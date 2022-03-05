@@ -36,9 +36,7 @@ scripting_workshop ...
 
 ```bash
 $ cd scripting_workshop
-```
 
-```bash
 $ ls
 ref_genome  trimmed_reads 
 ```
@@ -49,18 +47,34 @@ First we need to create directories for the results that will be generated as pa
 ```bash
 $ mkdir -p results/sam results/bam results/bcf results/vcf
 ```
+### Index the reference genome
+Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 
 Since we are working on the NeSI HPC, we need to search and load the package before we start using it.
+- More on packages will be discussed in the HPC and Slurm section
 
 Search
-
 ```bash
-$ module spider fastqc
+$ module spider bwa
 ```
 
 and then load 
-
 ```bash
 $ module purge
-$ module load FastQC/0.11.9
+$ module load BWA/0.7.17-GCC-9.2.0
 ```
+
+indexing the genome
+```bash
+$ bwa index ref_genome/ecoli_rel606.fasta
+[bwa_index] Pack FASTA... 0.03 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 1.04 seconds elapse.
+[bwa_index] Update BWT... 0.03 sec
+[bwa_index] Pack forward-only FASTA... 0.02 sec
+[bwa_index] Construct SA from BWT and Occ... 0.57 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index ref_genome/ecoli_rel606.fasta
+[main] Real time: 2.462 sec; CPU: 1.702 sec
+```
+
