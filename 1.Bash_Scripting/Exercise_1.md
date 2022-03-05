@@ -126,11 +126,37 @@ You can use samtools to learn more about this bam file as well.
 $ samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
 ```
 
+## Variant calling
+A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the variants.
 
+### Step 1: Calculate the read coverage of positions in the genome
+Do the first pass on variant calling by counting read coverage with `bcftools`. We will use the command mpileup. The flag -O b tells bcftools to generate a bcf format output file, -o specifies where to write the output file, and -f flags the path to the reference genome:
 
+```bash
+$ module load BCFtools/1.13-GCC-9.2.0
+$ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
+[mpileup] 1 samples in 1 input files
+[mpileup] maximum number of reads per input file set to -d 250
+```
+We have now generated a file with coverage information for every base.
 
+### Step 2: Detect the single nucleotide variants (SNVs)
+Identify SNVs using bcftools call. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid E. coli. -m allows for multiallelic and rare-variant calling, -v tells the program to output variant sites only (not every site in the genome), and -o specifies where to write the output file:
 
+```bash
+$ bcftools call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf 
+```
 
+### Step 3: Filter and report the SNV variants in variant calling format (VCF)
+Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
+```bash
+$ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  > results/vcf/SRR2584866_final_variants.vcf
+```
+
+### Explore the VCF format:
+At this stage you can use various tools to analyse the vcf file. Exploring the vcf is beyond the scope of this workshop.
+
+[Now we are ready to put all these commands in a script](../Exercise_2.md)
 
 
 
