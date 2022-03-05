@@ -95,7 +95,7 @@ $ bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fast
 .....
 
 $ ls results/sam/
->SRR2584866.aligned.sam
+>SRR2584866.aligned.sam 
 ```
 
 
