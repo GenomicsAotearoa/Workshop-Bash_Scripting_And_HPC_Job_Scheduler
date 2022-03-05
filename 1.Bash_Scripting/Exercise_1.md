@@ -102,6 +102,33 @@ The SAM file, is a tab-delimited text file that contains information for each in
 
 The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.
 
+We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):
+
+We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):
+
+```bash
+$ module load SAMtools/1.13-GCC-9.2.0
+
+$ samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR2584866.aligned.bam
+```
+
+#### Sort BAM file by coordinates
+Next we sort the BAM file using the `sort` command from samtools. -o tells the command where to write the output.
+
+```bash
+$ samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
+```
+
+> hint: SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.
+
+You can use samtools to learn more about this bam file as well.
+```bash
+$ samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
+```
+
+
+
+
 
 
 
