@@ -95,9 +95,12 @@ $ bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fast
 .....
 
 $ ls results/sam/
->SRR2584866.aligned.sam 
+SRR2584866.aligned.sam 
 ```
+#### SAM/BAM format
+The SAM file, is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by [Heng Li et al.](https://academic.oup.com/bioinformatics/article/25/16/2078/204688) provides a lot more detail on the specification.
 
+The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.
 
 
 
