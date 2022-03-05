@@ -156,7 +156,7 @@ $ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  > results/vcf/SRR25
 ### Explore the VCF format:
 At this stage you can use various tools to analyse the vcf file. Exploring the vcf is beyond the scope of this workshop.
 
-[Now we are ready to put all these commands in a script](../Exercise_2.md)
+Now we are ready for the [Next Lesson](../Exercise_2.md) to put all these commands in a script.
 
 
 
