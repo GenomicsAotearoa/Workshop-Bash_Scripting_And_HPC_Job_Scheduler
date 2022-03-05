@@ -67,6 +67,7 @@ $ module load BWA/0.7.17-GCC-9.2.0
 indexing the genome
 ```bash
 $ bwa index ref_genome/ecoli_rel606.fasta
+
 [bwa_index] Pack FASTA... 0.03 sec
 [bwa_index] Construct BWT for the packed sequence...
 [bwa_index] 1.04 seconds elapse.
@@ -77,4 +78,29 @@ $ bwa index ref_genome/ecoli_rel606.fasta
 [main] CMD: bwa index ref_genome/ecoli_rel606.fasta
 [main] Real time: 2.462 sec; CPU: 1.702 sec
 ```
+### Align reads to reference genome
+The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it is faster and more accurate.
+We are going to start by aligning the reads from just one of the samples in our dataset (SRR2584866).
+
+```bash
+$ bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
+
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 77446 sequences (10000033 bp)...
+[M::process] read 77296 sequences (10000182 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)
+[M::mem_pestat] analyzing insert size distribution for orientation FF...
+[M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
+.....
+
+$ ls results/sam/
+>SRR2584866.aligned.sam
+```
+
+
+
+
+
+
 
