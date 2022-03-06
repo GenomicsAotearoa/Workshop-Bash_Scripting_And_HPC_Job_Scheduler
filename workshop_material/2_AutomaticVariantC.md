@@ -17,7 +17,6 @@
 ### Examplar script
 
 
-
 ### Variant calling workflow
 Remember our variant calling workflow has the following steps:
 - Index the reference genome for use by bwa and samtools.
