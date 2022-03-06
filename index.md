@@ -18,5 +18,5 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
 
 ## Content
 
-1. [Designing a Variant Calling Workflow](./workshop_material/Exercise_1.md)
-2. [Automating a Variant Calling Workflow](./workshop_material/Exercise_2.md)
+1. [Designing a Variant Calling Workflow](./workshop_material/1_Exercise1.md)
+2. [Automating a Variant Calling Workflow](./workshop_material/2_Exercise2.md)
