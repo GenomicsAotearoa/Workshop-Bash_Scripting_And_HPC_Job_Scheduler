@@ -1,7 +1,7 @@
 # 3. Introduction to HPC
 
 <p style="text-align:left;">
-    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_Exercise2.html">&lt; 2. Automating a Variant Calling Workflow</a></b>
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html">&lt; 2. Automating a Variant Calling Workflow</a></b>
     <span style="float:right;">
      <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_working_with_job_scheduler.html">4. Working with job Scheduler &gt;</a></b>
     </span>
