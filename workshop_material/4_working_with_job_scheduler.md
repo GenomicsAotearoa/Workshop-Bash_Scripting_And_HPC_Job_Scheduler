@@ -117,15 +117,15 @@ Let's put these directives together and compile our first slurm script
 
 ```bash
 
-#Change working directory to your personal wd
-$ cd /nesi/project/nesi02659/sismonr_workshop/workingdir/$USER
+#Confirming the working directory
+$ cd ~/scripting_workshop
 
 #confirm the path is correct (me123 is just a place holder for the place where you should see your username)
 $ pwd
-/nesi/project/nesi02659/sismonr_workshop/workingdir/me123/
+/home/USER/scripting_workshop
 
 #create a new directory for this section and change the directory to it
-$ mkdir 4_wwscheduler && cd 4_wwscheduler
+$ mkdir ex_4.2 && cd ex_4.2
 
 #use a text editor of choice to create a file named firstslurm.sl - we will use nano here
 $ nano firstslurm.sl
