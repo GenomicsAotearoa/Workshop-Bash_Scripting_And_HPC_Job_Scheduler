@@ -15,3 +15,8 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
     - Genetics, Genomics and DNA Sequencing 
     - Variant Calling
     - RNA sequencing and data analysis
+
+## Content
+
+1. [Designing a Variant Calling Workflow](./workshop_material/Exercise_1.md)
+2. [Automating a Variant Calling Workflow](./workshop_material/Exercise_2.md)
