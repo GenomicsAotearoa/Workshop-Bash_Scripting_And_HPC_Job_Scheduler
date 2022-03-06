@@ -327,7 +327,7 @@ $ python profile_plot_Jul2020.py job_JOBID.h5
 ---
 
 <p style="text-align:left;">
-    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_IntroductiontoHPC.html">&lt;3. Introduction to HP</a></b>
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_IntroductiontoHPC.html">&lt;3. Introduction to HPC</a></b>
     <span style="float:right;">
      <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/05_parallel_job_arrays.html">5. Parallel Job Arrays  &gt;</a></b>
     </span>
