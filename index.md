@@ -7,3 +7,11 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
 
 - Familiarity with terminal and basic linux commands
 - Intermediate level knowledge on Molecular Biology and Genetics 
+
+
+## Some of the things we won't cover in this workshop
+
+- Domain specific concepts in
+    - Genetics, Genomics and DNA Sequencing 
+    - Variant Calling
+    - RNA sequencing and data analysis
