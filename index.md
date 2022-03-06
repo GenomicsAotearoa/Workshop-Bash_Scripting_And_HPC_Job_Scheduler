@@ -20,3 +20,5 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
 
 1. [Designing a Variant Calling Workflow](./workshop_material/1_Exercise1.md)
 2. [Automating a Variant Calling Workflow](./workshop_material/2_Exercise2.md)
+3. [Introduction to HPC](./workshop_material/3_IntroductiontoHPC.md)
+4. [Working with Job Scheduler](./workshop_material/4_working_with_job_scheduler.md)
