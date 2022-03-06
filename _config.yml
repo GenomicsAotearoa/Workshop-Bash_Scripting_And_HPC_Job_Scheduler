@@ -1,1 +1,8 @@
 theme: jekyll-theme-cayman
+
+title: "Introduction to Bash Scripting and HPC Job Scheduler "
+description: "Introduction to Bash Scripting and HPC Job Scheduler "
+
+markdown: kramdown
+kramdown:
+  parse_block_html: true
