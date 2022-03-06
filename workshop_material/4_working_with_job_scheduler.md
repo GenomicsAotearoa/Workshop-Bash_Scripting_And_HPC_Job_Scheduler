@@ -38,6 +38,17 @@ Commonly used schedulers
 
 All NeSI clusters use Slurm *(Simple Linux Utility for Resource Management)* scheduler (or job submission system) to manage resources and how they are made available to users. The main commands you will use with Slurm on NeSI Mahuika cluster are:
    
+
+
+A quick note on `sinfo`(Query the current state of nodes) which is not a command a researcher will use regularly but helps HPC admins and support staff with monitoring.
+
+      
+## Life cycle of a slurm job
+
+<br>
+<p align="center"><img src="nesi_images/slurm_flow.png" alt="drawing" width="1000"/></p> 
+<br>
+
 ---
 
 | Command        | Function                                                                                             |
@@ -51,9 +62,6 @@ All NeSI clusters use Slurm *(Simple Linux Utility for Resource Management)* sch
 | `salloc`       | Submit interactive jobs to the scheduler                                                             |
 
 ---
-
-A quick note on `sinfo`(Query the current state of nodes) which is not a command a researcher will use regularly but helps HPC admins and support staff with monitoring.
-
 
 ### Exercise 4.1
 {% capture e4dot1 %}
@@ -75,13 +83,6 @@ $ sinfo -n wch001 -o "%n %c %m"
 {% endcapture %}
 
 {% include exercise.html title="e4dot1" content=e4dot1%}
-      
-## Life cycle of a slurm job
-
-<br>
-<p align="center"><img src="nesi_images/slurm_flow.png" alt="drawing" width="1000"/></p> 
-<br>
-
 
 ## Anatomy of a slurm script and submitting first slurm job 🧐
 
