@@ -1,7 +1,7 @@
 # 3. Introduction to HPC
 
 <p style="text-align:left;">
-    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_IntroductiontoHPC.html">&lt; 2. Getting started with sismonr</a></b>
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_Exercise2.html">&lt; 2. Automating a Variant Calling Workflow</a></b>
     <span style="float:right;">
      <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_working_with_job_scheduler.html">4. Working with job Scheduler &gt;</a></b>
     </span>
@@ -104,7 +104,7 @@ $ module switch CURRENT_MODULE DESIRED_MODULE
 ---
 
 <p style="text-align:left;">
-    <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/02_getting_started_sismonr.html">&lt; 2. Getting started with sismonr</a></b>
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_Exercise2.html">&lt; 2. Automating a Variant Calling Workflow</a></b>
     <span style="float:right;">
      <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_working_with_job_scheduler.html">4. Working with job Scheduler &gt;</a></b>
     </span>
