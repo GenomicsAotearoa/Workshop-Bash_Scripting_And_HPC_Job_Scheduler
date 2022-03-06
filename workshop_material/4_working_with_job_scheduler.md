@@ -124,7 +124,7 @@ $ cd ~/scripting_workshop
 $ pwd
 /home/USER/scripting_workshop
 
-#create a new directory for this section and change the directory to it
+#create a new directory for this section and change the directory to it - Check for the follow up not `&&`
 $ mkdir ex_4.2 && cd ex_4.2
 
 #use a text editor of choice to create a file named firstslurm.sl - we will use nano here
@@ -162,6 +162,18 @@ $ squeue -u $USER
 ```bash
 $ sacct
 ```
+- - - 
+>**NOTE**
+>The meaning of `&&` and `&` are intrinsically different.
+>
+>* **What is `&&` in Bash?** In Bash—and many other programming languages—`&&` means “AND”. And in command execution 
+>context like this, it means items to the left as well as right of && should be run in sequence in this case.
+>* **What is & in Bash?** And a single `&`means that the preceding commands—to the immediate left of the &—should 
+>simply be run in the background.
+
+- - - 
+
+
 {% endcapture %}
 
 {% include exercise.html title="e4dot2" content=e4dot2%}
