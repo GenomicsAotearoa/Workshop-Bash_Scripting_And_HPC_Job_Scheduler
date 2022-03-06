@@ -176,7 +176,7 @@ $ sacct
 
 
 
- When things go wrong, first step of **debugging** (STORY TIME !) starts with a referral to these files. 
+When things go wrong, first step of **debugging** (STORY TIME !) starts with a referral to these files. 
 
 ## Assessing resource utilisation (cpu, memory, time)
 
