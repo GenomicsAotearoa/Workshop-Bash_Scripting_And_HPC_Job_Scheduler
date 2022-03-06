@@ -1,3 +1,5 @@
+# Variant Calling Workflow
+
 <p style="text-align:left;">
   <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">&lt; Back to homepage</a></b> 
   <span style="float:right;">
@@ -5,7 +7,10 @@
   </span>
 </p>
 
-# Variant Calling Workflow
+## Outline
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 This material is extracted from the Genomics Data Carpentry Lesson
 ## Aim
 - To understand the steps to perform variant calling then overall put all these steps into a script.
