@@ -7,6 +7,10 @@
   </span>
 </p>
 
+## Outline
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 ## Aim
 - Put all the steps from the previous lesson into a script.
 
