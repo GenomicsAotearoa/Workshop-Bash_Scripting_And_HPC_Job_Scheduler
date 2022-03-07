@@ -260,7 +260,17 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 ### Exercise 5.4 😬	
 {% capture e4dot5 %}
 
+Purpose of this exercise is to compile a slurm submission script based on the script we wrote on [episode 2 - Automating variant calling workflow](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html)
 
+* Name of the file is `variant_calling.sl` (not we have change the extension form `.sh` to `.sl`)
+* In terms of slurm variables
+
+    * name of the job is `variant_calling_workflow`
+    * required number of CPUS is `2`
+    * timelimit `15 minutes`
+    * amount of memory in GB `4G`
+    * We do like both the *.err* files and *.out* where both of should be saved on a separate folder call ***slurmout***
+    * an email notification at the end of the job 
 {% endcapture %}
 
 {% include exercise.html title="e5dot4" content=e5dot4%}
