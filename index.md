@@ -23,3 +23,4 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
 3. [Introduction to HPC](./workshop_material/3_IntroductiontoHPC.md)
 4. [Working with Job Scheduler](./workshop_material/4_working_with_job_scheduler.md)
 5. [Supplementary #1](./workshop_material/5_supplementary_1.md)
+6. [Supplementary #2](./workshop_material/6_supplementary_2.md)
