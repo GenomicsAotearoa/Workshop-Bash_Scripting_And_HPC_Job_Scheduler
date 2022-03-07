@@ -222,10 +222,10 @@ $ cd ~/scripting_workshop/scheduler/ex_5.3
 
 #Run ls command and you should see two files (one .R and one sl) and one directory named slurmout
 $ ls -F
-example1_arraysum.R  example1_arraysum.sl  slurmout/
+bowtie-test.sl*  example/  slurmout/
 
-#Review the slurm script with cat Or another text editor and submit with sbatch
-$ sbatch example1_arraysum.sl 
+#Review the slurm script bowtie-test.sl with nano and edit the corresponding sections
+$ sbatch bowtie-test.sl 
 ```
 
 >use `squeue -u $USER` and `sacct` again to evaluate the job status
