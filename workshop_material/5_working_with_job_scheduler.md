@@ -262,6 +262,7 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 
 Purpose of this exercise is to compile a slurm submission script based on the script we wrote in [episode 2 - Automating variant calling workflow](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html)
 
+* recommend creating a new directory for the exercise .i.e `ex_5.4`
 * Name of the file is `variant_calling.sl` (note that we have change the extension from `.sh` to `.sl`)
 * In terms of slurm variables
 
