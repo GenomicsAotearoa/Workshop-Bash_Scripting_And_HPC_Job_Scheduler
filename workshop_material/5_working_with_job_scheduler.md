@@ -163,7 +163,7 @@ $ squeue -u $USER
 $ sacct
 ```
 - - - 
->**NOTE**
+>**NOTE** -
 >The meaning of `&&` and `&` are intrinsically different.
 >
 >* **What is `&&` in Bash?** In Bash—and many other programming languages—`&&` means “AND”. And in command execution 
@@ -222,7 +222,7 @@ $ cd ~/scripting_workshop/scheduler/ex_5.3
 
 #Run ls command and you should see two files (one .R and one sl) and one directory named slurmout
 $ ls -F
-bowtie-test.sl*  example/  slurmout/
+bowtie-test.sl*  input_data/  slurmout/
 
 #Review the slurm script bowtie-test.sl with nano and edit the corresponding sections (hint :email)
 $ sbatch bowtie-test.sl 
