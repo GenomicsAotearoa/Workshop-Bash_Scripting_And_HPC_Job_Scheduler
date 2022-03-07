@@ -3,7 +3,7 @@
 <p style="text-align:left;">
     <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html">&lt;2. Automating a Variant Calling Workflow</a></b>
     <span style="float:right;">
-     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/05_parallel_job_arrays.html">5. Parallel Job Arrays  &gt;</a></b>
+     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/04_IntroductiontoHPC.html">4. Introduction to HPC  &gt;</a></b>
     </span>
 </p>
 
@@ -282,3 +282,11 @@ at this stage we have mastered the art of writing scripts, instead of running th
 
 
 
+<p style="text-align:left;">
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html">&lt; 3. RNA-seq Mapping And Count Data Workflow</a></b>
+    <span style="float:right;">
+     <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/5_working_with_job_scheduler.html">5. Working with job Scheduler &gt;</a></b>
+    </span>
+</p>
+
+<p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
