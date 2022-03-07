@@ -67,3 +67,68 @@ echo "DONE"
 {% endcapture %}
 
 {% include exercise.html title="es3dot1" content=es3dot1%}
+
+### Exercise 5.5 😬	
+{% capture es3dot2 %}
+
+```bash
+#!/bin/bash -e
+
+#SBATCH --account		nesi02659
+#SBATCH --job-name 	rna-seq_workflow
+#SBATCH --cpus-per-task 	2
+#SBATCH --time 			00:15:00
+#SBATCH --mem 			4G
+#SBATCH --output 		rna-seq_workflow-%j.out
+#SBATCH --error 		rna-seq_workflow-%j.err
+#SBATCH --mail-type		END
+#SBATCH --mail-user		myemail@email.org.nz
+
+
+
+mkdir -p ~/scripting_workshop/scheduler/ex_5.5/{Mapping,Counts} && cd ~/scripting_workshop/scheduler/ex_5.5/
+cp -r /nesi/project/nesi02659/scripting_workshop/rna_seq/* ./
+
+module purge
+module load HISAT2/2.2.0-gimkl-2020a
+module load SAMtools/1.10-GCC-9.2.0
+module load Subread/2.0.0-GCC-9.2.0
+
+echo $PWD
+
+#index file
+hisat2-build -p 4 -f $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+
+
+#Mapping Samples to the reference genome
+
+for filename in $PWD/trimmed_reads/*
+  do
+    base=$(basename ${filename} .fastq)
+    hisat2 -p 4 -x $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filename -S $PWD/Mapping/${base}.sam --summary-file $PWD/Mapping/${base}_summary.txt
+  done
+
+#Convert SAMfiles to BAM
+
+for filename in $PWD/Mapping/*.sam
+  do
+    base=$(basename ${filename} .sam)
+    samtools view -S -b ${filename} -o $PWD/Mapping/${base}.bam
+  done
+
+#Sort BAM files
+
+for filename in $PWD/Mapping/*.bam
+  do
+    base=$(basename ${filename} .bam)
+    samtools sort -o $PWD/Mapping/${base}_sorted.bam ${filename}
+  done
+
+#count how many reads aligned to each genome feature (exon).
+
+featureCounts -a $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o $PWD/Counts/yeast_counts.txt -T 2 -t exon -g gene_id $PWD/Mapping/*sorted.bam
+```
+
+{% endcapture %}
+
+{% include exercise.html title="es3dot2" content=es3dot2%}
