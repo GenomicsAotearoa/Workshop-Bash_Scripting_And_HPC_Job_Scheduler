@@ -271,6 +271,8 @@ Purpose of this exercise is to compile a slurm submission script based on the sc
     * amount of memory in GB `4G`
     * We do like both the *.err* files and *.out* where both of should be saved on a separate folder call ***slurmout***
     * an email notification at the end of the job 
+
+* 
 {% endcapture %}
 
 {% include exercise.html title="e5dot4" content=e5dot4%}
