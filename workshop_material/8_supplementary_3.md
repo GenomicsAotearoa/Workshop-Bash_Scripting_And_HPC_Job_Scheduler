@@ -8,7 +8,7 @@
 #!/bin/bash -e
 
 #SBATCH --account		nesi02659
-#SBATCH --job-name 	variant_calling_workflow
+#SBATCH --job-name 	    variant_calling_workflow
 #SBATCH --cpus-per-task 	2
 #SBATCH --time 			00:15:00
 #SBATCH --mem 			4G
