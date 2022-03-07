@@ -294,6 +294,7 @@ trimmed=~/scripting_workshop/variant_calling/trimmed_reads
 {% endcapture %}
 
 {% include exercise.html title="e5dot5" content=e5dot5%}
+
 ---
 
 <p style="text-align:left;">
