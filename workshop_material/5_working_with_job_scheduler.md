@@ -241,10 +241,12 @@ $ sbatch bowtie-test.sl
 >Cores: 1
 >Tasks: 1
 >Nodes: 1
->Job Wall-time:  20.56%  00:00:37 of 00:03:00 time limit
->CPU Efficiency: 178.38%  00:01:06 of 00:00:37 core-walltime
->Mem Efficiency: 21.94%  224.68 MB of 1.00 GB
+>Job Wall-time:  18.33%  00:00:33 of 00:03:00 time limit
+>CPU Efficiency: 93.94%  00:00:31 of 00:00:33 core-walltime
+>Mem Efficiency: 1.33%  13.62 MB of 1.00 GB
 >```
+
+Now review the content of `.err` and `.out` files in */slurmout* directory 
 
 {% endcapture %}
 
