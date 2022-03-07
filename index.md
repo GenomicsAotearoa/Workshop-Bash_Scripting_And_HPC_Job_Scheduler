@@ -1,7 +1,7 @@
 ---
 layout: homepage
 ---
-This as an intermediate level workshop on *Introduction to Bash Scripting and HPC JOb Scheduler*. 
+This as an intermediate level workshop on *Introduction to Bash Scripting and HPC Job Scheduler*. 
 
 ## Prerequisites
 
