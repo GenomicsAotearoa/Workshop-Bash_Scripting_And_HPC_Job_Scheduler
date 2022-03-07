@@ -35,7 +35,7 @@ $ mkdir script_workspace
 
 $ cd script_workspace
 
-$ cp -r /nesi/project/nesi02659/scripting_workshop/* .
+$ cp -r /nesi/project/nesi02659/scripting_workshop/variant_calling/* .
 
 $ ls
 ref_genome  trimmed_reads
