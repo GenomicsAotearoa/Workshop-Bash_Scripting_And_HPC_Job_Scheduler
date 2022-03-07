@@ -62,10 +62,10 @@ For RNA-seq, we need to align or map each read back to the genome, to see which 
 To be able to map (align) sequencing reads on the genome, the genome needs to be indexed first. In this workshop we will use [HISAT2](https://www.nature.com/articles/nmeth.3317).
 
 ```bash
-$ cd /home/[Your_Username]/scripting_workshop/rna_seq/ref_genome
+$ cd ~/scripting_workshop/rna_seq/ref_genome
 
 #to list what is in your directory:
-$ ls /home/[Your_Username]/RNA_seq/ref_genome
+$ ls ~/scripting_workshop/rna_seq/ref_genome
 Saccharomyces_cerevisiae.R64-1-1.99.gtf  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
 
 $ module load HISAT2/2.2.0-gimkl-2020a
