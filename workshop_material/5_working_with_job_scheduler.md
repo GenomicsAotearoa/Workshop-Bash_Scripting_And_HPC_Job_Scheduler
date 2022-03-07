@@ -255,7 +255,7 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 {% include exercise.html title="e5dot3" content=e5dot3%}
 ---
 
-
+## Compiling slurm scripts for Variant Calling and RNA-seq
 
 ### Exercise 5.4 😬	
 {% capture e4dot5 %}
