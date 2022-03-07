@@ -236,7 +236,7 @@ $ sbatch example1_arraysum.sl
 >$ nn_seff 23263188
 >Job ID: 23263188
 >Cluster: mahuika
->User/Group: me1234/me123
+>User/Group: me1234/me1234
 >State: COMPLETED (exit code 0)
 >Cores: 1
 >Tasks: 1
