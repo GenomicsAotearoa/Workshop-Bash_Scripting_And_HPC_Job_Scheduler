@@ -258,7 +258,7 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 ## Compiling slurm scripts for Variant Calling and RNA-seq episodes 
 
 ### Exercise 5.4 😬	
-{% capture e4dot5 %}
+{% capture e5dot4 %}
 
 Purpose of this exercise is to compile a slurm submission script based on the script we wrote on [episode 2 - Automating variant calling workflow](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html)
 
