@@ -7,7 +7,7 @@
 
 #!/bin/bash -e
 
-#SBATCH --account		nesi99999
+#SBATCH --account		nesi02659
 #SBATCH --job-name 	variant_calling_workflow
 #SBATCH --cpus-per-task 	2
 #SBATCH --time 			00:15:00
@@ -15,7 +15,7 @@
 #SBATCH --output 		slurmout/variant_calling-%j.out
 #SBATCH --error 		slurmout/variant_calling-%j.err
 #SBATCH --mail-type		END
-#SBATCH --mail-user		dinindu.senanayake@nesi.org.nz
+#SBATCH --mail-user		myemail@email.co.nz
 
 # Load all the required modules
 module purge
