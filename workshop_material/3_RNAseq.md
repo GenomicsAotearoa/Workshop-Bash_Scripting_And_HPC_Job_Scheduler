@@ -1,4 +1,15 @@
 # RNA-seq Mapping And Count Data Workflow
+
+<p style="text-align:left;">
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html">&lt;2. Automating a Variant Calling Workflow</a></b>
+    <span style="float:right;">
+     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/05_parallel_job_arrays.html">5. Parallel Job Arrays  &gt;</a></b>
+    </span>
+</p>
+
+## Outline
+* Do not remove this line (it will not be displayed)
+{:toc}
 This material is extracted from the [RNA-seq workshop](https://github.com/GenomicsAotearoa/RNA-seq-workshop) Lesson
 ## Aim
 - To develop a pipeline that does mapping and count the number of reads that mapped then overall put all these steps into a script.
