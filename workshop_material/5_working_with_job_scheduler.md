@@ -288,6 +288,7 @@ trimmed=~/scripting_workshop/variant_calling/trimmed_reads
 ### Exercise 5.5 😬	
 {% capture e5dot5 %}
 
+* Now it's you turn to compile a slurm submission script for the RNA-seq workflow. 😊
 
 {% endcapture %}
 
