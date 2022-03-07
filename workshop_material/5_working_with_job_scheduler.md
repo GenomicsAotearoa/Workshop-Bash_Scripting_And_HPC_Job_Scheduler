@@ -3,7 +3,7 @@
 <p style="text-align:left;">
     <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_IntroductiontoHPC.html">&lt;3. Introduction to HPC</a></b>
     <span style="float:right;">
-     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/05_parallel_job_arrays.html">5. Parallel Job Arrays  &gt;</a></b>
+     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/06_supplementary_1.html">6. Supplementary  &gt;</a></b>
     </span>
 </p>
 
@@ -295,7 +295,7 @@ $ sbatch example1_arraysum.sl
 <p style="text-align:left;">
     <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_IntroductiontoHPC.html">&lt;3. Introduction to HPC</a></b>
     <span style="float:right;">
-     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/05_parallel_job_arrays.html">5. Parallel Job Arrays  &gt;</a></b>
+     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/6_supplementary_1.html">6. Supplementary  &gt;</a></b>
     </span>
 </p>
 
