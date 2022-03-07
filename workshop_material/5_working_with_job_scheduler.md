@@ -142,9 +142,9 @@ $ nano firstslurm.sl
 >#SBATCH --mem           512
 >#SBATCH --output        slurmjob.%j.out
 >
->sleep 40
+>sleep 200
 >
->echo "I am a slurm job and I slept for 40 seconds"
+>echo "I am a slurm job and I slept for 200 seconds"
 >
 >echo "$SLURM_JOB_ID END"
 >```
