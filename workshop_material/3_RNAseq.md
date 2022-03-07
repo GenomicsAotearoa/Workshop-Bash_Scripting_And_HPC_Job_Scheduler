@@ -39,7 +39,7 @@ Checking to make sure we have the directory and files for the workshop.
 ```bash
 
 $ ls
-rna_seq  variant_calling
+rna_seq  variant_calling scheduler
 
 ```
 >hint : If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
@@ -62,7 +62,7 @@ For RNA-seq, we need to align or map each read back to the genome, to see which 
 To be able to map (align) sequencing reads on the genome, the genome needs to be indexed first. In this workshop we will use [HISAT2](https://www.nature.com/articles/nmeth.3317).
 
 ```bash
-$ cd /home/[Your_Username]/RNA_seq/ref_genome
+$ cd /home/[Your_Username]/scripting_workshop/rna_seq/ref_genome
 
 #to list what is in your directory:
 $ ls /home/[Your_Username]/RNA_seq/ref_genome
