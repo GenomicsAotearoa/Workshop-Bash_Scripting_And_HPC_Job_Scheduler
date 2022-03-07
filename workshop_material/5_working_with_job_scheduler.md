@@ -261,7 +261,15 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 
 {% endcapture %}
 
-{% include exercise.html title="e4dot5" content=e4dot5%}
+{% include exercise.html title="e5dot4" content=e5dot4%}
+
+### Exercise 5.5 😬	
+{% capture e5dot5 %}
+
+
+{% endcapture %}
+
+{% include exercise.html title="e5dot5" content=e5dot5%}
 ---
 
 <p style="text-align:left;">
