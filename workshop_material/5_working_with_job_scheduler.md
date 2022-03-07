@@ -248,6 +248,8 @@ $ sbatch bowtie-test.sl
 
 Now review the content of `.err` and `.out` files in */slurmout* directory 
 
+>**Feeling adventurous ?** - Refer to [Supplementary material on slurm profiling](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/7_supplementary_2.html)
+
 {% endcapture %}
 
 {% include exercise.html title="e5dot3" content=e5dot3%}
