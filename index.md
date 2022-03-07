@@ -23,5 +23,5 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
 3. [RNA-seq Mapping And Count Data Workflow](./workshop_material/3_RNAseq.md)
 4. [Introduction to HPC](./workshop_material/3_IntroductiontoHPC.md)
 5. [Working with Job Scheduler](./workshop_material/4_working_with_job_scheduler.md)
-6. [Supplementary #1](./workshop_material/5_supplementary_1.md)
-7. [Supplementary #2](./workshop_material/6_supplementary_2.md)
+6. [Supplementary #1](./workshop_material/6_supplementary_1.md)
+7. [Supplementary #2](./workshop_material/7_supplementary_2.md)
