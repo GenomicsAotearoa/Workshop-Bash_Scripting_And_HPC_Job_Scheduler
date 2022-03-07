@@ -49,7 +49,7 @@ scripting_workshop ...
 >hint : If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
 
 ```bash
-$ cd scripting_workshop
+$ cd scripting_workshop/variant_calling
 
 $ ls
 ref_genome  trimmed_reads 
