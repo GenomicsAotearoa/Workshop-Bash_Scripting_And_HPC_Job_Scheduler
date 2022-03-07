@@ -63,8 +63,8 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
 
 ---
 
-### Exercise 4.1
-{% capture e4dot1 %}
+### Exercise 5.1
+{% capture e5dot1 %}
 Let's run the following commands and discuss the outputs
 
 ```bash
@@ -82,7 +82,7 @@ $ sinfo -n wch001 -o "%n %c %m"
 ```
 {% endcapture %}
 
-{% include exercise.html title="e4dot1" content=e4dot1%}
+{% include exercise.html title="e5dot1" content=e5dot1%}
 
 ## Anatomy of a slurm script and submitting first slurm job 🧐
 
@@ -109,8 +109,8 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 |                 | `#SBATCH --mail-type=TIME_LIMIT_80` |Will send message at 80% walltime.                    |
 
 ---
-### Exercise 4.2
-{% capture e4dot2 %}
+### Exercise 5.2
+{% capture e5dot2 %}
 Let's put these directives together and compile our first slurm script
 
 * First create a new working directory and write the script
@@ -118,14 +118,14 @@ Let's put these directives together and compile our first slurm script
 ```bash
 
 #Confirming the working directory
-$ cd ~/scripting_workshop
+$ cd ~/scripting_workshop/scheduler
 
-#confirm the path is correct (me123 is just a place holder for the place where you should see your username)
+#confirm the path is correct 
 $ pwd
-/home/USER/scripting_workshop
+/home/$USER/scripting_workshop/scheduler
 
 #create a new directory for this section and change the directory to it - Check for the follow up not `&&`
-$ mkdir ex_4.2 && cd ex_4.2
+$ mkdir ex_5.2 && cd ex_5.2
 
 #use a text editor of choice to create a file named firstslurm.sl - we will use nano here
 $ nano firstslurm.sl
@@ -176,7 +176,7 @@ $ sacct
 
 {% endcapture %}
 
-{% include exercise.html title="e4dot2" content=e4dot2%}
+{% include exercise.html title="e5dot2" content=e5dot2%}
 ---
 
 ### STDOUT/STDERR from jobs
@@ -211,8 +211,8 @@ Understanding the resources you have available and how to use them most efficien
 
 ---
 
-### Exercise 4.3 
-{% capture e4dot3 %}
+### Exercise 5.3 
+{% capture e5dot3 %}
 
 * Let's submit another slurm job and review its resource utilisation
 
@@ -248,7 +248,7 @@ $ sbatch example1_arraysum.sl
 
 {% endcapture %}
 
-{% include exercise.html title="e4dot3" content=e4dot3%}
+{% include exercise.html title="e5dot3" content=e5dot3%}
 ---
 
 
