@@ -91,7 +91,7 @@ done
 
 Running the script
 ```bash
-$ bash. variant_calling.sh
+$ bash variant_calling.sh
 ```
 This should take about 10 minutes.
 Note: The was the script is written means we have to indicate which program to use whenever we are running it. 
