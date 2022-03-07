@@ -74,7 +74,7 @@ $ module load HISAT2/2.2.0-gimkl-2020a
 $ hisat2-build -p 4 -f Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
 
 #list what is in the directory:
-$ ls /home/[Your_Username]/RNA_seq/ref_genome
+$ ls ~/scripting_workshop/rna_seq/ref_genome
 Saccharomyces_cerevisiae.R64-1-1.99.gtf              Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.4.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.8.ht2
 Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.5.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
 Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.6.ht2
@@ -100,7 +100,7 @@ Information required:
   * Where will the mapping files be stored?
   
   
-  * Now, lets move one folder up (into the RNA_seq folder):
+  * Now, lets move one folder up (into the rna_seq folder):
   
 ```bash
   
@@ -116,7 +116,7 @@ Let's map one of our sample to the reference genome
 ```bash
 
 $ pwd
-/home/[Your_Username]/rna_seq/
+/home/[Your_Username]/scripting_workshop/rna_seq/
 
 
 $ mkdir Mapping
