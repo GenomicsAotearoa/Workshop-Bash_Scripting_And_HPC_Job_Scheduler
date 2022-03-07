@@ -272,7 +272,15 @@ Purpose of this exercise is to compile a slurm submission script based on the sc
     * We do like both the *.err* files and *.out* where both of should be saved on a separate folder call ***slurmout***
     * an email notification at the end of the job 
 
-* 
+* We don't want to replicate ***input data***  in multiple places .i.e. be conservative in-terms how you use research storage
+    * Therefore, use the same reference genome file (assign the filename to variable `genome` and the trimmed read files (assign the path of these files to variable `trimmed`) used in the first episode
+    
+
+```bash
+genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
+trimmed=~/scripting_workshop/variant_calling/trimmed_reads
+```
+    
 {% endcapture %}
 
 {% include exercise.html title="e5dot4" content=e5dot4%}
