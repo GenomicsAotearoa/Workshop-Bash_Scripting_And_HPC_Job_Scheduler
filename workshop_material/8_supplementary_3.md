@@ -23,6 +23,7 @@ module load BWA/0.7.17-GCC-9.2.0
 module load SAMtools/1.13-GCC-9.2.0
 module load BCFtools/1.13-GCC-9.2.0
 
+echo "$PWD"
 
 # create the results directories
 mkdir -p results/sam results/bam results/bcf results/vcf
