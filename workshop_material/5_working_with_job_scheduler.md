@@ -217,8 +217,8 @@ Understanding the resources you have available and how to use them most efficien
 * Let's submit another slurm job and review its resource utilisation
 
 ```bash
-#Change the working directory to Exercise_4.3
-$ cd /nesi/project/nesi02659/sismonr_workshop/workingdir/$USER/Exercise_4.3
+#Change the working directory to Exercise_5.3
+$ cd ~/scripting_workshop/scheduler/ex_5.3
 
 #Run ls command and you should see two files (one .R and one sl) and one directory named slurmout
 $ ls -F
