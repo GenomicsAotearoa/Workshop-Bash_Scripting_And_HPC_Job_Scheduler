@@ -224,7 +224,7 @@ $ cd ~/scripting_workshop/scheduler/ex_5.3
 $ ls -F
 bowtie-test.sl*  example/  slurmout/
 
-#Review the slurm script bowtie-test.sl with nano and edit the corresponding sections
+#Review the slurm script bowtie-test.sl with nano and edit the corresponding sections (hint :email)
 $ sbatch bowtie-test.sl 
 ```
 
@@ -233,8 +233,8 @@ $ sbatch bowtie-test.sl
 >Once the job ran into completion, use `nn_seff JOBID` command to print the resource utilisation statistics (Replace **JOBID** with the corresponding number)
 >
 >```bash
->$ nn_seff 23263188
->Job ID: 23263188
+>$ nn_seff 25222190
+>Job ID: 25222190
 >Cluster: mahuika
 >User/Group: me1234/me1234
 >State: COMPLETED (exit code 0)
