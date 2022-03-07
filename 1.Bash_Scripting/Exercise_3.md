@@ -15,7 +15,7 @@ First, it is always good to verify where we are:
 
 ```bash
 
-$ cd ~
+$ cd ~/scripting_workshop
 
 $ pwd
 /home/[your_username]/scripting_workshop
