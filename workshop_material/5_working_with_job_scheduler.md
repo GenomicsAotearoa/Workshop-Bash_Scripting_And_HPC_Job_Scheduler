@@ -157,7 +157,7 @@ $ sbatch firstslurm.sl
 ```
 >Execute `squeue -u $USER` and `sacct`. Discuss the outputs .i.e.
 ```bash
-$ squeue -u $USER
+$ squeue --me
 ```
 ```bash
 $ sacct
