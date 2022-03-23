@@ -228,7 +228,7 @@ bowtie-test.sl*  input_data/  slurmout/
 $ sbatch bowtie-test.sl 
 ```
 
->use `squeue -u $USER` and `sacct` again to evaluate the job status
+>use `squeue --me` and `sacct` again to evaluate the job status
 >
 >Once the job ran into completion, use `nn_seff JOBID` command to print the resource utilisation statistics (Replace **JOBID** with the corresponding number)
 >
