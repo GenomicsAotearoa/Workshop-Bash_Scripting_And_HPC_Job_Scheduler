@@ -1,9 +1,9 @@
 # Variant Calling Workflow
 
 <p style="text-align:left;">
-  <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">&lt; Back to homepage</a></b> 
+  <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">&laquo; Back to homepage</a></b> 
   <span style="float:right;">
-    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html">2. Automating a Variant Calling Workflow &gt;</a></b>
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html">2. Automating a Variant Calling Workflow &raquo;</a></b>
   </span>
 </p>
 
