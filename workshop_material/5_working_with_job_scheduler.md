@@ -298,9 +298,9 @@ trimmed=~/scripting_workshop/variant_calling/trimmed_reads
 ---
 
 <p style="text-align:left;">
-    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_IntroductiontoHPC.html">&lt;4. Introduction to HPC</a></b>
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_IntroductiontoHPC.html">&laquo;4. Introduction to HPC</a></b>
     <span style="float:right;">
-     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/6_supplementary_1.html">6. Supplementary  &gt;</a></b>
+     <b><a href="https://genomicsaotearoa.github.io/Gene_Regulatory_Networks_Simulation_Workshop/workshop_material/6_supplementary_1.html">6. Supplementary  &raquo;</a></b>
     </span>
 </p>
 
