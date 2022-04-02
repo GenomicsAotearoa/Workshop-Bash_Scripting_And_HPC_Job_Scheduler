@@ -20,7 +20,8 @@ This material is extracted from the Genomics Data Carpentry Lesson
 - Understand and perform the steps involved in variant calling.
 - Describe the types of data formats encountered during variant calling.
 - Use command line tools to perform variant calling.
-
+<br>
+<p align="center">
 
 ### Assumptions
 - You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.
