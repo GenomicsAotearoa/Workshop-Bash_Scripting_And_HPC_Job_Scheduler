@@ -23,7 +23,7 @@ This material is extracted from the Genomics Data Carpentry Lesson
 
 ### Assumptions
 - You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.
-- You have a reference genome saved in a directory called ref_genome.
+- You have a reference genome saved in a directory called `ref_genome`.
 
 In this workshop, we have already trimmed the reads and downloaded the reference genome for you.
 First, it is always good to verify where we are:
