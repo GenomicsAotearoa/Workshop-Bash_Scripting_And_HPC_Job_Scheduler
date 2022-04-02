@@ -22,6 +22,7 @@ This material is extracted from the Genomics Data Carpentry Lesson
 - Use command line tools to perform variant calling.
 <br>
 <p align="center"><img src="nesi_images/variant_callingworkflow.png" alt="drawing" width="800"/></p>
+<br>
 
 ### Assumptions
 - You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.
