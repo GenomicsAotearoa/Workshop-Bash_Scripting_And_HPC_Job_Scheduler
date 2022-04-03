@@ -20,6 +20,10 @@ This material is extracted from the [RNA-seq workshop](https://github.com/Genomi
 - Understand and perform the steps involved in RNA-seq mapping and read count.
 - Use command line tools to run the pipeline.
 
+<br>
+<p align="center"><img src="nesi_images/variant_callingworkflow.png" alt="drawing" width="800"/></p>
+<br>
+
 ### Assumptions
 - You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.
 - You have a reference genome saved in a directory called ref_genome.
