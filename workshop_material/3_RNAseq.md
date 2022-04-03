@@ -21,7 +21,7 @@ This material is extracted from the [RNA-seq workshop](https://github.com/Genomi
 - Use command line tools to run the pipeline.
 
 <br>
-<p align="center"><img src="nesi_images/variant_callingworkflow.png" alt="drawing" width="800"/></p>
+<p align="center"><img src="nesi_images/rnaseq_workflowdiagram.png" alt="drawing" width="800"/></p>
 <br>
 
 ### Assumptions
