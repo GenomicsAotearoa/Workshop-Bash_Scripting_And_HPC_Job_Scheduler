@@ -16,7 +16,7 @@ This material is extracted from the [RNA-seq workshop](https://github.com/Genomi
 ## Aim
 - To develop a pipeline that does mapping and count the number of reads that mapped then overall put all these steps into a script.
 
-## Objectives and overall 
+## Objectives and overall workflow
 - Understand and perform the steps involved in RNA-seq mapping and read count.
 - Use command line tools to run the pipeline.
 
