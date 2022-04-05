@@ -3,7 +3,7 @@
 <p style="text-align:left;">
   <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/1_DesigningVariantC.html" style="background: var(--bs-green);font-weight:bold">&laquo; 1.Designing a Variant Calling Workflow</a></b> 
   <span style="float:right;">
-    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html">3. RNA-seq Mapping And Count Data Workflow &r;</a></b>
+    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html">3. RNA-seq Mapping And Count Data Workflow &raquo;</a></b>
   </span>
 </p>
 
