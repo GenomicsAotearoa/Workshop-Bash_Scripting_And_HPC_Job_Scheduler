@@ -1,9 +1,9 @@
 # Automating a Variant Calling Workflow
 
 <p style="text-align:left;">
-  <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/1_DesigningVariantC.html" style="background: var(--bs-green);font-weight:bold">&lt; 1.Designing a Variant Calling Workflow</a></b> 
+  <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/1_DesigningVariantC.html" style="background: var(--bs-green);font-weight:bold">&laquo; 1.Designing a Variant Calling Workflow</a></b> 
   <span style="float:right;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html" style="background: var(--bs-green);font-weight:bold">3. RNA-seq Mapping And Count Data Workflow &gt;</a></b>
+    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html" style="background: var(--bs-green);font-weight:bold">3. RNA-seq Mapping And Count Data Workflow &raquo;</a></b>
   </span>
 </p>
 
@@ -128,8 +128,8 @@ In the [Next Lesson](https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting
 
 
 <p style="text-align:left;">
-  <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/1_DesigningVariantC.html">&lt; 1.Designing a Variant Calling Workflow</a></b> 
+  <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/1_DesigningVariantC.html" style="background: var(--bs-green);font-weight:bold">&lt; 1.Designing a Variant Calling Workflow</a></b> 
   <span style="float:right;">
-    <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html">3. RNA-seq Mapping And Count Data Workflow &gt;</a></b>
+    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html" style="background: var(--bs-green);font-weight:bold">3. RNA-seq Mapping And Count Data Workflow &gt;</a></b>
   </span>
 </p>
