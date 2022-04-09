@@ -3,7 +3,7 @@
 <p style="text-align:left;">
     <b><a class href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html">&laquo; 2. Automating a Variant Calling Workflow</a></b>
     <span style="float:right;">
-     <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/5_working_with_job_scheduler.html">4. Working with job Scheduler &raquo;</a></b>
+     <b><a class href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/5_working_with_job_scheduler.html">4. Working with job Scheduler &raquo;</a></b>
     </span>
 </p>
 
