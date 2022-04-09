@@ -58,7 +58,7 @@ In reality
 <p style="text-align:left;">
     <b><a class href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html">&laquo; 3. RNA-seq Mapping And Count Data Workflow</a></b>
     <span style="float:right;">
-     <b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/5_working_with_job_scheduler.html">5. Working with job Scheduler &raquo;</a></b>
+     <b><a class href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/5_working_with_job_scheduler.html">5. Working with job Scheduler &raquo;</a></b>
     </span>
 </p>
 
