@@ -1,4 +1,4 @@
-## slurm profiling
+## S2 : slurm profiling
 
 <p style="text-align:left;">
     <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/6_supplementary_1.html" style="background: var(--bs-green);font-weight:bold">&laquo;6. Supplementary 1</a></b>
