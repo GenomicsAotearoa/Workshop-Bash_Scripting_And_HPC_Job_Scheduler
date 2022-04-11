@@ -1,5 +1,12 @@
 ## slurm profiling
 
+<p style="text-align:left;">
+    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/5_working_with_job_scheduler.html" style="background: var(--bs-green);font-weight:bold">&laquo;5. Working with job Scheduler</a></b>
+    <span style="float:right;">
+    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/7_supplementary_2.html" style="background: var(--bs-green);font-weight:bold">6. Supplementary 2  &raquo;</a></b>
+    </span>
+</p>
+
 Although `nn_seff` command is a quick and easy way to determine the resource utilisation, it relies on **peak** values (data gets recorded every 30 seconds) which doesn't allows us to examine resource usage over the run-time of the job. There are number of in-built/external tools to achieve the latter which will require some effort to understand its deployment, tracing and interpretation. Therefore, we will use **slurm native profiling** to evaluate resource usage over run-time. This is a simple and elegant solution.
 
 ### Exercise S.2.1
