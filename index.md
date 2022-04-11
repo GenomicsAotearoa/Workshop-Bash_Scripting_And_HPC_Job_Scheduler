@@ -26,3 +26,6 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
 6. [Supplementary #1](./workshop_material/6_supplementary_1.md)
 7. [Supplementary #2](./workshop_material/7_supplementary_2.md)
 8. [Supplementary #3](./workshop_material/8_supplementary_3.md)
+
+### Setup
+
