@@ -1,7 +1,7 @@
 ## slurm profiling
 
 <p style="text-align:left;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/7_supplementary_1.html" style="background: var(--bs-green);font-weight:bold">&laquo;5. Working with job Scheduler</a></b>
+    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/6_supplementary_1.html" style="background: var(--bs-green);font-weight:bold">&laquo;6. Working with job Scheduler</a></b>
     <span style="float:right;">
     <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/8_supplementary_3.html" style="background: var(--bs-green);font-weight:bold">8. Supplementary 3  &raquo;</a></b>
     </span>
