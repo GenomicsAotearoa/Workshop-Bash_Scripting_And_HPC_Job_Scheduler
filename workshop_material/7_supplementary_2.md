@@ -48,3 +48,6 @@ $ python profile_plot_Jul2020.py job_JOBID.h5
 {% endcapture %}
 
 {% include exercise.html title="e4dot4" content=eS2dot1%}
+
+
+<p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>

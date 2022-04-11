@@ -47,3 +47,5 @@ $ module purge
 ```bash
 $ module switch CURRENT_MODULE DESIRED_MODULE
 ```
+
+<p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
