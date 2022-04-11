@@ -34,7 +34,9 @@ Commonly used schedulers
 * PBS , Torque
 * Grid Engine
 
-
+<br>
+<p align="center"><img src="nesi_images/slurm_logo.png" alt="drawing" width="600"/></p> 
+<br>
 
 All NeSI clusters use Slurm *(Simple Linux Utility for Resource Management)* scheduler (or job submission system) to manage resources and how they are made available to users. The main commands you will use with Slurm on NeSI Mahuika cluster are:
    
