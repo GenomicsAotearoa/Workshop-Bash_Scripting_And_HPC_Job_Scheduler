@@ -1,6 +1,7 @@
 ## S3 : Solutions
 
-
+<p style="text-align:left;">
+    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/7_supplementary_2.html" style="background: var(--bs-green);font-weight:bold">&laquo;6. Supplementary 1</a></b>
 
 ### Exercise 5.4 😬	
 {% capture es3dot1 %}
