@@ -104,7 +104,7 @@ Running the script
 $ bash ./variant_calling.sh
 ```
 This should take about 10 minutes.
-Note: The was the script is written means we have to indicate which program to use whenever we are running it. 
+Note: The way the script is written means we have to indicate which program to use whenever we are running it. 
 So to run without calling bash, we can change the script permissions.
 
 ```bash 
