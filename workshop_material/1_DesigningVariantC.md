@@ -167,7 +167,7 @@ $ bcftools call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/
 ### Step 3: Filter and report the SNV variants in variant calling format (VCF)
 Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
 ```bash
-$ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  > results/vcf/SRR2584866_final_variants.vcf
+$ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf > results/vcf/SRR2584866_final_variants.vcf
 ```
 
 ### Explore the VCF format:
