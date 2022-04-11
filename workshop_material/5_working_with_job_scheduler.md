@@ -155,7 +155,7 @@ $ nano firstslurm.sl
 ```bash
 $ sbatch firstslurm.sl
 ```
->Execute `squeue -u $USER` and `sacct`. Discuss the outputs .i.e.
+>Execute `squeue --me` and `sacct`. Discuss the outputs .i.e.
 ```bash
 $ squeue --me
 ```
