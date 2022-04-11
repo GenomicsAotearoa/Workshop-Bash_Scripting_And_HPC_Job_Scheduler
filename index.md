@@ -29,3 +29,5 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
 
 ### Setup
 
+Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. 
+
