@@ -29,5 +29,5 @@ This as an intermediate level workshop on *Introduction to Bash Scripting and HP
 
 ### Setup
 
-Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. 
+Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. Instructions on how to Set/Reset Authentication factors to access NeSI Services and Jupyter Login instructions c
 
