@@ -14,7 +14,7 @@
 ## Aim
 - Put all the steps from the previous lesson into a script.
 
-### Examplar script
+### Exemplar script
 
 
 ### Variant calling workflow
