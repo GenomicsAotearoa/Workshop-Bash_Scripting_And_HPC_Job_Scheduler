@@ -56,14 +56,16 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
         module load Python/3.8.2-gimkl-2020a
         ```
         - Replace **JOBID** with the corresponding number
-$ python profile_plot_Jul2020.py job_JOBID.h5
+        ```bash
+        python profile_plot_Jul2020.py job_JOBID.h5
+        ```
 
-#This should generate a .png file where the filename is in the format of job_23258404_profile.png
-``` 
+       - This should generate a .png file where the filename is in the format of job_23258404_profile.png
 
-<br>
-<p align="center"><img src="nesi_images/slurm_profile.png" alt="drawing" width="1000"/></p> 
-<br>
+
+    <br>
+    <p align="center"><img src="nesi_images/slurm_profile.png" alt="drawing" width="1000"/></p> 
+    <br>
 
 {% endcapture %}
 
