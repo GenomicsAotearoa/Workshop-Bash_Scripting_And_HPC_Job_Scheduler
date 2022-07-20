@@ -566,15 +566,15 @@
 <li>PBS , Torque</li>
 <li>Grid Engine</li>
 </ul>
-<p><br></p>
-<p align="center"><img src="/nesi_images/slurm_logo.png" alt="drawing" width="150"/></p>
-<p><br></p>
+<p><center>
+<img alt="image" src="../nesi_images/slurm_logo.png" width="150" />
+</center></p>
 <p>All NeSI clusters use Slurm <em>(Simple Linux Utility for Resource Management)</em> scheduler (or job submission system) to manage resources and how they are made available to users. The main commands you will use with Slurm on NeSI Mahuika cluster are:</p>
 <p>A quick note on <code>sinfo</code>(Query the current state of nodes) which is not a command a researcher will use regularly but helps HPC admins and support staff with monitoring.</p>
 <h2 id="life-cycle-of-a-slurm-job">Life cycle of a slurm job<a class="headerlink" href="#life-cycle-of-a-slurm-job" title="Permanent link">&para;</a></h2>
-<p><br></p>
-<p align="center"><img src="/nesi_images/slurm_flow.png" alt="drawing" width="1000"/></p>
-<p><br></p>
+<p><center>
+<img alt="image" src="../nesi_images/slurm_flow.png" width="1000" />
+</center></p>
 <hr />
 <table>
 <thead>
@@ -642,9 +642,9 @@
 </details>
 <h2 id="anatomy-of-a-slurm-script-and-submitting-first-slurm-job">Anatomy of a slurm script and submitting first slurm job 🧐<a class="headerlink" href="#anatomy-of-a-slurm-script-and-submitting-first-slurm-job" title="Permanent link">&para;</a></h2>
 <p>As with most other scheduler systems, job submission scripts in Slurm consist of a header section with the shell specification and options to the submission command (<code>sbatch</code> in this case) followed by the body of the script that actually runs the commands you want. In the header section, options to <code>sbatch</code> should be prepended with <code>#SBATCH</code>.</p>
-<p><br></p>
-<p align="center"><img src="/nesi_images/anatomyofslurm_bashscript.png" alt="drawing" width="700"/></p>
-<p><br></p>
+<p><center>
+<img alt="image" src="../nesi_images/anatomyofslurm_bashscript.png" width="700" />
+</center></p>
 <blockquote>
 <p>Commented lines are ignored by the bash interpreter, but they are not ignored by slurm. The <code>#SBATCH</code> parameters are read by slurm when we submit the job. When the job starts, the bash interpreter will ignore all lines starting with <code>#</code>. This is very similar to the shebang mentioned earlier, when you run your script, the system looks at the <code>#!</code>, then uses the program at the subsequent path to interpret the script, in our case <code>/bin/bash</code> (the program <code>bash</code> found in the <em>/bin</em> directory</p>
 </blockquote>
