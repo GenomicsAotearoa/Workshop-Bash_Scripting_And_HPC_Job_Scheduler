@@ -68,9 +68,7 @@
     echo "DONE"
     ```
 
-{% endcapture %}
 
-{% include exercise.html title="es3dot1" content=es3dot1%}
 
 ### Exercise 5.5 😬	
 {% capture es3dot2 %}
