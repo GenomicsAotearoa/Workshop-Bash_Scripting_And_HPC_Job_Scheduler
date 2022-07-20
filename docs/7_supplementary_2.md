@@ -29,8 +29,9 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
     ```
 
     * Review the slurm script with cat Or another text editor and submit with sbatch
-$ sbatch example1_arraysum.sl 
-```
+    ```bash
+    sbatch example1_arraysum.sl 
+    ```
     
 * Do take a note of the **JOBID** as we are going to need it for next step. Otherwise, we use `squeue --me` OR `sacct` command as before to monitor the status
 * Also, you can `watch` the status of this job via `$ watch -n 1 -d "squeue -j JOBID"`. 
