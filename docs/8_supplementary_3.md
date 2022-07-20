@@ -103,13 +103,13 @@
     hisat2-build -p 4 -f $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
 
 
-#Mapping Samples to the reference genome
+    #Mapping Samples to the reference genome
 
-for filename in $PWD/trimmed_reads/*
-  do
-    base=$(basename ${filename} .fastq)
-    hisat2 -p 4 -x $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filename -S $PWD/Mapping/${base}.sam --summary-file $PWD/Mapping/${base}_summary.txt
-  done
+    for filename in $PWD/trimmed_reads/*
+      do
+        base=$(basename ${filename} .fastq)
+        hisat2 -p 4 -x $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filename -S $PWD/Mapping/${base}.sam --summary-file $PWD/Mapping/${base}_summary.txt
+    done
 
 #Convert SAMfiles to BAM
 
