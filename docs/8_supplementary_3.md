@@ -87,9 +87,9 @@
     #SBATCH --mail-user		myemail@email.org.nz
 
 
-echo "$PWD"
+    echo "$PWD"
 
-mkdir -p ~/scripting_workshop/scheduler/ex_5.5/{Mapping,Counts} && cd ~/scripting_workshop/scheduler/ex_5.5/
+    mkdir -p ~/scripting_workshop/scheduler/ex_5.5/{Mapping,Counts} && cd ~/scripting_workshop/scheduler/ex_5.5/
 cp -r /nesi/project/nesi02659/scripting_workshop/rna_seq/* ./
 
 module purge
