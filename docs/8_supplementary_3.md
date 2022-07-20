@@ -6,16 +6,16 @@
 
 ??? success "Exercise 5.4 😬"	
 
-```bash
+    ```bash
 
-#!/bin/bash -e
+    #!/bin/bash -e
 
-#SBATCH --account		nesi02659
-#SBATCH --job-name 	    variant_calling_workflow
-#SBATCH --cpus-per-task 	2
-#SBATCH --time 			00:15:00
-#SBATCH --mem 			4G
-#SBATCH --output 		slurmout/variant_calling-%j.out
+    #SBATCH --account		nesi02659
+    #SBATCH --job-name 	    variant_calling_workflow
+    #SBATCH --cpus-per-task 	2
+    #SBATCH --time 			00:15:00
+    #SBATCH --mem 			4G
+    #SBATCH --output 		slurmout/variant_calling-%j.out
 #SBATCH --error 		slurmout/variant_calling-%j.err
 #SBATCH --mail-type		END
 #SBATCH --mail-user		myemail@email.co.nz
