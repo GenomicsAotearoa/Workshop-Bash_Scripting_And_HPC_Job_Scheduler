@@ -94,10 +94,10 @@
 
     module purge
     module load HISAT2/2.2.0-gimkl-2020a
-module load SAMtools/1.10-GCC-9.2.0
-module load Subread/2.0.0-GCC-9.2.0
+    module load SAMtools/1.10-GCC-9.2.0
+    module load Subread/2.0.0-GCC-9.2.0
 
-echo $PWD
+    echo $PWD
 
 #index file
 hisat2-build -p 4 -f $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
