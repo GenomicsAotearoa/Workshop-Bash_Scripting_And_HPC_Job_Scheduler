@@ -37,11 +37,11 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
     * Also, you can `watch` the status of this job via `$ watch -n 1 -d "squeue -j JOBID"`. 
     *  `watch` command execute a program periodically, showing output fullscreen. Exiting the `watch` screen by done by pressing `Ctrl+x` 
 
-* Let's create slurm profile graphs
+    * Let's create slurm profile graphs
 
-```bash
+    ```bash
 
-#collate the data into an HDF5 file using the command. Replace **JOBID** with the corresponding number 
+
 $ sh5util -j JOBID
 sh5util: Merging node-step files into ./job_JOBID.h5
 
