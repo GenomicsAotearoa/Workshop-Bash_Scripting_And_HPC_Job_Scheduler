@@ -30,6 +30,10 @@ Commonly used schedulers
 * PBS , Torque
 * Grid Engine
 
+<center>
+![image](./nesi_images/slurm_logo.png){width="150"}
+</center>
+
 <br>
 <p align="center"><img src="/nesi_images/slurm_logo.png" alt="drawing" width="150"/></p> 
 <br>
