@@ -130,11 +130,8 @@
     #count how many reads aligned to each genome feature (exon).
 
     featureCounts -a $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o $PWD/Counts/yeast_counts.txt -T 2 -t exon -g gene_id $PWD/Mapping/*sorted.bam
-```
+    ```
 
-{% endcapture %}
-
-{% include exercise.html title="es3dot2" content=es3dot2%}
 
 
 <p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
