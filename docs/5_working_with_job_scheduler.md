@@ -61,7 +61,7 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
 
 ---
 
- Exercise 5.1
+??? question "Exercise 5.1"
 
 ```bash
 #summary of current states of compute nodes known to the scheduler
