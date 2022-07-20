@@ -5,7 +5,6 @@
 </p>
 
 ??? success "Exercise 5.4 😬"	
-{% capture es3dot1 %}
 
 ```bash
 
