@@ -51,8 +51,8 @@
         bam=results/bam/${base}.aligned.bam
         sorted_bam=results/bam/${base}.aligned.sorted.bam
         raw_bcf=results/bcf/${base}_raw.bcf
-    variants=results/vcf/${base}_variants.vcf
-    final_variants=results/vcf/${base}_final_variants.vcf
+        variants=results/vcf/${base}_variants.vcf
+        final_variants=results/vcf/${base}_final_variants.vcf
 
     # running the analysis steps
     bwa mem $genome $fq1 $fq2 > $sam
