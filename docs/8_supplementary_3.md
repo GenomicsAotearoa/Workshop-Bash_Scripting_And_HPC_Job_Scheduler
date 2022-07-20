@@ -90,10 +90,10 @@
     echo "$PWD"
 
     mkdir -p ~/scripting_workshop/scheduler/ex_5.5/{Mapping,Counts} && cd ~/scripting_workshop/scheduler/ex_5.5/
-cp -r /nesi/project/nesi02659/scripting_workshop/rna_seq/* ./
+    cp -r /nesi/project/nesi02659/scripting_workshop/rna_seq/* ./
 
-module purge
-module load HISAT2/2.2.0-gimkl-2020a
+    module purge
+    module load HISAT2/2.2.0-gimkl-2020a
 module load SAMtools/1.10-GCC-9.2.0
 module load Subread/2.0.0-GCC-9.2.0
 
