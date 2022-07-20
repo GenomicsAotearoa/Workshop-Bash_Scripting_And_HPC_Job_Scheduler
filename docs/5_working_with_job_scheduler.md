@@ -295,11 +295,5 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 
 ---
 
-<p style="text-align:left;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_IntroductiontoHPC.html" style="background: var(--bs-green);font-weight:bold">&laquo;4. Introduction to HPC</a></b>
-    <span style="float:right;">
-     <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/6_supplementary_1.html" style="background: var(--bs-green);font-weight:bold">6. Supplementary 1  &raquo;</a></b>
-    </span>
-</p>
 
 <p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
