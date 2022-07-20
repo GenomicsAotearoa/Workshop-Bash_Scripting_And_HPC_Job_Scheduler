@@ -1,0 +1,1135 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../nesi_images/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Working with job scheduler - Introduction to Bash Scripting and HPC Scheduler</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#working-with-job-scheduler" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to Bash Scripting and HPC Scheduler" class="md-header__button md-logo" aria-label="Introduction to Bash Scripting and HPC Scheduler" data-md-component="logo">
+      
+  <img src="../nesi_images/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to Bash Scripting and HPC Scheduler
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Working with job scheduler
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent=""  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+          
+            <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to Bash Scripting and HPC Scheduler" class="md-nav__button md-logo" aria-label="Introduction to Bash Scripting and HPC Scheduler" data-md-component="logo">
+      
+  <img src="../nesi_images/nesi_ga.png" alt="logo">
+
+    </a>
+    Introduction to Bash Scripting and HPC Scheduler
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction to Bash Scripting and HPC Scheduler
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_DesigningVariantC/" class="md-nav__link">
+        Variant Calling Workflow
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_AutomaticVariantC/" class="md-nav__link">
+        Automating a Variant Calling Workflow
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_RNAseq/" class="md-nav__link">
+        RNA-seq Mapping And Count Data Workflow
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_IntroductiontoHPC/" class="md-nav__link">
+        Introduction to HPC
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Working with job scheduler
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Working with job scheduler
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#outline" class="md-nav__link">
+    Outline
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-slurm-scheduler-and-directives" class="md-nav__link">
+    Introduction to slurm scheduler and directives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#life-cycle-of-a-slurm-job" class="md-nav__link">
+    Life cycle of a slurm job
+  </a>
+  
+    <nav class="md-nav" aria-label="Life cycle of a slurm job">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-51" class="md-nav__link">
+    Exercise 5.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anatomy-of-a-slurm-script-and-submitting-first-slurm-job" class="md-nav__link">
+    Anatomy of a slurm script and submitting first slurm job 🧐
+  </a>
+  
+    <nav class="md-nav" aria-label="Anatomy of a slurm script and submitting first slurm job 🧐">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-52" class="md-nav__link">
+    Exercise 5.2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#include-exercisehtml-titlee5dot2-contente5dot2" class="md-nav__link">
+    {% include exercise.html title="e5dot2" content=e5dot2%}
+  </a>
+  
+    <nav class="md-nav" aria-label="{% include exercise.html title="e5dot2" content=e5dot2%}">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdoutstderr-from-jobs" class="md-nav__link">
+    STDOUT/STDERR from jobs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessing-resource-utilisation-cpu-memory-time" class="md-nav__link">
+    Assessing resource utilisation (cpu, memory, time)
+  </a>
+  
+    <nav class="md-nav" aria-label="Assessing resource utilisation (cpu, memory, time)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-53" class="md-nav__link">
+    Exercise 5.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#include-exercisehtml-titlee5dot3-contente5dot3" class="md-nav__link">
+    {% include exercise.html title="e5dot3" content=e5dot3%}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiling-slurm-scripts-for-variant-calling-and-rna-seq-episodes" class="md-nav__link">
+    Compiling slurm scripts for Variant Calling and RNA-seq episodes
+  </a>
+  
+    <nav class="md-nav" aria-label="Compiling slurm scripts for Variant Calling and RNA-seq episodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-54" class="md-nav__link">
+    Exercise 5.4 😬
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-55" class="md-nav__link">
+    Exercise 5.5 😬
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_supplementary_1/" class="md-nav__link">
+        S1 : Accessing software via modules
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_supplementary_2/" class="md-nav__link">
+        S2 : slurm profiling
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_supplementary_3/" class="md-nav__link">
+        S3 : Solutions
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#outline" class="md-nav__link">
+    Outline
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-slurm-scheduler-and-directives" class="md-nav__link">
+    Introduction to slurm scheduler and directives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#life-cycle-of-a-slurm-job" class="md-nav__link">
+    Life cycle of a slurm job
+  </a>
+  
+    <nav class="md-nav" aria-label="Life cycle of a slurm job">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-51" class="md-nav__link">
+    Exercise 5.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anatomy-of-a-slurm-script-and-submitting-first-slurm-job" class="md-nav__link">
+    Anatomy of a slurm script and submitting first slurm job 🧐
+  </a>
+  
+    <nav class="md-nav" aria-label="Anatomy of a slurm script and submitting first slurm job 🧐">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-52" class="md-nav__link">
+    Exercise 5.2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#include-exercisehtml-titlee5dot2-contente5dot2" class="md-nav__link">
+    {% include exercise.html title="e5dot2" content=e5dot2%}
+  </a>
+  
+    <nav class="md-nav" aria-label="{% include exercise.html title="e5dot2" content=e5dot2%}">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdoutstderr-from-jobs" class="md-nav__link">
+    STDOUT/STDERR from jobs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessing-resource-utilisation-cpu-memory-time" class="md-nav__link">
+    Assessing resource utilisation (cpu, memory, time)
+  </a>
+  
+    <nav class="md-nav" aria-label="Assessing resource utilisation (cpu, memory, time)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-53" class="md-nav__link">
+    Exercise 5.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#include-exercisehtml-titlee5dot3-contente5dot3" class="md-nav__link">
+    {% include exercise.html title="e5dot3" content=e5dot3%}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiling-slurm-scripts-for-variant-calling-and-rna-seq-episodes" class="md-nav__link">
+    Compiling slurm scripts for Variant Calling and RNA-seq episodes
+  </a>
+  
+    <nav class="md-nav" aria-label="Compiling slurm scripts for Variant Calling and RNA-seq episodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-54" class="md-nav__link">
+    Exercise 5.4 😬
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-55" class="md-nav__link">
+    Exercise 5.5 😬
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler.git/edit/master/docs/5_working_with_job_scheduler.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="working-with-job-scheduler">Working with job scheduler<a class="headerlink" href="#working-with-job-scheduler" title="Permanent link">&para;</a></h1>
+<p style="text-align:left;">
+    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_IntroductiontoHPC.html" style="background: var(--bs-green);font-weight:bold">&laquo;4. Introduction to HPC</a></b>
+    <span style="float:right;">
+     <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/6_supplementary_1.html" style="background: var(--bs-green);font-weight:bold">6. Supplementary 1  &raquo;</a></b>
+    </span>
+</p>
+
+<h2 id="outline">Outline<a class="headerlink" href="#outline" title="Permanent link">&para;</a></h2>
+<ul>
+<li toc="toc">Do not remove this line (it will not be displayed)</li>
+</ul>
+<h2 id="introduction-to-slurm-scheduler-and-directives">Introduction to slurm scheduler and directives<a class="headerlink" href="#introduction-to-slurm-scheduler-and-directives" title="Permanent link">&para;</a></h2>
+<p>An HPC system might have thousands of nodes and thousands of users. How do we decide who gets what and when? How do we ensure that a task is run with the resources it needs? This job is handled by a special piece of software called the scheduler. On an HPC system, the scheduler manages which jobs run where and when. In brief, scheduler is a </p>
+<ul>
+<li>Mechanism to control access by many users to shared computing resources</li>
+<li>Queuing / scheduling system for users’ jobs</li>
+<li>Manages the reservation of resources and job execution on these resources </li>
+<li>Allows users to “fire and forget” large, long calculations or many jobs (“production runs”)</li>
+</ul>
+<p>Why do we need a scheduler ?</p>
+<ul>
+<li>To ensure the machine is utilised as fully as possible</li>
+<li>To ensure all users get a fair chance to use compute resources (demand usually exceeds supply)</li>
+<li>To track usage - for accounting and budget control</li>
+<li>To mediate access to other resources e.g. software licences</li>
+</ul>
+<p>Commonly used schedulers</p>
+<ul>
+<li>Slurm</li>
+<li>PBS , Torque</li>
+<li>Grid Engine</li>
+</ul>
+<p><br></p>
+<p align="center"><img src="nesi_images/slurm_logo.png" alt="drawing" width="150"/></p>
+<p><br></p>
+<p>All NeSI clusters use Slurm <em>(Simple Linux Utility for Resource Management)</em> scheduler (or job submission system) to manage resources and how they are made available to users. The main commands you will use with Slurm on NeSI Mahuika cluster are:</p>
+<p>A quick note on <code>sinfo</code>(Query the current state of nodes) which is not a command a researcher will use regularly but helps HPC admins and support staff with monitoring.</p>
+<h2 id="life-cycle-of-a-slurm-job">Life cycle of a slurm job<a class="headerlink" href="#life-cycle-of-a-slurm-job" title="Permanent link">&para;</a></h2>
+<p><br></p>
+<p align="center"><img src="nesi_images/slurm_flow.png" alt="drawing" width="1000"/></p>
+<p><br></p>
+<hr />
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>sbatch</code></td>
+<td align="left">Submit non-interactive (batch) jobs to the scheduler</td>
+</tr>
+<tr>
+<td align="left"><code>squeue</code></td>
+<td align="left">List jobs in the queue</td>
+</tr>
+<tr>
+<td align="left"><code>scancel</code></td>
+<td align="left">Cancel a job</td>
+</tr>
+<tr>
+<td align="left"><code>sacct</code></td>
+<td align="left">Display accounting data for all jobs and job steps in the Slurm job accounting log or Slurm database</td>
+</tr>
+<tr>
+<td align="left"><code>srun</code></td>
+<td align="left">Slurm directive for parallel computing</td>
+</tr>
+<tr>
+<td align="left"><code>sinfo</code></td>
+<td align="left">Query the current state of nodes</td>
+</tr>
+<tr>
+<td align="left"><code>salloc</code></td>
+<td align="left">Submit interactive jobs to the scheduler</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="exercise-51">Exercise 5.1<a class="headerlink" href="#exercise-51" title="Permanent link">&para;</a></h3>
+<p>{% capture e5dot1 %}
+Let's run the following commands and discuss the outputs</p>
+<p _="%" endcapture="endcapture"><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">#summary of current states of compute nodes known to the scheduler</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ sinfo
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">#similar to above but expanded</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>$ sinfo --format<span class="o">=</span><span class="s2">&quot;%16P %.8m %.5a %10T %.5D %80N&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">#will print a long output as it is one row per compute node in the cluster</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>$ sinfo -N -l
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1">#Explore the capacity of a compute node</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>$ sinfo -n wch001 -o <span class="s2">&quot;%n %c %m&quot;</span>
+</code></pre></div></p>
+<p>{% include exercise.html title="e5dot1" content=e5dot1%}</p>
+<h2 id="anatomy-of-a-slurm-script-and-submitting-first-slurm-job">Anatomy of a slurm script and submitting first slurm job 🧐<a class="headerlink" href="#anatomy-of-a-slurm-script-and-submitting-first-slurm-job" title="Permanent link">&para;</a></h2>
+<p>As with most other scheduler systems, job submission scripts in Slurm consist of a header section with the shell specification and options to the submission command (<code>sbatch</code> in this case) followed by the body of the script that actually runs the commands you want. In the header section, options to <code>sbatch</code> should be prepended with <code>#SBATCH</code>.</p>
+<p><br></p>
+<p align="center"><img src="nesi_images/anatomyofslurm_bashscript.png" alt="drawing" width="700"/></p>
+<p><br></p>
+<blockquote>
+<p>Commented lines are ignored by the bash interpreter, but they are not ignored by slurm. The <code>#SBATCH</code> parameters are read by slurm when we submit the job. When the job starts, the bash interpreter will ignore all lines starting with <code>#</code>. This is very similar to the shebang mentioned earlier, when you run your script, the system looks at the <code>#!</code>, then uses the program at the subsequent path to interpret the script, in our case <code>/bin/bash</code> (the program <code>bash</code> found in the <em>/bin</em> directory</p>
+</blockquote>
+<hr />
+<table>
+<thead>
+<tr>
+<th align="left">header</th>
+<th align="left">use</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">--job-name</td>
+<td align="left"><code>#SBATCH --job-name=MyJob</code></td>
+<td align="left">The name that will appear when using squeue or sacct.</td>
+</tr>
+<tr>
+<td align="left">--account</td>
+<td align="left"><code>#SBATCH --account=nesi12345</code></td>
+<td align="left">The account your core hours will be 'charged' to.</td>
+</tr>
+<tr>
+<td align="left">--time</td>
+<td align="left"><code>#SBATCH --time=DD-HH:MM:SS</code></td>
+<td align="left">Job max walltime.</td>
+</tr>
+<tr>
+<td align="left">--mem</td>
+<td align="left"><code>#SBATCH --mem=512MB</code></td>
+<td align="left">Memory required per node.</td>
+</tr>
+<tr>
+<td align="left">--cpus-per-task</td>
+<td align="left"><code>#SBATCH --cpus-per-task=10</code></td>
+<td align="left">Will request 10 logical CPUs per task.</td>
+</tr>
+<tr>
+<td align="left">--output</td>
+<td align="left"><code>#SBATCH --output=%j_output.out</code></td>
+<td align="left">Path and name of standard output file. <code>%j</code> will be replaced by the job ID.</td>
+</tr>
+<tr>
+<td align="left">--mail-user</td>
+<td align="left"><code>#SBATCH --mail-user=me23@gmail.com</code></td>
+<td align="left">address to send mail notifications.</td>
+</tr>
+<tr>
+<td align="left">--mail-type</td>
+<td align="left"><code>#SBATCH --mail-type=ALL</code></td>
+<td align="left">Will send a mail notification at BEGIN END FAIL.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>#SBATCH --mail-type=TIME_LIMIT_80</code></td>
+<td align="left">Will send message at 80% walltime.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="exercise-52">Exercise 5.2<a class="headerlink" href="#exercise-52" title="Permanent link">&para;</a></h3>
+<p>{% capture e5dot2 %}
+Let's put these directives together and compile our first slurm script</p>
+<ul>
+<li>First create a new working directory and write the script</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">#Confirming the working directory</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$ <span class="nb">cd</span> ~/scripting_workshop/scheduler
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">#confirm the path is correct </span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>$ <span class="nb">pwd</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>/home/<span class="nv">$USER</span>/scripting_workshop/scheduler
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1">#create a new directory for this section and change the directory to it - Check for the follow up not `&amp;&amp;`</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>$ mkdir ex_5.2 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ex_5.2
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">#use a text editor of choice to create a file named firstslurm.sl - we will use nano here</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>$ nano firstslurm.sl
+</code></pre></div>
+<blockquote>
+<p>Content of <code>firstslurm.sl</code> should be as below. Please discuss as you make progress</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="ch">#!/bin/bash </span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">#SBATCH --job-name      myfirstslurmjob</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">#SBATCH --account       nesi02659</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1">#SBATCH --time          00:01:00</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1">#SBATCH --cpus-per-task 1</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">#SBATCH --mem           512</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1">#SBATCH --output        slurmjob.%j.out</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>sleep <span class="m">200</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="nb">echo</span> <span class="s2">&quot;I am a slurm job and I slept for 200 seconds&quot;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$SLURM_JOB_ID</span><span class="s2"> END&quot;</span>
+</code></pre></div>
+</blockquote>
+<ul>
+<li><strong>Save</strong> and <strong>Exit</strong></li>
+<li>Submit the script with <code>sbatch</code> command</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ sbatch firstslurm.sl
+</code></pre></div>
+<blockquote>
+<p>Execute <code>squeue --me</code> and <code>sacct</code>. Discuss the outputs .i.e.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ squeue --me
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ sacct
+</code></pre></div></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>NOTE</strong> -
+The meaning of <code>&amp;&amp;</code> and <code>&amp;</code> are intrinsically different.</p>
+<ul>
+<li><strong>What is <code>&amp;&amp;</code> in Bash?</strong> In Bash—and many other programming languages—<code>&amp;&amp;</code> means “AND”. And in command execution 
+context like this, it means items to the left as well as right of &amp;&amp; should be run in sequence in this case.</li>
+<li><strong>What is &amp; in Bash?</strong> And a single <code>&amp;</code>means that the preceding commands—to the immediate left of the &amp;—should 
+simply be run in the background.</li>
+</ul>
+</blockquote>
+<hr />
+<p>{% endcapture %}</p>
+<h2 id="include-exercisehtml-titlee5dot2-contente5dot2">{% include exercise.html title="e5dot2" content=e5dot2%}<a class="headerlink" href="#include-exercisehtml-titlee5dot2-contente5dot2" title="Permanent link">&para;</a></h2>
+<h3 id="stdoutstderr-from-jobs">STDOUT/STDERR from jobs<a class="headerlink" href="#stdoutstderr-from-jobs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>STDOUT - your process writes conventional output to this file handle</li>
+<li>STDERR - your process writes diagnostic output to this file handle.</li>
+</ul>
+<p><strong>STDOUT</strong> and <strong>STDERR</strong> from jobs are, by default, written to a file called <code>slurm-JOBID.out</code> and <code>slurm-JOBID.err</code> in the working directory for the job (unless the job script changes this, this will be the directory where you submitted the job). So for a job with ID 12345 STDOUT and STDERR will be <code>slurm-12345.out</code> and <code>slurm-12345.err</code>.</p>
+<p>When things go wrong, first step of <strong>debugging</strong> (STORY TIME !) starts with a referral to these files. </p>
+<h2 id="assessing-resource-utilisation-cpu-memory-time">Assessing resource utilisation (cpu, memory, time)<a class="headerlink" href="#assessing-resource-utilisation-cpu-memory-time" title="Permanent link">&para;</a></h2>
+<p>Understanding the resources you have available and how to use them most efficiently is a vital skill in high performance computing. The three resources that every single job submitted on the platform needs to request are:</p>
+<ul>
+<li>CPUs (i.e. logical CPU cores), and</li>
+<li>Memory (RAM), and</li>
+<li>Time.</li>
+</ul>
+<p><strong><em>What happens if I ask for the wrong resources?</em></strong></p>
+<hr />
+<table>
+<thead>
+<tr>
+<th align="left">Resource</th>
+<th align="left">Asking for too much</th>
+<th align="left">Not asking for enough</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Number of CPUs</td>
+<td align="left">Job may wait in the queue for longer</td>
+<td align="left">Job will run more slowly than expected, and so may run out time</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">Drop in fairshare score which determines job priority</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Memory</td>
+<td align="left">(above)</td>
+<td align="left">Job will fail, probably with <code>OUT OF MEMORY</code> error, segmentation fault or bus error</td>
+</tr>
+<tr>
+<td align="left">Wall time</td>
+<td align="left">(above)</td>
+<td align="left">Job will run out of time and get killed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="exercise-53">Exercise 5.3<a class="headerlink" href="#exercise-53" title="Permanent link">&para;</a></h3>
+<p>{% capture e5dot3 %}</p>
+<ul>
+<li>Let's submit another slurm job and review its resource utilisation</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">#Change the working directory to Exercise_5.3</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>$ <span class="nb">cd</span> ~/scripting_workshop/scheduler/ex_5.3
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">#Run ls command and you should see two files (one .R and one sl) and one directory named slurmout</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>$ ls -F
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>bowtie-test.sl*  input_data/  slurmout/
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1">#Review the slurm script bowtie-test.sl with nano and edit the corresponding sections (hint :email)</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>$ sbatch bowtie-test.sl 
+</code></pre></div>
+<blockquote>
+<p>use <code>squeue --me</code> and <code>sacct</code> again to evaluate the job status</p>
+<p>Once the job ran into completion, use <code>nn_seff JOBID</code> command to print the resource utilisation statistics (Replace <strong>JOBID</strong> with the corresponding number)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ nn_seff <span class="m">25222190</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Job ID: <span class="m">25222190</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Cluster: mahuika
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>User/Group: me1234/me1234
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>State: COMPLETED <span class="o">(</span><span class="nb">exit</span> code <span class="m">0</span><span class="o">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>Cores: <span class="m">1</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>Tasks: <span class="m">1</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>Nodes: <span class="m">1</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>Job Wall-time:  <span class="m">18</span>.33%  <span class="m">00</span>:00:33 of <span class="m">00</span>:03:00 <span class="nb">time</span> limit
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>CPU Efficiency: <span class="m">93</span>.94%  <span class="m">00</span>:00:31 of <span class="m">00</span>:00:33 core-walltime
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>Mem Efficiency: <span class="m">1</span>.33%  <span class="m">13</span>.62 MB of <span class="m">1</span>.00 GB
+</code></pre></div>
+</blockquote>
+<p>Now review the content of <code>.err</code> and <code>.out</code> files in <em>/slurmout</em> directory </p>
+<blockquote>
+<p><strong>Feeling adventurous ?</strong> - Refer to <a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/7_supplementary_2.html">Supplementary material on slurm profiling</a></p>
+</blockquote>
+<p>{% endcapture %}</p>
+<h2 id="include-exercisehtml-titlee5dot3-contente5dot3">{% include exercise.html title="e5dot3" content=e5dot3%}<a class="headerlink" href="#include-exercisehtml-titlee5dot3-contente5dot3" title="Permanent link">&para;</a></h2>
+<h2 id="compiling-slurm-scripts-for-variant-calling-and-rna-seq-episodes">Compiling slurm scripts for Variant Calling and RNA-seq episodes<a class="headerlink" href="#compiling-slurm-scripts-for-variant-calling-and-rna-seq-episodes" title="Permanent link">&para;</a></h2>
+<h3 id="exercise-54">Exercise 5.4 😬<a class="headerlink" href="#exercise-54" title="Permanent link">&para;</a></h3>
+<p>{% capture e5dot4 %}</p>
+<p>Purpose of this exercise is to compile a slurm submission script based on the script we wrote in <a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html">episode 2 - Automating variant calling workflow</a></p>
+<ul>
+<li>recommend creating a new directory for the exercise .i.e <code>ex_5.4</code></li>
+<li>Name of the file is <code>variant_calling.sl</code> (note that we have change the extension from <code>.sh</code> to <code>.sl</code>)</li>
+<li>
+<p>In terms of slurm variables</p>
+<ul>
+<li>name of the job is <code>variant_calling_workflow</code></li>
+<li>number of CPUS is <code>2</code></li>
+<li>timelimit <code>15 minutes</code></li>
+<li>amount of memory in GB <code>4G</code></li>
+<li>generate  <em>.err</em> files and <em>.out</em> where both should be re-directed to the directory <strong><em>slurmout</em></strong></li>
+<li>an email notification at the end of the job </li>
+</ul>
+</li>
+<li>
+<p>We don't want to replicate <strong><em>input data</em></strong>  in multiple places .i.e. be conservative in-terms how you use research storage</p>
+<ul>
+<li>Therefore, use the same reference genome file (assign the filename to variable <code>genome</code> and the trimmed read files (assign the path of these files to variable <code>trimmed</code>) used in the first episode</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">genome</span><span class="o">=</span>~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">trimmed</span><span class="o">=</span>~/scripting_workshop/variant_calling/trimmed_reads
+</code></pre></div>
+<p>{% endcapture %}</p>
+<p>{% include exercise.html title="e5dot4" content=e5dot4%}</p>
+<h3 id="exercise-55">Exercise 5.5 😬<a class="headerlink" href="#exercise-55" title="Permanent link">&para;</a></h3>
+<p>{% capture e5dot5 %}</p>
+<blockquote>
+<ul>
+<li>Now it's your turn to compile a slurm submission script for the RNA-seq workflow. 😊</li>
+</ul>
+</blockquote>
+<p>{% endcapture %}</p>
+<p>{% include exercise.html title="e5dot5" content=e5dot5%}</p>
+<hr />
+<p style="text-align:left;">
+    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_IntroductiontoHPC.html" style="background: var(--bs-green);font-weight:bold">&laquo;4. Introduction to HPC</a></b>
+    <span style="float:right;">
+     <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/6_supplementary_1.html" style="background: var(--bs-green);font-weight:bold">6. Supplementary 1  &raquo;</a></b>
+    </span>
+</p>
+
+<p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../4_IntroductiontoHPC/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction to HPC" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction to HPC
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../6_supplementary_1/" class="md-footer__link md-footer__link--next" aria-label="Next: S1 : Accessing software via modules" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              S1 : Accessing software via modules
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>
