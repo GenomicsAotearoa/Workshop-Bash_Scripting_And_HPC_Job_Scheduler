@@ -1,32 +1,25 @@
 # Variant Calling Workflow
 
-<p style="text-align:left;">
-  <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/" style="background: var(--bs-green);font-weight:bold">&laquo; Back to homepage</a></b> 
-  <span style="float:right;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html" style="background: var(--bs-green);font-weight:bold">2. Automating a Variant Calling Workflow &raquo;</a></b>
-  </span>
-</p>
-
-## Outline
-* Do not remove this line (it will not be displayed)
-{:toc}
-
 This material is extracted from the Genomics Data Carpentry Lesson
 
-## Aim
-- To understand the steps to perform variant calling then overall put all these steps into a script.
+!!! abstract "Aim"
 
-## Objectives and overall workflow
-- Understand and perform the steps involved in variant calling.
-- Describe the types of data formats encountered during variant calling.
-- Use command line tools to perform variant calling.
+    To understand the steps to perform variant calling then overall put all these steps into a script.
+
+!!! abstract "Objectives and overall workflow"
+
+    - Understand and perform the steps involved in variant calling.
+    - Describe the types of data formats encountered during variant calling.
+    - Use command line tools to perform variant calling.
+
 <br>
-<p align="center"><img src="nesi_images/variant_callingworkflow.png" alt="drawing" width="800"/></p>
+<p align="center"><img src="/nesi_images/variant_callingworkflow.png" alt="drawing" width="800"/></p>
 <br>
 
-### Assumptions
-- You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.
-- You have a reference genome saved in a directory called `ref_genome`.
+!!! note "Assumptions"
+
+    - You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.
+    - You have a reference genome saved in a directory called `ref_genome`.
 
 In this workshop, we have already trimmed the reads and downloaded the reference genome for you.
 First, it is always good to verify where we are:
