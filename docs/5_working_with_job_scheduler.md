@@ -47,7 +47,7 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
 <p align="center"><img src="/nesi_images/slurm_flow.png" alt="drawing" width="1000"/></p> 
 <br>
 
----
+- - - 
 
 | Command        | Function                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------|
@@ -59,23 +59,24 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
 | `sinfo`        | Query the current state of nodes                                                                     |
 | `salloc`       | Submit interactive jobs to the scheduler                                                             |
 
----
+- - - 
 
 ??? question "Exercise 5.1"
 
-```bash
-#summary of current states of compute nodes known to the scheduler
-$ sinfo
+    * summary of current states of compute nodes known to the scheduler
+    ```bash
+    sinfo
+    ```
 
-#similar to above but expanded
-$ sinfo --format="%16P %.8m %.5a %10T %.5D %80N"
+    #similar to above but expanded
+    $ sinfo --format="%16P %.8m %.5a %10T %.5D %80N"
 
-#will print a long output as it is one row per compute node in the cluster
-$ sinfo -N -l
+    #will print a long output as it is one row per compute node in the cluster
+    $ sinfo -N -l
 
-#Explore the capacity of a compute node
-$ sinfo -n wch001 -o "%n %c %m"
-```
+    #Explore the capacity of a compute node
+    $ sinfo -n wch001 -o "%n %c %m"
+   ```
 
 
 ## Anatomy of a slurm script and submitting first slurm job 🧐
