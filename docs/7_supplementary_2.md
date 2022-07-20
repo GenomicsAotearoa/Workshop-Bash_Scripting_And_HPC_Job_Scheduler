@@ -67,9 +67,7 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
     <p align="center"><img src="/nesi_images/slurm_profile.png" alt="drawing" width="1000"/></p> 
     <br>
 
-{% endcapture %}
 
-{% include exercise.html title="e4dot4" content=eS2dot1%}
 
 
 <p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
