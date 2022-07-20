@@ -39,14 +39,18 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
 
     * Let's create slurm profile graphs
 
-    ```bash
+        - collate the data into an HDF5 file using the command. Replace **JOBID** with the corresponding number 
 
+        ```bash
+        sh5util -j JOBID
+        ```
+        ```bash
+        sh5util: Merging node-step files into ./job_JOBID.h5
+        ```
 
-$ sh5util -j JOBID
-sh5util: Merging node-step files into ./job_JOBID.h5
-
-#execute the script on .h5 file. We will need one of the Python 3 modules to do this. Ignore the deprecating warning. 
-$ module purge 
+        - execute the script on .h5 file. We will need one of the Python 3 modules to do this. Ignore the deprecating warning. 
+        ```bash
+        module purge 
 $ module load Python/3.8.2-gimkl-2020a
 
 #Replace **JOBID** with the corresponding number
