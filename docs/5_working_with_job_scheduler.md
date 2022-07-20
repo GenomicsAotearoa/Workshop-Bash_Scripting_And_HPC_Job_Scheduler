@@ -111,14 +111,12 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 - - -
 
 ??? question "Exercise 5.2"
-{% capture e5dot2 %}
-Let's put these directives together and compile our first slurm script
 
-* First create a new working directory and write the script
+    Let's put these directives together and compile our first slurm script
+
+* First create a new working directory and end the directory
 
 ```bash
-
-#Confirming the working directory
 $ cd ~/scripting_workshop/scheduler
 
 #confirm the path is correct 
