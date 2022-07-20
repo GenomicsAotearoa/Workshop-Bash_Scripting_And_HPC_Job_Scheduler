@@ -54,9 +54,9 @@
         variants=results/vcf/${base}_variants.vcf
         final_variants=results/vcf/${base}_final_variants.vcf
 
-    # running the analysis steps
-    bwa mem $genome $fq1 $fq2 > $sam
-    samtools view -S -b $sam > $bam
+        # running the analysis steps
+        bwa mem $genome $fq1 $fq2 > $sam
+        samtools view -S -b $sam > $bam
     samtools sort -o $sorted_bam $bam
     samtools index $sorted_bam
     bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
