@@ -21,12 +21,12 @@ theme:
     toggle:
       icon: material/brightness-auto
       name: Switch to light mode
-    primary: blue grey
+    primary: teal
 
   # Palette toggle for light mode
   - media: "(prefers-color-scheme: light)"
     scheme: default
-    primary: blue grey
+    primary: teal
 
     toggle:
       icon: material/brightness-7
@@ -38,7 +38,7 @@ theme:
     toggle:
       icon: material/brightness-4
       name: Switch to system preference
-    primary: blue grey
+    primary: teal
   
   features:
     - navigation.tracking
