@@ -52,7 +52,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="">
   
     
     
@@ -107,7 +107,7 @@
         
           
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
@@ -116,7 +116,7 @@
         
           
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -125,7 +125,7 @@
         
           
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent=""  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent=""  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
           
             <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -350,40 +350,9 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          S2 : slurm profiling
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         S2 : slurm profiling
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-s21" class="md-nav__link">
-    Exercise S.2.1
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -424,21 +393,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-s21" class="md-nav__link">
-    Exercise S.2.1
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -464,50 +418,63 @@
 </p>
 
 <p>Although <code>nn_seff</code> command is a quick and easy way to determine the resource utilisation, it relies on <strong>peak</strong> values (data gets recorded every 30 seconds) which doesn't allows us to examine resource usage over the run-time of the job. There are number of in-built/external tools to achieve the latter which will require some effort to understand its deployment, tracing and interpretation. Therefore, we will use <strong>slurm native profiling</strong> to evaluate resource usage over run-time. This is a simple and elegant solution.</p>
-<h3 id="exercise-s21">Exercise S.2.1<a class="headerlink" href="#exercise-s21" title="Permanent link">&para;</a></h3>
-<p>{% capture eS2dot1 %}</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">#Download and decompress the content</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ wget -c Exercise_S21.tar.gz https://github.com/DininduSenanayake/nesi_introductory_custom/releases/download/v1.0/Exercise_S21.tar.gz -O - <span class="p">|</span> tar -xz
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>$ <span class="nb">cd</span> Exercise_S21
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1">#Run ls command and you should see three files (one .R,sl and one .py - We will discuss the purpose of this .py file after submitting the job) and one directory named slurmout</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>$ ls -F
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>example1_arraysum.R  example1_arraysum.sl  profile_plot_Jul2020.py  slurmout/
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1">#Review the slurm script with cat Or another text editor and submit with sbatch</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>$ sbatch example1_arraysum.sl 
-</code></pre></div>
+<details class="question" open="open">
+<summary>Exercise S.2.1</summary>
 <ul>
-<li>Do take a note of the <strong>JOBID</strong> as we are going to need it for next step. Otherwise, we use <code>squeue --me</code> OR <code>sacct</code> command as before to monitor the status</li>
 <li>
-<p>Also, you can <code>watch</code> the status of this job via <code>$ watch -n 1 -d "squeue -j JOBID"</code>. </p>
-<ul>
-<li><code>watch</code> command execute a program periodically, showing output fullscreen. Exiting the <code>watch</code> screen by done by pressing <code>Ctrl+x</code> </li>
-</ul>
+<p>Download and decompress the content
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wget -c Exercise_S21.tar.gz https://github.com/DininduSenanayake/nesi_introductory_custom/releases/download/v1.0/Exercise_S21.tar.gz -O - <span class="p">|</span> tar -xz
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span> Exercise_S21
+</code></pre></div></p>
+</li>
+<li>
+<p>Run <code>ls</code> command and you should see three files (one .R,sl and one .py - We will discuss the purpose of this .py file after submitting the job) and one directory named slurmout
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ls -F
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>example1_arraysum.R  example1_arraysum.sl  profile_plot_Jul2020.py  slurmout/
+</code></pre></div></p>
+</li>
+<li>
+<p>Review the slurm script with cat Or another text editor and submit with sbatch
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sbatch example1_arraysum.sl 
+</code></pre></div></p>
+</li>
+<li>
+<p>Do take a note of the <strong>JOBID</strong> as we are going to need it for next step. Otherwise, we use <code>squeue --me</code> OR <code>sacct</code> command as before to monitor the status</p>
+</li>
+<li>Also, you can <code>watch</code> the status of this job via <code>$ watch -n 1 -d "squeue -j JOBID"</code>. </li>
+<li>
+<p><code>watch</code> command execute a program periodically, showing output fullscreen. Exiting the <code>watch</code> screen by done by pressing <code>Ctrl+x</code> </p>
 </li>
 <li>
 <p>Let's create slurm profile graphs</p>
+<ul>
+<li>collate the data into an HDF5 file using the command. Replace <strong>JOBID</strong> with the corresponding number </li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sh5util -j JOBID
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sh5util: Merging node-step files into ./job_JOBID.h5
+</code></pre></div></p>
+<ul>
+<li>execute the script on .h5 file. We will need one of the Python 3 modules to do this. Ignore the deprecating warning. 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>module purge 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>module load Python/3.8.2-gimkl-2020a
+</code></pre></div></li>
+<li>Replace <strong>JOBID</strong> with the corresponding number
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python profile_plot_Jul2020.py job_JOBID.h5
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>This should generate a .png file where the filename is in the format of job_23258404_profile.png</p>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">#collate the data into an HDF5 file using the command. Replace **JOBID** with the corresponding number </span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$ sh5util -j JOBID
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sh5util: Merging node-step files into ./job_JOBID.h5
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">#execute the script on .h5 file. We will need one of the Python 3 modules to do this. Ignore the deprecating warning. </span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>$ module purge 
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>$ module load Python/3.8.2-gimkl-2020a
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1">#Replace **JOBID** with the corresponding number</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>$ python profile_plot_Jul2020.py job_JOBID.h5
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1">#This should generate a .png file where the filename is in the format of job_23258404_profile.png</span>
-</code></pre></div>
-<p><br></p>
-<p align="center"><img src="nesi_images/slurm_profile.png" alt="drawing" width="1000"/></p>
-<p><br></p>
-<p>{% endcapture %}</p>
-<p>{% include exercise.html title="e4dot4" content=eS2dot1%}</p>
+<p><br>
+<p align="center"><img src="/nesi_images/slurm_profile.png" alt="drawing" width="1000"/></p> 
+<br></p>
+</details>
 <p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
 
               
