@@ -7,10 +7,6 @@
     </span>
 </p>
 
-## Outline
-* Do not remove this line (it will not be displayed)
-{:toc}
-
 This material is extracted from the [RNA-seq workshop](https://github.com/GenomicsAotearoa/RNA-seq-workshop) Lesson
 
 ## Aim
