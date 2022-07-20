@@ -16,8 +16,9 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
 
     wget -c Exercise_S21.tar.gz https://github.com/DininduSenanayake/nesi_introductory_custom/releases/download/v1.0/Exercise_S21.tar.gz -O - | tar -xz
     ```
-
-$ cd Exercise_S21
+    ```bash
+    cd Exercise_S21
+    ```
 
 #Run ls command and you should see three files (one .R,sl and one .py - We will discuss the purpose of this .py file after submitting the job) and one directory named slurmout
 $ ls -F
