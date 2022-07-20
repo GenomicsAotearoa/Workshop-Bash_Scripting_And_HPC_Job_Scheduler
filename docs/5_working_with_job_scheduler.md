@@ -290,11 +290,8 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 
 ??? question  "Exercise 5.5 😬"	
 
->* Now it's your turn to compile a slurm submission script for the RNA-seq workflow. 😊
+    *  Now it's your turn to compile a slurm submission script for the RNA-seq workflow. 😊
 
-{% endcapture %}
-
-{% include exercise.html title="e5dot5" content=e5dot5%}
 
 ---
 
