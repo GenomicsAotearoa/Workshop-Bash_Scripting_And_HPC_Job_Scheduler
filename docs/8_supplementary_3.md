@@ -37,22 +37,22 @@
     bwa index $genome
 
     # create a loop that map reads to the genome, sort the bam files and call variants
-for fq1 in ${trimmed}/*_1.trim.sub.fastq
+    for fq1 in ${trimmed}/*_1.trim.sub.fastq
     do
     echo "working with file $fq1"
 
     base=$(basename $fq1 _1.trim.sub.fastq)
     echo "base name is $base"
 
-   # setting the variables
-   fq1=${trimmed}/${base}_1.trim.sub.fastq
-   fq2=${trimmed}/${base}_2.trim.sub.fastq
-   sam=results/sam/${base}.aligned.sam
-   bam=results/bam/${base}.aligned.bam
-   sorted_bam=results/bam/${base}.aligned.sorted.bam
-   raw_bcf=results/bcf/${base}_raw.bcf
-   variants=results/vcf/${base}_variants.vcf
-   final_variants=results/vcf/${base}_final_variants.vcf
+    # setting the variables
+    fq1=${trimmed}/${base}_1.trim.sub.fastq
+    fq2=${trimmed}/${base}_2.trim.sub.fastq
+    sam=results/sam/${base}.aligned.sam
+    bam=results/bam/${base}.aligned.bam
+    sorted_bam=results/bam/${base}.aligned.sorted.bam
+    raw_bcf=results/bcf/${base}_raw.bcf
+    variants=results/vcf/${base}_variants.vcf
+    final_variants=results/vcf/${base}_final_variants.vcf
 
   # running the analysis steps
   bwa mem $genome $fq1 $fq2 > $sam
