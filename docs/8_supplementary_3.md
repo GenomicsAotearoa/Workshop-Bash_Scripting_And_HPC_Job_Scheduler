@@ -77,8 +77,8 @@
     #!/bin/bash -e
 
     #SBATCH --account		nesi02659
-    #SBATCH --job-name 	rna-seq_workflow
-    #SBATCH --cpus-per-task 	2
+    #SBATCH --job-name 	    rna-seq_workflow
+    #SBATCH --cpus-per-task 2
     #SBATCH --time 			00:15:00
     #SBATCH --mem 			4G
     #SBATCH --output 		rna-seq_workflow-%j.out
