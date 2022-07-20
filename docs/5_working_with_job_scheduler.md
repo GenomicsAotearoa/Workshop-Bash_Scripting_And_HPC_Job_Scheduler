@@ -68,15 +68,20 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
     sinfo
     ```
 
-    #similar to above but expanded
-    $ sinfo --format="%16P %.8m %.5a %10T %.5D %80N"
+    * similar to above but expanded
+    ```bash
+    sinfo --format="%16P %.8m %.5a %10T %.5D %80N"
+    ```
 
-    #will print a long output as it is one row per compute node in the cluster
-    $ sinfo -N -l
+    * will print a long output as it is one row per compute node in the cluster
+    ```bash
+    sinfo -N -l
+    ```
 
-    #Explore the capacity of a compute node
-    $ sinfo -n wch001 -o "%n %c %m"
-   ```
+     * Explore the capacity of a compute node
+     ```bash
+     sinfo -n wch001 -o "%n %c %m"
+     ```
 
 
 ## Anatomy of a slurm script and submitting first slurm job 🧐
@@ -84,7 +89,7 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
 As with most other scheduler systems, job submission scripts in Slurm consist of a header section with the shell specification and options to the submission command (`sbatch` in this case) followed by the body of the script that actually runs the commands you want. In the header section, options to `sbatch` should be prepended with `#SBATCH`.
 
 <br>
-<p align="center"><img src="nesi_images/anatomyofslurm_bashscript.png" alt="drawing" width="700"/></p> 
+<p align="center"><img src="/nesi_images/anatomyofslurm_bashscript.png" alt="drawing" width="700"/></p> 
 <br>
 
 >Commented lines are ignored by the bash interpreter, but they are not ignored by slurm. The `#SBATCH` parameters are read by slurm when we submit the job. When the job starts, the bash interpreter will ignore all lines starting with `#`. This is very similar to the shebang mentioned earlier, when you run your script, the system looks at the `#!`, then uses the program at the subsequent path to interpret the script, in our case `/bin/bash` (the program `bash` found in the */bin* directory
