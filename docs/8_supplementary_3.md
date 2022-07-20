@@ -80,11 +80,11 @@
     #SBATCH --job-name 	rna-seq_workflow
     #SBATCH --cpus-per-task 	2
     #SBATCH --time 			00:15:00
-#SBATCH --mem 			4G
-#SBATCH --output 		rna-seq_workflow-%j.out
-#SBATCH --error 		rna-seq_workflow-%j.err
-#SBATCH --mail-type		END
-#SBATCH --mail-user		myemail@email.org.nz
+    #SBATCH --mem 			4G
+    #SBATCH --output 		rna-seq_workflow-%j.out
+    #SBATCH --error 		rna-seq_workflow-%j.err
+    #SBATCH --mail-type		END
+    #SBATCH --mail-user		myemail@email.org.nz
 
 
 echo "$PWD"
