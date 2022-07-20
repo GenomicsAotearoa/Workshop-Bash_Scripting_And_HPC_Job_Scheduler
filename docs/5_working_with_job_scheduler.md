@@ -217,17 +217,23 @@ Understanding the resources you have available and how to use them most efficien
 
     Let's submit another slurm job and review its resource utilisation
 
-```bash
-#Change the working directory to Exercise_5.3
-$ cd ~/scripting_workshop/scheduler/ex_5.3
+    * Change the working directory to Exercise_5.3
 
-#Run ls command and you should see two files (one .R and one sl) and one directory named slurmout
-$ ls -F
-bowtie-test.sl*  input_data/  slurmout/
+    ```bash
+    cd ~/scripting_workshop/scheduler/ex_5.3
+    ```
 
-#Review the slurm script bowtie-test.sl with nano and edit the corresponding sections (hint :email)
-$ sbatch bowtie-test.sl 
-```
+    * Run `ls` command and you should see two files (one .R and one sl) and one directory named slurmout
+    ```bash
+     ls -F
+    ```
+      ```bash
+      bowtie-test.sl*  input_data/  slurmout/
+      ```
+    * Review the slurm script bowtie-test.sl with nano and edit the corresponding sections (hint :email)
+    ```bash
+    sbatch bowtie-test.sl 
+    ```
 
 >use `squeue --me` and `sacct` again to evaluate the job status
 >
