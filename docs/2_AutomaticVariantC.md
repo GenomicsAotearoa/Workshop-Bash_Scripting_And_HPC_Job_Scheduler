@@ -7,18 +7,14 @@
   </span>
 </p>
 
-## Outline
-* Do not remove this line (it will not be displayed)
-{:toc}
+!!! abstract "Aim"
 
-## Aim
-- Put all the steps from the previous lesson into a script.
-
-### Exemplar script
-
+    - Put all the steps from the previous lesson into a script.
 
 ### Variant calling workflow
+
 Remember our variant calling workflow has the following steps:
+
 - Index the reference genome for use by bwa and samtools.
 - Align reads to reference genome.
 - Convert the format of the alignment to sorted BAM, with some intermediate steps.
@@ -126,10 +122,3 @@ In the [Next Lesson](https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting
 
 
 
-
-<p style="text-align:left;">
-  <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/1_DesigningVariantC.html" style="background: var(--bs-green);font-weight:bold">&lt; 1.Designing a Variant Calling Workflow</a></b> 
-  <span style="float:right;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html" style="background: var(--bs-green);font-weight:bold">3. RNA-seq Mapping And Count Data Workflow &gt;</a></b>
-  </span>
-</p>
