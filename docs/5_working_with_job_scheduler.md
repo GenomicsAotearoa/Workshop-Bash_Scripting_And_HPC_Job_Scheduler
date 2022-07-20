@@ -160,29 +160,25 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     ```bash
     sbatch firstslurm.sl
     ```
-    * Execute `squeue --me` and `sacct`. Discuss the outputs .i.e.
+    *  Execute `squeue --me` and `sacct`. Discuss the outputs .i.e.
+
     ```bash
     squeue --me
     ```
-```bash
-$ sacct
-```
+    ```bash
+    sacct
+    ```
 - - - 
->**NOTE** -
->The meaning of `&&` and `&` are intrinsically different.
->
->* **What is `&&` in Bash?** In Bash—and many other programming languages—`&&` means “AND”. And in command execution 
->context like this, it means items to the left as well as right of && should be run in sequence in this case.
->* **What is & in Bash?** And a single `&`means that the preceding commands—to the immediate left of the &—should 
->simply be run in the background.
+ 
+!!! note ""
+
+    The meaning of `&&` and `&` are intrinsically different.
+  
+    * **What is `&&` in Bash?** In Bash—and many other programming languages—`&&` means “AND”. And in command execution context like this, it means items to the left as well as right of && should be run in sequence in this case.
+    * **What is & in Bash?** And a single `&`means that the preceding commands—to the immediate left of the &—should simply be run in the background.
 
 - - - 
 
-
-{% endcapture %}
-
-{% include exercise.html title="e5dot2" content=e5dot2%}
----
 
 ### STDOUT/STDERR from jobs
 
