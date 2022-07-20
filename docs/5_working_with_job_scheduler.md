@@ -288,8 +288,7 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
     
 - - - 
 
-### Exercise 5.5 😬	
-{% capture e5dot5 %}
+??? question  "Exercise 5.5 😬"	
 
 >* Now it's your turn to compile a slurm submission script for the RNA-seq workflow. 😊
 
