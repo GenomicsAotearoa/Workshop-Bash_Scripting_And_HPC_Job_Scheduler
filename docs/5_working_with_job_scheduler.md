@@ -44,6 +44,10 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
       
 ## Life cycle of a slurm job
 
+<center>
+![image](./nesi_images/slurm_flow.png){width="1000"}
+</center>
+
 <br>
 <p align="center"><img src="/nesi_images/slurm_flow.png" alt="drawing" width="1000"/></p> 
 <br>
