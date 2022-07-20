@@ -109,23 +109,23 @@
       do
         base=$(basename ${filename} .fastq)
         hisat2 -p 4 -x $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filename -S $PWD/Mapping/${base}.sam --summary-file $PWD/Mapping/${base}_summary.txt
-     done
+      done
 
     #Convert SAMfiles to BAM
 
     for filename in $PWD/Mapping/*.sam
-     do
+      do
        base=$(basename ${filename} .sam)
        samtools view -S -b ${filename} -o $PWD/Mapping/${base}.bam
-     done
+      done
 
-#Sort BAM files
+    #Sort BAM files
 
-for filename in $PWD/Mapping/*.bam
-  do
-    base=$(basename ${filename} .bam)
-    samtools sort -o $PWD/Mapping/${base}_sorted.bam ${filename}
-  done
+    for filename in $PWD/Mapping/*.bam
+      do
+        base=$(basename ${filename} .bam)
+        samtools sort -o $PWD/Mapping/${base}_sorted.bam ${filename}
+      done
 
 #count how many reads aligned to each genome feature (exon).
 
