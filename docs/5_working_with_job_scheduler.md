@@ -160,10 +160,10 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     ```bash
     sbatch firstslurm.sl
     ```
->Execute `squeue --me` and `sacct`. Discuss the outputs .i.e.
-```bash
-$ squeue --me
-```
+    * Execute `squeue --me` and `sacct`. Discuss the outputs .i.e.
+    ```bash
+    squeue --me
+    ```
 ```bash
 $ sacct
 ```
