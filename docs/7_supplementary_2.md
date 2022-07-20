@@ -20,7 +20,7 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
     cd Exercise_S21
     ```
 
-    * Run ls command and you should see three files (one .R,sl and one .py - We will discuss the purpose of this .py file after submitting the job) and one directory named slurmout
+    * Run `ls` command and you should see three files (one .R,sl and one .py - We will discuss the purpose of this .py file after submitting the job) and one directory named slurmout
 $ ls -F
 example1_arraysum.R  example1_arraysum.sl  profile_plot_Jul2020.py  slurmout/
 
