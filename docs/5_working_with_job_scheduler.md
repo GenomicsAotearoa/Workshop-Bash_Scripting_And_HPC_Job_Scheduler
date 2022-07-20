@@ -212,10 +212,10 @@ Understanding the resources you have available and how to use them most efficien
 
 ---
 
-### Exercise 5.3 
-{% capture e5dot3 %}
+???+ question "Exercise 5.3" 
 
-* Let's submit another slurm job and review its resource utilisation
+
+    Let's submit another slurm job and review its resource utilisation
 
 ```bash
 #Change the working directory to Exercise_5.3
