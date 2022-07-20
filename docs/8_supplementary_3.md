@@ -36,7 +36,7 @@
     trimmed=~/scripting_workshop/variant_calling/trimmed_reads
     bwa index $genome
 
-# create a loop that map reads to the genome, sort the bam files and call variants
+    # create a loop that map reads to the genome, sort the bam files and call variants
 for fq1 in ${trimmed}/*_1.trim.sub.fastq
     do
     echo "working with file $fq1"
