@@ -127,9 +127,9 @@
         samtools sort -o $PWD/Mapping/${base}_sorted.bam ${filename}
       done
 
-#count how many reads aligned to each genome feature (exon).
+    #count how many reads aligned to each genome feature (exon).
 
-featureCounts -a $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o $PWD/Counts/yeast_counts.txt -T 2 -t exon -g gene_id $PWD/Mapping/*sorted.bam
+    featureCounts -a $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o $PWD/Counts/yeast_counts.txt -T 2 -t exon -g gene_id $PWD/Mapping/*sorted.bam
 ```
 
 {% endcapture %}
