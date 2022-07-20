@@ -11,9 +11,11 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
 
 ???+ question "Exercise S.2.1"
 
-```bash
-#Download and decompress the content
-$ wget -c Exercise_S21.tar.gz https://github.com/DininduSenanayake/nesi_introductory_custom/releases/download/v1.0/Exercise_S21.tar.gz -O - | tar -xz
+    * Download and decompress the content
+    ```bash
+
+    wget -c Exercise_S21.tar.gz https://github.com/DininduSenanayake/nesi_introductory_custom/releases/download/v1.0/Exercise_S21.tar.gz -O - | tar -xz
+    ```
 
 $ cd Exercise_S21
 
