@@ -94,7 +94,7 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
 >Commented lines are ignored by the bash interpreter, but they are not ignored by slurm. The `#SBATCH` parameters are read by slurm when we submit the job. When the job starts, the bash interpreter will ignore all lines starting with `#`. This is very similar to the shebang mentioned earlier, when you run your script, the system looks at the `#!`, then uses the program at the subsequent path to interpret the script, in our case `/bin/bash` (the program `bash` found in the */bin* directory
 
----
+-  - - 
 
 | header          | use                                 | description                                          |
 |:--------------- |:------------------------------------|:-----------------------------------------------------|
@@ -108,8 +108,9 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 |--mail-type 	  | `#SBATCH --mail-type=ALL` 	        |Will send a mail notification at BEGIN END FAIL.      |
 |                 | `#SBATCH --mail-type=TIME_LIMIT_80` |Will send message at 80% walltime.                    |
 
----
-### Exercise 5.2
+- - -
+
+??? Exercise 5.2
 {% capture e5dot2 %}
 Let's put these directives together and compile our first slurm script
 
