@@ -89,6 +89,10 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
 
 As with most other scheduler systems, job submission scripts in Slurm consist of a header section with the shell specification and options to the submission command (`sbatch` in this case) followed by the body of the script that actually runs the commands you want. In the header section, options to `sbatch` should be prepended with `#SBATCH`.
 
+
+<center>
+![image](./nesi_images/anatomyofslurm_bashscript.png){width="700"}
+</center>
 <br>
 <p align="center"><img src="/nesi_images/anatomyofslurm_bashscript.png" alt="drawing" width="700"/></p> 
 <br>
