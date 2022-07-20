@@ -64,7 +64,7 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
 
 
     <br>
-    <p align="center"><img src="nesi_images/slurm_profile.png" alt="drawing" width="1000"/></p> 
+    <p align="center"><img src="/nesi_images/slurm_profile.png" alt="drawing" width="1000"/></p> 
     <br>
 
 {% endcapture %}
