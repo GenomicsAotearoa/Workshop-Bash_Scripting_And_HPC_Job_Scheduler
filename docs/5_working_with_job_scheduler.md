@@ -262,29 +262,29 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 
 ## Compiling slurm scripts for Variant Calling and RNA-seq episodes 
 
-???+ question "Exercise 5.4" 😬	
+???+ question "Exercise 5.4 😬"	
     
     Purpose of this exercise is to compile a slurm submission script based on the script we wrote in [episode 2 - Automating variant calling workflow](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html)
 
-* recommend creating a new directory for the exercise .i.e `ex_5.4`
-* Name of the file is `variant_calling.sl` (note that we have change the extension from `.sh` to `.sl`)
-* In terms of slurm variables
+    * recommend creating a new directory for the exercise .i.e `ex_5.4`
+    * Name of the file is `variant_calling.sl` (note that we have change the extension from `.sh` to `.sl`)
+    * In terms of slurm variables
 
-    * name of the job is `variant_calling_workflow`
-    * number of CPUS is `2`
-    * timelimit `15 minutes`
-    * amount of memory in GB `4G`
-    * generate  *.err* files and *.out* where both should be re-directed to the directory ***slurmout***
-    * an email notification at the end of the job 
+        * name of the job is `variant_calling_workflow`
+        * number of CPUS is `2`
+        * timelimit `15 minutes`
+        * amount of memory in GB `4G`
+        * generate  *.err* files and *.out* where both should be re-directed to the directory ***slurmout***
+        * an email notification at the end of the job 
 
-* We don't want to replicate ***input data***  in multiple places .i.e. be conservative in-terms how you use research storage
+    * We don't want to replicate ***input data***  in multiple places .i.e. be conservative in-terms how you use research storage
     * Therefore, use the same reference genome file (assign the filename to variable `genome` and the trimmed read files (assign the path of these files to variable `trimmed`) used in the first episode
     
 
-```bash
-genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
-trimmed=~/scripting_workshop/variant_calling/trimmed_reads
-```
+    ```bash
+    genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
+    trimmed=~/scripting_workshop/variant_calling/trimmed_reads
+    ```
     
 {% endcapture %}
 
