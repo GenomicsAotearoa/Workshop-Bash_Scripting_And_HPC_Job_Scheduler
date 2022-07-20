@@ -20,7 +20,7 @@
     #SBATCH --mail-type		END
     #SBATCH --mail-user		myemail@email.co.nz
 
-# Load all the required modules
+    # Load all the required modules
 module purge
 module load BWA/0.7.17-GCC-9.2.0
 module load SAMtools/1.13-GCC-9.2.0
