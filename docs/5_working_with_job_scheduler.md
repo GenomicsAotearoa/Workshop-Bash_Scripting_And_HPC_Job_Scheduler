@@ -76,9 +76,7 @@ $ sinfo -N -l
 #Explore the capacity of a compute node
 $ sinfo -n wch001 -o "%n %c %m"
 ```
-{% endcapture %}
 
-{% include exercise.html title="e5dot1" content=e5dot1%}
 
 ## Anatomy of a slurm script and submitting first slurm job 🧐
 
