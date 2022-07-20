@@ -51,6 +51,7 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
         - execute the script on .h5 file. We will need one of the Python 3 modules to do this. Ignore the deprecating warning. 
         ```bash
         module purge 
+        ```
 $ module load Python/3.8.2-gimkl-2020a
 
 #Replace **JOBID** with the corresponding number
