@@ -26,15 +26,15 @@
     module load SAMtools/1.13-GCC-9.2.0
     module load BCFtools/1.13-GCC-9.2.0
 
-echo "$PWD"
+    echo "$PWD"
 
-# create the results directories
-mkdir -p results/sam results/bam results/bcf results/vcf
+    # create the results directories
+    mkdir -p results/sam results/bam results/bcf results/vcf
 
-# indexing the genome
-genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
-trimmed=~/scripting_workshop/variant_calling/trimmed_reads
-bwa index $genome
+    # indexing the genome
+    genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
+    trimmed=~/scripting_workshop/variant_calling/trimmed_reads
+    bwa index $genome
 
 # create a loop that map reads to the genome, sort the bam files and call variants
 for fq1 in ${trimmed}/*_1.trim.sub.fastq
