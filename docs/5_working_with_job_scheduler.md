@@ -113,40 +113,46 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 ??? question "Exercise 5.2"
 
     Let's put these directives together and compile our first slurm script
+    
+    * First create a new working directory and end the directory
 
-* First create a new working directory and end the directory
+    ```bash
+     cd ~/scripting_workshop/scheduler
+    ```
 
-```bash
-$ cd ~/scripting_workshop/scheduler
+    * confirm the path is correct 
+    ```bash
+    pwd
+    ```
 
-#confirm the path is correct 
-$ pwd
-/home/$USER/scripting_workshop/scheduler
+    * create a new directory for this section and change the directory to it - Check for the follow up not `&&`
+    ```bash
+    mkdir ex_5.2 && cd ex_5.2
+    ```
 
-#create a new directory for this section and change the directory to it - Check for the follow up not `&&`
-$ mkdir ex_5.2 && cd ex_5.2
+    * use a text editor of choice to create a file named firstslurm.sl - we will use nano here
+    ```bash
+    nano firstslurm.sl
+    ```
 
-#use a text editor of choice to create a file named firstslurm.sl - we will use nano here
-$ nano firstslurm.sl
-```
->Content of `firstslurm.sl` should be as below. Please discuss as you make progress
->
->```bash
->#!/bin/bash 
->
->#SBATCH --job-name      myfirstslurmjob
->#SBATCH --account       nesi02659
->#SBATCH --time          00:01:00
->#SBATCH --cpus-per-task 1
->#SBATCH --mem           512
->#SBATCH --output        slurmjob.%j.out
->
->sleep 200
->
->echo "I am a slurm job and I slept for 200 seconds"
->
->echo "$SLURM_JOB_ID END"
->```
+    * Content of `firstslurm.sl` should be as below. Please discuss as you make progress
+
+    ```bash
+    #!/bin/bash 
+
+    #SBATCH --job-name      myfirstslurmjob
+    #SBATCH --account       nesi02659
+    #SBATCH --time          00:01:00
+    #SBATCH --cpus-per-task 1
+    #SBATCH --mem           512
+    #SBATCH --output        slurmjob.%j.out
+
+    sleep 200
+
+    echo "I am a slurm job and I slept for 200 seconds"
+  
+    echo "$SLURM_JOB_ID END"
+    ```
 
 * **Save** and **Exit**
 * Submit the script with `sbatch` command
