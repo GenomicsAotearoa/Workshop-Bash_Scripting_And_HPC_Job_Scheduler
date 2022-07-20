@@ -49,8 +49,8 @@
         fq2=${trimmed}/${base}_2.trim.sub.fastq
         sam=results/sam/${base}.aligned.sam
         bam=results/bam/${base}.aligned.bam
-    sorted_bam=results/bam/${base}.aligned.sorted.bam
-    raw_bcf=results/bcf/${base}_raw.bcf
+        sorted_bam=results/bam/${base}.aligned.sorted.bam
+        raw_bcf=results/bcf/${base}_raw.bcf
     variants=results/vcf/${base}_variants.vcf
     final_variants=results/vcf/${base}_final_variants.vcf
 
