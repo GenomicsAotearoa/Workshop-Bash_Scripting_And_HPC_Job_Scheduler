@@ -12,9 +12,11 @@ This material is extracted from the Genomics Data Carpentry Lesson
     - Describe the types of data formats encountered during variant calling.
     - Use command line tools to perform variant calling.
 
-<br>
-<p align="center"><img src="/nesi_images/variant_callingworkflow.png" alt="drawing" width="800"/></p>
-<br>
+
+<center>
+![image](./nesi_images/variant_callingworkflow.png){width="800"}
+</center>
+
 
 !!! note "Assumptions"
 
