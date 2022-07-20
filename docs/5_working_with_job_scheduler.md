@@ -110,7 +110,7 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
 - - -
 
-??? Exercise 5.2
+??? question "Exercise 5.2"
 {% capture e5dot2 %}
 Let's put these directives together and compile our first slurm script
 
