@@ -59,8 +59,8 @@
         samtools view -S -b $sam > $bam
         samtools sort -o $sorted_bam $bam
         samtools index $sorted_bam
-    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
-    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf
+        bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
+        bcftools call --ploidy 1 -m -v -o $variants $raw_bcf
     vcfutils.pl varFilter $variants > $final_variants
 
     done
