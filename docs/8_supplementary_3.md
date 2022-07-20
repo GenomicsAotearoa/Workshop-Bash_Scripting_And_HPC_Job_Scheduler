@@ -70,7 +70,7 @@
 
 
 
-### Exercise 5.5 😬	
+??? success Exercise 5.5 😬	
 {% capture es3dot2 %}
 
 ```bash
