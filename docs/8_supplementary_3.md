@@ -46,9 +46,9 @@
 
         # setting the variables
         fq1=${trimmed}/${base}_1.trim.sub.fastq
-    fq2=${trimmed}/${base}_2.trim.sub.fastq
-    sam=results/sam/${base}.aligned.sam
-    bam=results/bam/${base}.aligned.bam
+        fq2=${trimmed}/${base}_2.trim.sub.fastq
+        sam=results/sam/${base}.aligned.sam
+        bam=results/bam/${base}.aligned.bam
     sorted_bam=results/bam/${base}.aligned.sorted.bam
     raw_bcf=results/bcf/${base}_raw.bcf
     variants=results/vcf/${base}_variants.vcf
