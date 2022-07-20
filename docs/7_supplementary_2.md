@@ -22,7 +22,9 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
 
     * Run `ls` command and you should see three files (one .R,sl and one .py - We will discuss the purpose of this .py file after submitting the job) and one directory named slurmout
     ```bash
-$ ls -F
+    ls -F
+    ```
+    ```bash
 example1_arraysum.R  example1_arraysum.sl  profile_plot_Jul2020.py  slurmout/
 
 #Review the slurm script with cat Or another text editor and submit with sbatch
