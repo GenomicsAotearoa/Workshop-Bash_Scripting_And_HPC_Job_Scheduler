@@ -235,23 +235,23 @@ Understanding the resources you have available and how to use them most efficien
     sbatch bowtie-test.sl 
     ```
 
->use `squeue --me` and `sacct` again to evaluate the job status
->
->Once the job ran into completion, use `nn_seff JOBID` command to print the resource utilisation statistics (Replace **JOBID** with the corresponding number)
->
->```bash
->$ nn_seff 25222190
->Job ID: 25222190
->Cluster: mahuika
->User/Group: me1234/me1234
->State: COMPLETED (exit code 0)
->Cores: 1
->Tasks: 1
->Nodes: 1
->Job Wall-time:  18.33%  00:00:33 of 00:03:00 time limit
->CPU Efficiency: 93.94%  00:00:31 of 00:00:33 core-walltime
->Mem Efficiency: 1.33%  13.62 MB of 1.00 GB
->```
+    * use `squeue --me` and `sacct` again to evaluate the job status
+
+    * Once the job ran into completion, use `nn_seff JOBID` command to print the resource utilisation statistics (Replace **JOBID** with the corresponding number)
+
+    ```bash
+    $ nn_seff 25222190
+    Job ID: 25222190
+    Cluster: mahuika
+    User/Group: me1234/me1234
+    State: COMPLETED (exit code 0)
+    Cores: 1
+    Tasks: 1
+    Nodes: 1
+    Job Wall-time:  18.33%  00:00:33 of 00:03:00 time limit
+    CPU Efficiency: 93.94%  00:00:31 of 00:00:33 core-walltime
+    Mem Efficiency: 1.33%  13.62 MB of 1.00 GB
+    ```
 
 Now review the content of `.err` and `.out` files in */slurmout* directory 
 
