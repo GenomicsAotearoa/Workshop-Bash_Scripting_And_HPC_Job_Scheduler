@@ -71,7 +71,7 @@
 
 
 ??? success "Exercise 5.5 😬"	
-{% capture es3dot2 %}
+
 
 ```bash
 #!/bin/bash -e
