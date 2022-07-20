@@ -99,8 +99,8 @@
 
     echo $PWD
 
-#index file
-hisat2-build -p 4 -f $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+    #index file
+    hisat2-build -p 4 -f $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa $PWD/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
 
 
 #Mapping Samples to the reference genome
