@@ -16,9 +16,9 @@
     #SBATCH --time 			00:15:00
     #SBATCH --mem 			4G
     #SBATCH --output 		slurmout/variant_calling-%j.out
-#SBATCH --error 		slurmout/variant_calling-%j.err
-#SBATCH --mail-type		END
-#SBATCH --mail-user		myemail@email.co.nz
+    #SBATCH --error 		slurmout/variant_calling-%j.err
+    #SBATCH --mail-type		END
+    #SBATCH --mail-user		myemail@email.co.nz
 
 # Load all the required modules
 module purge
