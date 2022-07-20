@@ -33,8 +33,8 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
     sbatch example1_arraysum.sl 
     ```
     
-* Do take a note of the **JOBID** as we are going to need it for next step. Otherwise, we use `squeue --me` OR `sacct` command as before to monitor the status
-* Also, you can `watch` the status of this job via `$ watch -n 1 -d "squeue -j JOBID"`. 
+    * Do take a note of the **JOBID** as we are going to need it for next step. Otherwise, we use `squeue --me` OR `sacct` command as before to monitor the status
+    * Also, you can `watch` the status of this job via `$ watch -n 1 -d "squeue -j JOBID"`. 
     *  `watch` command execute a program periodically, showing output fullscreen. Exiting the `watch` screen by done by pressing `Ctrl+x` 
 
 * Let's create slurm profile graphs
