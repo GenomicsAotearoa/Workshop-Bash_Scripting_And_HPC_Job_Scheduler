@@ -286,9 +286,7 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
     trimmed=~/scripting_workshop/variant_calling/trimmed_reads
     ```
     
-{% endcapture %}
-
-{% include exercise.html title="e5dot4" content=e5dot4%}
+- - - 
 
 ### Exercise 5.5 😬	
 {% capture e5dot5 %}
