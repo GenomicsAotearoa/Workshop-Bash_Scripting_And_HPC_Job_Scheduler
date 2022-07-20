@@ -22,15 +22,16 @@ There are a number of different environment module implementations commonly used
 **Common commands - module**
 
 * View available modules
-
 ```bash
-#View all modules
-$ module avail
+module avail
+```
 
-# View all modules which match the keyword in their name
-$ module avail KEYWORD
+* View all modules which match the keyword in their name
+```bash
+module avail KEYWORD
+```
 
-# View all modules which match the keyword in their name or description
+* View all modules which match the keyword in their name or description
 $ module spider KEYWORD
 ```
 * Load a specific program
