@@ -203,7 +203,9 @@ SRR014335-chr1.sam  SRR014336-chr1.sam  SRR014337-chr1.sam  SRR014339-chr1.sam  
 
 Next we sort the BAM file using the sort command from samtools. `-o` tells the command where to write the output.
 
->SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. Default `sort` is coordinates. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input. 
+!!! note
+
+    SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.**
 
 ```bash
 
@@ -212,12 +214,12 @@ $ for filename in *.bam
 > base=$(basename ${filename} .bam)
 > samtools sort -o ${base}_sorted.bam ${filename}
 > done
-
 ```
 
->**SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.**
 
-You can use samtools to learn more about the bam file as well.
+
+We can use samtools to learn more about the bam file as well.
+
 #### Some stats on your mapping:
 
 ```bash
@@ -236,9 +238,8 @@ $ samtools flagstat SRR014335-chr1_sorted.bam
 0 + 0 singletons (N/A : N/A)
 0 + 0 with mate mapped to a different chr
 0 + 0 with mate mapped to a different chr (mapQ>=5)
-
 ```
----
+- - - 
 
 ## Read Summarization
 Sequencing reads often need to be assigned to genomic features of interest after they are mapped to the reference genome. This process is often called read summarization or read quantification. Read summarization is required by a number of downstream analyses such as gene expression analysis and histone modification analysis. The output of read summarization
@@ -268,14 +269,15 @@ $ mkdir Counts
 $ cd Counts
 
 $ featureCounts -a ../ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o ./yeast_counts.txt -T 2 -t exon -g gene_id ../Mapping/*sorted.bam
-
 ```
->**Arguments:**
->  * **-a** Name of an annotation file. GTF/GFF format by default
->  * **-o** Name of output file including read counts
->  * **-T** Specify the number of threads/CPUs used for mapping. 1 by default
->  * **-t** Specify feature type in GTF annotation. 'exon' by default. Features used for read counting will be extracted from annotation using the provided value.
-> *  **-g** Specify attribute type in GTF annotation. 'gene_id' by default. Meta-features used for read counting will be extracted from annotation using the provided value.
+
+!!! abstract "**Arguments:**"
+
+    * **-a** Name of an annotation file. GTF/GFF format by default
+    * **-o** Name of output file including read counts
+    * **-T** Specify the number of threads/CPUs used for mapping. 1 by default
+    * **-t** Specify feature type in GTF annotation. 'exon' by default. Features used for read counting will be extracted from annotation using the provided value.
+    *  **-g** Specify attribute type in GTF annotation. 'gene_id' by default. Meta-features used for read counting will be extracted from annotation using the provided value.
 
 ---
  
