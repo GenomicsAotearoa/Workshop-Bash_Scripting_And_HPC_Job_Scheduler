@@ -154,12 +154,12 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     echo "$SLURM_JOB_ID END"
     ```
 
-* **Save** and **Exit**
-* Submit the script with `sbatch` command
+    * **Save** and **Exit**
+    * Submit the script with `sbatch` command
 
-```bash
-$ sbatch firstslurm.sl
-```
+    ```bash
+    sbatch firstslurm.sl
+    ```
 >Execute `squeue --me` and `sacct`. Discuss the outputs .i.e.
 ```bash
 $ squeue --me
