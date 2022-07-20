@@ -52,8 +52,9 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
         ```bash
         module purge 
         ```
-$ module load Python/3.8.2-gimkl-2020a
-
+        ```bash
+        module load Python/3.8.2-gimkl-2020a
+        ```
 #Replace **JOBID** with the corresponding number
 $ python profile_plot_Jul2020.py job_JOBID.h5
 
