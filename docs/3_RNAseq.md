@@ -288,12 +288,3 @@ Now, let's work together in our groups to create an RNA-seq mapping and count sc
 at this stage we have mastered the art of writing scripts, instead of running them on the commandline, let us now run them on HPC.
 
 
-
-<p style="text-align:left;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html" style="background: var(--bs-green);font-weight:bold">&laquo; 2. Automating a Variant Calling Workflow</a></b>
-    <span style="float:right;">
-     <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/4_IntroductiontoHPC.html" style="background: var(--bs-green);font-weight:bold">4. Introduction to HPC &raquo;</a></b>
-    </span>
-</p>
-
-<p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
