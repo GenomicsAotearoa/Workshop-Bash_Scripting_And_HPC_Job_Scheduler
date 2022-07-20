@@ -25,9 +25,10 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
     ls -F
     ```
     ```bash
-example1_arraysum.R  example1_arraysum.sl  profile_plot_Jul2020.py  slurmout/
+    example1_arraysum.R  example1_arraysum.sl  profile_plot_Jul2020.py  slurmout/
+    ```
 
-#Review the slurm script with cat Or another text editor and submit with sbatch
+    * Review the slurm script with cat Or another text editor and submit with sbatch
 $ sbatch example1_arraysum.sl 
 ```
     
