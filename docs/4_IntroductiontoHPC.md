@@ -1,12 +1,5 @@
 # Introduction to HPC
 
-<p style="text-align:left;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html" style="background: var(--bs-green);font-weight:bold">&laquo; 2. Automating a Variant Calling Workflow</a></b>
-    <span style="float:right;">
-     <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/5_working_with_job_scheduler.html" style="background: var(--bs-green);font-weight:bold">4. Working with job Scheduler &raquo;</a></b>
-    </span>
-</p>
-
 ## Defining high-performance computing
 
 The simplest way of defining high-performance computing is by saying that it is the using of high-performance computers (HPC). However, this leads to our next question what is a HPC .
