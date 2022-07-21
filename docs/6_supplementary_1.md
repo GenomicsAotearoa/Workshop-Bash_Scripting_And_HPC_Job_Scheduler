@@ -19,7 +19,7 @@ One of the workarounds for this issue is Environment modules. A module is a self
 
 There are a number of different environment module implementations commonly used on HPC systems and the one used in NeSI Mahuika cluster is `Lmod` where the `module` command is used to interact with environment modules.
 
-**Common commands - module**
+**Commonly used `module` sub-commands**
 
 * View available modules
 ```bash
@@ -32,28 +32,31 @@ module avail KEYWORD
 ```
 
 * View all modules which match the keyword in their name or description
-$ module spider KEYWORD
+```bash
+module spider KEYWORD
 ```
 * Load a specific program
 
-    >Note: All modules on NeSI have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
+    - Note: All modules on NeSI have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
 
 ```bash
-$ module load MY_APPLICATION
+module load MY_APPLICATION
 ```
+* Swap a currently loaded module for a different one
 
+```bash
+module switch CURRENT_MODULE DESIRED_MODULE
+```
 
 * Unload all current modules
 
 ```bash
-$ module purge
+module purge
 ```
->Please **do not** use `$module --force purge`
+!!! danger 
 
-* Swap a currently loaded module for a different one
+    Please **do not** use `$module --force purge`
 
-```bash
-$ module switch CURRENT_MODULE DESIRED_MODULE
-```
+
 
 <p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
