@@ -38,11 +38,11 @@ module spider KEYWORD
 * Load a specific program
 
     - Note: All modules on NeSI have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
-
-```bash
-module load MY_APPLICATION
-```
-* Swap a currently loaded module for a different one
+    ```bash
+    module load MY_APPLICATION
+    ```
+    
+*  Swap a currently loaded module for a different one
 
 ```bash
 module switch CURRENT_MODULE DESIRED_MODULE
