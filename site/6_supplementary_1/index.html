@@ -426,37 +426,46 @@
 </ul>
 <p>One of the workarounds for this issue is Environment modules. A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.</p>
 <p>There are a number of different environment module implementations commonly used on HPC systems and the one used in NeSI Mahuika cluster is <code>Lmod</code> where the <code>module</code> command is used to interact with environment modules.</p>
-<p><strong>Common commands - module</strong></p>
+<p><strong>Commonly used <code>module</code> sub-commands</strong></p>
 <ul>
-<li>View available modules</li>
+<li>
+<p>View available modules
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>module avail
+</code></pre></div></p>
+</li>
+<li>
+<p>View all modules which match the keyword in their name
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>module avail KEYWORD
+</code></pre></div></p>
+</li>
+<li>
+<p>View all modules which match the keyword in their name or description
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>module spider KEYWORD
+</code></pre></div></p>
+</li>
+<li>
+<p>Load a specific program</p>
+<ul>
+<li>Note: All modules on NeSI have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>module load MY_APPLICATION
+</code></pre></div></li>
 </ul>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">#View all modules</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ module avail
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># View all modules which match the keyword in their name</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>$ module avail KEYWORD
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># View all modules which match the keyword in their name or description</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>$ module spider KEYWORD
-</code></pre></div>
-* Load a specific program</p>
-<div class="highlight"><pre><span></span><code>&gt;Note: All modules on NeSI have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ module load MY_APPLICATION
+</li>
+<li>
+<p>Swap a currently loaded module for a different one</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>module switch CURRENT_MODULE DESIRED_MODULE
 </code></pre></div>
 <ul>
 <li>Unload all current modules</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ module purge
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>module purge
 </code></pre></div>
-<blockquote>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
 <p>Please <strong>do not</strong> use <code>$module --force purge</code></p>
-</blockquote>
-<ul>
-<li>Swap a currently loaded module for a different one</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ module switch CURRENT_MODULE DESIRED_MODULE
-</code></pre></div>
+</div>
 <p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
 
               
