@@ -1,6 +1,6 @@
 # Introduction to Bash Scripting and HPC Scheduler
 
-This as an intermediate level workshop on *Introduction to Bash Scripting and HPC Job Scheduler*. 
+This as an **Introductory** level workshop on *Introduction to Bash Scripting and HPC Job Scheduler*. 
 
 ## Prerequisites
 
