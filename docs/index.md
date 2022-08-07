@@ -1,8 +1,12 @@
 <center>
 # **Introduction to Bash Scripting and HPC Scheduler**
-
+This as an **Introductory** level workshop on *Bash Scripting and HPC Job Scheduler, Slurm*. 
 </center>
-This as an **Introductory** level workshop on *Introduction to Bash Scripting and HPC Job Scheduler*. 
+
+
+<center>
+![image](./nesi_images/tuxpeng_hpc.png){width="400"}
+</center>
 
 ## Prerequisites
 
