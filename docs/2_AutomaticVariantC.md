@@ -36,7 +36,7 @@ $ nano variant_calling.sh
 ```
 
 In the text editor, type the commands
-```
+```bash
 #!/bin/bash 
 
 # Jane Doe
