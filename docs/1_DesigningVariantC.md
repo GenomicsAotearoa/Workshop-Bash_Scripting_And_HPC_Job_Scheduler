@@ -42,8 +42,9 @@ ls
     If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
 
 ```bash
-$ cd scripting_workshop/variant_calling
-
+cd scripting_workshop/variant_calling
+```
+```bash
 $ ls
 ref_genome  trimmed_reads 
 ```
@@ -103,7 +104,8 @@ $ bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fast
 [M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
 [M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
 .....
-
+```
+```bash
 $ ls results/sam/
 SRR2584866.aligned.sam 
 ```
@@ -117,23 +119,24 @@ We will convert the SAM file to BAM format using the samtools program with the v
 We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):
 
 ```bash
-$ module load SAMtools/1.13-GCC-9.2.0
-
-$ samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR2584866.aligned.bam
+module load SAMtools/1.13-GCC-9.2.0
+```
+```bash
+samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR2584866.aligned.bam
 ```
 
 #### Sort BAM file by coordinates
 Next we sort the BAM file using the `sort` command from samtools. -o tells the command where to write the output.
 
 ```bash
-$ samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
+samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
 ```
 
 > hint: SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.
 
 You can use samtools to learn more about this bam file as well.
 ```bash
-$ samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
+samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
 ```
 
 ## Variant calling
@@ -143,7 +146,9 @@ A variant call is a conclusion that there is a nucleotide difference vs. some re
 Do the first pass on variant calling by counting read coverage with `bcftools`. We will use the command mpileup. The flag -O b tells bcftools to generate a bcf format output file, -o specifies where to write the output file, and -f flags the path to the reference genome:
 
 ```bash
-$ module load BCFtools/1.13-GCC-9.2.0
+module load BCFtools/1.13-GCC-9.2.0
+```
+```bash
 $ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
 [mpileup] 1 samples in 1 input files
 [mpileup] maximum number of reads per input file set to -d 250
@@ -154,13 +159,13 @@ We have now generated a file with coverage information for every base.
 Identify SNVs using bcftools call. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid E. coli. -m allows for multiallelic and rare-variant calling, -v tells the program to output variant sites only (not every site in the genome), and -o specifies where to write the output file:
 
 ```bash
-$ bcftools call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf 
+bcftools call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf 
 ```
 
 ### Step 3: Filter and report the SNV variants in variant calling format (VCF)
 Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
 ```bash
-$ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf > results/vcf/SRR2584866_final_variants.vcf
+vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf > results/vcf/SRR2584866_final_variants.vcf
 ```
 
 ### Explore the VCF format:
