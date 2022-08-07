@@ -1,11 +1,5 @@
 # S1 : Accessing software via modules
 
-<p style="text-align:left;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/5_working_with_job_scheduler.html" style="background: var(--bs-green);font-weight:bold">&laquo;5. Working with job Scheduler</a></b>
-    <span style="float:right;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/7_supplementary_2.html" style="background: var(--bs-green);font-weight:bold">6. Supplementary 2  &raquo;</a></b>
-    </span>
-</p>
 
 On a high-performance computing system, it is quite rare that the software we want to use is available when we log in. It is installed, but we will need to “load” it before it can run.
 
