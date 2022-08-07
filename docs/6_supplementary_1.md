@@ -49,7 +49,7 @@ module purge
 ```
 !!! danger 
 
-    Please **do not** use `$module --force purge`
+    Please **do not** use `$ module --force purge`
 
 
 
