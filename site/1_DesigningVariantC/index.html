@@ -654,95 +654,96 @@ First, it is always good to verify where we are:</p>
 <p class="admonition-title">Hint</p>
 <p>If you do not have the workshop directory, you can copy it using the command: <code>cp -r  /nesi/project/nesi02659/scripting_workshop/ ~</code>  </p>
 </div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ <span class="nb">cd</span> scripting_workshop/variant_calling
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>$ ls
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>ref_genome  trimmed_reads 
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span> scripting_workshop/variant_calling
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ ls
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ref_genome  trimmed_reads 
+</code></pre></div></p>
 <h2 id="alignment-to-a-reference-genome">Alignment to a reference genome<a class="headerlink" href="#alignment-to-a-reference-genome" title="Permanent link">&para;</a></h2>
 <p>First we need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because mkdir can accept multiple new directory names as input.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir -p results/sam results/bam results/bcf results/vcf
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir -p results/sam results/bam results/bcf results/vcf
 </code></pre></div>
 <h3 id="index-the-reference-genome">Index the reference genome<a class="headerlink" href="#index-the-reference-genome" title="Permanent link">&para;</a></h3>
 <p>Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.</p>
 <p>Since we are working on the NeSI HPC, we need to search and load the package before we start using it.
 - More on packages will be discussed in the HPC and Slurm section</p>
 <p>Search
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>module spider bwa
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>module spider bwa
 </code></pre></div></p>
 <p>and then load <strong>BWA</strong> module. </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>module purge
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>module load BWA/0.7.17-GCC-9.2.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>module purge
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>module load BWA/0.7.17-GCC-9.2.0
 </code></pre></div>
 <p>indexing the genome
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>bwa index ref_genome/ecoli_rel606.fasta
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>bwa index ref_genome/ecoli_rel606.fasta
 </code></pre></div></p>
 <details class="success">
 <summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="o">[</span>bwa_index<span class="o">]</span> Pack FASTA... <span class="m">0</span>.03 sec
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="o">[</span>bwa_index<span class="o">]</span> Construct BWT <span class="k">for</span> the packed sequence...
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="o">[</span>bwa_index<span class="o">]</span> <span class="m">1</span>.04 seconds elapse.
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="o">[</span>bwa_index<span class="o">]</span> Update BWT... <span class="m">0</span>.03 sec
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="o">[</span>bwa_index<span class="o">]</span> Pack forward-only FASTA... <span class="m">0</span>.02 sec
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="o">[</span>bwa_index<span class="o">]</span> Construct SA from BWT and Occ... <span class="m">0</span>.57 sec
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="o">[</span>main<span class="o">]</span> Version: <span class="m">0</span>.7.17-r1188
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="o">[</span>main<span class="o">]</span> CMD: bwa index ref_genome/ecoli_rel606.fasta
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="o">[</span>main<span class="o">]</span> Real time: <span class="m">2</span>.462 sec<span class="p">;</span> CPU: <span class="m">1</span>.702 sec
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">[</span>bwa_index<span class="o">]</span> Pack FASTA... <span class="m">0</span>.03 sec
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="o">[</span>bwa_index<span class="o">]</span> Construct BWT <span class="k">for</span> the packed sequence...
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="o">[</span>bwa_index<span class="o">]</span> <span class="m">1</span>.04 seconds elapse.
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="o">[</span>bwa_index<span class="o">]</span> Update BWT... <span class="m">0</span>.03 sec
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="o">[</span>bwa_index<span class="o">]</span> Pack forward-only FASTA... <span class="m">0</span>.02 sec
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="o">[</span>bwa_index<span class="o">]</span> Construct SA from BWT and Occ... <span class="m">0</span>.57 sec
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="o">[</span>main<span class="o">]</span> Version: <span class="m">0</span>.7.17-r1188
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="o">[</span>main<span class="o">]</span> CMD: bwa index ref_genome/ecoli_rel606.fasta
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="o">[</span>main<span class="o">]</span> Real time: <span class="m">2</span>.462 sec<span class="p">;</span> CPU: <span class="m">1</span>.702 sec
 </code></pre></div>
 </details>
 <h3 id="align-reads-to-reference-genome">Align reads to reference genome<a class="headerlink" href="#align-reads-to-reference-genome" title="Permanent link">&para;</a></h3>
 <p>The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it is faster and more accurate.
 We are going to start by aligning the reads from just one of the samples in our dataset (SRR2584866).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$ bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq &gt; results/sam/SRR2584866.aligned.sam
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="o">[</span>M::bwa_idx_load_from_disk<span class="o">]</span> <span class="nb">read</span> <span class="m">0</span> ALT contigs
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="o">[</span>M::process<span class="o">]</span> <span class="nb">read</span> <span class="m">77446</span> sequences <span class="o">(</span><span class="m">10000033</span> bp<span class="o">)</span>...
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="o">[</span>M::process<span class="o">]</span> <span class="nb">read</span> <span class="m">77296</span> sequences <span class="o">(</span><span class="m">10000182</span> bp<span class="o">)</span>...
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="o">[</span>M::mem_pestat<span class="o">]</span> <span class="c1"># candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="o">[</span>M::mem_pestat<span class="o">]</span> analyzing insert size distribution <span class="k">for</span> orientation FF...
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="o">[</span>M::mem_pestat<span class="o">]</span> <span class="o">(</span><span class="m">25</span>, <span class="m">50</span>, <span class="m">75</span><span class="o">)</span> percentile: <span class="o">(</span><span class="m">420</span>, <span class="m">660</span>, <span class="m">1774</span><span class="o">)</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="o">[</span>M::mem_pestat<span class="o">]</span> low and high boundaries <span class="k">for</span> computing mean and std.dev: <span class="o">(</span><span class="m">1</span>, <span class="m">4482</span><span class="o">)</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>.....
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>$ ls results/sam/
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>SRR2584866.aligned.sam 
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq &gt; results/sam/SRR2584866.aligned.sam
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="o">[</span>M::bwa_idx_load_from_disk<span class="o">]</span> <span class="nb">read</span> <span class="m">0</span> ALT contigs
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="o">[</span>M::process<span class="o">]</span> <span class="nb">read</span> <span class="m">77446</span> sequences <span class="o">(</span><span class="m">10000033</span> bp<span class="o">)</span>...
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="o">[</span>M::process<span class="o">]</span> <span class="nb">read</span> <span class="m">77296</span> sequences <span class="o">(</span><span class="m">10000182</span> bp<span class="o">)</span>...
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="o">[</span>M::mem_pestat<span class="o">]</span> <span class="c1"># candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="o">[</span>M::mem_pestat<span class="o">]</span> analyzing insert size distribution <span class="k">for</span> orientation FF...
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="o">[</span>M::mem_pestat<span class="o">]</span> <span class="o">(</span><span class="m">25</span>, <span class="m">50</span>, <span class="m">75</span><span class="o">)</span> percentile: <span class="o">(</span><span class="m">420</span>, <span class="m">660</span>, <span class="m">1774</span><span class="o">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="o">[</span>M::mem_pestat<span class="o">]</span> low and high boundaries <span class="k">for</span> computing mean and std.dev: <span class="o">(</span><span class="m">1</span>, <span class="m">4482</span><span class="o">)</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>.....
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ ls results/sam/
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>SRR2584866.aligned.sam 
+</code></pre></div></p>
 <h4 id="sambam-format">SAM/BAM format<a class="headerlink" href="#sambam-format" title="Permanent link">&para;</a></h4>
 <p>The SAM file, is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by <a href="https://academic.oup.com/bioinformatics/article/25/16/2078/204688">Heng Li et al.</a> provides a lot more detail on the specification.</p>
 <p>The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.</p>
 <p>We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):</p>
 <p>We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ module load SAMtools/1.13-GCC-9.2.0
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>$ samtools view -S -b results/sam/SRR2584866.aligned.sam &gt; results/bam/SRR2584866.aligned.bam
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>module load SAMtools/1.13-GCC-9.2.0
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>samtools view -S -b results/sam/SRR2584866.aligned.sam &gt; results/bam/SRR2584866.aligned.bam
+</code></pre></div></p>
 <h4 id="sort-bam-file-by-coordinates">Sort BAM file by coordinates<a class="headerlink" href="#sort-bam-file-by-coordinates" title="Permanent link">&para;</a></h4>
 <p>Next we sort the BAM file using the <code>sort</code> command from samtools. -o tells the command where to write the output.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
 </code></pre></div>
 <blockquote>
 <p>hint: SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.</p>
 </blockquote>
 <p>You can use samtools to learn more about this bam file as well.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$ samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
 </code></pre></div></p>
 <h2 id="variant-calling">Variant calling<a class="headerlink" href="#variant-calling" title="Permanent link">&para;</a></h2>
 <p>A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for variant calling. In this workshop we will be using <code>bcftools</code>, but there are a few things we need to do before actually calling the variants.</p>
 <h3 id="step-1-calculate-the-read-coverage-of-positions-in-the-genome">Step 1: Calculate the read coverage of positions in the genome<a class="headerlink" href="#step-1-calculate-the-read-coverage-of-positions-in-the-genome" title="Permanent link">&para;</a></h3>
 <p>Do the first pass on variant calling by counting read coverage with <code>bcftools</code>. We will use the command mpileup. The flag -O b tells bcftools to generate a bcf format output file, -o specifies where to write the output file, and -f flags the path to the reference genome:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$ module load BCFtools/1.13-GCC-9.2.0
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>$ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="o">[</span>mpileup<span class="o">]</span> <span class="m">1</span> samples <span class="k">in</span> <span class="m">1</span> input files
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="o">[</span>mpileup<span class="o">]</span> maximum number of reads per input file <span class="nb">set</span> to -d <span class="m">250</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>module load BCFtools/1.13-GCC-9.2.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>$ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="o">[</span>mpileup<span class="o">]</span> <span class="m">1</span> samples <span class="k">in</span> <span class="m">1</span> input files
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="o">[</span>mpileup<span class="o">]</span> maximum number of reads per input file <span class="nb">set</span> to -d <span class="m">250</span>
 </code></pre></div>
 We have now generated a file with coverage information for every base.</p>
 <h3 id="step-2-detect-the-single-nucleotide-variants-snvs">Step 2: Detect the single nucleotide variants (SNVs)<a class="headerlink" href="#step-2-detect-the-single-nucleotide-variants-snvs" title="Permanent link">&para;</a></h3>
 <p>Identify SNVs using bcftools call. We have to specify ploidy with the flag <code>--ploidy</code>, which is one for the haploid E. coli. -m allows for multiallelic and rare-variant calling, -v tells the program to output variant sites only (not every site in the genome), and -o specifies where to write the output file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ bcftools call --ploidy <span class="m">1</span> -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>bcftools call --ploidy <span class="m">1</span> -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf 
 </code></pre></div>
 <h3 id="step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf">Step 3: Filter and report the SNV variants in variant calling format (VCF)<a class="headerlink" href="#step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf" title="Permanent link">&para;</a></h3>
 <p>Filter the SNVs for the final output in VCF format, using <code>vcfutils.pl</code>:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf &gt; results/vcf/SRR2584866_final_variants.vcf
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf &gt; results/vcf/SRR2584866_final_variants.vcf
 </code></pre></div></p>
 <h3 id="explore-the-vcf-format">Explore the VCF format:<a class="headerlink" href="#explore-the-vcf-format" title="Permanent link">&para;</a></h3>
 <p>At this stage you can use various tools to analyse the vcf file. Exploring the vcf is beyond the scope of this workshop.</p>

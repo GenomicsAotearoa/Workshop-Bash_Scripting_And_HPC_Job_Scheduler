@@ -456,13 +456,6 @@
 
 
 <h1 id="automating-a-variant-calling-workflow">Automating a Variant Calling Workflow<a class="headerlink" href="#automating-a-variant-calling-workflow" title="Permanent link">&para;</a></h1>
-<p style="text-align:left;">
-  <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/1_DesigningVariantC.html" style="background: var(--bs-green);font-weight:bold">&laquo; 1.Designing a Variant Calling Workflow</a></b> 
-  <span style="float:right;">
-    <b><a class="btn" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/3_RNAseq.html" style="background: var(--bs-green);font-weight:bold">3. RNA-seq Mapping And Count Data Workflow &raquo;</a></b>
-  </span>
-</p>
-
 <div class="admonition abstract">
 <p class="admonition-title">Aim</p>
 <ul>
@@ -496,55 +489,55 @@ Now we are ready to start building the script.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ nano variant_calling.sh
 </code></pre></div>
 <p>In the text editor, type the commands
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>#!/bin/bash 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="ch">#!/bin/bash </span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a># Jane Doe
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a># 05 March 2022
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Jane Doe</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 05 March 2022</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a># This script runs the variant calling pipeline from mapping to vcf.
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># This script runs the variant calling pipeline from mapping to vcf.</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>set -e
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a># Load all the required modules
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nb">set</span> -e
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># Load all the required modules</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>module purge
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>module load BWA/0.7.17-GCC-9.2.0
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>module load SAMtools/1.13-GCC-9.2.0
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>module load BCFtools/1.13-GCC-9.2.0
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a># create the results directories
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># create the results directories</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>mkdir -p results/sam results/bam results/bcf results/vcf
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a># indexing the genome
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>genome=ref_genome/ecoli_rel606.fasta
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>bwa index $genome
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># indexing the genome</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="nv">genome</span><span class="o">=</span>ref_genome/ecoli_rel606.fasta
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>bwa index <span class="nv">$genome</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a># create a loop that map reads to the genome, sort the bam files and call variants
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>for fq1 in trimmed_reads/*_1.trim.sub.fastq
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    do
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    echo &quot;working with file $fq1&quot;
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="c1"># create a loop that map reads to the genome, sort the bam files and call variants</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="k">for</span> fq1 <span class="k">in</span> trimmed_reads/*_1.trim.sub.fastq
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="k">do</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="nb">echo</span> <span class="s2">&quot;working with file </span><span class="nv">$fq1</span><span class="s2">&quot;</span>
 <a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    base=$(basename $fq1 _1.trim.sub.fastq)
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>    echo &quot;base name is $base&quot;
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="nv">base</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$fq1</span> _1.trim.sub.fastq<span class="k">)</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>    <span class="nb">echo</span> <span class="s2">&quot;base name is </span><span class="nv">$base</span><span class="s2">&quot;</span>
 <a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>   # setting the variables
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>   fq1=trimmed_reads/${base}_1.trim.sub.fastq
-<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>   fq2=trimmed_reads/${base}_2.trim.sub.fastq
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>   sam=results/sam/${base}.aligned.sam
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>   bam=results/bam/${base}.aligned.bam
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>   sorted_bam=results/bam/${base}.aligned.sorted.bam
-<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>   raw_bcf=results/bcf/${base}_raw.bcf
-<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>   variants=results/vcf/${base}_variants.vcf
-<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>   final_variants=results/vcf/${base}_final_variants.vcf
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>   <span class="c1"># setting the variables</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>   <span class="nv">fq1</span><span class="o">=</span>trimmed_reads/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>_1.trim.sub.fastq
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>   <span class="nv">fq2</span><span class="o">=</span>trimmed_reads/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>_2.trim.sub.fastq
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>   <span class="nv">sam</span><span class="o">=</span>results/sam/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>.aligned.sam
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>   <span class="nv">bam</span><span class="o">=</span>results/bam/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>.aligned.bam
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>   <span class="nv">sorted_bam</span><span class="o">=</span>results/bam/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>.aligned.sorted.bam
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>   <span class="nv">raw_bcf</span><span class="o">=</span>results/bcf/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>_raw.bcf
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>   <span class="nv">variants</span><span class="o">=</span>results/vcf/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>_variants.vcf
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>   <span class="nv">final_variants</span><span class="o">=</span>results/vcf/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>_final_variants.vcf
 <a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>
-<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>  # running the analysis steps
-<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>  bwa mem $genome $fq1 $fq2 &gt; $sam
-<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>  samtools view -S -b $sam &gt; $bam
-<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>  samtools sort -o $sorted_bam $bam
-<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>  samtools index $sorted_bam
-<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>  bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
-<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>  bcftools call --ploidy 1 -m -v -o $variants $raw_bcf
-<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>  vcfutils.pl varFilter $variants &gt; $final_variants
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>  <span class="c1"># running the analysis steps</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>  bwa mem <span class="nv">$genome</span> <span class="nv">$fq1</span> <span class="nv">$fq2</span> &gt; <span class="nv">$sam</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>  samtools view -S -b <span class="nv">$sam</span> &gt; <span class="nv">$bam</span>
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>  samtools sort -o <span class="nv">$sorted_bam</span> <span class="nv">$bam</span>
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>  samtools index <span class="nv">$sorted_bam</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>  bcftools mpileup -O b -o <span class="nv">$raw_bcf</span> -f <span class="nv">$genome</span> <span class="nv">$sorted_bam</span>
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>  bcftools call --ploidy <span class="m">1</span> -m -v -o <span class="nv">$variants</span> <span class="nv">$raw_bcf</span>
+<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>  vcfutils.pl varFilter <span class="nv">$variants</span> &gt; <span class="nv">$final_variants</span>
 <a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>
-<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>done
+<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a><span class="k">done</span>
 </code></pre></div></p>
 <p>Running the script
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ bash ./variant_calling.sh
