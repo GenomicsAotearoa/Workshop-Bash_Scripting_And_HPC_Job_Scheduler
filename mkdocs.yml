@@ -99,6 +99,6 @@ markdown_extensions:
   - pymdownx.snippets
 
 plugins:
-    - mkdocs-video
+#    - mkdocs-video
     - search:
         lang: en
