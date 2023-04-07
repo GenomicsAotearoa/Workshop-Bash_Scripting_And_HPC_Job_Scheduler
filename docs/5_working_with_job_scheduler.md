@@ -11,18 +11,16 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
     * Manages the reservation of resources and job execution on these resources 
     * Allows users to “fire and forget” large, long calculations or many jobs (“production runs”)
 
-Why do we need a scheduler ?
-
-!!! quote ""
+!!! info "Commonly used schedulers"
 
     * To ensure the machine is utilised as fully as possible
     * To ensure all users get a fair chance to use compute resources (demand usually exceeds supply)
     * To track usage - for accounting and budget control
     * To mediate access to other resources e.g. software licences
 
-Commonly used schedulers
 
-!!! note ""
+
+!!! note "Commonly used schedulers"
     
     * Slurm
     * PBS , Torque
