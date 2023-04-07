@@ -36,57 +36,60 @@ $ nano variant_calling.sh
 ```
 
 In the text editor, type the commands
-```bash
-#!/bin/bash 
 
-# Jane Doe
-# 05 March 2022
+!!! terminal "script"
 
-# This script runs the variant calling pipeline from mapping to vcf.
-
-set -e
-# Load all the required modules
-module purge
-module load BWA/0.7.17-GCC-9.2.0
-module load SAMtools/1.13-GCC-9.2.0
-module load BCFtools/1.13-GCC-9.2.0
-
-# create the results directories
-mkdir -p results/sam results/bam results/bcf results/vcf
-
-# indexing the genome
-genome=ref_genome/ecoli_rel606.fasta
-bwa index $genome
-
-# create a loop that map reads to the genome, sort the bam files and call variants
-for fq1 in trimmed_reads/*_1.trim.sub.fastq
-    do
-    echo "working with file $fq1"
-
-    base=$(basename $fq1 _1.trim.sub.fastq)
-    echo "base name is $base"
-
-   # setting the variables
-   fq1=trimmed_reads/${base}_1.trim.sub.fastq
-   fq2=trimmed_reads/${base}_2.trim.sub.fastq
-   sam=results/sam/${base}.aligned.sam
-   bam=results/bam/${base}.aligned.bam
-   sorted_bam=results/bam/${base}.aligned.sorted.bam
-   raw_bcf=results/bcf/${base}_raw.bcf
-   variants=results/vcf/${base}_variants.vcf
-   final_variants=results/vcf/${base}_final_variants.vcf
-
-  # running the analysis steps
-  bwa mem $genome $fq1 $fq2 > $sam
-  samtools view -S -b $sam > $bam
-  samtools sort -o $sorted_bam $bam
-  samtools index $sorted_bam
-  bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
-  bcftools call --ploidy 1 -m -v -o $variants $raw_bcf
-  vcfutils.pl varFilter $variants > $final_variants
-
-done
-```
+    ```bash
+    #!/bin/bash 
+    
+    # Jane Doe
+    # 05 March 2022
+    
+    # This script runs the variant calling pipeline from mapping to vcf.
+    
+    set -e
+    # Load all the required modules
+    module purge
+    module load BWA/0.7.17-GCC-9.2.0
+    module load SAMtools/1.13-GCC-9.2.0
+    module load BCFtools/1.13-GCC-9.2.0
+    
+    # create the results directories
+    mkdir -p results/sam results/bam results/bcf results/vcf
+    
+    # indexing the genome
+    genome=ref_genome/ecoli_rel606.fasta
+    bwa index $genome
+    
+    # create a loop that map reads to the genome, sort the bam files and call variants
+    for fq1 in trimmed_reads/*_1.trim.sub.fastq
+        do
+        echo "working with file $fq1"
+    
+        base=$(basename $fq1 _1.trim.sub.fastq)
+        echo "base name is $base"
+    
+       # setting the variables
+       fq1=trimmed_reads/${base}_1.trim.sub.fastq
+       fq2=trimmed_reads/${base}_2.trim.sub.fastq
+       sam=results/sam/${base}.aligned.sam
+       bam=results/bam/${base}.aligned.bam
+       sorted_bam=results/bam/${base}.aligned.sorted.bam
+       raw_bcf=results/bcf/${base}_raw.bcf
+       variants=results/vcf/${base}_variants.vcf
+       final_variants=results/vcf/${base}_final_variants.vcf
+    
+      # running the analysis steps
+      bwa mem $genome $fq1 $fq2 > $sam
+      samtools view -S -b $sam > $bam
+      samtools sort -o $sorted_bam $bam
+      samtools index $sorted_bam
+      bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
+      bcftools call --ploidy 1 -m -v -o $variants $raw_bcf
+      vcfutils.pl varFilter $variants > $final_variants
+    
+    done
+    ```
 
 Running the script
 ```bash
