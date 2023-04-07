@@ -38,4 +38,3 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
     |[8. Supplementary #3](./8_supplementary_3.md){ .md-button .md-button--primary }||
 
 
-    
