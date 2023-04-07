@@ -2,10 +2,6 @@
 
 This material is extracted from the Genomics Data Carpentry Lesson
 
-!!! abstract "Aim"
-
-    To understand the steps to perform variant calling then overall put all these steps into a script.
-
 !!! abstract "Objectives and overall workflow"
 
     - Understand and perform the steps involved in variant calling.
