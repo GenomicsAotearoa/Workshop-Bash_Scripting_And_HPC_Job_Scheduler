@@ -1,12 +1,16 @@
+<center>![image](./nesi_images/nesiga_LOGO.png){width="300"}</center>
+
 <center>
 # **Introduction to Bash Scripting and HPC Scheduler**
-This as an **Introductory** level workshop on *Bash Scripting and HPC Job Scheduler, Slurm*. 
+ 
 </center>
 
 
 <center>
 ![image](./nesi_images/slurm_llinux_penguin_dna.png){width="450"}
 </center>
+
+This as an **Introductory** level workshop on *Bash Scripting and HPC Job Scheduler, Slurm*.
 
 !!! check-to-slot "Prerequisites"
 
