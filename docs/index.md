@@ -8,10 +8,10 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 ![image](./nesi_images/tuxpeng_hpc.png){width="400"}
 </center>
 
-## Prerequisites
+!!! check-to-slot "Prerequisites"
 
-- Familiarity with terminal and basic linux commands
-- Intermediate level knowledge on Molecular Biology and Genetics 
+    - Familiarity with terminal and basic linux commands
+    - Intermediate level knowledge on Molecular Biology and Genetics 
 
 
 ## Some of the things we won't cover in this workshop
