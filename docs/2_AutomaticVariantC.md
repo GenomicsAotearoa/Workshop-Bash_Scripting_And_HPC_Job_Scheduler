@@ -104,25 +104,28 @@ Running the script
     $ bash ./variant_calling.sh
     ```
 This should take about 10 minutes.
-Note: The way the script is written means we have to indicate which program to use whenever we are running it. 
-So to run without calling bash, we can change the script permissions.
 
-!!! terminal "script"
+!!! hint "Adding executable permissions"
 
-    ```bash 
-    $ ls -l variant_calling.sh 
-    -rw-rw-r-- 1 fayfa80p fayfa80p 1401 Mar  5 22:29 variant_calling.sh
+    The way the script is written means we have to indicate which program to use whenever we are running it. 
+    So to run without calling bash, we can change the script permissions.
+
+    !!! terminal "script"
     
-    $ chmod u+x variant_calling.sh
-    
-    $ ls -l variant_calling.sh 
-    -rwxrw-r-- 1 fayfa80p fayfa80p 1401 Mar  5 22:29 variant_calling.sh
-    # note colour change on the script filename
+        ```bash 
+        $ ls -l variant_calling.sh 
+        -rw-rw-r-- 1 fayfa80p fayfa80p 1401 Mar  5 22:29 variant_calling.sh
+        
+        $ chmod u+x variant_calling.sh
+        
+        $ ls -l variant_calling.sh 
+        -rwxrw-r-- 1 fayfa80p fayfa80p 1401 Mar  5 22:29 variant_calling.sh
+        # note colour change on the script filename
+        ```
+    Now we can execute the script without calling bash
+    ```bash
+    $ ./variant_calling.sh
     ```
-Now we can execute the script without calling bash
-```bash
-$ ./variant_calling.sh
-```
 
 In the [Next Lesson](https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/tree/main/2.HPC_Job_Scheduling) we will now prepare the script to run on the HPC environment
 
