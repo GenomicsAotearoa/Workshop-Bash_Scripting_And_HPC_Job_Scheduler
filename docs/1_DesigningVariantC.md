@@ -26,19 +26,26 @@ This material is extracted from the Genomics Data Carpentry Lesson
 In this workshop, we have already trimmed the reads and downloaded the reference genome for you.
 First, it is always good to verify where we are:
 
-```bash
-cd ~
-```
-```bash
-pwd
-```
+!!! terminal "script"
+
+    ```bash
+    cd ~
+    ```
+    ```bash
+    pwd
+    ```
 
 Checking to make sure we have the directory and files for the workshop.
 
-```bash
-ls
-```
-!!! hint
+!!! terminal "script"
+
+    ```bash
+    ls
+    ```
+
+    - You should see a directory names *scripting_workshop*
+
+!!! code-compare "Quick Check"
     If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
 
 ```bash
