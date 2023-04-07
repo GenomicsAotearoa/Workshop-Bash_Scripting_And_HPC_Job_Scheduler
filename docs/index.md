@@ -22,15 +22,16 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
          - RNA sequencing and data analysis
 
 !!! rectangle-list "Content"
-
-    1. [Designing a Variant Calling Workflow](./1_DesigningVariantC.md)
-    2. [Automating a Variant Calling Workflow](./2_AutomaticVariantC.md)
-    3. [RNA-seq Mapping And Count Data Workflow](./3_RNAseq.md)
-    4. [Introduction to HPC](./4_IntroductiontoHPC.md)
-    5. [Working with Job Scheduler](./5_working_with_job_scheduler.md)
-    6. [Supplementary #1](./6_supplementary_1.md)
-    7. [Supplementary #2](./7_supplementary_2.md)
-    8. [Supplementary #3](./8_supplementary_3.md)
+    | **Lesson**                                        | **Overview** | 
+    |:---------------------------------------------------|:-------------|
+    |[1. Designing a Variant Calling Workflow](./1_DesigningVariantC.md){ .md-button .md-button--primary }||
+    |[2. Automating a Variant Calling Workflow](./2_AutomaticVariantC.md){ .md-button .md-button--primary }||
+    |[3. RNA-seq Mapping And Count Data Workflow](./3_RNAseq.md){ .md-button .md-button--primary }||
+    |[4. Introduction to HPC](./4_IntroductiontoHPC.md){ .md-button .md-button--primary }||
+    |[5. Working with Job Scheduler](./5_working_with_job_scheduler.md){ .md-button .md-button--primary }||
+    |[6. Supplementary #1](./6_supplementary_1.md){ .md-button .md-button--primary }||
+    |[7. Supplementary #2](./7_supplementary_2.md){ .md-button .md-button--primary }||
+    |[8. Supplementary #3](./8_supplementary_3.md){ .md-button .md-button--primary }||
 
 !!! screwdriver-wrench "Setup"
 
