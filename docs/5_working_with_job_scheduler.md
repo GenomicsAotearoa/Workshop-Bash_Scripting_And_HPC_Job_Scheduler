@@ -4,28 +4,33 @@
 
 An HPC system might have thousands of nodes and thousands of users. How do we decide who gets what and when? How do we ensure that a task is run with the resources it needs? This job is handled by a special piece of software called the scheduler. On an HPC system, the scheduler manages which jobs run where and when. In brief, scheduler is a 
 
+!!! quote ""
 
-* Mechanism to control access by many users to shared computing resources
-* Queuing / scheduling system for users’ jobs
-* Manages the reservation of resources and job execution on these resources 
-* Allows users to “fire and forget” large, long calculations or many jobs (“production runs”)
+    * Mechanism to control access by many users to shared computing resources
+    * Queuing / scheduling system for users’ jobs
+    * Manages the reservation of resources and job execution on these resources 
+    * Allows users to “fire and forget” large, long calculations or many jobs (“production runs”)
 
 Why do we need a scheduler ?
 
-* To ensure the machine is utilised as fully as possible
-* To ensure all users get a fair chance to use compute resources (demand usually exceeds supply)
-* To track usage - for accounting and budget control
-* To mediate access to other resources e.g. software licences
+!!! quote ""
+
+    * To ensure the machine is utilised as fully as possible
+    * To ensure all users get a fair chance to use compute resources (demand usually exceeds supply)
+    * To track usage - for accounting and budget control
+    * To mediate access to other resources e.g. software licences
 
 Commonly used schedulers
 
-* Slurm
-* PBS , Torque
-* Grid Engine
-
-<center>
-![image](./nesi_images/slurm_logo.png){width="150"}
-</center>
+!!! note ""
+    
+    * Slurm
+    * PBS , Torque
+    * Grid Engine
+    
+    <center>
+    ![image](./nesi_images/slurm_logo.png){width="150"}
+    </center>
 
 
 All NeSI clusters use Slurm *(Simple Linux Utility for Resource Management)* scheduler (or job submission system) to manage resources and how they are made available to users. The main commands you will use with Slurm on NeSI Mahuika cluster are:
