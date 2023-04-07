@@ -28,6 +28,7 @@ theme:
     scheme: default
     primary: teal
 
+
     toggle:
       icon: material/brightness-7
       name: Switch to dark mode
