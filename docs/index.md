@@ -35,3 +35,4 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 ### Setup
 
 Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. Instructions on how to Set/Reset Authentication factors to access NeSI Services and Jupyter Login instructions [can be found here](https://dinindusenanayake.github.io/ganesi_authesetup-login/)
+
