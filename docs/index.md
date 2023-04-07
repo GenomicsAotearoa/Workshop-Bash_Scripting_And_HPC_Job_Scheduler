@@ -5,7 +5,7 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 
 
 <center>
-![image](./nesi_images/tuxpeng_hpc.png){width="400"}
+![image](./nesi_images/slurm_llinux_penguin_dna.png){width="450"}
 </center>
 
 !!! check-to-slot "Prerequisites"
@@ -21,6 +21,10 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
          - Variant Calling
          - RNA sequencing and data analysis
 
+!!! screwdriver-wrench "Setup"
+
+    Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. Instructions on how to Set/Reset Authentication factors to access NeSI Services and Jupyter Login instructions [can be found here](https://dinindusenanayake.github.io/ganesi_authesetup-login/)
+
 !!! rectangle-list "Content"
     | **Lesson**                                        | **Overview** | 
     |:---------------------------------------------------|:-------------|
@@ -33,7 +37,5 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
     |[7. Supplementary #2](./7_supplementary_2.md){ .md-button .md-button--primary }||
     |[8. Supplementary #3](./8_supplementary_3.md){ .md-button .md-button--primary }||
 
-!!! screwdriver-wrench "Setup"
 
-    Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. Instructions on how to Set/Reset Authentication factors to access NeSI Services and Jupyter Login instructions [can be found here](https://dinindusenanayake.github.io/ganesi_authesetup-login/)
     
