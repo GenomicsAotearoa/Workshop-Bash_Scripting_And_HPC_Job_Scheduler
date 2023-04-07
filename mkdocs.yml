@@ -44,6 +44,7 @@ theme:
     - navigation.tracking
     - navigation.sections
     - navigation.expand
+    - navigation.top
 
     
 
@@ -109,6 +110,8 @@ plugins:
       zoomable: true
   - search:
       lang: en
+
+copyright : Introduction to Bash Scripting and HPC Scheduler is licensed under a <a rel="noopener" target="_blank" href="https://opensource.org/license/mit/">MIT License</a>
 
 extra_css:
   - stylesheets/extra.css
