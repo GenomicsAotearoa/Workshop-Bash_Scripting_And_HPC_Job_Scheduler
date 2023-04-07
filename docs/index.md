@@ -21,20 +21,18 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
          - Variant Calling
          - RNA sequencing and data analysis
 
-## Content
+!!! rectangle-list "Content"
 
-1. [Designing a Variant Calling Workflow](./1_DesigningVariantC.md)
-2. [Automating a Variant Calling Workflow](./2_AutomaticVariantC.md)
-3. [RNA-seq Mapping And Count Data Workflow](./3_RNAseq.md)
-4. [Introduction to HPC](./4_IntroductiontoHPC.md)
-5. [Working with Job Scheduler](./5_working_with_job_scheduler.md)
-6. [Supplementary #1](./6_supplementary_1.md)
-7. [Supplementary #2](./7_supplementary_2.md)
-8. [Supplementary #3](./8_supplementary_3.md)
+    1. [Designing a Variant Calling Workflow](./1_DesigningVariantC.md)
+    2. [Automating a Variant Calling Workflow](./2_AutomaticVariantC.md)
+    3. [RNA-seq Mapping And Count Data Workflow](./3_RNAseq.md)
+    4. [Introduction to HPC](./4_IntroductiontoHPC.md)
+    5. [Working with Job Scheduler](./5_working_with_job_scheduler.md)
+    6. [Supplementary #1](./6_supplementary_1.md)
+    7. [Supplementary #2](./7_supplementary_2.md)
+    8. [Supplementary #3](./8_supplementary_3.md)
 
-### Setup
+!!! screwdriver-wrench "Setup"
 
-Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. Instructions on how to Set/Reset Authentication factors to access NeSI Services and Jupyter Login instructions [can be found here](https://dinindusenanayake.github.io/ganesi_authesetup-login/)
-
-!!! rectangle-list "list"
-    List
+    Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. Instructions on how to Set/Reset Authentication factors to access NeSI Services and Jupyter Login instructions [can be found here](https://dinindusenanayake.github.io/ganesi_authesetup-login/)
+    
