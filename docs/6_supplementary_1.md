@@ -13,40 +13,40 @@ One of the workarounds for this issue is Environment modules. A module is a self
 
 There are a number of different environment module implementations commonly used on HPC systems and the one used in NeSI Mahuika cluster is `Lmod` where the `module` command is used to interact with environment modules.
 
-**Commonly used `module` sub-commands**
+!!! info "Commonly used `module` sub-commands"
 
-* View available modules
-```bash
-module avail
-```
-
-* View all modules which match the keyword in their name
-```bash
-module avail KEYWORD
-```
-
-* View all modules which match the keyword in their name or description
-```bash
-module spider KEYWORD
-```
-* Load a specific program
-
-    - Note: All modules on NeSI have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
+    * View available modules
     ```bash
-    module load MY_APPLICATION
+    module avail
     ```
     
-*  Swap a currently loaded module for a different one
-
-```bash
-module switch CURRENT_MODULE DESIRED_MODULE
-```
-
-* Unload all current modules
-
-```bash
-module purge
-```
+    * View all modules which match the keyword in their name
+    ```bash
+    module avail KEYWORD
+    ```
+    
+    * View all modules which match the keyword in their name or description
+    ```bash
+    module spider KEYWORD
+    ```
+    * Load a specific program
+    
+        - Note: All modules on NeSI have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
+        ```bash
+        module load MY_APPLICATION
+        ```
+        
+    *  Swap a currently loaded module for a different one
+    
+       ```bash
+       module switch CURRENT_MODULE DESIRED_MODULE
+       ```
+    
+    * Unload all current modules
+    
+       ```bash
+       module purge
+       ```
 !!! danger 
 
     Please **do not** use `$ module --force purge`
