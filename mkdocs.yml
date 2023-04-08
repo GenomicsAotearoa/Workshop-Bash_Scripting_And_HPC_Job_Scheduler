@@ -50,6 +50,7 @@ theme:
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - content.code.copy
     
 
   # Necessary for search to work properly
