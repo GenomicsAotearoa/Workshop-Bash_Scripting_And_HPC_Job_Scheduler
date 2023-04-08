@@ -1,5 +1,7 @@
 # Working with job scheduler
 
+<center>![image](./nesi_images/scheduler_image.png){width="500"}</center>
+
 ## Introduction to slurm scheduler and directives
 
 An HPC system might have thousands of nodes and thousands of users. How do we decide who gets what and when? How do we ensure that a task is run with the resources it needs? This job is handled by a special piece of software called the scheduler. On an HPC system, the scheduler manages which jobs run where and when. In brief, scheduler is a 
@@ -112,14 +114,21 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     |--mail-type 	  | `#SBATCH --mail-type=ALL` 	        |Will send a mail notification at BEGIN END FAIL.      |
     |                 | `#SBATCH --mail-type=TIME_LIMIT_80` |Will send message at 80% walltime.                    |
 
+<br>
+
+!!! bell "Assigning values to Slurm variables"
+    <center>![image](./nesi_images/sbtach_def_1.png)</center>
+
+    <center>![image](./nesi_images/sbatch_def_2.png)</center>
 - - -
 
 ??? question "Exercise 5.2"
 
-    Let's put these directives together and compile our first slurm script
+    Let's put these directives together and compile our first slurm script. Below is a abstract version of the slurm life cycle to assist you with the process
+
+    <center>![image](./nesi_images/slurm_cycle_mini.png)</center>
     
     * First create a new working directory and end the directory
-
     ```bash
      cd ~/scripting_workshop/scheduler
     ```
@@ -140,7 +149,6 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     ```
 
     * Content of `firstslurm.sl` should be as below. Please discuss as you make progress
-
     ```bash
     #!/bin/bash 
 
@@ -160,12 +168,10 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
     * **Save** and **Exit**
     * Submit the script with `sbatch` command
-
     ```bash
     sbatch firstslurm.sl
     ```
     *  Execute `squeue --me` and `sacct`. Discuss the outputs .i.e.
-
     ```bash
     squeue --me
     ```
@@ -222,7 +228,6 @@ Understanding the resources you have available and how to use them most efficien
     Let's submit another slurm job and review its resource utilisation
 
     * Change the working directory to Exercise_5.3
-
     ```bash
     cd ~/scripting_workshop/scheduler/ex_5.3
     ```
@@ -242,7 +247,6 @@ Understanding the resources you have available and how to use them most efficien
     * use `squeue --me` and `sacct` again to evaluate the job status
 
     * Once the job ran into completion, use `nn_seff JOBID` command to print the resource utilisation statistics (Replace **JOBID** with the corresponding number)
-
     ```bash
     $ nn_seff 25222190
     Job ID: 25222190
@@ -283,8 +287,6 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
 
     * We don't want to replicate ***input data***  in multiple places .i.e. be conservative in-terms how you use research storage
     * Therefore, use the same reference genome file (assign the filename to variable `genome` and the trimmed read files (assign the path of these files to variable `trimmed`) used in the first episode
-    
-
     ```bash
     genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
     trimmed=~/scripting_workshop/variant_calling/trimmed_reads
