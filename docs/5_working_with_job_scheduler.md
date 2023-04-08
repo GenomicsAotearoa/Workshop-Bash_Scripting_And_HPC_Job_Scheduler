@@ -260,10 +260,12 @@ Understanding the resources you have available and how to use them most efficien
     CPU Efficiency: 93.94%  00:00:31 of 00:00:33 core-walltime
     Mem Efficiency: 1.33%  13.62 MB of 1.00 GB
     ```
+    * Now review the content of `.err` and `.out` files in */slurmout* directory
 
-Now review the content of `.err` and `.out` files in */slurmout* directory 
+ 
 
->**Feeling adventurous ?** - Refer to [Supplementary material on slurm profiling](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/7_supplementary_2.html)
+!!! quote ""
+    **Feeling adventurous 🤠 ?** - Refer to [Supplementary material on slurm profiling](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/7_supplementary_2/)
 
 
 - - -
