@@ -1,9 +1,13 @@
 site_name: Introduction to Bash Scripting and HPC Scheduler
+site_author: Genomics Aotearoa & NeSI
+site_dir: public
+site_url: "https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/"
 
 #Repository information
 
+repo_name: GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
 repo_url: https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler.git
-repo_name:   GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler  
+  
 
 
 theme:
