@@ -30,11 +30,15 @@ Let's start with creating a new directory as our script working space and copy a
     ```bash
     cd script_workspace
     ```
-    $ cp -r /nesi/project/nesi02659/scripting_workshop/variant_calling/* .
-    
-    $ ls
-    ref_genome  trimmed_reads
+    ```bash
+    cp -r /nesi/project/nesi02659/scripting_workshop/variant_calling/* .
     ```
+    ```bash
+    ls
+    ```
+
+    **Output** - `ref_genome  trimmed_reads`
+    
 Now we are ready to start building the script.
 
 !!! terminal "script"
