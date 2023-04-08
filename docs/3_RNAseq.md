@@ -1,5 +1,10 @@
 # RNA-seq Mapping And Count Data Workflow
 
+<center>
+![imge](./nesi_images/mapping.png){width="300"}
+</center>
+
+
 This material is extracted from the [RNA-seq workshop](https://github.com/GenomicsAotearoa/RNA-seq-workshop) Lesson
 
 !!! abstract "Objectives and overall workflow"
