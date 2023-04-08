@@ -1,5 +1,7 @@
 # Introduction to HPC
 
+<center>![image](./nesi_images/scaling.png){width="300"}</center>
+
 ## Defining high-performance computing
 
 The simplest way of defining high-performance computing is by saying that it is the using of high-performance computers (HPC). However, this leads to our next question what is a HPC .
@@ -16,11 +18,13 @@ The simplest way of defining high-performance computing is by saying that it is 
 
 ### HPC architectures
 
-<p>Most HPC systems follow the ideas described above of taking many computers and linking them via network switches. What distinguishes a high-performance computer from the computer clusters described above is:</p>
+Most HPC systems follow the ideas described above of taking many computers and linking them via network switches.
 
-* The number of computers/nodes 
-* The strength of each individual computer/node 
-* The network interconnect – this dictates the communication speed between nodes. The faster this speed is, the more a group of individual nodes will act like a unit.
+!!! info "What distinguishes a high-performance computer from the computer clusters"
+
+    * The number of computers/nodes 
+    * The strength of each individual computer/node 
+    * The network interconnect – this dictates the communication speed between nodes. The faster this speed is, the more a group of individual nodes will act like a unit.
 
 
 ### NeSI Mahuika Cluster architecture
