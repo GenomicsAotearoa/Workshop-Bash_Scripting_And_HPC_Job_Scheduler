@@ -303,10 +303,13 @@ You can process all the samples at once:
 
 ---
  
-## Group Exercise
-Now, let's work together in our groups to create an RNA-seq mapping and count script.
+!!! question "Group Exercise"
+
+    Now, let's work together in our groups to create an RNA-seq mapping and count script.
 
 ---
-at this stage we have mastered the art of writing scripts, instead of running them on the commandline, let us now run them on HPC.
+
+!!! pied-piper "🎊"
+    At this stage we have mastered the art of writing scripts, instead of running them on the commandline, let us now run them on HPC.
 
 
