@@ -6,27 +6,30 @@
 
 ### Variant calling workflow
 
-Remember our variant calling workflow has the following steps:
 
-- Index the reference genome for use by bwa and samtools.
-- Align reads to reference genome.
-- Convert the format of the alignment to sorted BAM, with some intermediate steps.
-- Calculate the read coverage of positions in the genome.
-- Detect the single nucleotide variants (SNVs).
-- Filter and report the SNVs in VCF (variant calling format).
+!!! rectangle-list "Remember our variant calling workflow has the following steps"
+
+    - Index the reference genome for use by bwa and samtools.
+    - Align reads to reference genome.
+    - Convert the format of the alignment to sorted BAM, with some intermediate steps.
+    - Calculate the read coverage of positions in the genome.
+    - Detect the single nucleotide variants (SNVs).
+    - Filter and report the SNVs in VCF (variant calling format).
 
 Let's start with creating a new directory as our script working space and copy all the required resources.
 
 !!! terminal "script"
 
     ```bash
-    $ pwd
-    /home/[Your_Username]/scripting_workshop
-    
-    $ mkdir script_workspace
-    
-    $ cd script_workspace
-    
+    pwd
+    ```
+    **Output** - */home/[Your_Username]/scripting_workshop*
+    ```bash
+    mkdir script_workspace
+    ```
+    ```bash
+    cd script_workspace
+    ```
     $ cp -r /nesi/project/nesi02659/scripting_workshop/variant_calling/* .
     
     $ ls

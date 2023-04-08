@@ -30,6 +30,7 @@ First, it is always good to verify where we are:
     ```bash
     pwd
     ```
+    **Output** -  `/home/yourusername`
 
 Checking to make sure we have the directory and files for the workshop.
 
@@ -39,47 +40,52 @@ Checking to make sure we have the directory and files for the workshop.
     ls
     ```
 
-    - You should see a directory names *scripting_workshop*
+    - You should see a directory names `/scripting_workshop`
 
 !!! code-compare "Quick Check"
     If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
 
-```bash
-cd scripting_workshop/variant_calling
-```
-```bash
-$ ls
-ref_genome  trimmed_reads 
-```
+!!! terminal "script"
 
+    ```bash
+    cd scripting_workshop/variant_calling
+    ```
+    ```bash
+     ls
+    ```
+    **Output** -  `ref_genome  trimmed_reads` 
 ## Alignment to a reference genome
 First we need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because mkdir can accept multiple new directory names as input.
 
-```bash
-mkdir -p results/sam results/bam results/bcf results/vcf
-```
+!!! terminal "script"
+
+    ```bash
+    mkdir -p results/sam results/bam results/bcf results/vcf
+    ```
 ### Index the reference genome
 Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 
 Since we are working on the NeSI HPC, we need to search and load the package before we start using it.
 - More on packages will be discussed in the HPC and Slurm section
 
-Search
-```bash
-module spider bwa
-```
+!!! terminal "script"
 
-and then load **BWA** module. 
-
-```bash
-module purge
-module load BWA/0.7.17-GCC-9.2.0
-```
+    ```bash
+    #Search for a module
+    module spider bwa
+    ```
+    ```bash
+    #Load BWA module
+    module purge
+    module load BWA/0.7.17-GCC-9.2.0
+    ```
 
 indexing the genome
-```bash
-bwa index ref_genome/ecoli_rel606.fasta
-```
+!!! terminal "script"
+
+    ```bash
+    bwa index ref_genome/ecoli_rel606.fasta
+    ```
 ??? success "Output"
     ```bash
     [bwa_index] Pack FASTA... 0.03 sec
@@ -96,18 +102,21 @@ bwa index ref_genome/ecoli_rel606.fasta
 The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it is faster and more accurate.
 We are going to start by aligning the reads from just one of the samples in our dataset (SRR2584866).
 
-```bash
-$ bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
-
-[M::bwa_idx_load_from_disk] read 0 ALT contigs
-[M::process] read 77446 sequences (10000033 bp)...
-[M::process] read 77296 sequences (10000182 bp)...
-[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)
-[M::mem_pestat] analyzing insert size distribution for orientation FF...
-[M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
-[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
-.....
-```
+!!! terminal "script"
+    ```bash
+    bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
+    ```
+    ??? success "Output"
+        ```
+        [M::bwa_idx_load_from_disk] read 0 ALT contigs
+        [M::process] read 77446 sequences (10000033 bp)...
+        [M::process] read 77296 sequences (10000182 bp)...
+        [M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)
+        [M::mem_pestat] analyzing insert size distribution for orientation FF...
+        [M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
+        [M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
+        .....
+        ```
 ```bash
 $ ls results/sam/
 SRR2584866.aligned.sam 
