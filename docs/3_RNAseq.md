@@ -18,32 +18,41 @@ This material is extracted from the [RNA-seq workshop](https://github.com/Genomi
 In this workshop, we have already trimmed the reads and downloaded the reference genome for you.
 First, it is always good to verify where we are:
 
-```bash
+!!! terminal "script"
 
-$ cd ~/scripting_workshop
+    ```bash
+    cd ~/scripting_workshop
+    ```
+    ```bash
+    pwd
+    ```
+    
+    **Output** - */home/[your_username]/scripting_workshop*
 
-$ pwd
-/home/[your_username]/scripting_workshop
-# good I am ready to work
-
-```
 
 Checking to make sure we have the directory and files for the workshop.
 
-```bash
+!!! terminal "script"
 
-$ ls
-rna_seq  variant_calling scheduler
+    ```bash
+    ls
+    ```
+    
+    **Output** - *rna_seq  variant_calling scheduler*
 
-```
->hint : If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
+!!! hint "Hint"
+    If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
 
-```bash
-$ cd rna_seq
+!!! terminal "script"
 
-$ ls
-ref_genome  trimmed_reads 
-```
+    ```bash
+    cd rna_seq
+    ```
+    ```bash
+    ls
+    ```
+    **Output**  - *ref_genome  trimmed_reads* 
+
 ## Alignment to a reference genome
 RNA-seq generate gene expression information by quantifying the number of transcripts (per gene) in a sample. This is acompished by counting the number of transcripts that have been sequenced - the more active a gene is, the more transcripts will be in a sample, and the more reads will be generated from that transcript.
 
@@ -179,13 +188,15 @@ The compressed binary version of SAM is called a BAM file. We use this version t
 
 #### A quick look into the sam file
 
-```bash
-
-$ less SRR014335-chr1.sam 
-
-The file begins with a header, which is optional. The header is used to describe the source of data, reference sequence, method of alignment, etc., this will change depending on the aligner being used. Following the header is the alignment section. Each line that follows corresponds to alignment information for a single read. Each alignment line has 11 mandatory fields for essential mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is displayed below with the different fields highlighted.
-
-```
+!!! terminal "script"
+    ```bash
+    less SRR014335-chr1.sam 
+    ```
+!!! heading "`.sam` header & format" 
+    
+    The file begins with a header, which is optional. The header is used to describe the source of data, reference sequence, method of alignment, etc., this will change depending on the aligner being used. Following the header is the alignment section. Each line that follows corresponds to alignment information for a single read. Each alignment line has 11 mandatory fields for essential mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is displayed below with the different fields highlighted.
+    
+    
 
 
 We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`):
@@ -203,10 +214,13 @@ We will convert the SAM file to BAM format using the samtools program with the v
     done
     ```
     ```bash
-    $ ls
-    SRR014335-chr1.bam  SRR014336-chr1.bam  SRR014337-chr1.bam  SRR014339-chr1.bam  SRR014340-chr1.bam  SRR014341-chr1.bam
-    SRR014335-chr1.sam  SRR014336-chr1.sam  SRR014337-chr1.sam  SRR014339-chr1.sam  SRR014340-chr1.sam  SRR014341-chr1.sam
+    ls
     ```
+    ??? success "Output"
+        ```bash
+        SRR014335-chr1.bam  SRR014336-chr1.bam  SRR014337-chr1.bam  SRR014339-chr1.bam  SRR014340-chr1.bam  SRR014341-chr1.bam
+        SRR014335-chr1.sam  SRR014336-chr1.sam  SRR014337-chr1.sam  SRR014339-chr1.sam  SRR014340-chr1.sam  SRR014341-chr1.sam
+        ```
     
 
 Next we sort the BAM file using the sort command from samtools. `-o` tells the command where to write the output.
