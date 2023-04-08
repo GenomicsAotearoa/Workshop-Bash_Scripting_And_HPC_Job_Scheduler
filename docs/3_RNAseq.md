@@ -1,9 +1,5 @@
 # RNA-seq Mapping And Count Data Workflow
 
-<center>
-![imge](./nesi_images/mapping.png){width="300"}
-</center>
-
 
 This material is extracted from the [RNA-seq workshop](https://github.com/GenomicsAotearoa/RNA-seq-workshop) Lesson
 
@@ -12,6 +8,12 @@ This material is extracted from the [RNA-seq workshop](https://github.com/Genomi
     - Understand and perform the steps involved in RNA-seq mapping and read count.
     - Use command line tools to run the pipeline.
 
+<center>
+![imge](./nesi_images/mapping.png){width="300"}
+</center>
+
+
+## RNA-Seq Data Analysis Workflow
 <center>
 ![image](./nesi_images/rnaseq_workflowdiagram.png)
 </center>
