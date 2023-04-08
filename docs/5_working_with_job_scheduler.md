@@ -44,21 +44,22 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
 ![image](./nesi_images/slurm_flow.png){width="1000"}
 </center>
 
+- - -
+!!! info "Commonly used Slurm commands"
+
+    | Command        | Function                                                                                             |
+    |:---------------|:------------------------------------------------------------------------------------------------------|
+    | `sbatch`       | Submit non-interactive (batch) jobs to the scheduler                                                 |
+    | `squeue`       | List jobs in the queue                                                                               |
+    | `scancel`      | Cancel a job                                                                                         |
+    | `sacct`        | Display accounting data for all jobs and job steps in the Slurm job accounting log or Slurm database|
+    | `srun`         | Slurm directive for parallel computing                                                                      |
+    | `sinfo`        | Query the current state of nodes                                                                     |
+    | `salloc`       | Submit interactive jobs to the scheduler                                                             |
+
 - - - 
 
-| Command        | Function                                                                                             |
-|:---------------|:------------------------------------------------------------------------------------------------------|
-| `sbatch`       | Submit non-interactive (batch) jobs to the scheduler                                                 |
-| `squeue`       | List jobs in the queue                                                                               |
-| `scancel`      | Cancel a job                                                                                         |
-| `sacct`        | Display accounting data for all jobs and job steps in the Slurm job accounting log or Slurm database|
-| `srun`         | Slurm directive for parallel computing                                                                      |
-| `sinfo`        | Query the current state of nodes                                                                     |
-| `salloc`       | Submit interactive jobs to the scheduler                                                             |
-
-- - - 
-
-??? question "Exercise 5.1"
+??? question "Exercise 5.1 (Optional)" 
 
     * summary of current states of compute nodes known to the scheduler
     ```bash
@@ -97,17 +98,19 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
 -  - - 
 
-| header          | use                                 | description                                          |
-|:--------------- |:------------------------------------|:-----------------------------------------------------|
-|--job-name 	  | `#SBATCH --job-name=MyJob` 	        |The name that will appear when using squeue or sacct. |
-|--account 	      | `#SBATCH --account=nesi12345` 	    |The account your core hours will be 'charged' to.     |
-|--time 	      | `#SBATCH --time=DD-HH:MM:SS` 	    |Job max walltime.                                     |
-|--mem 	          | `#SBATCH --mem=512MB` 	            |Memory required per node.                             |
-|--cpus-per-task  | `#SBATCH --cpus-per-task=10` 	    |Will request 10 logical CPUs per task.                |
-|--output 	      | `#SBATCH --output=%j_output.out` 	|Path and name of standard output file. `%j` will be replaced by the job ID.         |
-|--mail-user 	  | `#SBATCH --mail-user=me23@gmail.com`|address to send mail notifications.                   |
-|--mail-type 	  | `#SBATCH --mail-type=ALL` 	        |Will send a mail notification at BEGIN END FAIL.      |
-|                 | `#SBATCH --mail-type=TIME_LIMIT_80` |Will send message at 80% walltime.                    |
+??? info "Slurm variables"
+
+    | header          | use                                 | description                                          |
+    |:--------------- |:------------------------------------|:-----------------------------------------------------|
+    |--job-name 	  | `#SBATCH --job-name=MyJob` 	        |The name that will appear when using squeue or sacct. |
+    |--account 	      | `#SBATCH --account=nesi12345` 	    |The account your core hours will be 'charged' to.     |
+    |--time 	      | `#SBATCH --time=DD-HH:MM:SS` 	    |Job max walltime.                                     |
+    |--mem 	          | `#SBATCH --mem=512MB` 	            |Memory required per node.                             |
+    |--cpus-per-task  | `#SBATCH --cpus-per-task=10` 	    |Will request 10 logical CPUs per task.                |
+    |--output 	      | `#SBATCH --output=%j_output.out` 	|Path and name of standard output file. `%j` will be replaced by the job ID.         |
+    |--mail-user 	  | `#SBATCH --mail-user=me23@gmail.com`|address to send mail notifications.                   |
+    |--mail-type 	  | `#SBATCH --mail-type=ALL` 	        |Will send a mail notification at BEGIN END FAIL.      |
+    |                 | `#SBATCH --mail-type=TIME_LIMIT_80` |Will send message at 80% walltime.                    |
 
 - - -
 
