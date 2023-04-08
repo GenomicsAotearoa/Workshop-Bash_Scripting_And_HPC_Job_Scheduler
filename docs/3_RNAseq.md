@@ -138,7 +138,7 @@ let's use a for loop to process our samples:
     cd trimmed_reads
     ```
     ```bash
-    $ ls
+    ls
     ```
     - *SRR014335-chr1.fastq  SRR014336-chr1.fastq  SRR014337-chr1.fastq  SRR014339-chr1.fastq  SRR014340-chr1.fastq  SRR014341-chr1.fastq*
     ```bash
@@ -234,24 +234,26 @@ We can use samtools to learn more about the bam file as well.
 
 !!! terminal "script"
 
-    ```bash
-    
-    $ samtools flagstat SRR014335-chr1_sorted.bam 
-
-    156984 + 0 in total (QC-passed reads + QC-failed reads)
-    31894 + 0 secondary
-    0 + 0 supplementary
-    0 + 0 duplicates
-    136447 + 0 mapped (86.92% : N/A)
-    0 + 0 paired in sequencing
-    0 + 0 read1
-    0 + 0 read2
-    0 + 0 properly paired (N/A : N/A)
-    0 + 0 with itself and mate mapped
-    0 + 0 singletons (N/A : N/A)
-    0 + 0 with mate mapped to a different chr
-    0 + 0 with mate mapped to a different chr (mapQ>=5)
+    ```bash    
+    samtools flagstat SRR014335-chr1_sorted.bam 
     ```
+    ??? success "Output"
+        ```
+        156984 + 0 in total (QC-passed reads + QC-failed reads)
+        31894 + 0 secondary
+        0 + 0 supplementary
+        0 + 0 duplicates
+        136447 + 0 mapped (86.92% : N/A)
+        0 + 0 paired in sequencing
+        0 + 0 read1
+        0 + 0 read2
+        0 + 0 properly paired (N/A : N/A)
+        0 + 0 with itself and mate mapped
+        0 + 0 singletons (N/A : N/A)
+        0 + 0 with mate mapped to a different chr
+        0 + 0 with mate mapped to a different chr (mapQ>=5)
+        ```
+
 - - - 
 
 ## Read Summarization
@@ -272,21 +274,26 @@ You can process all the samples at once:
 !!! terminal "script"
 
     ```bash
-    $ cd ~/scripting_workshop/rna_seq
-    
-    $ module load Subread/2.0.0-GCC-9.2.0
-    
-    $ pwd
-    /home/[Your_Username]/scripting_workshop/rna_seq
-    
-    $ mkdir Counts
-    
-    $ cd Counts
-    
-    $ featureCounts -a ../ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o ./yeast_counts.txt -T 2 -t exon -g gene_id ../Mapping/*sorted.bam
+    cd ~/scripting_workshop/rna_seq
+    ```
+    ```bash
+    module load Subread/2.0.0-GCC-9.2.0
+    ```
+    ```bash
+    pwd
+    ```
+    **Output**=  */home/[Your_Username]/scripting_workshop/rna_seq*
+    ```bash
+    mkdir Counts
+    ```
+    ```
+    cd Counts
+    ```
+    ```bash
+    featureCounts -a ../ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o ./yeast_counts.txt -T 2 -t exon -g gene_id ../Mapping/*sorted.bam
     ```
 
-!!! abstract "**Arguments:**"
+!!! bell "**Arguments:**"
 
     * **-a** Name of an annotation file. GTF/GFF format by default
     * **-o** Name of output file including read counts
