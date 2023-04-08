@@ -1,6 +1,6 @@
 # Variant Calling Workflow
 
-This material is extracted from the Genomics Data Carpentry Lesson
+This material is extracted from the [Genomics Data Carpentry Lesson](https://datacarpentry.org/genomics-workshop/)
 
 !!! abstract "Objectives and overall workflow"
 
