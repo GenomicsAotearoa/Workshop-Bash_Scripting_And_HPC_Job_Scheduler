@@ -15,7 +15,11 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 !!! check-to-slot "Prerequisites"
 
     - Familiarity with terminal and basic linux commands
-    - Intermediate level knowledge on Molecular Biology and Genetics 
+    - Intermediate level knowledge on Molecular Biology and Genetics
+
+    **Recommended but not required**
+
+    -  Attend [Genomics Data Carpentry](https://datacarpentry.org/genomics-workshop/) and [RNA-Seq Data Analysis](https://genomicsaotearoa.github.io/RNA-seq-workshop/) workshops
 
 
 !!! square-xmark "Some of the things we won't cover in this workshop"
