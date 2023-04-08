@@ -36,13 +36,14 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 !!! rectangle-list "Content"
     | **Lesson**                                        | **Overview** | 
     |:---------------------------------------------------|:-------------|
-    |[1. Designing a Variant Calling Workflow](./1_DesigningVariantC.md){ .md-button .md-button--primary }||
-    |[2. Automating a Variant Calling Workflow](./2_AutomaticVariantC.md){ .md-button .md-button--primary }||
-    |[3. RNA-seq Mapping And Count Data Workflow](./3_RNAseq.md){ .md-button .md-button--primary }||
-    |[4. Introduction to HPC](./4_IntroductiontoHPC.md){ .md-button .md-button--primary }|Introduction to High Performance Computing|
-    |[5. Working with Job Scheduler](./5_working_with_job_scheduler.md){ .md-button .md-button--primary }|Introduction to HPC Job Schedulers, Slurm Scheduler & life cycle of a Slurm job, Assessing resource utilisation and profiling|
+    |[1. Designing a Variant Calling Workflow  :fontawesome-solid-dna:](./1_DesigningVariantC.md){ .md-button .md-button--primary }||
+    |[2. Automating a Variant Calling Workflow  :fontawesome-solid-wand-magic-sparkles:](./2_AutomaticVariantC.md){ .md-button .md-button--primary }||
+    |[3. RNA-seq Mapping And Count Data Workflow  :fontawesome-solid-map-location:](./3_RNAseq.md){ .md-button .md-button--primary }||
+    |[4. Introduction to HPC  :fontawesome-solid-server:](./4_IntroductiontoHPC.md){ .md-button .md-button--primary }|Introduction to High Performance Computing|
+    |[5. Working with Job Scheduler  :fontawesome-solid-calendar-days:](./5_working_with_job_scheduler.md){ .md-button .md-button--primary }|Introduction to HPC Job Schedulers, Slurm Scheduler & life cycle of a Slurm job, Assessing resource utilisation and profiling|
     |[6. Supplementary #1](./6_supplementary_1.md){ .md-button .md-button--primary }||
     |[7. Supplementary #2](./7_supplementary_2.md){ .md-button .md-button--primary }||
     |[8. Supplementary #3](./8_supplementary_3.md){ .md-button .md-button--primary }||
 
 
+<i class="fa-solid fa-dna"></i>
