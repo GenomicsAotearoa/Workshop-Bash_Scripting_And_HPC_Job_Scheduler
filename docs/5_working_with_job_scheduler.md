@@ -299,6 +299,8 @@ Now review the content of `.err` and `.out` files in */slurmout* directory
     *  Now it's your turn to compile a slurm submission script for the RNA-seq workflow. 😊
 
 
+!!! stethoscope "steth"
+    test
 ---
 
 
