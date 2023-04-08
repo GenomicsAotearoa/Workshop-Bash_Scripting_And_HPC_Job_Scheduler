@@ -46,7 +46,6 @@ theme:
     - navigation.sections
     - navigation.expand
     - navigation.top
-
     
 
   # Necessary for search to work properly
@@ -99,6 +98,7 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
   - pymdownx.snippets
+  - pymdownx.pathconverter
 
 extra_javascript:
   - javascripts/mathjax.js

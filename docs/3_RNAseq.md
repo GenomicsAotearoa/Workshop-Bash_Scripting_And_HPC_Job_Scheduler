@@ -58,28 +58,35 @@ To be able to map (align) sequencing reads on the genome, the genome needs to be
 !!! terminal "script"
 
     ```bash
-    $ cd ~/scripting_workshop/rna_seq/ref_genome
-    
-    #to list what is in your directory:
-    $ ls ~/scripting_workshop/rna_seq/ref_genome
-    Saccharomyces_cerevisiae.R64-1-1.99.gtf  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
-    
-    $ module load HISAT2/2.2.0-gimkl-2020a
-    
-    # index file:
-    $ hisat2-build -p 4 -f Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
-    
-    #list what is in the directory:
-    $ ls ~/scripting_workshop/rna_seq/ref_genome
-    Saccharomyces_cerevisiae.R64-1-1.99.gtf              Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.4.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.8.ht2
-    Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.5.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
-    Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.6.ht2
-    Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.7.ht2   
+    cd ~/scripting_workshop/rna_seq/ref_genome
     ```
+    ```bash
+    #to list what is in your directory:
+    ls ~/scripting_workshop/rna_seq/ref_genome
+    ```
+     - *Saccharomyces_cerevisiae.R64-1-1.99.gtf  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa*
+    ```bash
+    module load HISAT2/2.2.0-gimkl-2020a
+    ```
+    ```bash
+    # index file:
+    hisat2-build -p 4 -f Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+    ```
+    ```bash
+    #list what is in the directory:
+    ls ~/scripting_workshop/rna_seq/ref_genome
+    ```
+    ??? success "Output"
+        ```bash
+        Saccharomyces_cerevisiae.R64-1-1.99.gtf              Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.4.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.8.ht2
+        Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.5.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
+        Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.6.ht2
+        Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.7.ht2   
+        ```
 
->**Arguments:**
->  * **-p** number of threads
->  * **-f** fasta file
+!!! bell "Arguments"
+    * **-p** number of threads
+    * **-f** fasta file
 
 How many files were created during the indexing process?
 
@@ -87,51 +94,53 @@ How many files were created during the indexing process?
 
 Now that the genome is prepared. Sequencing reads can be aligned.
 
-Information required:
+!!! rectangle-list "Information required"
 
-  * Where the sequence information is stored (e.g. fastq files ...) ?
-  * What kind of sequencing: Single End or Paired end ?
-  * Where are stored the indexes and the genome? 
-  * Where will the mapping files be stored?
+    * Where the sequence information is stored (e.g. fastq files ...) ?
+    * What kind of sequencing: Single End or Paired end ?
+    * Where are stored the indexes and the genome? 
+    * Where will the mapping files be stored?
   
   
   * Now, lets move one folder up (into the rna_seq folder):
   
-```bash
-  
-$ cd ..
-  
-$ ls
-ref_genome  trimmed_reads
-  
-```
+!!! terminal "script"  
+
+    ```bash  
+    cd ..
+    ```
+    ```bash  
+    ls    
+    ```
 
 Let's map one of our sample to the reference genome
 
 !!! terminal "script"
 
-    ```bash
-    
-    $ pwd
-    /home/[Your_Username]/scripting_workshop/rna_seq/
-    
-    
-    $ mkdir Mapping
-    
-    $ ls
-    ref_genome  Mapping  trimmed_reads
+    ```bash    
+    pwd
     ```
+        - */home/[Your_Username]/scripting_workshop/rna_seq/*
+
+    ```bash
+    mkdir Mapping
+    ```
+    ```bash
+    ls
+    ```
+        - *ref_genome  Mapping  trimmed_reads*
 
 let's use a for loop to process our samples:
 
 !!! terminal "script"
 
     ```bash
-    $ cd trimmed_reads
-    
-    $ ls
-    SRR014335-chr1.fastq  SRR014336-chr1.fastq  SRR014337-chr1.fastq  SRR014339-chr1.fastq  SRR014340-chr1.fastq  SRR014341-chr1.fastq
+    cd trimmed_reads
     ```
+    ```bash
+    $ ls
+    ```
+    - *SRR014335-chr1.fastq  SRR014336-chr1.fastq  SRR014337-chr1.fastq  SRR014339-chr1.fastq  SRR014340-chr1.fastq  SRR014341-chr1.fastq*
     ```bash
     for filename in *
      do
@@ -141,10 +150,11 @@ let's use a for loop to process our samples:
     ```
 
 
->**Arguments:**
->  * **-x** The basename of the index for the reference genome. 
->  * **-U** Comma-separated list of files containing unpaired reads to be aligned
->  * **-S** File to write SAM alignments to. By default, alignments are written to the “standard out” or “stdout” filehandle  
+!!! bell "Arguments"
+
+    * **-x** The basename of the index for the reference genome. 
+    * **-U** Comma-separated list of files containing unpaired reads to be aligned
+    * **-S** File to write SAM alignments to. By default, alignments are written to the “standard out” or “stdout” filehandle  
 
 Now we can explore our SAM files.
 
