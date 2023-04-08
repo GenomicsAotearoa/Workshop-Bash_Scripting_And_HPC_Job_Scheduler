@@ -43,7 +43,7 @@ A quick note on `sinfo`(Query the current state of nodes) which is not a command
 ## Life cycle of a slurm job
 
 <center>
-![image](./nesi_images/slurm_flow.png){width="1000"}
+![image](./nesi_images/batch_system_flow.png){width="1000"}
 </center>
 
 - - -
@@ -90,7 +90,7 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
 
 <center>
-![image](./nesi_images/anatomyofslurm_bashscript.png){width="700"}
+![image](./nesi_images/anatomy_of_a_slurm_script.png){width="700"}
 </center>
 
 
@@ -116,7 +116,7 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
 <br>
 
-!!! bell "Assigning values to Slurm variables"
+??? bell "Assigning values to Slurm variables"
     <center>![image](./nesi_images/sbtach_def_1.png)</center>
 
     <center>![image](./nesi_images/sbatch_def_2.png)</center>
