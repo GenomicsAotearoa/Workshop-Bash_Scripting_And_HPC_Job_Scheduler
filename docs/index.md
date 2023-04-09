@@ -36,6 +36,7 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 !!! rectangle-list "Content"
     | **Lesson**                                        | **Overview** | 
     |:---------------------------------------------------|:-------------|
+    |[Background :fontawesome-solid-eye:](./0_Background.md){ .md-button .md-button--primary }||
     |[1. Designing a Variant Calling Workflow  :fontawesome-solid-dna:](./1_DesigningVariantC.md){ .md-button .md-button--primary }||
     |[2. Automating a Variant Calling Workflow  :fontawesome-solid-wand-magic-sparkles:](./2_AutomaticVariantC.md){ .md-button .md-button--primary }||
     |[3. RNA-seq Mapping And Count Data Workflow  :fontawesome-solid-map-location:](./3_RNAseq.md){ .md-button .md-button--primary }||
