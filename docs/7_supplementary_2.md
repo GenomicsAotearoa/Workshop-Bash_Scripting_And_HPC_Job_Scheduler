@@ -34,7 +34,6 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
     * Let's create slurm profile graphs
 
         - collate the data into an HDF5 file using the command. Replace **JOBID** with the corresponding number 
-
         ```bash
         sh5util -j JOBID
         ```
