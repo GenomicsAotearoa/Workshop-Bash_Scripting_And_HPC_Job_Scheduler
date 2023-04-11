@@ -87,6 +87,20 @@ Since we are working on the NeSI HPC, we need to search and load the package bef
     module purge
     module load BWA/0.7.17-GCC-9.2.0
     ```
+    !!! tip "All-In-One"
+        We will be needing few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once,  run the following command
+        ```bash
+        source ~/scripting_workshop/modload.sh
+        ```
+        ??? success "Output"
+            ```bash
+            The following modules were not unloaded:
+            (Use "module --force purge" to unload all):
+    
+            1) XALT/minimal   2) slurm   3) NeSI
+            Loaded modules BWA, SAMtools, BCFtools,HISAT2,Subread
+            ```
+            * Please **do not** run `module --force purge` under any circumstances
 
 indexing the genome
 !!! terminal "script"
