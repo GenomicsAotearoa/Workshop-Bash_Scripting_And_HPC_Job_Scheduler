@@ -32,6 +32,10 @@ First, it is always good to verify where we are:
     ```
     **Output** -  `/home/$USER`
 
+    !!! quote ""
+        - You should see your own **username** in place of `$USER`
+        - FYI: `$USER` is not an arbitrary string as it is a real environment variable. Run `echo $USER` and see what happens 
+
 Checking to make sure we have the directory and files for the workshop.
 
 !!! terminal "script"
