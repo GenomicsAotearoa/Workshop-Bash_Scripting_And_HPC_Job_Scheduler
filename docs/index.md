@@ -14,15 +14,15 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 
 !!! check-to-slot "Prerequisites"
 
-    - Familiarity with terminal and basic linux commands
-    - Some knowledge on shell environment variables and `for` loops
-    - Ability to use a terminal based text editor such as `nano` 
-        - This is not much of an issue as we are using JupyterHub which has a more friendlier text editor if needed. 
-    - Intermediate level knowledge on Molecular Biology and Genetics
+    - [x] Familiarity with terminal and basic linux commands
+    - [x] Some knowledge on shell environment variables and `for` loops
+    - [x] Ability to use a terminal based text editor such as `nano` 
+        * [ ] This is not much of an issue as we are using JupyterHub which has a more friendlier text editor.  
+    - [x] Intermediate level knowledge on Molecular Biology and Genetics
 
     **Recommended but not required**
 
-    -  Attend [Genomics Data Carpentry](https://datacarpentry.org/genomics-workshop/) and [RNA-Seq Data Analysis](https://genomicsaotearoa.github.io/RNA-seq-workshop/) workshops
+    - [ ] Attend [Genomics Data Carpentry](https://datacarpentry.org/genomics-workshop/) and [RNA-Seq Data Analysis](https://genomicsaotearoa.github.io/RNA-seq-workshop/) workshops
 
 <br>
 
