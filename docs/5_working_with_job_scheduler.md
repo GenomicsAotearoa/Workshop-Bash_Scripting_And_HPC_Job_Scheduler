@@ -163,6 +163,7 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     #SBATCH --cpus-per-task 1
     #SBATCH --mem           512
     #SBATCH --output        slurmjob.%j.out
+    #SBATCH --error         slurmjob.%j.err
 
     sleep 200
 
@@ -185,16 +186,16 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     ```
 - - - 
  
+!!! magnifying-glass "STDOUT/STDERR from jobs"
+
+    * STDOUT - your process writes conventional output to this file handle
+    * STDERR - your process writes diagnostic output to this file handle.
+    
+    **STDOUT** and **STDERR** from jobs are, by default, written to a file called `slurm-JOBID.out` and `slurm-JOBID.err` in the working directory for the job (unless the job script changes this, this will be the directory where you submitted the job). So for a job with ID 12345 STDOUT and STDERR will be `slurm-12345.out` and `slurm-12345.err`
+
+    - When things go wrong, first step of **debugging** (STORY TIME !) starts with a referral to these files. 
 
 
-- - - 
-
-
-
-
-
-
-When things go wrong, first step of **debugging** (STORY TIME !) starts with a referral to these files. 
 
 ## Assessing resource utilisation (cpu, memory, time)
 
@@ -256,13 +257,6 @@ Understanding the resources you have available and how to use them most efficien
     Mem Efficiency: 1.33%  13.62 MB of 1.00 GB
     ```
     * Now review the content of `.err` and `.out` files in */slurmout* directory
-
-    !!! magnifying-glass "STDOUT/STDERR from jobs"
-
-        * STDOUT - your process writes conventional output to this file handle
-        * STDERR - your process writes diagnostic output to this file handle.
-        
-        **STDOUT** and **STDERR** from jobs are, by default, written to a file called `slurm-JOBID.out` and `slurm-JOBID.err` in the working directory for the job (unless the job script changes this, this will be the directory where you submitted the job). So for a job with ID 12345 STDOUT and STDERR will be `slurm-12345.out` and `slurm-12345.err`.
 
  
 
