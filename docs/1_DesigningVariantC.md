@@ -30,7 +30,7 @@ First, it is always good to verify where we are:
     ```bash
     pwd
     ```
-    **Output** -  `/home/yourusername`
+    **Output** -  `/home/$USER`
 
 Checking to make sure we have the directory and files for the workshop.
 
