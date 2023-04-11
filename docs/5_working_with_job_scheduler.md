@@ -142,6 +142,11 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     ```bash
     mkdir ex_5.2 && cd ex_5.2
     ```
+    !!! quote ""
+        The meaning of `&&` and `&` are intrinsically different.
+      
+        * **What is `&&` in Bash?** In Bash—and many other programming languages—`&&` means “AND”. And in command execution context like this, it means items to the left as well as right of && should be run in sequence in this case.
+        * **What is & in Bash?** And a single `&`means that the preceding commands—to the immediate left of the &—should simply be run in the background.
 
     * use a text editor of choice to create a file named firstslurm.sl - we will use nano here
     ```bash
@@ -180,12 +185,7 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     ```
 - - - 
  
-!!! note ""
 
-    The meaning of `&&` and `&` are intrinsically different.
-  
-    * **What is `&&` in Bash?** In Bash—and many other programming languages—`&&` means “AND”. And in command execution context like this, it means items to the left as well as right of && should be run in sequence in this case.
-    * **What is & in Bash?** And a single `&`means that the preceding commands—to the immediate left of the &—should simply be run in the background.
 
 - - - 
 
