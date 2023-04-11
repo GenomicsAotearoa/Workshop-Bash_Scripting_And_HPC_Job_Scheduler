@@ -36,14 +36,12 @@ There are a number of different environment module implementations commonly used
         module load MY_APPLICATION
         ```
         
-    *  Swap a currently loaded module for a different one
-    
+    *  Swap a currently loaded module for a different one 
        ```bash
        module switch CURRENT_MODULE DESIRED_MODULE
        ```
     
     * Unload all current modules
-    
        ```bash
        module purge
        ```
