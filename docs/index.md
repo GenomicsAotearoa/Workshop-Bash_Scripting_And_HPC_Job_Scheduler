@@ -15,12 +15,14 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 !!! check-to-slot "Prerequisites"
 
     - Familiarity with terminal and basic linux commands
+    - Some knowledge on shell environment variables and `for` loops
     - Intermediate level knowledge on Molecular Biology and Genetics
 
     **Recommended but not required**
 
     -  Attend [Genomics Data Carpentry](https://datacarpentry.org/genomics-workshop/) and [RNA-Seq Data Analysis](https://genomicsaotearoa.github.io/RNA-seq-workshop/) workshops
 
+<br>
 
 !!! square-xmark "Some of the things we won't cover in this workshop"
 
@@ -29,9 +31,13 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
          - Variant Calling
          - RNA sequencing and data analysis
 
+<br>
+
 !!! screwdriver-wrench "Setup"
 
     Workshop material is designed to run on NeSI Mahuika cluster via Jupyter. Instructions on how to Set/Reset Authentication factors to access NeSI Services and Jupyter Login instructions [can be found here](https://dinindusenanayake.github.io/ganesi_authesetup-login/)
+
+<br>
 
 !!! rectangle-list "Content"
     | **Lesson**                                        | **Overview** | 
