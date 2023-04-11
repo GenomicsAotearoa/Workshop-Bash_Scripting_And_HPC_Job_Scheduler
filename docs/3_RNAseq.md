@@ -136,7 +136,7 @@ Let's map one of our sample to the reference genome
     ```bash    
     pwd
     ```
-        - */home/[Your_Username]/scripting_workshop/rna_seq/*
+    **Output**    - `/home/$USER/scripting_workshop/rna_seq/`
 
     ```bash
     mkdir Mapping
@@ -144,7 +144,7 @@ Let's map one of our sample to the reference genome
     ```bash
     ls
     ```
-        - *ref_genome  Mapping  trimmed_reads*
+    **Output**   - `ref_genome  Mapping  trimmed_reads`
 
 let's use a for loop to process our samples:
 
@@ -156,7 +156,7 @@ let's use a for loop to process our samples:
     ```bash
     ls
     ```
-    - *SRR014335-chr1.fastq  SRR014336-chr1.fastq  SRR014337-chr1.fastq  SRR014339-chr1.fastq  SRR014340-chr1.fastq  SRR014341-chr1.fastq*
+    **Output** - `SRR014335-chr1.fastq  SRR014336-chr1.fastq  SRR014337-chr1.fastq  SRR014339-chr1.fastq  SRR014340-chr1.fastq  SRR014341-chr1.fastq`
     ```bash
     for filename in *
      do
