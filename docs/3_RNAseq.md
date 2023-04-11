@@ -80,7 +80,7 @@ To be able to map (align) sequencing reads on the genome, the genome needs to be
     #to list what is in your directory:
     ls ~/scripting_workshop/rna_seq/ref_genome
     ```
-     - *Saccharomyces_cerevisiae.R64-1-1.99.gtf  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa*
+    **Output** - `Saccharomyces_cerevisiae.R64-1-1.99.gtf  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa`
     ```bash
     module load HISAT2/2.2.0-gimkl-2020a
     ```
