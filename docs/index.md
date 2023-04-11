@@ -36,10 +36,10 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 !!! rectangle-list "Content"
     | **Lesson**                                        | **Overview** | 
     |:---------------------------------------------------|:-------------|
-    |[Background :fontawesome-solid-eye:](./0_Background.md){ .md-button .md-button--primary }||
-    |[1. Designing a Variant Calling Workflow  :fontawesome-solid-dna:](./1_DesigningVariantC.md){ .md-button .md-button--primary }||
-    |[2. Automating a Variant Calling Workflow  :fontawesome-solid-wand-magic-sparkles:](./2_AutomaticVariantC.md){ .md-button .md-button--primary }||
-    |[3. RNA-seq Mapping And Count Data Workflow  :fontawesome-solid-map-location:](./3_RNAseq.md){ .md-button .md-button--primary }||
+    |[Background :fontawesome-solid-eye:](./0_Background.md){ .md-button .md-button--primary }|Objective of this workshop|
+    |[1. Designing a Variant Calling Workflow  :fontawesome-solid-dna:](./1_DesigningVariantC.md){ .md-button .md-button--primary }|Develop and test the steps involved in calling variants|
+    |[2. Automating a Variant Calling Workflow  :fontawesome-solid-wand-magic-sparkles:](./2_AutomaticVariantC.md){ .md-button .md-button--primary }|Compile a script based on the above steps|
+    |[3. RNA-Seq Mapping And Count Data Workflow  :fontawesome-solid-map-location:](./3_RNAseq.md){ .md-button .md-button--primary }|Develop, test & compile a script for mapping reads and counting transcripts in a RNA-Seq data analysis pipeline|
     |[4. Introduction to HPC  :fontawesome-solid-server:](./4_IntroductiontoHPC.md){ .md-button .md-button--primary }|Introduction to High Performance Computing|
     |[5. Working with Job Scheduler  :fontawesome-solid-calendar-days:](./5_working_with_job_scheduler.md){ .md-button .md-button--primary }|Introduction to HPC Job Schedulers, Slurm Scheduler & life cycle of a Slurm job, Assessing resource utilisation and profiling|
     |[6. Supplementary #1](./6_supplementary_1.md){ .md-button .md-button--primary }||
