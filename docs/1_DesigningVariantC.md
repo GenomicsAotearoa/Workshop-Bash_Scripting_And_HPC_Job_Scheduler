@@ -62,6 +62,10 @@ First we need to create directories for the results that will be generated as pa
     ```bash
     mkdir -p results/sam results/bam results/bcf results/vcf
     ```
+    - Another quick and easy way to create multiple directories reside within the same parent directory is to wrap them with `{}` (comma separated). .i.e. 
+        ```bash
+        mkdir -p results/{sam,bam,bcf,vcf}
+        ```
 ### Index the reference genome
 Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 
