@@ -305,7 +305,7 @@ You can process all the samples at once:
     ```bash
     pwd
     ```
-    **Output**=  */home/[Your_Username]/scripting_workshop/rna_seq*
+    **Output**   `/home/$USER/scripting_workshop/rna_seq`
     ```bash
     mkdir Counts
     ```
