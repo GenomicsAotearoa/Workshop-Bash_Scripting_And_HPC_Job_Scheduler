@@ -229,7 +229,7 @@ Understanding the resources you have available and how to use them most efficien
 
     * Run `ls` command and you should see two files (one .R and one sl) and one directory named slurmout
     ```bash
-     ls -F
+    ls -F
     ```
       ```bash
       bowtie-test.sl*  input_data/  slurmout/
