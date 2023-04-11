@@ -23,7 +23,7 @@ Let's start with creating a new directory as our script working space and copy a
     ```bash
     pwd
     ```
-    **Output** - `/home/[Your_Username]/scripting_workshop`
+    **Output** - `/home/$USER/scripting_workshop`
     ```bash
     mkdir script_workspace
     ```
