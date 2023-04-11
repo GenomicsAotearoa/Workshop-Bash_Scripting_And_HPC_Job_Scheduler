@@ -16,6 +16,8 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 
     - Familiarity with terminal and basic linux commands
     - Some knowledge on shell environment variables and `for` loops
+    - Ability to use a terminal based text editor such as `nano` 
+        - This is not much of an issue as we are using JupyterHub which has a more friendlier text editor if needed. 
     - Intermediate level knowledge on Molecular Biology and Genetics
 
     **Recommended but not required**
@@ -30,6 +32,7 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
          - Genetics, Genomics and DNA Sequencing 
          - Variant Calling (covers in [Genomics Data Carpentry Workshop](https://datacarpentry.org/genomics-workshop/))
          - RNA sequencing and data analysis ( covers in [RNA-Seq Data Analysis Workshop](https://genomicsaotearoa.github.io/RNA-seq-workshop/))
+     
 
 <br>
 
