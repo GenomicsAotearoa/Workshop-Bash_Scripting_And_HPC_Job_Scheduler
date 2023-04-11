@@ -67,8 +67,10 @@ Our first step is to index the reference genome for use by BWA. Indexing allows 
 
 Since we are working on the NeSI HPC, we need to search and load the package before we start using it.
 
-!!! info "Software as modules"
-    - 
+!!! key "Software as modules"
+    - Similar to other HPCs/SuperComputers, NeSI Clusters provide software as modules ( this is not the only way to deploy a software as it can be done via other means such as conda, containers, etc. )
+    - A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.
+    - Refer to [supplementary 1 - Accessing software via modules](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/6_supplementary_1/) for more information 
 
 !!! terminal "script"
 
