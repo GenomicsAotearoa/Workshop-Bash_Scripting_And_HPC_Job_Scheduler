@@ -264,7 +264,7 @@
   }
   .md-typeset .admonition.check-to-slot,
   .md-typeset details.check-to-slot {
-    border-color: rgb(47,79,79);
+    border-color: rgb(30, 182, 182);
   }
   .md-typeset .check-to-slot > .admonition-title,
   .md-typeset .check-to-slot > summary {
