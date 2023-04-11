@@ -202,7 +202,8 @@ Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
     ```
 
 ### Explore the VCF format:
-At this stage you can use various tools to analyse the vcf file. Exploring the vcf is beyond the scope of this workshop.
+- At this stage you can use various tools to analyse the vcf file. 
+- Exploring the vcf is beyond the scope of this workshop. Please refer to [official documentation on VCF provided by Broad Institute](]https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format)
 
 Now we are ready for the [Next Lesson](2_AutomaticVariantC.md) to put all these commands in a script.
 
