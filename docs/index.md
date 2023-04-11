@@ -28,8 +28,8 @@ This as an **Introductory** level workshop on *Bash Scripting and HPC Job Schedu
 
      - Domain specific concepts in
          - Genetics, Genomics and DNA Sequencing 
-         - Variant Calling
-         - RNA sequencing and data analysis
+         - Variant Calling (covers in [Genomics Data Carpentry Workshop](https://datacarpentry.org/genomics-workshop/))
+         - RNA sequencing and data analysis ( covers in [RNA-Seq Data Analysis Workshop](https://genomicsaotearoa.github.io/RNA-seq-workshop/))
 
 <br>
 
