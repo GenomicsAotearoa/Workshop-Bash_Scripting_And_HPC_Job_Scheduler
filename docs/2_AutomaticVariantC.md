@@ -23,7 +23,7 @@ Let's start with creating a new directory as our script working space and copy a
     ```bash
     pwd
     ```
-    **Output** - */home/[Your_Username]/scripting_workshop*
+    **Output** - `/home/[Your_Username]/scripting_workshop`
     ```bash
     mkdir script_workspace
     ```
@@ -31,6 +31,7 @@ Let's start with creating a new directory as our script working space and copy a
     cd script_workspace
     ```
     ```bash
+    #Don't forget the  . at the end of the line
     cp -r /nesi/project/nesi02659/scripting_workshop/variant_calling/* .
     ```
     ```bash
