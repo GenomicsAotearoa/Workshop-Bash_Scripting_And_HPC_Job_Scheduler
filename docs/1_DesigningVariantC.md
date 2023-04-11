@@ -55,7 +55,7 @@ Checking to make sure we have the directory and files for the workshop.
     cd scripting_workshop/variant_calling
     ```
     ```bash
-     ls
+    ls
     ```
     **Output** -  `ref_genome  trimmed_reads` 
 ## Alignment to a reference genome
@@ -104,7 +104,8 @@ Since we are working on the NeSI HPC, we need to search and load the package bef
             1) XALT/minimal   2) slurm   3) NeSI
             Loaded modules BWA, SAMtools, BCFtools,HISAT2,Subread
             ```
-            * Please **do not** run `module --force purge` under any circumstances
+            
+            - Please **do not** run `module --force purge` under any circumstances
 
 indexing the genome
 !!! terminal "script"
