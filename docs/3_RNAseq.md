@@ -34,7 +34,7 @@ First, it is always good to verify where we are:
     pwd
     ```
     
-    **Output** - */home/[your_username]/scripting_workshop*
+    **Output** - `/home/$USER/scripting_workshop`
 
 
 Checking to make sure we have the directory and files for the workshop.
@@ -45,7 +45,7 @@ Checking to make sure we have the directory and files for the workshop.
     ls
     ```
     
-    **Output** - *rna_seq  variant_calling scheduler*
+    **Output** - `rna_seq  variant_calling scheduler`
 
 !!! tip "Hint"
     If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
@@ -58,7 +58,7 @@ Checking to make sure we have the directory and files for the workshop.
     ```bash
     ls
     ```
-    **Output**  - *ref_genome  trimmed_reads* 
+    **Output**  - `ref_genome  trimmed_reads` 
 
 ## Alignment to a reference genome
 RNA-seq generate gene expression information by quantifying the number of transcripts (per gene) in a sample. This is acompished by counting the number of transcripts that have been sequenced - the more active a gene is, the more transcripts will be in a sample, and the more reads will be generated from that transcript.
