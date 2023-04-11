@@ -159,15 +159,15 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
     #SBATCH --job-name      myfirstslurmjob
     #SBATCH --account       nesi02659
-    #SBATCH --time          00:01:00
+    #SBATCH --time          00:02:00                 #Format is DD-HH:MM:SS
     #SBATCH --cpus-per-task 1
-    #SBATCH --mem           512
+    #SBATCH --mem           512                      #Default unit is Megabytes
     #SBATCH --output        slurmjob.%j.out
     #SBATCH --error         slurmjob.%j.err
 
-    sleep 200
+    sleep 100
 
-    echo "I am a slurm job and I slept for 200 seconds"
+    echo "I am a slurm job and I slept for 100 seconds"
   
     echo "$SLURM_JOB_ID END"
     ```
