@@ -213,7 +213,7 @@ We will convert the SAM file to BAM format using the samtools program with the v
 !!! terminal "script"
 
     ```bash
-    module load SAMtools/1.10-GCC-9.2.0
+    module load SAMtools/1.13-GCC-9.2.0
     ```
     ```bash
     for filename in *.sam
