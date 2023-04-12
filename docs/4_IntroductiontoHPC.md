@@ -55,7 +55,7 @@ NeSI Mahuika cluster (CRAY HPE CS400) system consists of a number of different n
         </center>
 
 !!! jupyter "Jupyter Terminal"
-    * Treat is as a **login** node. .i.e. Just like what we have done so far, use it to develop, test and debug scripts but do not to deploy the production level workflow interactively.   
+    * Jupyter terminal should be treated as a **login** node. .i.e. Just like what we have done so far; use it to develop, test and debug scripts but do not to deploy the production level workflow interactively.   
   
 - - - 
 
