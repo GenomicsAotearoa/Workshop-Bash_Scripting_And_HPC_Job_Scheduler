@@ -329,7 +329,7 @@ You can process all the samples at once:
 
 ---
  
-!!! question "Group Exercise"
+!!! users-line "Group Exercise"
 
     Now, let's work together in our groups to create an RNA-seq mapping and count script.
 
