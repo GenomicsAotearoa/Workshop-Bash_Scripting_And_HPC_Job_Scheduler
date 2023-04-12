@@ -1,4 +1,4 @@
-# RNA-seq Mapping And Count Data Workflow
+# RNA-Seq Mapping And Count Data Workflow
 
 
 This material is extracted from the [RNA-seq workshop](https://github.com/GenomicsAotearoa/RNA-seq-workshop) Lesson
