@@ -2,6 +2,53 @@
 
 ??? success "RNA-Seq Mapping and Count Data"
 
+    ```bash
+    #!/bin/bash -e
+
+    # Jane Doe
+    # 13 April 2023
+    #This script uses relative paths. It has to be executed from rna_seq parent directory OR edit paths accordingly. 
+
+    # Load required modules and setup the environment
+    module purge
+    module load HISAT2/2.2.0-gimkl-2020a
+    module load SAMtools/1.10-GCC-9.2.0
+    module load Subread/2.0.0-GCC-9.2.0
+
+    #Print the current working directory
+    echo "${PWD}"
+
+    #Create results directories. We are moving away from "Mapping" and "Counts"
+    mkdir -p results/{sam,bam,counts}
+
+    # Index genome
+    hisat2-build -p 2 -f ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa \
+                         ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+
+    # Align to indexed genome
+    for filename in trimmed_reads/*.fastq
+    do
+          # Extract base name
+          base=$(basename ${filename} .fastq)
+
+          # Align to the reference genome
+          hisat2 -p 2 -x ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filename \
+          -S results/sam/${base}.sam --summary-file results/sam/${base}.summary.txt
+
+          # Convert SAM to BAM
+          samtools view -S -b results/sam/${base}.sam | samtools sort -o results/bam/${base}_sorted.bam
+
+          # Extract stats for mapping
+          samtools flagstat results/bam/${base}_sorted.bam > results/bam/${base}_mapstat.txt
+    done
+
+    # count how many reads aligned to each genome feature (exon).
+    featureCounts -a ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf \
+                  -o results/counts/yeast_counts.txt -T 2 -t exon -g gene_id \
+                     results/bam/${base}_sorted.bam
+
+    ```
+
 ??? success "Exercise 5.4 😊"	
 
     ```bash
