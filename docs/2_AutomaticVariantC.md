@@ -65,7 +65,7 @@ In the text editor, type the commands
     #!/bin/bash 
     
     # Jane Doe
-    # 05 March 2022
+    # 13 April 2023
     
     # This script runs the variant calling pipeline from mapping to vcf.
     

@@ -335,10 +335,11 @@ You can process all the samples at once:
 
     1. It is safe to compile and submit the script from `/rna_seq` parent directory as it will override the existing results from above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as `--override` (If it is available as a function of the application)
     2. On the other hand, how about we bring more structure to "results/outputs" ? .i.e. Perhaps create a **results** directory for `sam`,`bam` and `counts` sub-directories than creating `/Mapping` (for both sam and bam) and `/Counts`  ? (Similar to what we have done in Variant calling pipeline)
+    3. Also, above testing was done with three separate `for` loops. Is it possible to bring them altogether under one `for` loop ?
 
 ---
 
 !!! pied-piper "🎊"
-    At this stage we have mastered the art of writing scripts, instead of running them on the commandline, let us now run them on HPC.
+    At this stage we have mastered the art of writing scripts, instead of running them on the command line, let us now run them on HPC.
 
 
