@@ -1,7 +1,7 @@
 # S3 : Solutions
 
 
-??? success "Exercise 5.4 😬"	
+??? success "Exercise 5.4 😊"	
 
     ```bash
 
@@ -67,7 +67,7 @@
 
 
 
-??? success "Exercise 5.5 😬"	
+??? success "Exercise 5.5 😊"	
 
 
     ```bash
