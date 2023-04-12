@@ -111,7 +111,7 @@ Running the script
     ```bash
     bash ./variant_calling.sh
     ```
-This should take about 10 minutes.
+This should take about ~ 5 minutes.
 
 !!! tip "Adding executable permissions"
 
