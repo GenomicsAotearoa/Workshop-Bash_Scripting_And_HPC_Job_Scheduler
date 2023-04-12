@@ -47,6 +47,15 @@ Now we are ready to start building the script.
     ```bash
     nano variant_calling.sh
     ```
+    <br>
+    !!! jupyter "Prefer Jupyter *file* over `nano` ?"
+        You are welcome to choose Jupyter interactive *file* option over `nano`. If this is your preferred option, below are the instructions on how to **create** a file
+
+        1. **Make sure** to navigate the left file explorer to correct *path*
+        2. <KBD>Right click</KBD> on the explorer to open the menu and choose `New file`
+        3. Rename the file as `variant_calling.sh`
+
+        ![image](./nesi_images/open_text_file.png)
 
 In the text editor, type the commands
 
