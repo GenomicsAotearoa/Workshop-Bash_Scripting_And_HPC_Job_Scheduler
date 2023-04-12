@@ -48,7 +48,7 @@ Now we are ready to start building the script.
     nano variant_calling.sh
     ```
     <br>
-    !!! jupyter "Prefer Jupyter *file* over `nano` ?"
+    ??? jupyter "Prefer Jupyter *file* over `nano` ?"
         You are welcome to choose Jupyter interactive *file* option over `nano`. If this is your preferred option, below are the instructions on how to **create** a file
 
         1. **Make sure** to navigate the left file explorer to correct *path*
