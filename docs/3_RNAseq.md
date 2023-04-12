@@ -332,11 +332,15 @@ You can process all the samples at once:
 !!! users-line "Group Exercise"
 
     Now, let's work together in our groups to create an RNA-seq mapping and count script.
-
-    1. It is safe to compile and submit the script from `/rna_seq` parent directory as it will override the existing results from above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as `--override` (If it is available as a function of the application)
-    2. On the other hand, how about we bring more structure to "results/outputs" ? .i.e. Perhaps create a **results** directory for `sam`,`bam` and `counts` sub-directories than creating `/Mapping` (for both sam and bam) and `/Counts`  ? (Similar to what we have done in Variant calling pipeline)
-    3. Also, above testing was done with three separate `for` loops. Is it possible to bring them altogether under one `for` loop ?
-
+    
+    * You will be assigned to breakout rooms
+    * Appreciate if one person from the room volunteers to share the screen as the group works together to compile the script 
+    <br> 
+    !!! quote ""
+        1. It is safe to compile and submit the script from `/rna_seq` parent directory as it will override the existing results from above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as `--override` (If it is available as a function of the application)
+        2. On the other hand, how about we bring more structure to "results/outputs" ? .i.e. Perhaps create a **results** directory for `sam`,`bam` and `counts` sub-directories than creating `/Mapping` (for both sam and bam) and `/Counts`  ? (Similar to what we have done in Variant calling pipeline)
+        3. Also, above testing was done with three separate `for` loops. Is it possible to bring them altogether under one `for` loop ?
+    
 ---
 
 !!! pied-piper "🎊"
