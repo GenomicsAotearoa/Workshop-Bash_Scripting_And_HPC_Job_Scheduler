@@ -13,28 +13,24 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
     * Manages the reservation of resources and job execution on these resources 
     * Allows users to “fire and forget” large, long calculations or many jobs (“production runs”)
 
-!!! info "Commonly used schedulers"
+!!! info "Why do we need a scheduler ?"
 
     * To ensure the machine is utilised as fully as possible
     * To ensure all users get a fair chance to use compute resources (demand usually exceeds supply)
     * To track usage - for accounting and budget control
     * To mediate access to other resources e.g. software licences
 
-
-
-!!! note "Commonly used schedulers"
+    **Commonly used schedulers**
     
-    * Slurm
+    * [x] Slurm
     * PBS , Torque
     * Grid Engine
     
-    <center>
-    ![image](./nesi_images/slurm_logo.png){width="150"}
-    </center>
+    All NeSI clusters use Slurm (Simple Linux Utility for Resource Management) scheduler (or job submission system) to manage resources and how they are made available to users.
 
+    ![image](./nesi_images/slurm_comms2compute.png)
 
-All NeSI clusters use Slurm *(Simple Linux Utility for Resource Management)* scheduler (or job submission system) to manage resources and how they are made available to users. The main commands you will use with Slurm on NeSI Mahuika cluster are:
-   
+    <small>Researchers can not communicate directly to  Compute nodes from the login node. Only way to establish a connection OR send scripts to compute nodes is to use scheduler as the carrier/manager</small>
 
 
       
