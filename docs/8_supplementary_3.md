@@ -1,6 +1,6 @@
 # S3 : Solutions
 
-??? success "RNA-Seq Mapping and Count Data"
+??? success "RNA-Seq Mapping and Count Data 😺"
 
     ```bash
     #!/bin/bash -e
@@ -115,7 +115,7 @@
 
 
 
-??? success "Exercise 5.5 😊"	
+??? success "Exercise 5.5 🐮"	
 
 
     ```bash
