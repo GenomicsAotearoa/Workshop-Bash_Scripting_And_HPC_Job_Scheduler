@@ -42,12 +42,12 @@ Checking to make sure we have the directory and files for the workshop.
 !!! terminal "script"
 
     ```bash
-    ls
+    ls -F
     ```
     
-    **Output** - `rna_seq  variant_calling scheduler`
+    **Output** - `modload.sh*  rna_seq/  scheduler/  script_workspace/  variant_calling/`
 
-!!! tip "Hint"
+!!! tip "Reminder"
     If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
 
 !!! terminal "script"
@@ -315,6 +315,9 @@ You can process all the samples at once:
     ```bash
     featureCounts -a ../ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o ./yeast_counts.txt -T 2 -t exon -g gene_id ../Mapping/*sorted.bam
     ```
+
+    !!! tip "Hint"
+        If you encounter an error along the lines of `ERROR: invalid parameter:..`, first check is to make you the current working directory is `Counts`. (it's all about location, location, location 😉 )
 
 !!! bell "**Arguments:**"
 
