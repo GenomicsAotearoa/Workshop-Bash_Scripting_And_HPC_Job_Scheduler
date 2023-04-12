@@ -16,10 +16,10 @@ This material is extracted from the [Genomics Data Carpentry Lesson](https://dat
 
 !!! note "Assumptions"
 
-    - You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.
+    - You have already performed trimming and filtering of your reads and saved in a directory called `trimmed_reads`.
     - You have a reference genome saved in a directory called `ref_genome`.
 
-In this workshop, we have already trimmed the reads and downloaded the reference genome for you.
+In this workshop we have already trimmed the reads and downloaded the reference genome for you.
 First, it is always good to verify where we are:
 
 !!! terminal "script"
@@ -44,7 +44,7 @@ Checking to make sure we have the directory and files for the workshop.
     ls
     ```
 
-    - You should see a directory names `/scripting_workshop`
+    - You should see a directory named `/scripting_workshop`
 
 !!! code-compare "Quick Check"
     If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
@@ -66,19 +66,19 @@ First we need to create directories for the results that will be generated as pa
     ```bash
     mkdir -p results/sam results/bam results/bcf results/vcf
     ```
-    - Another quick and easy way to create multiple directories reside within the same parent directory is to wrap them with `{}` (comma separated). .i.e. 
+    - Another quick and easy way to create multiple directories reside within the same parent directory is to wrap them with `{}` (comma separated) e.g., 
         ```bash
         mkdir -p results/{sam,bam,bcf,vcf}
         ```
 ### Index the reference genome
-Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
+Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequence in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 
 Since we are working on the NeSI HPC, we need to search and load the package before we start using it.
 
 !!! key "Software as modules"
-    - Similar to other HPCs/SuperComputers, NeSI Clusters provide software as modules ( this is not the only way to deploy a software as it can be done via other means such as conda, containers, etc. )
+    - Similar to other HPCs/SuperComputers, NeSI Clusters provide software as modules ( this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).
     - A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.
-    - Refer to [supplementary 1 - Accessing software via modules](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/6_supplementary_1/) for more information 
+    - Refer to [supplementary 1 - Accessing software via modules](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/6_supplementary_1/) for more information. 
 
 !!! terminal "script"
 
@@ -92,7 +92,7 @@ Since we are working on the NeSI HPC, we need to search and load the package bef
     module load BWA/0.7.17-GCC-9.2.0
     ```
     !!! tip "All-In-One"
-        We will be needing few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once,  run the following command
+        We will be needing few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once,  run the following command:
         ```bash
         source ~/scripting_workshop/modload.sh
         ```
@@ -107,7 +107,7 @@ Since we are working on the NeSI HPC, we need to search and load the package bef
             
             - Please **do not** run `module --force purge` under any circumstances
 
-indexing the genome
+Indexing the genome
 !!! terminal "script"
 
     ```bash
@@ -152,7 +152,7 @@ We are going to start by aligning the reads from just one of the samples in our 
     **Output** - `SRR2584866.aligned.sam` 
 
 #### SAM/BAM format
-The SAM file, is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by [Heng Li et al.](https://academic.oup.com/bioinformatics/article/25/16/2078/204688) provides a lot more detail on the specification.
+The SAM file is a tab-delimited text file that contains information for each individual read and it's alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by [Heng Li et al.](https://academic.oup.com/bioinformatics/article/25/16/2078/204688) provides a lot more detail on the specification.
 
 The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.
 
@@ -169,7 +169,7 @@ We will convert the SAM file to BAM format using the samtools program with the v
     ```
 
 #### Sort BAM file by coordinates
-Next we sort the BAM file using the `sort` command from samtools. -o tells the command where to write the output.
+Next we sort the BAM file using the `sort` command from samtools. The -o flag tells the command where to write the output.
 
 !!! terminal
 
@@ -181,7 +181,7 @@ Next we sort the BAM file using the `sort` command from samtools. -o tells the c
 
     SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.
 
-You can use samtools to learn more about this bam file as well.
+You can use samtools to learn more about the bam file.
 
 !!! terminal "script"
 
