@@ -10,7 +10,7 @@
 ![image](./nesi_images/slurm_llinux_penguin_dna.png){width="450"}
 </center>
 
-This as an **Introductory** level workshop on *Bash Scripting and HPC Job Scheduler, Slurm*.
+
 
 !!! check-to-slot "Prerequisites"
 
