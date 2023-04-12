@@ -112,6 +112,11 @@ In the text editor, type the commands
     
     done
     ```
+    <br>
+    ??? hand-holding-dollar "Shell variables"
+        A variable is a character string to which we assign a value. The value assigned could be a number, text, filename, device, or any other type of data. A variable is nothing more than a pointer to the actual data. The shell enables you to create, assign, and delete variables.
+
+
 
 Running the script
 

@@ -482,11 +482,11 @@
   }
   .md-typeset .admonition.hand-holding-dollar,
   .md-typeset details.hand-holding-dollar {
-    border-color: rgb(235, 184, 90);
+    border-color: rgb(148, 233, 152);
   }
   .md-typeset .hand-holding-dollar > .admonition-title,
   .md-typeset .hand-holding-dollar > summary {
-    background-color: rgba(252, 207, 9, 0.151);
+    background-color: rgba(26, 243, 6, 0.459);
   }
   .md-typeset .hand-holding-dollar > .admonition-title::before,
   .md-typeset .hand-holding-dollar > summary::before {
