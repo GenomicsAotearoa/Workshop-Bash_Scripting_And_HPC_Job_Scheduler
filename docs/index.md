@@ -56,3 +56,6 @@
     |[8. Supplementary #3](./8_supplementary_3.md){ .md-button .md-button--primary }||
 
 
+:fontawesome-brands-twitter:{ .twitter }
+
+:fontawesome-solid-lightbulb:{ .lightbulb }
