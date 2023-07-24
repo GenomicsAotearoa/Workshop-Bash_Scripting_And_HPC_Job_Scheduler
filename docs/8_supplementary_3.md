@@ -51,7 +51,7 @@
 
 ??? success "Exercise 5.4 😊"	
 
-    ```bash
+    ```bash linenums="1"
 
     #!/bin/bash -e
 
