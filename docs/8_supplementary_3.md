@@ -118,7 +118,7 @@
 ??? success "Exercise 5.5 🐮"	
 
 
-    ```bash
+    ```bash linenums="2"
     #!/bin/bash -e
 
     #SBATCH --account		nesi02659
