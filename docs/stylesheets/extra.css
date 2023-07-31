@@ -211,8 +211,8 @@
 }
 .md-typeset .terminal > .admonition-title,
 .md-typeset .terminal > summary {
-  color:rgb(105,105,105);
-  background-color: rgba(105,105,105);
+  color:rgb(54,50,50);
+  background-color: rgb(54, 50, 50);
 }
 .md-typeset .terminal > .admonition-title::before,
 .md-typeset .terminal > summary::before {
