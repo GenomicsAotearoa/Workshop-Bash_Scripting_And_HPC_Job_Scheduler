@@ -301,15 +301,15 @@
   }
   .md-typeset .admonition.check-to-slot,
   .md-typeset details.check-to-slot {
-    border-color: rgb(30, 182, 182);
+    border-color: rgb(182, 121, 30);
   }
   .md-typeset .check-to-slot > .admonition-title,
   .md-typeset .check-to-slot > summary {
-    background-color: rgba(114, 228, 152, 0.1);
+    background-color: rgba(228, 150, 7, 0.342);
   }
   .md-typeset .check-to-slot > .admonition-title::before,
   .md-typeset .check-to-slot > summary::before {
-    background-color: rgb(12, 165, 114);
+    background-color: rgb(243, 123, 11);
     -webkit-mask-image: var(--md-admonition-icon--check-to-slot);
             mask-image: var(--md-admonition-icon--check-to-slot);
   }
@@ -320,15 +320,15 @@
   }
   .md-typeset .admonition.square-xmark,
   .md-typeset details.square-xmark {
-    border-color: rgb(219, 166, 95);
+    border-color: rgb(235, 203, 162);
   }
   .md-typeset .square-xmark > .admonition-title,
   .md-typeset .square-xmark > summary {
-    background-color: rgba(221, 112, 62, 0.1);
+    background-color: rgba(236, 191, 43, 0.1);
   }
   .md-typeset .square-xmark > .admonition-title::before,
   .md-typeset .square-xmark > summary::before {
-    background-color: rgb(207, 31, 18);
+    background-color: rgb(248, 124, 7);
     -webkit-mask-image: var(--md-admonition-icon--square-xmark);
             mask-image: var(--md-admonition-icon--square-xmark);
   }
@@ -339,15 +339,15 @@
   }
   .md-typeset .admonition.rectangle-list,
   .md-typeset details.rectangle-list {
-    border-color: rgb(168, 216, 153);
+    border-color: rgb(215, 216, 153);
   }
   .md-typeset .rectangle-list > .admonition-title,
   .md-typeset .rectangle-list > summary {
-    background-color: rgba(30, 145, 87, 0.315);
+    background-color: rgba(234, 236, 100, 0.315);
   }
   .md-typeset .rectangle-list > .admonition-title::before,
   .md-typeset .rectangle-list > summary::before {
-    background-color: rgb(8, 92, 53);
+    background-color: rgb(92, 84, 8);
     -webkit-mask-image: var(--md-admonition-icon--rectangle-list);
             mask-image: var(--md-admonition-icon--rectangle-list);
   }
