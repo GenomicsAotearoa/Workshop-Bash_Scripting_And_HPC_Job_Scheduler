@@ -7,7 +7,7 @@
 ### Variant calling workflow
 
 
-!!! rectangle-list "Remember our variant calling workflow has the following steps"
+!!! rectangle-list "Remember our variant calling workflow has the following steps:"
 
     - Index the reference genome for use by bwa and samtools.
     - Align reads to reference genome.
@@ -128,7 +128,7 @@
 !!! tip "Adding executable permissions"
 
     The way the script is written means we have to indicate which program to use whenever we are running it. 
-    So to run without calling bash, we can change the script permissions.
+    To be able to run without calling bash, we need to change the script permissions.
 
     !!! terminal "script"
     
@@ -156,7 +156,7 @@
         ./variant_calling.sh
         ```
 
-In the [Next Lesson](https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/tree/main/2.HPC_Job_Scheduling) we will now prepare the script to run on the HPC environment
+In the [Next Lesson](https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/tree/main/2.HPC_Job_Scheduling) we will now prepare the script to run on the HPC environment.
 
 
 
