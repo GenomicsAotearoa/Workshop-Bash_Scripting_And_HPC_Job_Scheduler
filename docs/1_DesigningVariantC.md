@@ -193,7 +193,7 @@ Next we sort the BAM file using the `sort` command from samtools. The -o flag te
 A variant call is a conclusion that there is a nucleotide difference relative to a given reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the variants.
 
 ### Step 1: Calculate the read coverage of positions in the genome
-Do the first pass on variant calling by counting read coverage with `bcftools`. We will use the command mpileup. The flag -O b tells bcftools to generate a bcf format output file, -o specifies where to write the output file, and -f flags the path to the reference genome:
+Do the first pass on variant calling by counting read coverage with `bcftools`. We will use the command mpileup. The flag -O b tells bcftools to generate a bcf format output file, -o specifies where to write the output file, and -f specifies the path to the reference genome:
 
 !!! terminal "script"
     ```bash
@@ -211,7 +211,7 @@ Do the first pass on variant calling by counting read coverage with `bcftools`. 
 We have now generated a file with coverage information for every base.
 
 ### Step 2: Detect the single nucleotide variants (SNVs)
-Identify SNVs using bcftools call. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid E. coli. -m allows for multiallelic and rare-variant calling, -v tells the program to output variant sites only (not every site in the genome), and -o specifies where to write the output file:
+Identify SNVs using bcftools call. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. -m allows for multiallelic and rare-variant calling, -v tells the program to output variant sites only (not every site in the genome), and -o specifies where to write the output file:
 
 !!! terminal "script"
 
