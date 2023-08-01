@@ -61,7 +61,7 @@ In the text editor, type the commands
 
 !!! terminal "script"
 
-    ```bash
+    ```bash linenums="1"
     #!/bin/bash 
     
     # Jane Doe
