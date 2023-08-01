@@ -108,7 +108,7 @@ How many files were created during the indexing process?
 
 ## Alignment on the genome
 
-Now that the genome is prepared. Sequencing reads can be aligned.
+Now that the genome is prepared, sequencing reads can be aligned.
 
 !!! rectangle-list "Information required"
 
@@ -129,7 +129,7 @@ Now that the genome is prepared. Sequencing reads can be aligned.
     ls    
     ```
 
-Let's map one of our sample to the reference genome
+Let's map one of our sample to the reference genome:
 
 !!! terminal "script"
 
@@ -146,7 +146,7 @@ Let's map one of our sample to the reference genome
     ```
     **Output**   - `ref_genome  Mapping  trimmed_reads`
 
-let's use a for loop to process our samples:
+Let's use a for loop to process our samples:
 
 !!! terminal "script"
 
@@ -291,7 +291,7 @@ is a count table, in which the number of reads assigned to each feature in each 
 
 ### Subread and FeatureCounts
 - The featureCounts tool from the Subread package can be used to count how many reads aligned to each genome feature (exon).
-- Need to specify the annotation informatyion (.gtf file) 
+- We need to specify the annotation information (.gtf file) 
 You can process all the samples at once:
 
 !!! terminal "script"
