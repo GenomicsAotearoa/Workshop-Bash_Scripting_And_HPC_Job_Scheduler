@@ -14,7 +14,7 @@ This material is extracted from the [Genomics Data Carpentry Lesson](https://dat
 </center>
 
 
-!!! note "Assumptions"
+!!! square-pen "Assumptions"
 
     - You have already performed trimming and filtering of your reads and saved in a directory called `trimmed_reads`.
     - You have a reference genome saved in a directory called `ref_genome`.
