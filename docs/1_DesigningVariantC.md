@@ -158,8 +158,6 @@ The compressed binary version of SAM is called a BAM file. We use this version t
 
 We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):
 
-We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):
-
 !!! terminal "script"
     ```bash
     module load SAMtools/1.13-GCC-9.2.0
