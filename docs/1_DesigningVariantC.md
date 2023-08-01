@@ -36,9 +36,8 @@ First, it is always good to verify where we are:
         - You should see your own **username** in place of `$USER`
         - FYI: `$USER` is not an arbitrary string as it is a real environment variable. Run `echo $USER` and see what happens 
 
-Checking to make sure we have the directory and files for the workshop.
 
-!!! terminal "script"
+!!! terminal-2 "Checking to make sure we have the directory and files for the workshop."
 
     ```bash
     ls
@@ -66,10 +65,11 @@ First we need to create directories for the results that will be generated as pa
     ```bash
     mkdir -p results/sam results/bam results/bcf results/vcf
     ```
+
     - Another quick and easy way to create multiple directories reside within the same parent directory is to wrap them with `{}` (comma separated) e.g., 
-        ```bash
-        mkdir -p results/{sam,bam,bcf,vcf}
-        ```
+    ```bash
+    mkdir -p results/{sam,bam,bcf,vcf}
+    ```
 ### Index the reference genome
 Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequence in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 
@@ -107,8 +107,8 @@ Since we are working on the NeSI HPC, we need to search and load the package bef
             
             - Please **do not** run `module --force purge` under any circumstances
 
-Indexing the genome
-!!! terminal "script"
+
+!!! terminal-2 "Indexing the genome"
 
     ```bash
     bwa index ref_genome/ecoli_rel606.fasta
@@ -181,9 +181,9 @@ Next we sort the BAM file using the `sort` command from samtools. The -o flag te
 
     SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.
 
-You can use samtools to learn more about the bam file.
 
-!!! terminal "script"
+
+!!! terminal-2 "You can use samtools to learn more about the bam file."
 
     ```bash
     samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
@@ -220,9 +220,9 @@ Identify SNVs using bcftools call. We have to specify ploidy with the flag `--pl
     ```
 
 ### Step 3: Filter and report the SNV variants in variant calling format (VCF)
-Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
 
-!!! terminal "script"
+
+!!! terminal-2 "Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:"
 
     ```bash
     vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf > results/vcf/SRR2584866_final_variants.vcf
