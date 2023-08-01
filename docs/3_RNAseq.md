@@ -92,7 +92,7 @@ To be able to map (align) sequencing reads on the genome, the genome needs to be
     #list what is in the directory:
     ls ~/scripting_workshop/rna_seq/ref_genome
     ```
-    ??? success "Output"
+    ??? circle-check "Output"
         ```bash
         Saccharomyces_cerevisiae.R64-1-1.99.gtf              Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.4.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.8.ht2
         Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.5.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
@@ -182,7 +182,7 @@ Now we can explore our SAM files.
     ```bash
     ls
     ```
-    ??? success "Output"
+    ??? circle-check "Output"
         ``` 
         SRR014335-chr1.sam          SRR014336-chr1_summary.txt  SRR014339-chr1.sam          SRR014340-chr1_summary.txt
         SRR014335-chr1_summary.txt  SRR014337-chr1.sam          SRR014339-chr1_summary.txt  SRR014341-chr1.sam
@@ -225,7 +225,7 @@ We will convert the SAM file to BAM format using the samtools program with the v
     ```bash
     ls
     ```
-    ??? success "Output"
+    ??? circle-check "Output"
         ```bash
         SRR014335-chr1.bam  SRR014336-chr1.bam  SRR014337-chr1.bam  SRR014339-chr1.bam  SRR014340-chr1.bam  SRR014341-chr1.bam
         SRR014335-chr1.sam  SRR014336-chr1.sam  SRR014337-chr1.sam  SRR014339-chr1.sam  SRR014340-chr1.sam  SRR014341-chr1.sam
@@ -260,7 +260,7 @@ We can use samtools to learn more about the bam file as well.
     ```bash    
     samtools flagstat SRR014335-chr1_sorted.bam 
     ```
-    ??? success "Output"
+    ??? circle-check "Output"
         ```
         156984 + 0 in total (QC-passed reads + QC-failed reads)
         31894 + 0 secondary
