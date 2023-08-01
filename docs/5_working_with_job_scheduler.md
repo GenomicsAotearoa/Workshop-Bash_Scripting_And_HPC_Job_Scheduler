@@ -13,7 +13,7 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
     * Manages the reservation of resources and job execution on these resources 
     * Allows users to “fire and forget” large, long calculations or many jobs (“production runs”)
 
-!!! info "A bit more on why do we need a scheduler ?"
+!!! circle-info "A bit more on why do we need a scheduler ?"
 
     * To ensure the machine is utilised as fully as possible
     * To ensure all users get a fair chance to use compute resources (demand usually exceeds supply)
@@ -41,7 +41,7 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
 </center>
 
 - - -
-!!! info "Commonly used Slurm commands"
+!!! clipboard-list "Commonly used Slurm commands"
 
     | Command        | Function                                                                                             |
     |:---------------|:------------------------------------------------------------------------------------------------------|
@@ -88,13 +88,13 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 </center>
 
 
-!!! note "Commented lines `#`"
+!!! square-pen "Commented lines `#`"
 
     Commented lines are ignored by the bash interpreter, but they are not ignored by slurm. The `#SBATCH` parameters are read by slurm when we submit the job. When the job starts, the bash interpreter will ignore all lines starting with `#`. This is very similar to the shebang mentioned earlier, when you run your script, the system looks at the `#!`, then uses the program at the subsequent path to interpret the script, in our case `/bin/bash` (the program `bash` found in the */bin* directory
 
 -  - - 
 
-??? info "Slurm variables"
+??? circle-info "Slurm variables"
 
     | header          | use                                 | description                                          |
     |:--------------- |:------------------------------------|:-----------------------------------------------------|

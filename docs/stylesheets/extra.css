@@ -579,11 +579,11 @@
   }
   .md-typeset .circle-info > .admonition-title,
   .md-typeset .circle-info > summary {
-    background-color: rgba(240, 199, 19, 0.459);
+    background-color: rgba(236, 238, 113, 0.616);
   }
   .md-typeset .circle-info > .admonition-title::before,
   .md-typeset .circle-info > summary::before {
-    background-color: rgb(235, 98, 80);
+    background-color: rgb(235, 150, 80);
     -webkit-mask-image: var(--md-admonition-icon--circle-info);
             mask-image: var(--md-admonition-icon--circle-info);
   }

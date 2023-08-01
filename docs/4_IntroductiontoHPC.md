@@ -20,7 +20,7 @@ The simplest way of defining high-performance computing is by saying that it is 
 
 Most HPC systems follow the ideas described above of taking many computers and linking them via network switches.
 
-!!! info "What distinguishes a high-performance computer from the computer clusters"
+!!! circle-info "What distinguishes a high-performance computer from the computer clusters"
 
     * The number of computers/nodes 
     * The strength of each individual computer/node 
