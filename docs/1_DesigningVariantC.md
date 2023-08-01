@@ -2,7 +2,7 @@
 
 This material is extracted from the [Genomics Data Carpentry Lesson](https://datacarpentry.org/genomics-workshop/)
 
-!!! abstract "Objectives and overall workflow"
+!!! clipboard-list "Objectives and overall workflow"
 
     - Understand and perform the steps involved in variant calling.
     - Describe the types of data formats encountered during variant calling.

@@ -634,11 +634,12 @@
 }
 .md-typeset .clipboard-list > .admonition-title,
 .md-typeset .clipboard-list > summary {
-  background-color: rgba(88, 173, 243, 0.473);
+  color:rgb(35, 35, 37);
+  background-color: rgba(130, 209, 4, 0.473);
 }
 .md-typeset .clipboard-list > .admonition-title::before,
 .md-typeset .clipboard-list > summary::before {
-  background-color: rgb(33, 53, 161);
+  background-color: rgb(79, 145, 4);
   -webkit-mask-image: var(--md-admonition-icon--clipboard-list);
           mask-image: var(--md-admonition-icon--clipboard-list);
 }
