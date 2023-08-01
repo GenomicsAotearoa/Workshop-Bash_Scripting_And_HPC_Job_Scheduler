@@ -16,9 +16,8 @@
     - Detect the single nucleotide variants (SNVs).
     - Filter and report the SNVs in VCF (variant calling format).
 
-Let's start with creating a new directory as our script working space and copy all the required resources.
 
-!!! terminal "script"
+!!! terminal-2 "Let's start with creating a new directory as our script working space and copy all the required resources."
 
     ```bash
     pwd
@@ -40,9 +39,9 @@ Let's start with creating a new directory as our script working space and copy a
 
     **Output** - `ref_genome  trimmed_reads`
     
-Now we are ready to start building the script.
 
-!!! terminal "script"
+
+!!! terminal-2 "Now we are ready to start building the script."
 
     ```bash
     nano variant_calling.sh
@@ -57,9 +56,8 @@ Now we are ready to start building the script.
 
         ![image](./nesi_images/open_text_file.png)
 
-In the text editor, type the commands
 
-!!! terminal "script"
+!!! terminal-2 "In the text editor, type the commands"
 
     ```bash linenums="1"
     #!/bin/bash 
@@ -118,14 +116,14 @@ In the text editor, type the commands
 
 
 
-Running the script
 
-!!! terminal "script"
+
+!!! terminal-2 "Running the script (Running the script)"
 
     ```bash
     bash ./variant_calling.sh
     ```
-This should take about ~ 5 minutes.
+
 
 !!! tip "Adding executable permissions"
 
