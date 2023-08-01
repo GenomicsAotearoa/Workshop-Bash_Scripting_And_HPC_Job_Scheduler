@@ -1,6 +1,6 @@
 # Automating a Variant Calling Workflow
 
-!!! abstract "Aim"
+!!! clipboard-list "Aim"
 
     - Put all the steps from the previous lesson into a script.
 
