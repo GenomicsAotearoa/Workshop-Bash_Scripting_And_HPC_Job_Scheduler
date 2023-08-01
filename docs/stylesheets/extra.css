@@ -616,11 +616,11 @@
 .md-typeset .circle-check > .admonition-title,
 .md-typeset .circle-check > summary {
   color:rgb(35, 35, 37);
-  background-color: rgba(193, 241, 138, 0.815);
+  background-color: rgba(rgb(4, 21, 77));
 }
 .md-typeset .circle-check > .admonition-title::before,
 .md-typeset .circle-check > summary::before {
-  background-color: rgb(68, 160, 7);
+  background-color: rgb(#4169e1);
   -webkit-mask-image: var(--md-admonition-icon--circle-check);
           mask-image: var(--md-admonition-icon--circle-check);
 }
