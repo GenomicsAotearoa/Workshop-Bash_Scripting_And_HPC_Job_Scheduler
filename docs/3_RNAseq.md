@@ -3,7 +3,7 @@
 
 This material is extracted from the [RNA-seq workshop](https://github.com/GenomicsAotearoa/RNA-seq-workshop) Lesson
 
-!!! abstract "Objectives and overall workflow"
+!!! clipboard-list "Objectives and overall workflow"
     - To develop a pipeline that does mapping and count the number of reads that mapped then overall put all these steps into a script.
     - Understand and perform the steps involved in RNA-seq mapping and read count.
     - Use command line tools to run the pipeline.
