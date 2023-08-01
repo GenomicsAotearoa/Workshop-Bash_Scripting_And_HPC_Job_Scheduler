@@ -234,9 +234,9 @@ We will convert the SAM file to BAM format using the samtools program with the v
 
 Next we sort the BAM file using the sort command from samtools. `-o` tells the command where to write the output.
 
-!!! note
+!!! square-pen "Note"
 
-    SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.**
+    SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.
 
 !!! terminal "script"
 

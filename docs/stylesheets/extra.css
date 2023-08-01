@@ -659,7 +659,7 @@
 }
 .md-typeset .square-pen > .admonition-title::before,
 .md-typeset .square-pen > summary::before {
-  background-color: rgb(206, 223, 112);
+  background-color: rgb(204, 224, 87);
   -webkit-mask-image: var(--md-admonition-icon--square-pen);
           mask-image: var(--md-admonition-icon--square-pen);
 }
