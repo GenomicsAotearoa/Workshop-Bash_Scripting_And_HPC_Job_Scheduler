@@ -4,7 +4,7 @@
 This material is extracted from the [RNA-seq workshop](https://github.com/GenomicsAotearoa/RNA-seq-workshop) Lesson
 
 !!! clipboard-list "Objectives and overall workflow"
-    - To develop a pipeline that does mapping and count the number of reads that mapped then overall put all these steps into a script.
+    - To develop a pipeline that does mapping and count the number of reads that mapped overall, then put all these steps into a script.
     - Understand and perform the steps involved in RNA-seq mapping and read count.
     - Use command line tools to run the pipeline.
 
@@ -114,7 +114,7 @@ Now that the genome is prepared, sequencing reads can be aligned.
 
     * Where the sequence information is stored (e.g. fastq files ...) ?
     * What kind of sequencing: Single End or Paired end ?
-    * Where are stored the indexes and the genome? 
+    * Where are the indexes and the genome stored? 
     * Where will the mapping files be stored?
   
   
@@ -191,7 +191,7 @@ Now we can explore our SAM files.
 
 ### Converting SAM files to BAM files
 
-The SAM file, is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by Heng Li et al. provides a lot more detail on the specification.
+The SAM file is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by Heng Li et al. provides a lot more detail on the specification.
 
 The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.
 
