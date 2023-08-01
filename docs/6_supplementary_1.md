@@ -13,7 +13,7 @@ One of the workarounds for this issue is Environment modules. A module is a self
 
 There are a number of different environment module implementations commonly used on HPC systems and the one used in NeSI Mahuika cluster is `Lmod` where the `module` command is used to interact with environment modules.
 
-!!! info "Commonly used `module` sub-commands"
+!!! circle-info "Commonly used `module` sub-commands"
 
     * View available modules
     ```bash

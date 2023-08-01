@@ -1,8 +1,8 @@
 # S3 : Solutions
 
-??? success "RNA-Seq Mapping and Count Data 😺"
+??? circle-check "RNA-Seq Mapping and Count Data 😺"
 
-    ```bash
+    ```bash linenums="1"
     #!/bin/bash -e
 
     # Jane Doe
@@ -49,7 +49,7 @@
 
     ```
 
-??? success "Exercise 5.4 😊"	
+??? circle-check "Exercise 5.4 😊"	
 
     ```bash linenums="1"
 
@@ -115,7 +115,7 @@
 
 
 
-??? success "Exercise 5.5 🐮"	
+??? circle-check "Exercise 5.5 🐮"	
 
 
     ```bash linenums="2"
