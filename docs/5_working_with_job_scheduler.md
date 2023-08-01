@@ -122,7 +122,7 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
     <center>![image](./nesi_images/slurm_cycle_mini.png)</center>
     
-    * First create a new working directory and end the directory
+    * First step is to create new working directories inside the existing `~/scripting_workshop/scheduler` 
     ```bash
      cd ~/scripting_workshop/scheduler
     ```
