@@ -291,7 +291,8 @@ is a count table, in which the number of reads assigned to each feature in each 
 
 ### Subread and FeatureCounts
 - The featureCounts tool from the Subread package can be used to count how many reads aligned to each genome feature (exon).
-- We need to specify the annotation information (.gtf file) 
+- We need to specify the annotation information (.gtf file).
+
 You can process all the samples at once:
 
 !!! terminal "script"
@@ -317,13 +318,13 @@ You can process all the samples at once:
     ```
 
     !!! tip "Hint"
-        If you encounter an error along the lines of `ERROR: invalid parameter:..`, first check is to make you the current working directory is `Counts`. (it's all about location, location, location 😉 )
+        If you encounter an error along the lines of `ERROR: invalid parameter:..`, first check that your current working directory is `Counts`. (it's all about location, location, location 😉 )
 
 !!! bell "**Arguments:**"
 
-    * **-a** Name of an annotation file. GTF/GFF format by default
+    * **-a** Name of an annotation file. GTF/GFF format by default.
     * **-o** Name of output file including read counts
-    * **-T** Specify the number of threads/CPUs used for mapping. 1 by default
+    * **-T** Specify the number of threads/CPUs used for mapping. 1 by default.
     * **-t** Specify feature type in GTF annotation. 'exon' by default. Features used for read counting will be extracted from annotation using the provided value.
     *  **-g** Specify attribute type in GTF annotation. 'gene_id' by default. Meta-features used for read counting will be extracted from annotation using the provided value.
 
@@ -334,12 +335,12 @@ You can process all the samples at once:
     Now, let's work together in our groups to create an RNA-seq mapping and count script.
     
     * You will be assigned to breakout rooms
-    * Appreciate if one person from the room volunteers to share the screen as the group works together to compile the script 
+    * One person from the room must volunteer to share their screen as the group works together to compile the script 
     <br> 
     !!! quote ""
-        1. It is safe to compile and submit the script from `/rna_seq` parent directory as it will override the existing results from above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as `--override` (If it is available as a function of the application)
+        1. It is safe to compile and submit the script from `/rna_seq` parent directory as it will override the existing results from the above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as `--override` (if it is available as a function of the application)
         2. On the other hand, how about we bring more structure to "results/outputs" ? .i.e. Perhaps create a **results** directory for `sam`,`bam` and `counts` sub-directories than creating `/Mapping` (for both sam and bam) and `/Counts`  ? (Similar to what we have done in Variant calling pipeline)
-        3. Also, above testing was done with three separate `for` loops. Is it possible to bring them altogether under one `for` loop ?
+        3. Also, the above testing was done with three separate `for` loops. Is it possible to bring them altogether under one `for` loop ?
     
 ---
 
