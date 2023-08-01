@@ -96,7 +96,7 @@ Since we are working on the NeSI HPC, we need to search and load the package bef
         ```bash
         source ~/scripting_workshop/modload.sh
         ```
-        ??? success "Output"
+        ??? circle-check "Output"
             ```bash
             The following modules were not unloaded:
             (Use "module --force purge" to unload all):
@@ -113,18 +113,18 @@ Indexing the genome
     ```bash
     bwa index ref_genome/ecoli_rel606.fasta
     ```
-??? success "Output"
-    ```bash
-    [bwa_index] Pack FASTA... 0.03 sec
-    [bwa_index] Construct BWT for the packed sequence...
-    [bwa_index] 1.04 seconds elapse.
-    [bwa_index] Update BWT... 0.03 sec
-    [bwa_index] Pack forward-only FASTA... 0.02 sec
-    [bwa_index] Construct SA from BWT and Occ... 0.57 sec
-    [main] Version: 0.7.17-r1188
-    [main] CMD: bwa index ref_genome/ecoli_rel606.fasta
-    [main] Real time: 2.462 sec; CPU: 1.702 sec
-    ```
+    ??? circle-check "Output"
+        ```bash
+        [bwa_index] Pack FASTA... 0.03 sec
+        [bwa_index] Construct BWT for the packed sequence...
+        [bwa_index] 1.04 seconds elapse.
+        [bwa_index] Update BWT... 0.03 sec
+        [bwa_index] Pack forward-only FASTA... 0.02 sec
+        [bwa_index] Construct SA from BWT and Occ... 0.57 sec
+        [main] Version: 0.7.17-r1188
+        [main] CMD: bwa index ref_genome/ecoli_rel606.fasta
+        [main] Real time: 2.462 sec; CPU: 1.702 sec
+        ```
 ### Align reads to reference genome
 The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it is faster and more accurate.
 We are going to start by aligning the reads from just one of the samples in our dataset (SRR2584866).
@@ -133,7 +133,7 @@ We are going to start by aligning the reads from just one of the samples in our 
     ```bash
     bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
     ```
-    ??? success "Output"
+    ??? circle-check "Output"
         ```
         [M::bwa_idx_load_from_disk] read 0 ALT contigs
         [M::process] read 77446 sequences (10000033 bp)...
@@ -203,7 +203,7 @@ Do the first pass on variant calling by counting read coverage with `bcftools`. 
     bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
     ```
 
-    ??? success "Output"
+    ??? circle-check "Output"
 
         [mpileup] 1 samples in 1 input files
         [mpileup] maximum number of reads per input file set to -d 250
