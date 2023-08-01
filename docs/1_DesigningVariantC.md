@@ -16,7 +16,7 @@ This material is extracted from the [Genomics Data Carpentry Lesson](https://dat
 
 !!! square-pen "Assumptions"
 
-    - You have already performed trimming and filtering of your reads and saved in a directory called `trimmed_reads`.
+    - You have already performed trimming and filtering of your reads and saved them in a directory called `trimmed_reads`.
     - You have a reference genome saved in a directory called `ref_genome`.
 
 In this workshop we have already trimmed the reads and downloaded the reference genome for you.
@@ -30,7 +30,7 @@ First, it is always good to verify where we are:
     ```bash
     pwd
     ```
-    **Output** -  `/home/$USER`
+    **Output**:  `/home/$USER`
 
     !!! quote ""
         - You should see your own **username** in place of `$USER`
@@ -56,7 +56,7 @@ First, it is always good to verify where we are:
     ```bash
     ls
     ```
-    **Output** -  `ref_genome  trimmed_reads` 
+    **Output**:  `ref_genome  trimmed_reads` 
 ## Alignment to a reference genome
 First we need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because mkdir can accept multiple new directory names as input.
 
@@ -76,7 +76,7 @@ Our first step is to index the reference genome for use by BWA. Indexing allows 
 Since we are working on the NeSI HPC, we need to search and load the package before we start using it.
 
 !!! key "Software as modules"
-    - Similar to other HPCs/SuperComputers, NeSI Clusters provide software as modules ( this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).
+    - Similar to other HPCs/SuperComputers, NeSI Clusters provide software as modules (this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).
     - A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.
     - Refer to [supplementary 1 - Accessing software via modules](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/6_supplementary_1/) for more information. 
 
@@ -92,7 +92,7 @@ Since we are working on the NeSI HPC, we need to search and load the package bef
     module load BWA/0.7.17-GCC-9.2.0
     ```
     !!! tip "All-In-One"
-        We will be needing few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once,  run the following command:
+        We will be needing a few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once, run the following command:
         ```bash
         source ~/scripting_workshop/modload.sh
         ```
@@ -190,7 +190,7 @@ Next we sort the BAM file using the `sort` command from samtools. The -o flag te
     ```
 
 ## Variant calling
-A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the variants.
+A variant call is a conclusion that there is a nucleotide difference relative to a given reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the variants.
 
 ### Step 1: Calculate the read coverage of positions in the genome
 Do the first pass on variant calling by counting read coverage with `bcftools`. We will use the command mpileup. The flag -O b tells bcftools to generate a bcf format output file, -o specifies where to write the output file, and -f flags the path to the reference genome:
