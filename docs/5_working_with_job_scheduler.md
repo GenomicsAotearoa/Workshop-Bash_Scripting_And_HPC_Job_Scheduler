@@ -55,7 +55,7 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
 
 - - - 
 
-??? question "Exercise 5.1 (Optional)" 
+??? question "Exercise 5.1 (Optional) - Check the state of the compute cluster " 
 
     * summary of current states of compute nodes known to the scheduler
     ```bash
