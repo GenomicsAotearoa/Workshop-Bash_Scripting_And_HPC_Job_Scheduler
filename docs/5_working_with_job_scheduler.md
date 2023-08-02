@@ -178,6 +178,10 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     ```bash
     sacct
     ```
+    ??? hand-holding-dollar "`$SLURM_JOB_ID`"
+        `$SLURM_JOB_ID` is a Slurm environment variable. 
+        - A full list of environment variables for SLURM can be found by visiting the [SLURM page on environment variables](https://slurm.schedmd.com/sbatch.html#SECTION_INPUT-ENVIRONMENT-VARIABLES)
+        - These variables are great for recursive operations. 
 - - - 
  
 !!! magnifying-glass "STDOUT/STDERR from jobs"
