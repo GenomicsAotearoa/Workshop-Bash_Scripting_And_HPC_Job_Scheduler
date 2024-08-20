@@ -1,0 +1,1097 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa & NeSI">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/1_DesigningVariantC/">
+      
+      
+        <link rel="prev" href="../0_Background/">
+      
+      
+        <link rel="next" href="../2_AutomaticVariantC/">
+      
+      
+      <link rel="icon" href="../nesi_images/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
+    
+    
+      
+        <title>Variant Calling Workflow - Introduction to Bash Scripting and HPC Scheduler</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#variant-calling-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to Bash Scripting and HPC Scheduler" class="md-header__button md-logo" aria-label="Introduction to Bash Scripting and HPC Scheduler" data-md-component="logo">
+      
+  <img src="../nesi_images/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to Bash Scripting and HPC Scheduler
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Variant Calling Workflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to Bash Scripting and HPC Scheduler" class="md-nav__button md-logo" aria-label="Introduction to Bash Scripting and HPC Scheduler" data-md-component="logo">
+      
+  <img src="../nesi_images/nesi_ga.png" alt="logo">
+
+    </a>
+    Introduction to Bash Scripting and HPC Scheduler
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Variant Calling Workflow
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Variant Calling Workflow
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alignment-to-a-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alignment to a reference genome
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alignment to a reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#index-the-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index the reference genome
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-reads-to-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align reads to reference genome
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Align reads to reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sambam-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      SAM/BAM format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort-bam-file-by-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sort BAM file by coordinates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variant-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variant calling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variant calling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-calculate-the-read-coverage-of-positions-in-the-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Calculate the read coverage of positions in the genome
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-detect-the-single-nucleotide-variants-snvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Detect the single nucleotide variants (SNVs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Filter and report the SNV variants in variant calling format (VCF)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explore-the-vcf-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore the VCF format:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_AutomaticVariantC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Automating a Variant Calling Workflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_RNAseq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RNA-Seq Mapping And Count Data Workflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_IntroductiontoHPC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to HPC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_working_with_job_scheduler/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Working with job scheduler
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_supplementary_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S1 : Accessing software via modules
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_supplementary_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S2 : slurm profiling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_supplementary_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S3 : Solutions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alignment-to-a-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alignment to a reference genome
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alignment to a reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#index-the-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index the reference genome
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-reads-to-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align reads to reference genome
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Align reads to reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sambam-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      SAM/BAM format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort-bam-file-by-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sort BAM file by coordinates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variant-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variant calling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variant calling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-calculate-the-read-coverage-of-positions-in-the-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Calculate the read coverage of positions in the genome
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-detect-the-single-nucleotide-variants-snvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Detect the single nucleotide variants (SNVs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Filter and report the SNV variants in variant calling format (VCF)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explore-the-vcf-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore the VCF format:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="variant-calling-workflow">Variant Calling Workflow<a class="headerlink" href="#variant-calling-workflow" title="Permanent link">&para;</a></h1>
+<p>This material is extracted from the <a href="https://datacarpentry.org/genomics-workshop/">Genomics Data Carpentry Lesson</a></p>
+<div class="admonition clipboard-list">
+<p class="admonition-title">Objectives and overall workflow</p>
+<ul>
+<li>Understand and perform the steps involved in variant calling.</li>
+<li>Describe the types of data formats encountered during variant calling.</li>
+<li>Use command line tools to perform variant calling.</li>
+</ul>
+</div>
+<p><center>
+<a class="glightbox" href="../nesi_images/variant_callingworkflow.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image" src="../nesi_images/variant_callingworkflow.png" width="800" /></a>
+</center></p>
+<div class="admonition square-pen">
+<p class="admonition-title">Assumptions</p>
+<ul>
+<li>You have already performed trimming and filtering of your reads and saved them in a directory called <code>trimmed_reads</code>.</li>
+<li>You have a reference genome saved in a directory called <code>ref_genome</code>.</li>
+</ul>
+</div>
+<p>In this workshop we have already trimmed the reads and downloaded the reference genome for you.
+First, it is always good to verify where we are:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">pwd</span>
+</code></pre></div>
+<strong>Output</strong>:  <code>/home/$USER</code></p>
+<div class="admonition quote">
+<ul>
+<li>You should see your own <strong>username</strong> in place of <code>$USER</code></li>
+<li>FYI: <code>$USER</code> is not an arbitrary string as it is a real environment variable. Run <code>echo $USER</code> and see what happens </li>
+</ul>
+</div>
+</div>
+<div class="admonition terminal-2">
+<p class="admonition-title">Checking to make sure we have the directory and files for the workshop.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ls
+</code></pre></div>
+<ul>
+<li>You should see a directory named <code>/scripting_workshop</code></li>
+</ul>
+</div>
+<div class="admonition code-compare">
+<p class="admonition-title">Quick Check</p>
+<p>If you do not have the workshop directory, you can copy it using the command: <code>cp -r  /nesi/project/nesi02659/scripting_workshop/ ~</code>  </p>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>scripting_workshop/variant_calling
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ls
+</code></pre></div>
+<strong>Output</strong>:  <code>ref_genome  trimmed_reads</code> </p>
+</div>
+<h2 id="alignment-to-a-reference-genome">Alignment to a reference genome<a class="headerlink" href="#alignment-to-a-reference-genome" title="Permanent link">&para;</a></h2>
+<p>First we need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because mkdir can accept multiple new directory names as input.</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>results/sam<span class="w"> </span>results/bam<span class="w"> </span>results/bcf<span class="w"> </span>results/vcf
+</code></pre></div>
+<ul>
+<li>Another quick and easy way to create multiple directories reside within the same parent directory is to wrap them with <code>{}</code> (comma separated) e.g., 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>results/<span class="o">{</span>sam,bam,bcf,vcf<span class="o">}</span>
+</code></pre></div></li>
+</ul>
+</div>
+<h3 id="index-the-reference-genome">Index the reference genome<a class="headerlink" href="#index-the-reference-genome" title="Permanent link">&para;</a></h3>
+<p>Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequence in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.</p>
+<p>Since we are working on the NeSI HPC, we need to search and load the package before we start using it.</p>
+<div class="admonition key">
+<p class="admonition-title">Software as modules</p>
+<ul>
+<li>Similar to other HPCs/SuperComputers, NeSI Clusters provide software as modules (this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).</li>
+<li>A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.</li>
+<li>Refer to <a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/6_supplementary_1/">supplementary 1 - Accessing software via modules</a> for more information. </li>
+</ul>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">#Search for a module</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>module<span class="w"> </span>spider<span class="w"> </span>bwa
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">#Load BWA module</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>module<span class="w"> </span>purge
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>module<span class="w"> </span>load<span class="w"> </span>BWA/0.7.17-GCC-9.2.0
+</code></pre></div></p>
+<div class="admonition tip">
+<p class="admonition-title">All-In-One</p>
+<p>We will be needing a few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once, run the following command:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">source</span><span class="w"> </span>~/scripting_workshop/modload.sh
+</code></pre></div></p>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>The<span class="w"> </span>following<span class="w"> </span>modules<span class="w"> </span>were<span class="w"> </span>not<span class="w"> </span>unloaded:
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="o">(</span>Use<span class="w"> </span><span class="s2">&quot;module --force purge&quot;</span><span class="w"> </span>to<span class="w"> </span>unload<span class="w"> </span>all<span class="o">)</span>:
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="m">1</span><span class="o">)</span><span class="w"> </span>XALT/minimal<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span>slurm<span class="w">   </span><span class="m">3</span><span class="o">)</span><span class="w"> </span>NeSI
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>Loaded<span class="w"> </span>modules<span class="w"> </span>BWA,<span class="w"> </span>SAMtools,<span class="w"> </span>BCFtools,HISAT2,Subread
+</code></pre></div>
+<ul>
+<li>Please <strong>do not</strong> run <code>module --force purge</code> under any circumstances</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="admonition terminal-2">
+<p class="admonition-title">Indexing the genome</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>bwa<span class="w"> </span>index<span class="w"> </span>ref_genome/ecoli_rel606.fasta
+</code></pre></div>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Pack<span class="w"> </span>FASTA...<span class="w"> </span><span class="m">0</span>.03<span class="w"> </span>sec
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Construct<span class="w"> </span>BWT<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>packed<span class="w"> </span>sequence...
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span><span class="m">1</span>.04<span class="w"> </span>seconds<span class="w"> </span>elapse.
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Update<span class="w"> </span>BWT...<span class="w"> </span><span class="m">0</span>.03<span class="w"> </span>sec
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Pack<span class="w"> </span>forward-only<span class="w"> </span>FASTA...<span class="w"> </span><span class="m">0</span>.02<span class="w"> </span>sec
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Construct<span class="w"> </span>SA<span class="w"> </span>from<span class="w"> </span>BWT<span class="w"> </span>and<span class="w"> </span>Occ...<span class="w"> </span><span class="m">0</span>.57<span class="w"> </span>sec
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="o">[</span>main<span class="o">]</span><span class="w"> </span>Version:<span class="w"> </span><span class="m">0</span>.7.17-r1188
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="o">[</span>main<span class="o">]</span><span class="w"> </span>CMD:<span class="w"> </span>bwa<span class="w"> </span>index<span class="w"> </span>ref_genome/ecoli_rel606.fasta
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="o">[</span>main<span class="o">]</span><span class="w"> </span>Real<span class="w"> </span>time:<span class="w"> </span><span class="m">2</span>.462<span class="w"> </span>sec<span class="p">;</span><span class="w"> </span>CPU:<span class="w"> </span><span class="m">1</span>.702<span class="w"> </span>sec
+</code></pre></div>
+</details>
+</div>
+<h3 id="align-reads-to-reference-genome">Align reads to reference genome<a class="headerlink" href="#align-reads-to-reference-genome" title="Permanent link">&para;</a></h3>
+<p>The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it is faster and more accurate.
+We are going to start by aligning the reads from just one of the samples in our dataset (SRR2584866).</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>bwa<span class="w"> </span>mem<span class="w"> </span>ref_genome/ecoli_rel606.fasta<span class="w"> </span>trimmed_reads/SRR2584866_1.trim.sub.fastq<span class="w"> </span>trimmed_reads/SRR2584866_2.trim.sub.fastq<span class="w"> </span>&gt;<span class="w"> </span>results/sam/SRR2584866.aligned.sam
+</code></pre></div>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>[M::bwa_idx_load_from_disk] read 0 ALT contigs
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>[M::process] read 77446 sequences (10000033 bp)...
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>[M::process] read 77296 sequences (10000182 bp)...
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>[M::mem_pestat] analyzing insert size distribution for orientation FF...
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>[M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>.....
+</code></pre></div>
+</details>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ls<span class="w"> </span>results/sam/
+</code></pre></div>
+<strong>Output</strong> - <code>SRR2584866.aligned.sam</code> </p>
+</div>
+<h4 id="sambam-format">SAM/BAM format<a class="headerlink" href="#sambam-format" title="Permanent link">&para;</a></h4>
+<p>The SAM file is a tab-delimited text file that contains information for each individual read and it's alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by <a href="https://academic.oup.com/bioinformatics/article/25/16/2078/204688">Heng Li et al.</a> provides a lot more detail on the specification.</p>
+<p>The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.</p>
+<p>We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>module<span class="w"> </span>load<span class="w"> </span>SAMtools/1.13-GCC-9.2.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>samtools<span class="w"> </span>view<span class="w"> </span>-S<span class="w"> </span>-b<span class="w"> </span>results/sam/SRR2584866.aligned.sam<span class="w"> </span>&gt;<span class="w"> </span>results/bam/SRR2584866.aligned.bam
+</code></pre></div></p>
+</div>
+<h4 id="sort-bam-file-by-coordinates">Sort BAM file by coordinates<a class="headerlink" href="#sort-bam-file-by-coordinates" title="Permanent link">&para;</a></h4>
+<p>Next we sort the BAM file using the <code>sort</code> command from samtools. The -o flag tells the command where to write the output.</p>
+<div class="admonition terminal">
+<p class="admonition-title">Terminal</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>samtools<span class="w"> </span>sort<span class="w"> </span>-o<span class="w"> </span>results/bam/SRR2584866.aligned.sorted.bam<span class="w"> </span>results/bam/SRR2584866.aligned.bam
+</code></pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Sorting</p>
+<p>SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.</p>
+</div>
+<div class="admonition terminal-2">
+<p class="admonition-title">You can use samtools to learn more about the bam file.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>samtools<span class="w"> </span>flagstat<span class="w"> </span>results/bam/SRR2584866.aligned.sorted.bam
+</code></pre></div>
+</div>
+<h2 id="variant-calling">Variant calling<a class="headerlink" href="#variant-calling" title="Permanent link">&para;</a></h2>
+<p>A variant call is a conclusion that there is a nucleotide difference relative to a given reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for variant calling. In this workshop we will be using <code>bcftools</code>, but there are a few things we need to do before actually calling the variants.</p>
+<h3 id="step-1-calculate-the-read-coverage-of-positions-in-the-genome">Step 1: Calculate the read coverage of positions in the genome<a class="headerlink" href="#step-1-calculate-the-read-coverage-of-positions-in-the-genome" title="Permanent link">&para;</a></h3>
+<p>Do the first pass on variant calling by counting read coverage with <code>bcftools</code>. We will use the command mpileup. The flag -O b tells bcftools to generate a bcf format output file, -o specifies where to write the output file, and -f specifies the path to the reference genome:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>module<span class="w"> </span>load<span class="w"> </span>BCFtools/1.13-GCC-9.2.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>bcftools<span class="w"> </span>mpileup<span class="w"> </span>-O<span class="w"> </span>b<span class="w"> </span>-o<span class="w"> </span>results/bcf/SRR2584866_raw.bcf<span class="w"> </span>-f<span class="w"> </span>ref_genome/ecoli_rel606.fasta<span class="w"> </span>results/bam/SRR2584866.aligned.sorted.bam
+</code></pre></div></p>
+<details class="circle-check">
+<summary>Output</summary>
+<p>[mpileup] 1 samples in 1 input files
+[mpileup] maximum number of reads per input file set to -d 250</p>
+</details>
+</div>
+<p>We have now generated a file with coverage information for every base.</p>
+<h3 id="step-2-detect-the-single-nucleotide-variants-snvs">Step 2: Detect the single nucleotide variants (SNVs)<a class="headerlink" href="#step-2-detect-the-single-nucleotide-variants-snvs" title="Permanent link">&para;</a></h3>
+<p>Identify SNVs using bcftools call. We have to specify ploidy with the flag <code>--ploidy</code>, which is one for the haploid <em>E. coli</em>. -m allows for multiallelic and rare-variant calling, -v tells the program to output variant sites only (not every site in the genome), and -o specifies where to write the output file:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>bcftools<span class="w"> </span>call<span class="w"> </span>--ploidy<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>-v<span class="w"> </span>-o<span class="w"> </span>results/vcf/SRR2584866_variants.vcf<span class="w"> </span>results/bcf/SRR2584866_raw.bcf<span class="w"> </span>
+</code></pre></div>
+</div>
+<h3 id="step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf">Step 3: Filter and report the SNV variants in variant calling format (VCF)<a class="headerlink" href="#step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf" title="Permanent link">&para;</a></h3>
+<div class="admonition terminal-2">
+<p class="admonition-title">Filter the SNVs for the final output in VCF format, using <code>vcfutils.pl</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vcfutils.pl<span class="w"> </span>varFilter<span class="w"> </span>results/vcf/SRR2584866_variants.vcf<span class="w"> </span>&gt;<span class="w"> </span>results/vcf/SRR2584866_final_variants.vcf
+</code></pre></div>
+</div>
+<h3 id="explore-the-vcf-format">Explore the VCF format:<a class="headerlink" href="#explore-the-vcf-format" title="Permanent link">&para;</a></h3>
+<div class="admonition quote">
+<ul>
+<li>At this stage you can use various tools to analyse the vcf file. </li>
+<li>Exploring the vcf is beyond the scope of this workshop. Please refer to <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format">official documentation on VCF provided by Broad Institute</a></li>
+</ul>
+</div>
+<p>Now we are ready for the <a href="../2_AutomaticVariantC/">Next Lesson</a> to put all these commands in a script.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0_Background/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Background">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Background
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2_AutomaticVariantC/" class="md-footer__link md-footer__link--next" aria-label="Next: Automating a Variant Calling Workflow">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Automating a Variant Calling Workflow
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Introduction to Bash Scripting and HPC Scheduler is licensed under a <a rel="noopener" target="_blank" href="https://opensource.org/license/mit/">MIT License</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.471ce7a9.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
