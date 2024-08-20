@@ -63,7 +63,7 @@
     #!/bin/bash 
     
     # Jane Doe
-    # 13 April 2023
+    echo $(date)
     
     # This script runs the variant calling pipeline from mapping to vcf.
     
