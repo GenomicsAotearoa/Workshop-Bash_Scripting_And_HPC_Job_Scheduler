@@ -12,7 +12,7 @@ repo_url: https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Jo
 
 theme:
   name: material
-  logo: nesi_images/nesi_ga.png
+  logo: nesi_images/ga_reannz.png
   favicon: nesi_images/nesi_ga.png
    # 404 page
   static_templates:
