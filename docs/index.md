@@ -1,4 +1,4 @@
-<center>![image](./nesi_images/nesiga_LOGO.png){width="300"}</center>
+<center>![image](./nesi_images/ga_reannz.png){width="300"}</center>
 
 <center>
 # **Introduction to Bash Scripting and HPC Scheduler**
