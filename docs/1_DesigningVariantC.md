@@ -73,10 +73,10 @@ First we need to create directories for the results that will be generated as pa
 ### Index the reference genome
 Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequence in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 
-Since we are working on the NeSI HPC, we need to search and load the package before we start using it.
+Since we are working on the REANNZ HPC, we need to search and load the package before we start using it.
 
 !!! key "Software as modules"
-    - Similar to other HPCs/SuperComputers, NeSI Clusters provide software as modules (this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).
+    - Similar to other HPCs/SuperComputers, REANNZ Clusters provide software as modules (this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).
     - A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.
     - Refer to [supplementary 1 - Accessing software via modules](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/6_supplementary_1/) for more information. 
 
@@ -101,7 +101,7 @@ Since we are working on the NeSI HPC, we need to search and load the package bef
             The following modules were not unloaded:
             (Use "module --force purge" to unload all):
     
-            1) XALT/minimal   2) slurm   3) NeSI
+            1) XALT/minimal   2) slurm   
             Loaded modules BWA, SAMtools, BCFtools,HISAT2,Subread
             ```
             

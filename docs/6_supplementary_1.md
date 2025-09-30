@@ -11,7 +11,7 @@ Before we start using individual software packages, however, we should understan
 
 One of the workarounds for this issue is Environment modules. A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.
 
-There are a number of different environment module implementations commonly used on HPC systems and the one used in NeSI Mahuika cluster is `Lmod` where the `module` command is used to interact with environment modules.
+There are a number of different environment module implementations commonly used on HPC systems and the one used in REANNZ cluster is `Lmod` where the `module` command is used to interact with environment modules.
 
 !!! circle-info "Commonly used `module` sub-commands"
 
@@ -31,7 +31,7 @@ There are a number of different environment module implementations commonly used
     ```
     * Load a specific program
     
-        - Note: All modules on NeSI have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
+        - Note: All modules on REANNZ cluster have version and toolchain/environment suffixes. If none is specified, the default version for the tool is loaded. The default version can be seen with the module avail command.
         ```bash
         module load MY_APPLICATION
         ```

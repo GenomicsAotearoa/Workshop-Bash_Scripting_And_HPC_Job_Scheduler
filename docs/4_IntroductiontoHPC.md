@@ -27,9 +27,9 @@ Most HPC systems follow the ideas described above of taking many computers and l
     * The network interconnect – this dictates the communication speed between nodes. The faster this speed is, the more a group of individual nodes will act like a unit.
 
 
-### NeSI Mahuika Cluster architecture
+### REANNZ HPC cluster architecture
 
-NeSI Mahuika cluster (CRAY HPE CS400) system consists of a number of different node types. The ones visible to researchers are:
+REANNZ HPC consists of a number of different node types. The ones visible to researchers are:
 
 * Login nodes
 * Compute nodes
