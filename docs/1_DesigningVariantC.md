@@ -85,6 +85,8 @@ Since we are working on the REANNZ HPC, we need to search and load the package b
     ```bash
     #Search for a module
     module spider bwa
+    # or
+    module avail bwa
     ```
     ```bash
     #Load BWA module

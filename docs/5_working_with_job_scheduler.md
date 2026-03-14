@@ -74,7 +74,7 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
 
      * Explore the capacity of a compute node
      ```bash
-     sinfo -n wch001 -o "%n %c %m"
+     sinfo -n c001 -o "%n %c %m"
      ```
 
 

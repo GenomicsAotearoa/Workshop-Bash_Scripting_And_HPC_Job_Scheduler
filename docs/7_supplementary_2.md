@@ -53,7 +53,9 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
         python profile_plot_Jul2020.py job_JOBID.h5
         ```
 
-       - This should generate a .png file where the filename is in the format of job_23258404_profile.png
+        - This should generate a .png file where the filename is in the format of job_23258404_profile.png
+
+        - Note: This figure will also provide information on GPU CPU and memory usage if you are using a GPU.
 
 
     <br>
