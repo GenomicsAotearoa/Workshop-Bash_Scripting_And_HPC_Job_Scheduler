@@ -22,7 +22,7 @@
 
     **Recommended but not required**
 
-    - [ ] Attend [Genomics Data Carpentry](https://datacarpentry.org/genomics-workshop/) and [RNA-Seq Data Analysis](https://genomicsaotearoa.github.io/RNA-seq-workshop/) workshops
+    - [ ] Attend [Genomics Data Carpentry](https://datacarpentry.org/genomics-workshop/) and [RNA-Seq Data Analysis](https://genomicsaotearoa.github.io/RNA-seq-data-analysis-workflow/) workshops
 
 <br>
 
@@ -31,14 +31,14 @@
      - Domain specific concepts in
          - Genetics, Genomics and DNA Sequencing 
          - Variant Calling (covers in [Genomics Data Carpentry Workshop](https://datacarpentry.org/genomics-workshop/))
-         - RNA sequencing and data analysis ( covers in [RNA-Seq Data Analysis Workshop](https://genomicsaotearoa.github.io/RNA-seq-workshop/))
+         - RNA sequencing and data analysis ( covers in [RNA-Seq Data Analysis Workshop](https://genomicsaotearoa.github.io/RNA-seq-data-analysis-workflow/))
      
 
 <br>
 
 !!! screwdriver-wrench "Setup"
 
-    Workshop material is designed to run on REANNZ HPC.
+    Workshop material is designed to run on REANNZ HPC. You do not need to do anything in advance.
 <br>
 
 !!! rectangle-list "Content"
