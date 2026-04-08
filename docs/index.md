@@ -14,8 +14,7 @@
 
 !!! check-to-slot "Prerequisites"
 
-    - [x] Familiarity with terminal and basic linux commands
-    - [x] Some knowledge on shell environment variables and `for` loops
+    - [x] Familiarity with shell commands, environment variables and `for` loops (completed [Introduction to Shell workshop](https://genomicsaotearoa.github.io/introduction-to-shell/) or have equivalent experience)
     - [x] Ability to use a terminal based text editor such as `nano` 
         * [ ] This is not much of an issue as we are using JupyterHub which has a more friendlier text editor.  
     - [x] Intermediate level knowledge on Molecular Biology and Genetics
@@ -30,8 +29,8 @@
 
      - Domain specific concepts in
          - Genetics, Genomics and DNA Sequencing 
-         - Variant Calling (covers in [Genomics Data Carpentry Workshop](https://datacarpentry.org/genomics-workshop/))
-         - RNA sequencing and data analysis ( covers in [RNA-Seq Data Analysis Workshop](https://genomicsaotearoa.github.io/RNA-seq-data-analysis-workflow/))
+         - Variant Calling (covered in [Genomics Data Carpentry Workshop](https://datacarpentry.org/genomics-workshop/))
+         - RNA sequencing and data analysis (covered in [RNA-Seq Data Analysis Workshop](https://genomicsaotearoa.github.io/RNA-seq-data-analysis-workflow/))
      
 
 <br>
