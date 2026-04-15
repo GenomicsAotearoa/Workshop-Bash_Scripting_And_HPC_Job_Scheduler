@@ -94,7 +94,7 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
 -  - - 
 
-??? circle-info "Slurm variables"
+!!! circle-info "Slurm variables"
 
     | header          | use                                 | description                                          |
     |:--------------- |:------------------------------------|:-----------------------------------------------------|
@@ -110,13 +110,13 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 
 <br>
 
-??? bell "Assigning values to Slurm variables"
+??? bell "Assigning values to Slurm variables (formatting correctly examples)"
     <center>![image](./nesi_images/sbtach_def_1.png)</center>
 
     <center>![image](./nesi_images/sbatch_def_2.png)</center>
 - - -
 
-??? question "Exercise 5.2"
+!!! question "Exercise 5.2"
 
     Let's put these directives together and compile our first slurm script. Below is a abstract version of the slurm life cycle to assist you with the process
 
@@ -216,7 +216,7 @@ Understanding the resources you have available and how to use them most efficien
 
 ---
 
-??? question "Exercise 5.3" 
+!!! question "Exercise 5.3" 
 
 
     Let's submit another slurm job and review its resource utilisation
