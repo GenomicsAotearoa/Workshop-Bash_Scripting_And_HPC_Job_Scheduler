@@ -1,6 +1,6 @@
 # S3 : Solutions
 
-??? circle-check "RNA-Seq Mapping and Count Data 😺"
+??? circle-check "Exercise 3.1 - RNA-Seq Mapping and Count Data 😺"
 
     ```bash linenums="1"
     #!/bin/bash -e
@@ -49,7 +49,7 @@
 
     ```
 
-??? circle-check "Exercise 5.4 😊"	
+??? circle-check "Exercise 5.4 - Variant calling workflow slurm script 📜"	
 
     ```bash linenums="1"
 
@@ -60,8 +60,8 @@
     #SBATCH --cpus-per-task 2
     #SBATCH --time 			00:15:00
     #SBATCH --mem 			4G
-    #SBATCH --output 		slurmout/variant_calling-%j.out
-    #SBATCH --error 		slurmout/variant_calling-%j.err
+    #SBATCH --output 		variant_calling-%j.out
+    #SBATCH --error 		variant_calling-%j.err
     #SBATCH --mail-type		END
     #SBATCH --mail-user		myemail@email.co.nz
 
@@ -115,7 +115,7 @@
 
 
 
-??? circle-check "Exercise 5.5 🐮"	
+??? circle-check "Exercise 5.5 - RNA-seq workflow slurm script 📜"	
 
 
     ```bash linenums="2"

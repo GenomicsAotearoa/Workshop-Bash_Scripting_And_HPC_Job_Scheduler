@@ -266,19 +266,21 @@ Understanding the resources you have available and how to use them most efficien
 
 ## Compiling slurm scripts for Variant Calling and RNA-seq episodes 
 
-??? question "Exercise 5.4 😬"	
+👣 Choose your own adventure - compile a slurm script either for a variant calling or RNA-seq workflow. 
+
+??? question "Exercise 5.4 - Variant Calling Workflow 🧬 🔎"	
     
-    Purpose of this exercise is to compile a slurm submission script based on the script we wrote in [episode 2 - Automating variant calling workflow](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/workshop_material/2_AutomaticVariantC.html)
+    The purpose of this exercise is to compile a slurm submission script based on the script we wrote in [episode 2 - Automating variant calling workflow](2_AutomaticVariantC.md)
 
-    * recommend creating a new directory for the exercise .i.e `ex_5.4`
-    * Name of the file is `variant_calling.sl` (note that we have change the extension from `.sh` to `.sl`)
-    * In terms of slurm variables
+    * Recommend creating a new directory for the exercise .i.e `ex_5.4`
+    * Name the file is `variant_calling.sl` (note that we change the extension from `.sh` to `.sl`)
+    * Set slurm variables:
 
-        * name of the job is `variant_calling_workflow`
-        * number of CPUS is `2`
+        * name of the job as `variant_calling_workflow`
+        * number of CPUS as `2`
         * timelimit `15 minutes`
         * amount of memory in GB `4G`
-        * generate  *.err* files and *.out* where both should be re-directed to the directory ***slurmout***
+        * generate  *.err* files and *.out* 
         * an email notification at the end of the job 
 
     * We don't want to replicate ***input data***  in multiple places .i.e. be conservative in-terms how you use research storage
@@ -290,9 +292,27 @@ Understanding the resources you have available and how to use them most efficien
     
 - - - 
 
-??? question  "Exercise 5.5 😬"	
+??? question  "Exercise 5.5  - RNA-seq workflow 🧬 📊"	
 
-    *  Now it's your turn to compile a slurm submission script for the RNA-seq workflow. 😊
+    The purpose of this exercise is to compile a slurm submission script based on the script we wrote in [episode 3 - RNA-seq workflow](3_RNAseq.md )
+
+    * Recommend creating a new directory for the exercise i.e. `ex_5.5`
+    * Name the file is `rnaseq.sl` (note that we change the extension from `.sh` to `.sl`)
+    * Set slurm variables:
+
+        * name of the job as `rnaseq_workflow`
+        * number of CPUs as `2`
+        * timelimit `15 minutes`
+        * amount of memory in GB `4G`
+        * generate *.err* files and *.out* 
+        * an email notification at the end of the job
+
+    * We don't want to replicate ***input data*** in multiple places i.e. be conservative in terms of how you use research storage
+    * Therefore, use the same reference genome file (assign the filename to variable `genome`) and the trimmed read files (assign the path of these files to variable `trimmed`) used in the RNA-seq episode
+    ```bash
+    genome=~/scripting_workshop/rnaseq/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
+    trimmed=~/scripting_workshop/rnaseq/trimmed_reads
+    ```
 
 ---
 

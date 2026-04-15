@@ -156,7 +156,7 @@
         ./variant_calling.sh
         ```
 
-In the [Next Lesson](https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/tree/main/2.HPC_Job_Scheduling), we will  prepare the script to run on the HPC environment.
+In the [Next Lesson](3_RNAseq.md), we will do a similar pipeline, but with RNAseq data. 
 
 
 
