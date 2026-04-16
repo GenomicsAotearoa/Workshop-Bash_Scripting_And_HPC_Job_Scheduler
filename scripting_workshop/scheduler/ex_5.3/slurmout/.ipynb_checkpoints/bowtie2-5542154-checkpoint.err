@@ -1,0 +1,100 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) NeSI/zen3
+Building a SMALL index
+Renaming lambda_virus.3.bt2.tmp to lambda_virus.3.bt2
+Renaming lambda_virus.4.bt2.tmp to lambda_virus.4.bt2
+Renaming lambda_virus.1.bt2.tmp to lambda_virus.1.bt2
+Renaming lambda_virus.2.bt2.tmp to lambda_virus.2.bt2
+Renaming lambda_virus.rev.1.bt2.tmp to lambda_virus.rev.1.bt2
+Renaming lambda_virus.rev.2.bt2.tmp to lambda_virus.rev.2.bt2
+10000 reads; of these:
+  10000 (100.00%) were unpaired; of these:
+    596 (5.96%) aligned 0 times
+    9404 (94.04%) aligned exactly 1 time
+    0 (0.00%) aligned >1 times
+94.04% overall alignment rate
+10000 reads; of these:
+  10000 (100.00%) were paired; of these:
+    834 (8.34%) aligned concordantly 0 times
+    9166 (91.66%) aligned concordantly exactly 1 time
+    0 (0.00%) aligned concordantly >1 times
+    ----
+    834 pairs aligned concordantly 0 times; of these:
+      42 (5.04%) aligned discordantly 1 time
+    ----
+    792 pairs aligned 0 times concordantly or discordantly; of these:
+      1584 mates make up the pairs; of these:
+        1005 (63.45%) aligned 0 times
+        579 (36.55%) aligned exactly 1 time
+        0 (0.00%) aligned >1 times
+94.97% overall alignment rate
+6000 reads; of these:
+  6000 (100.00%) were unpaired; of these:
+    158 (2.63%) aligned 0 times
+    5636 (93.93%) aligned exactly 1 time
+    206 (3.43%) aligned >1 times
+97.37% overall alignment rate
+mpileup: invalid option -- 'u'
+
+Usage: samtools mpileup [options] in1.bam [in2.bam [...]]
+
+Input options:
+  -6, --illumina1.3+      quality is in the Illumina-1.3+ encoding
+  -A, --count-orphans     do not discard anomalous read pairs
+  -b, --bam-list FILE     list of input BAM filenames, one per line
+  -B, --no-BAQ            disable BAQ (per-Base Alignment Quality)
+  -C, --adjust-MQ INT     adjust mapping quality; recommended:50, disable:0 [0]
+  -d, --max-depth INT     max per-file depth; avoids excessive memory usage [8000]
+  -E, --redo-BAQ          recalculate BAQ on the fly, ignore existing BQs
+  -f, --fasta-ref FILE    faidx indexed reference sequence file
+  -G, --exclude-RG FILE   exclude read groups listed in FILE
+  -l, --positions FILE    skip unlisted positions (chr pos) or regions (BED)
+  -q, --min-MQ INT        skip alignments with mapQ smaller than INT [0]
+  -Q, --min-BQ INT        skip bases with baseQ/BAQ smaller than INT [13]
+  -r, --region REG        region in which pileup is generated
+  -R, --ignore-RG         ignore RG tags (one BAM = one sample)
+  --rf, --incl-flags STR|INT
+                          required flags: only include reads with any of
+                          the mask bits set []
+  --ff, --excl-flags STR|INT
+                          filter flags: skip reads with any of the mask bits set
+                                            [UNMAP,SECONDARY,QCFAIL,DUP]
+  -x, --ignore-overlaps-removal, --disable-overlap-removal
+                          disable read-pair overlap detection and removal
+  -X, --customized-index  use customized index files
+
+Output options:
+  -o, --output FILE        write output to FILE [standard output]
+  -O, --output-BP          output base positions on reads, current orientation
+      --output-BP-5        output base positions on reads, 5' to 3' orientation
+  -M, --output-mods        output base modifications
+  -s, --output-MQ          output mapping quality
+      --output-QNAME       output read names
+      --output-extra STR   output extra read fields and read tag values
+      --output-sep CHAR    set the separator character for tag lists [,]
+      --output-empty CHAR  set the no value character for tag lists [*]
+      --no-output-ins      skip insertion sequence after +NUM
+                           Use twice for complete insertion removal
+      --no-output-ins-mods don't display base modifications within insertions
+      --no-output-del      skip deletion sequence after -NUM
+                           Use twice for complete deletion removal
+      --no-output-ends     remove ^MQUAL and $ markup in sequence column
+      --reverse-del        use '#' character for deletions on the reverse strand
+  -a                       output all positions (including zero depth)
+  -a -a (or -aa)           output absolutely all positions, including unused ref. sequences
+
+Generic options:
+      --input-fmt-option OPT[=VAL]
+               Specify a single input file format option in the form
+               of OPTION or OPTION=VALUE
+      --reference FILE
+               Reference sequence FASTA FILE [null]
+      --verbosity INT
+               Set level of verbosity
+
+Note that using "samtools mpileup" to generate BCF or VCF files has been
+removed.  To output these formats, please use "bcftools mpileup" instead.
+Note: none of --samples-file, --ploidy or --ploidy-file given, assuming all sites are diploid
+Failed to read from standard input: unknown file type
