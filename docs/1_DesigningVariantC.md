@@ -93,8 +93,8 @@ Since we are working on the REANNZ HPC, we need to search and load the package b
     module purge
     module load BWA/0.7.18-GCC-12.3.0
     ```
-    !!! tip "All-In-One"
-        We will be needing a few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once, run the following command:
+    ??? tip "Tip: All-In-One module load"
+        We will be needing a few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once, you could run the following command:
         ```bash
         source ~/scripting_workshop/modload.sh
         ```
