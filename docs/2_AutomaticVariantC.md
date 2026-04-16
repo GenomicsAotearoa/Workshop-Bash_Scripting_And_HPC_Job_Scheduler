@@ -31,13 +31,13 @@
     ```
     ```bash
     #Don't forget the  . at the end of the line
-    cp -r /nesi/project/nesi02659/scripting_workshop/variant_calling/* .
+    cp -r ../variant_calling/ref_genome ../variant_calling/trimmed_reads .
     ```
     ```bash
     ls
     ```
 
-    **Output** - `ref_genome  trimmed_reads`
+    **Output** - `ref_genome trimmed_reads `
     
 
 
@@ -70,9 +70,9 @@
     set -e
     # Load all the required modules
     module purge
-    module load BWA/0.7.17-GCC-9.2.0
-    module load SAMtools/1.13-GCC-9.2.0
-    module load BCFtools/1.13-GCC-9.2.0
+    module load BWA/0.7.18-GCC-12.3.0
+    module load SAMtools/1.22-GCC-12.3.0
+    module load BCFtools/1.22-GCC-12.3.0
     
     # create the results directories
     mkdir -p results/sam results/bam results/bcf results/vcf
@@ -136,7 +136,7 @@
         ls -l variant_calling.sh 
         ```
 
-        **Output** `-rw-rw-r-- 1 fayfa80p fayfa80p 1401 Mar  5 22:29 variant_calling.sh`
+        **Output** `-rw-rw----+ 1 userID nesi02659 1411 Apr 16 13:53 variant_calling.sh`
         
         ```bash
         chmod u+x variant_calling.sh
@@ -145,7 +145,7 @@
         ls -l variant_calling.sh 
         ```
 
-        **Output** - `-rwxrw-r-- 1 fayfa80p fayfa80p 1401 Mar  5 22:29 variant_calling.sh`
+        **Output** - `-rwxrw----+ 1 userID nesi02659 1411 Apr 16 13:53 variant_calling.sh`
 
         - note colour change on the script filename
         

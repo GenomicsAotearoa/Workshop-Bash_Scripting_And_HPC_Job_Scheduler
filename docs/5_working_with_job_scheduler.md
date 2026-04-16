@@ -223,7 +223,7 @@ Understanding the resources you have available and how to use them most efficien
 
     * Change the working directory to Exercise_5.3
     ```bash
-    cd ~/scripting_workshop/scheduler/ex_5.3
+    cd ../ex_5.3
     ```
 
     * Run `ls` command and you should see two files (one .R and one sl) and one directory named slurmout
@@ -242,17 +242,20 @@ Understanding the resources you have available and how to use them most efficien
 
     * Once the job ran into completion, use `nn_seff JOBID` command to print the resource utilisation statistics (Replace **JOBID** with the corresponding number)
     ```bash
-    $ nn_seff 25222190
-    Job ID: 25222190
-    Cluster: mahuika
-    User/Group: me1234/me1234
-    State: COMPLETED (exit code 0)
-    Cores: 1
+    # Example
+    $ nn_seff 5545696
+    ```
+    ```bash
+    # Output
+    Cluster: hpc
+    Job ID: 5545696
+    State: COMPLETED
+    Cores: 2
     Tasks: 1
     Nodes: 1
-    Job Wall-time:  18.33%  00:00:33 of 00:03:00 time limit
-    CPU Efficiency: 93.94%  00:00:31 of 00:00:33 core-walltime
-    Mem Efficiency: 1.33%  13.62 MB of 1.00 GB
+    Job Wall-time:    10.6%  00:00:19 of 00:03:00 time limit
+    CPU Utilisation:  88.9%  00:00:33 of 00:00:38 core-walltime
+    Mem Utilisation:   0.0%  0.00 MB of 1.00 GB
     ```
     * Now review the content of `.err` and `.out` files in */slurmout* directory
 

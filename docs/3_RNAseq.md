@@ -47,8 +47,7 @@ Checking to make sure we have the directory and files for the workshop.
     
     **Output** - `modload.sh*  rna_seq/  scheduler/  script_workspace/  variant_calling/`
 
-!!! tip "Reminder"
-    If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
+
 
 !!! terminal "script"
 
@@ -74,23 +73,23 @@ To be able to map (align) sequencing reads on the genome, the genome needs to be
 !!! terminal "script"
 
     ```bash
-    cd ~/scripting_workshop/rna_seq/ref_genome
+    cd ref_genome
     ```
     ```bash
     #to list what is in your directory:
-    ls ~/scripting_workshop/rna_seq/ref_genome
+    ls 
     ```
     **Output** - `Saccharomyces_cerevisiae.R64-1-1.99.gtf  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa`
     ```bash
-    module load HISAT2/2.2.0-gimkl-2020a
+    module load HISAT2/2.2.1-gompi-2023a
     ```
     ```bash
     # index file:
     hisat2-build -p 4 -f Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
     ```
     ```bash
-    #list what is in the directory:
-    ls ~/scripting_workshop/rna_seq/ref_genome
+    #list what is in the directory (You should be in ~/scripting_workshop/rna_seq/ref_genome):
+    ls 
     ```
     ??? circle-check "Output"
         ```bash
@@ -126,17 +125,14 @@ Now that the genome is prepared, sequencing reads can be aligned.
     cd ..
     ```
     ```bash  
-    ls    
+    # Optional check:
+    pwd    
     ```
+    **Output**  - `~/scripting_workshop/rna_seq` 
 
 Let's map one of our sample to the reference genome:
 
 !!! terminal "script"
-
-    ```bash    
-    pwd
-    ```
-    **Output**    - `/home/$USER/scripting_workshop/rna_seq/`
 
     ```bash
     mkdir Mapping
@@ -164,7 +160,46 @@ Let's use a for loop to process our samples:
      hisat2 -p 4 -x ../ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filename -S ../Mapping/${base}.sam --summary-file ../Mapping/${base}_summary.txt
     done
     ```
-
+    ??? circle-check "Output"
+        ```
+        125090 reads; of these:
+            125090 (100.00%) were unpaired; of these:
+              15108 (12.08%) aligned 0 times
+              88988 (71.14%) aligned exactly 1 time
+              20994 (16.78%) aligned >1 times
+            87.92% overall alignment rate
+        125936 reads; of these:
+            125936 (100.00%) were unpaired; of these:
+                14300 (11.35%) aligned 0 times
+                90061 (71.51%) aligned exactly 1 time
+                21575 (17.13%) aligned >1 times
+            88.65% overall alignment rate
+        143638 reads; of these:
+            143638 (100.00%) were unpaired; of these:
+             28334 (19.73%) aligned 0 times
+             94006 (65.45%) aligned exactly 1 time
+             21298 (14.83%) aligned >1 times
+            80.27% overall alignment rate
+        80820 reads; of these:
+             80820 (100.00%) were unpaired; of these:
+              8399 (10.39%) aligned 0 times
+              60306 (74.62%) aligned exactly 1 time
+              12115 (14.99%) aligned >1 times
+            89.61% overall alignment rate
+        80453 reads; of these:
+             80453 (100.00%) were unpaired; of these:
+              8545 (10.62%) aligned 0 times
+              60560 (75.27%) aligned exactly 1 time
+              11348 (14.11%) aligned >1 times
+            89.38% overall alignment rate
+        78306 reads; of these:
+             78306 (100.00%) were unpaired; of these:
+              8201 (10.47%) aligned 0 times
+             59517 (76.01%) aligned exactly 1 time
+              10588 (13.52%) aligned >1 times
+            89.53% overall alignment rate
+        ```
+        
 
 !!! bell "Arguments"
 
@@ -201,6 +236,10 @@ The compressed binary version of SAM is called a BAM file. We use this version t
     ```bash
     less SRR014335-chr1.sam 
     ```
+
+!!! tip "Hint"
+    Hit <KBD>q</KBD> to exit the `less` interactive display.
+
 !!! heading "`.sam` header & format" 
     
     The file begins with a header, which is optional. The header is used to describe the source of data, reference sequence, method of alignment, etc., this will change depending on the aligner being used. Following the header is the alignment section. Each line that follows corresponds to alignment information for a single read. Each alignment line has 11 mandatory fields for essential mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is displayed below with the different fields highlighted.
@@ -213,7 +252,7 @@ We will convert the SAM file to BAM format using the samtools program with the v
 !!! terminal "script"
 
     ```bash
-    module load SAMtools/1.13-GCC-9.2.0
+    module load SAMtools/1.22-GCC-12.3.0
     ```
     ```bash
     for filename in *.sam
@@ -298,10 +337,11 @@ You can process all the samples at once:
 !!! terminal "script"
 
     ```bash
-    cd ~/scripting_workshop/rna_seq
+    # Move back to rna_seq dir
+    cd .. 
     ```
     ```bash
-    module load Subread/2.0.0-GCC-9.2.0
+    module load Subread/2.0.7-GCC-12.3.0
     ```
     ```bash
     pwd
@@ -319,6 +359,98 @@ You can process all the samples at once:
 
     !!! tip "Hint"
         If you encounter an error along the lines of `ERROR: invalid parameter:..`, first check that your current working directory is `Counts`. (it's all about location, location, location 😉 )
+    ??? circle-check "Output"
+		```
+			        
+			        ==========     _____ _    _ ____  _____  ______          _____  
+			        =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+			          =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+			            ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+			              ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+			        ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+			          v2.0.7
+			
+			//========================== featureCounts setting ===========================\\
+			||                                                                            ||
+			||             Input files : 6 BAM files                                      ||
+			||                                                                            ||
+			||                           SRR014335-chr1_sorted.bam                        ||
+			||                           SRR014336-chr1_sorted.bam                        ||
+			||                           SRR014337-chr1_sorted.bam                        ||
+			||                           SRR014339-chr1_sorted.bam                        ||
+			||                           SRR014340-chr1_sorted.bam                        ||
+			||                           SRR014341-chr1_sorted.bam                        ||
+			||                                                                            ||
+			||             Output file : yeast_counts.txt                                 ||
+			||                 Summary : yeast_counts.txt.summary                         ||
+			||              Paired-end : no                                               ||
+			||        Count read pairs : no                                               ||
+			||              Annotation : Saccharomyces_cerevisiae.R64-1-1.99.gtf (GTF)    ||
+			||      Dir for temp files : .                                                ||
+			||                                                                            ||
+			||                 Threads : 2                                                ||
+			||                   Level : meta-feature level                               ||
+			||      Multimapping reads : not counted                                      ||
+			|| Multi-overlapping reads : not counted                                      ||
+			||   Min overlapping bases : 1                                                ||
+			||                                                                            ||
+			\\============================================================================//
+			
+			//================================= Running ==================================\\
+			||                                                                            ||
+			|| Load annotation file Saccharomyces_cerevisiae.R64-1-1.99.gtf ...           ||
+			||    Features : 7507                                                         ||
+			||    Meta-features : 7127                                                    ||
+			||    Chromosomes/contigs : 17                                                ||
+			||                                                                            ||
+			|| Process BAM file SRR014335-chr1_sorted.bam...                              ||
+			||    Single-end reads are included.                                          ||
+			||    Total alignments : 161172                                               ||
+			||    Successfully assigned alignments : 58373 (36.2%)                        ||
+			||    Running time : 0.00 minutes                                             ||
+			||                                                                            ||
+			|| Process BAM file SRR014336-chr1_sorted.bam...                              ||
+			||    Single-end reads are included.                                          ||
+			||    Total alignments : 163348                                               ||
+			||    Successfully assigned alignments : 59351 (36.3%)                        ||
+			||    Running time : 0.00 minutes                                             ||
+			||                                                                            ||
+			|| Process BAM file SRR014337-chr1_sorted.bam...                              ||
+			||    Single-end reads are included.                                          ||
+			||    Total alignments : 179255                                               ||
+			||    Successfully assigned alignments : 61791 (34.5%)                        ||
+			||    Running time : 0.00 minutes                                             ||
+			||                                                                            ||
+			|| Process BAM file SRR014339-chr1_sorted.bam...                              ||
+			||    Single-end reads are included.                                          ||
+			||    Total alignments : 107272                                               ||
+			||    Successfully assigned alignments : 47147 (44.0%)                        ||
+			||    Running time : 0.00 minutes                                             ||
+			||                                                                            ||
+			|| Process BAM file SRR014340-chr1_sorted.bam...                              ||
+			||    Single-end reads are included.                                          ||
+			||    Total alignments : 104274                                               ||
+			||    Successfully assigned alignments : 47473 (45.5%)                        ||
+			||    Running time : 0.00 minutes                                             ||
+			||                                                                            ||
+			|| Process BAM file SRR014341-chr1_sorted.bam...                              ||
+			||    Single-end reads are included.                                          ||
+			||    Total alignments : 99253                                                ||
+			||    Successfully assigned alignments : 46614 (47.0%)                        ||
+			||    Running time : 0.00 minutes                                             ||
+			||                                                                            ||
+			|| Write the final count table.                                               ||
+			|| Write the read assignment summary.                                         ||
+			||                                                                            ||
+			|| Summary of counting results can be found in file "./yeast_counts.txt.summ  ||
+			|| ary"                                                                       ||
+			||                                                                            ||
+			\\============================================================================//
+		```
+    ```
+    ls
+    ```
+    **Output** - `yeast_counts.txt  yeast_counts.txt.summary`     
 
 !!! bell "**Arguments:**"
 

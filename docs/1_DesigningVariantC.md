@@ -91,7 +91,7 @@ Since we are working on the REANNZ HPC, we need to search and load the package b
     ```bash
     #Load BWA module
     module purge
-    module load BWA/0.7.17-GCC-9.2.0
+    module load BWA/0.7.18-GCC-12.3.0
     ```
     !!! tip "All-In-One"
         We will be needing a few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once, run the following command:
@@ -145,6 +145,9 @@ We are going to start by aligning the reads from just one of the samples in our 
         [M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
         [M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
         .....
+        [main] CMD: bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq
+        [main] Real time: 12.234 sec; CPU: 12.434 sec
+
         ```
 !!! terminal "script"
 
@@ -162,7 +165,7 @@ We will convert the SAM file to BAM format using the samtools program with the v
 
 !!! terminal "script"
     ```bash
-    module load SAMtools/1.13-GCC-9.2.0
+    module load SAMtools/1.22-GCC-12.3.0
     ```
     ```bash
     samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR2584866.aligned.bam
@@ -188,6 +191,27 @@ Next we sort the BAM file using the `sort` command from samtools. The -o flag te
     ```bash
     samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
     ```
+    
+    ??? circle-check "Output"
+        ```
+        351169 + 0 in total (QC-passed reads + QC-failed reads)
+        350000 + 0 primary
+        0 + 0 secondary
+        1169 + 0 supplementary
+        0 + 0 duplicates
+        0 + 0 primary duplicates
+        351103 + 0 mapped (99.98% : N/A)
+        349934 + 0 primary mapped (99.98% : N/A)
+        350000 + 0 paired in sequencing
+        175000 + 0 read1
+        175000 + 0 read2
+        346688 + 0 properly paired (99.05% : N/A)
+        349876 + 0 with itself and mate mapped
+        58 + 0 singletons (0.02% : N/A)
+        0 + 0 with mate mapped to a different chr
+        0 + 0 with mate mapped to a different chr (mapQ>=5)
+        ```
+
 
 ## Variant calling
 A variant call is a conclusion that there is a nucleotide difference relative to a given reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the variants.
@@ -197,7 +221,7 @@ Do the first pass on variant calling by counting read coverage with `bcftools`. 
 
 !!! terminal "script"
     ```bash
-    module load BCFtools/1.13-GCC-9.2.0
+    module load BCFtools/1.22-GCC-12.3.0
     ```
     ```bash
     bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
