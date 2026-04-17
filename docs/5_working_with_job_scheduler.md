@@ -299,7 +299,7 @@ Understanding the resources you have available and how to use them most efficien
 
     The purpose of this exercise is to compile a slurm submission script based on the script we wrote in [episode 3 - RNA-seq workflow](3_RNAseq.md )
 
-    * Recommend creating a new directory for the exercise i.e. `ex_5.5`
+    * Recommend creating a new directory for the exercise i.e. `ex_5.5` (or make this as part of the slurm script)
     * Name the file is `rnaseq.sl` (note that we change the extension from `.sh` to `.sl`)
     * Set slurm variables:
 
@@ -311,12 +311,13 @@ Understanding the resources you have available and how to use them most efficien
         * an email notification at the end of the job
 
     * We don't want to replicate ***input data*** in multiple places i.e. be conservative in terms of how you use research storage
-    * Therefore, use the same reference genome file (assign the filename to variable `genome`) and the trimmed read files (assign the path of these files to variable `trimmed`) used in the RNA-seq episode
+    * Therefore, use the same reference genome file (assign the filename to variable `genomedir`) and the trimmed read files (assign the path of these files to variable `trimmeddir`) used in the RNA-seq episode
     ```bash
-    genome=~/scripting_workshop/rnaseq/ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
-    trimmed=~/scripting_workshop/rnaseq/trimmed_reads
+    genomedir=~/scripting_workshop/rna_seq/ref_genome # update path as needed for your own dir!
+    trimmeddir=~/scripting_workshop/rna_seq/trimmed_reads # update path as needed for your own dir!
     ```
-
+    
+    Optional: recreate the genome index files as part of this script, or make use of the index files we already generated in `${genomedir}`
 ---
 
 
