@@ -1,5 +1,0 @@
-The following modules were not unloaded:
-  (Use "module --force purge" to unload all):
-
-  1) NeSI/zen3
-/var/spool/slurmd/job5542128/slurm_script: line 25: bowtie2-build: command not found
