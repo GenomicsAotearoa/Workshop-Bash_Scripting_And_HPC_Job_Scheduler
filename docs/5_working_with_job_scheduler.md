@@ -304,7 +304,7 @@ Understanding the resources you have available and how to use them most efficien
     * Set slurm variables:
 
         * name of the job as `rnaseq_workflow`
-        * number of CPUs as `2`
+        * number of CPUs as `4`
         * timelimit `15 minutes`
         * amount of memory in GB `4G`
         * generate *.err* files and *.out* 
