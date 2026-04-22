@@ -45,8 +45,7 @@ First, it is always good to verify where we are:
 
     - You should see a directory named `/scripting_workshop`
 
-!!! code-compare "Quick Check"
-    If you do not have the workshop directory, you can copy it using the command: `cp -r  /nesi/project/nesi02659/scripting_workshop/ ~`  
+ 
 
 !!! terminal "script"
 
