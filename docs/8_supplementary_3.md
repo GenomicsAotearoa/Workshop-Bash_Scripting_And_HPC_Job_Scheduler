@@ -47,7 +47,7 @@
     # count how many reads aligned to each genome feature (exon).
     featureCounts -a ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf \
                   -o results/counts/yeast_counts.txt -T 4 -t exon -g gene_id \
-                     results/bam/${base}_sorted.bam
+                     results/bam/*_sorted.bam
 
     ```
 
