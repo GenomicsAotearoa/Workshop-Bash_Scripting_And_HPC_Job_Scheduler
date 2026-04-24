@@ -1,0 +1,1484 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa &amp; NeSI">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/3_RNAseq/">
+      
+      
+        <link rel="prev" href="../2_AutomaticVariantC/">
+      
+      
+        <link rel="next" href="../4_IntroductiontoHPC/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../nesi_images/ga_logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>RNA-Seq Mapping And Count Data Workflow - Introduction to Bash Scripting and HPC Scheduler</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rna-seq-mapping-and-count-data-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to Bash Scripting and HPC Scheduler" class="md-header__button md-logo" aria-label="Introduction to Bash Scripting and HPC Scheduler" data-md-component="logo">
+      
+  <img src="../nesi_images/ga_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to Bash Scripting and HPC Scheduler
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RNA-Seq Mapping And Count Data Workflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to Bash Scripting and HPC Scheduler" class="md-nav__button md-logo" aria-label="Introduction to Bash Scripting and HPC Scheduler" data-md-component="logo">
+      
+  <img src="../nesi_images/ga_logo.png" alt="logo">
+
+    </a>
+    Introduction to Bash Scripting and HPC Scheduler
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_Background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_DesigningVariantC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variant Calling Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_AutomaticVariantC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automating a Variant Calling Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNA-Seq Mapping And Count Data Workflow
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNA-Seq Mapping And Count Data Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rna-seq-data-analysis-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RNA-Seq Data Analysis Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RNA-Seq Data Analysis Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alignment-to-a-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alignment to a reference genome
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alignment to a reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation-of-the-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparation of the genome
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alignment-on-the-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alignment on the genome
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alignment on the genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#converting-sam-files-to-bam-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Converting SAM files to BAM files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Converting SAM files to BAM files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-quick-look-into-the-sam-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A quick look into the sam file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#some-stats-on-your-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Some stats on your mapping:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read Summarization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Counting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subread-and-featurecounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subread and FeatureCounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_IntroductiontoHPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to HPC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_working_with_job_scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with job scheduler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_supplementary_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S1 : Accessing software via modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_supplementary_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S2 : slurm profiling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_supplementary_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S3 : Solutions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rna-seq-data-analysis-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RNA-Seq Data Analysis Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RNA-Seq Data Analysis Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alignment-to-a-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alignment to a reference genome
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alignment to a reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation-of-the-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparation of the genome
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alignment-on-the-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alignment on the genome
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alignment on the genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#converting-sam-files-to-bam-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Converting SAM files to BAM files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Converting SAM files to BAM files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-quick-look-into-the-sam-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A quick look into the sam file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#some-stats-on-your-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Some stats on your mapping:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read Summarization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Counting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subread-and-featurecounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subread and FeatureCounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="rna-seq-mapping-and-count-data-workflow">RNA-Seq Mapping And Count Data Workflow<a class="headerlink" href="#rna-seq-mapping-and-count-data-workflow" title="Permanent link">¶</a></h1>
+<p>This material is extracted from the <a href="https://github.com/GenomicsAotearoa/RNA-seq-workshop">RNA-seq workshop</a> Lesson</p>
+<div class="admonition clipboard-list">
+<p class="admonition-title">Objectives and overall workflow</p>
+<ul>
+<li>To develop a pipeline that does mapping and count the number of reads that mapped overall, then put all these steps into a script.</li>
+<li>Understand and perform the steps involved in RNA-seq mapping and read count.</li>
+<li>Use command line tools to run the pipeline.</li>
+</ul>
+</div>
+<p></p><center>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../nesi_images/mapping.png" data-desc-position="bottom"><img alt="imge" src="../nesi_images/mapping.png" width="300"></a>
+</center><p></p>
+<h2 id="rna-seq-data-analysis-workflow">RNA-Seq Data Analysis Workflow<a class="headerlink" href="#rna-seq-data-analysis-workflow" title="Permanent link">¶</a></h2>
+<p></p><center>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../nesi_images/rnaseq_workflowdiagram_2026.png" data-desc-position="bottom"><img alt="image" src="../nesi_images/rnaseq_workflowdiagram_2026.png"></a>
+</center><p></p>
+<h3 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permanent link">¶</a></h3>
+<ul>
+<li>You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.</li>
+<li>You have a reference genome saved in a directory called ref_genome.</li>
+</ul>
+<p>In this workshop, we have already trimmed the reads and downloaded the reference genome for you.
+First, it is always good to verify where we are:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~/scripting_workshop
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">pwd</span>
+</code></pre></div><p></p>
+<p><strong>Output</strong> - <code>/home/$USER/scripting_workshop</code></p>
+</div>
+<p>Checking to make sure we have the directory and files for the workshop.</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ls<span class="w"> </span>-F
+</code></pre></div>
+<p><strong>Output</strong> - <code>modload.sh*  rna_seq/  scheduler/  script_workspace/  variant_calling/</code></p>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>rna_seq
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ls
+</code></pre></div>
+<strong>Output</strong>  - <code>ref_genome  trimmed_reads</code> <p></p>
+</div>
+<h2 id="alignment-to-a-reference-genome">Alignment to a reference genome<a class="headerlink" href="#alignment-to-a-reference-genome" title="Permanent link">¶</a></h2>
+<p>RNA-seq generate gene expression information by quantifying the number of transcripts (per gene) in a sample. This is accomplished by counting the number of transcripts that have been sequenced - the more active a gene is, the more transcripts will be in a sample, and the more reads will be generated from that transcript.</p>
+<p>For RNA-seq, we need to align or map each read back to the genome, to see which gene produced it.
+- Highly expressed genes will generate lots of transcripts, so there will be lots of reads that map back to the position of that transcript in the genome.
+- The per-gene data we work with in an RNA-seq experiment are counts: the number of reads from each sample that originated from that gene.</p>
+<h3 id="preparation-of-the-genome">Preparation of the genome<a class="headerlink" href="#preparation-of-the-genome" title="Permanent link">¶</a></h3>
+<p>To be able to map (align) sequencing reads on the genome, the genome needs to be indexed first. In this workshop we will use <a href="https://www.nature.com/articles/nmeth.3317">HISAT2</a>.</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>ref_genome
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">#to list what is in your directory:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ls<span class="w"> </span>
+</code></pre></div>
+<strong>Output</strong> - <code>Saccharomyces_cerevisiae.R64-1-1.99.gtf  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>module<span class="w"> </span>load<span class="w"> </span>HISAT2/2.2.1-gompi-2023a
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># index file:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>hisat2-build<span class="w"> </span>-p<span class="w"> </span><span class="m">4</span><span class="w"> </span>-f<span class="w"> </span>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa<span class="w"> </span>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">#list what is in the directory (You should be in ~/scripting_workshop/rna_seq/ref_genome):</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>ls<span class="w"> </span>
+</code></pre></div><p></p>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Saccharomyces_cerevisiae.R64-1-1.99.gtf<span class="w">              </span>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.4.ht2<span class="w">  </span>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.8.ht2
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.ht2<span class="w">  </span>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.5.ht2<span class="w">  </span>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.ht2<span class="w">  </span>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.6.ht2
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.ht2<span class="w">  </span>Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.7.ht2<span class="w">   </span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition bell">
+<p class="admonition-title">Arguments</p>
+<ul>
+<li><strong>-p</strong> number of threads</li>
+<li><strong>-f</strong> fasta file</li>
+</ul>
+</div>
+<p>How many files were created during the indexing process?</p>
+<h2 id="alignment-on-the-genome">Alignment on the genome<a class="headerlink" href="#alignment-on-the-genome" title="Permanent link">¶</a></h2>
+<p>Now that the genome is prepared, sequencing reads can be aligned.</p>
+<div class="admonition rectangle-list">
+<p class="admonition-title">Information required</p>
+<ul>
+<li>Where the sequence information is stored (e.g. fastq files ...) ?</li>
+<li>What kind of sequencing: Single End or Paired end ?</li>
+<li>Where are the indexes and the genome stored? </li>
+<li>Where will the mapping files be stored?</li>
+</ul>
+</div>
+<ul>
+<li>Now, lets move one folder up (into the rna_seq folder):</li>
+</ul>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span>..
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Optional check:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nb">pwd</span><span class="w">    </span>
+</code></pre></div>
+<strong>Output</strong>  - <code>~/scripting_workshop/rna_seq</code> <p></p>
+</div>
+<p>Let's map one of our sample to the reference genome:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>Mapping
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ls
+</code></pre></div>
+<strong>Output</strong>   - <code>ref_genome  Mapping  trimmed_reads</code><p></p>
+</div>
+<p>Let's use a for loop to process our samples:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd</span><span class="w"> </span>trimmed_reads
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>ls
+</code></pre></div>
+<strong>Output</strong> - <code>SRR014335-chr1.fastq  SRR014336-chr1.fastq  SRR014337-chr1.fastq  SRR014339-chr1.fastq  SRR014340-chr1.fastq  SRR014341-chr1.fastq</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">for</span><span class="w"> </span>filename<span class="w"> </span><span class="k">in</span><span class="w"> </span>*
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w"> </span><span class="nv">base</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="w"> </span>.fastq<span class="k">)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w"> </span>hisat2<span class="w"> </span>-p<span class="w"> </span><span class="m">4</span><span class="w"> </span>-x<span class="w"> </span>../ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel<span class="w"> </span>-U<span class="w"> </span><span class="nv">$filename</span><span class="w"> </span>-S<span class="w"> </span>../Mapping/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>.sam<span class="w"> </span>--summary-file<span class="w"> </span>../Mapping/<span class="si">${</span><span class="nv">base</span><span class="si">}</span>_summary.txt
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="k">done</span>
+</code></pre></div><p></p>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>125090 reads; of these:
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    125090 (100.00%) were unpaired; of these:
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>      15108 (12.08%) aligned 0 times
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>      88988 (71.14%) aligned exactly 1 time
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>      20994 (16.78%) aligned &gt;1 times
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    87.92% overall alignment rate
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>125936 reads; of these:
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    125936 (100.00%) were unpaired; of these:
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>        14300 (11.35%) aligned 0 times
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>        90061 (71.51%) aligned exactly 1 time
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>        21575 (17.13%) aligned &gt;1 times
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>    88.65% overall alignment rate
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>143638 reads; of these:
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>    143638 (100.00%) were unpaired; of these:
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>     28334 (19.73%) aligned 0 times
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>     94006 (65.45%) aligned exactly 1 time
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>     21298 (14.83%) aligned &gt;1 times
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>    80.27% overall alignment rate
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>80820 reads; of these:
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>     80820 (100.00%) were unpaired; of these:
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>      8399 (10.39%) aligned 0 times
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>      60306 (74.62%) aligned exactly 1 time
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>      12115 (14.99%) aligned &gt;1 times
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>    89.61% overall alignment rate
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>80453 reads; of these:
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>     80453 (100.00%) were unpaired; of these:
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>      8545 (10.62%) aligned 0 times
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>      60560 (75.27%) aligned exactly 1 time
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>      11348 (14.11%) aligned &gt;1 times
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>    89.38% overall alignment rate
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a>78306 reads; of these:
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a>     78306 (100.00%) were unpaired; of these:
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>      8201 (10.47%) aligned 0 times
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>     59517 (76.01%) aligned exactly 1 time
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a>      10588 (13.52%) aligned &gt;1 times
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a>    89.53% overall alignment rate
+</code></pre></div>
+</details>
+</div>
+<div class="admonition bell">
+<p class="admonition-title">Arguments</p>
+<ul>
+<li><strong>-x</strong> The basename of the index for the reference genome. </li>
+<li><strong>-U</strong> Comma-separated list of files containing unpaired reads to be aligned</li>
+<li><strong>-S</strong> File to write SAM alignments to. By default, alignments are written to the “standard out” or “stdout” filehandle  </li>
+</ul>
+</div>
+<p>Now we can explore our SAM files.</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span><span class="w"> </span>../Mapping
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>ls
+</code></pre></div><p></p>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>SRR014335-chr1.sam          SRR014336-chr1_summary.txt  SRR014339-chr1.sam          SRR014340-chr1_summary.txt
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>SRR014335-chr1_summary.txt  SRR014337-chr1.sam          SRR014339-chr1_summary.txt  SRR014341-chr1.sam
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>SRR014336-chr1.sam          SRR014337-chr1_summary.txt  SRR014340-chr1.sam          SRR014341-chr1_summary.txt
+</code></pre></div>
+</details>
+</div>
+<h3 id="converting-sam-files-to-bam-files">Converting SAM files to BAM files<a class="headerlink" href="#converting-sam-files-to-bam-files" title="Permanent link">¶</a></h3>
+<p>The SAM file is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by Heng Li et al. provides a lot more detail on the specification.</p>
+<p>The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.</p>
+<h4 id="a-quick-look-into-the-sam-file">A quick look into the sam file<a class="headerlink" href="#a-quick-look-into-the-sam-file" title="Permanent link">¶</a></h4>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>less<span class="w"> </span>SRR014335-chr1.sam<span class="w"> </span>
+</code></pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Hint</p>
+<p>Hit <kbd>q</kbd> to exit the <code>less</code> interactive display.</p>
+</div>
+<div class="admonition heading">
+<p class="admonition-title"><code>.sam</code> header &amp; format</p>
+<p>The file begins with a header, which is optional. The header is used to describe the source of data, reference sequence, method of alignment, etc., this will change depending on the aligner being used. Following the header is the alignment section. Each line that follows corresponds to alignment information for a single read. Each alignment line has 11 mandatory fields for essential mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is displayed below with the different fields highlighted.</p>
+</div>
+<p>We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (<code>-S</code>) and to output BAM format (<code>-b</code>):</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>module<span class="w"> </span>load<span class="w"> </span>SAMtools/1.22-GCC-12.3.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">for</span><span class="w"> </span>filename<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.sam
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w"> </span><span class="nv">base</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="w"> </span>.sam<span class="k">)</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w"> </span>samtools<span class="w"> </span>view<span class="w"> </span>-S<span class="w"> </span>-b<span class="w"> </span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="w"> </span>-o<span class="w"> </span><span class="si">${</span><span class="nv">base</span><span class="si">}</span>.bam
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="k">done</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>ls
+</code></pre></div><p></p>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>SRR014335-chr1.bam<span class="w">  </span>SRR014336-chr1.bam<span class="w">  </span>SRR014337-chr1.bam<span class="w">  </span>SRR014339-chr1.bam<span class="w">  </span>SRR014340-chr1.bam<span class="w">  </span>SRR014341-chr1.bam
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>SRR014335-chr1.sam<span class="w">  </span>SRR014336-chr1.sam<span class="w">  </span>SRR014337-chr1.sam<span class="w">  </span>SRR014339-chr1.sam<span class="w">  </span>SRR014340-chr1.sam<span class="w">  </span>SRR014341-chr1.sam
+</code></pre></div>
+</details>
+</div>
+<p>Next we sort the BAM file using the sort command from samtools. <code>-o</code> tells the command where to write the output.</p>
+<div class="admonition square-pen">
+<p class="admonition-title">Note</p>
+<p>SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.</p>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">for</span><span class="w"> </span>filename<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.bam
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w"> </span><span class="nv">base</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="w"> </span>.bam<span class="k">)</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w"> </span>samtools<span class="w"> </span>sort<span class="w"> </span>-o<span class="w"> </span><span class="si">${</span><span class="nv">base</span><span class="si">}</span>_sorted.bam<span class="w"> </span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="k">done</span>
+</code></pre></div>
+</div>
+<p>We can use samtools to learn more about the bam file as well.</p>
+<h4 id="some-stats-on-your-mapping">Some stats on your mapping:<a class="headerlink" href="#some-stats-on-your-mapping" title="Permanent link">¶</a></h4>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>samtools<span class="w"> </span>flagstat<span class="w"> </span>SRR014335-chr1_sorted.bam<span class="w"> </span>
+</code></pre></div>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>156984 + 0 in total (QC-passed reads + QC-failed reads)
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>31894 + 0 secondary
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>0 + 0 supplementary
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>0 + 0 duplicates
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>136447 + 0 mapped (86.92% : N/A)
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>0 + 0 paired in sequencing
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>0 + 0 read1
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>0 + 0 read2
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>0 + 0 properly paired (N/A : N/A)
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>0 + 0 with itself and mate mapped
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a>0 + 0 singletons (N/A : N/A)
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>0 + 0 with mate mapped to a different chr
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a>0 + 0 with mate mapped to a different chr (mapQ&gt;=5)
+</code></pre></div>
+</details>
+</div>
+<hr>
+<h2 id="read-summarization">Read Summarization<a class="headerlink" href="#read-summarization" title="Permanent link">¶</a></h2>
+<p>Sequencing reads often need to be assigned to genomic features of interest after they are mapped to the reference genome. This process is often called read summarization or read quantification. Read summarization is required by a number of downstream analyses such as gene expression analysis and histone modification analysis. The output of read summarization
+is a count table, in which the number of reads assigned to each feature in each library is recorded.</p>
+<h2 id="counting">Counting<a class="headerlink" href="#counting" title="Permanent link">¶</a></h2>
+<ul>
+<li>We need to do some counting!</li>
+<li>Want to generate count data for each gene (actually each exon) - how many reads mapped to each exon in the genome, from each of our samples?</li>
+<li>Once we have that information, we can start thinking about how to determine which genes were differentially expressed in our study.</li>
+</ul>
+<h3 id="subread-and-featurecounts">Subread and FeatureCounts<a class="headerlink" href="#subread-and-featurecounts" title="Permanent link">¶</a></h3>
+<ul>
+<li>The featureCounts tool from the Subread package can be used to count how many reads aligned to each genome feature (exon).</li>
+<li>We need to specify the annotation information (.gtf file).</li>
+</ul>
+<p>You can process all the samples at once:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># Move back to rna_seq dir</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nb">cd</span><span class="w"> </span>..<span class="w"> </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>module<span class="w"> </span>load<span class="w"> </span>Subread/2.0.7-GCC-12.3.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nb">pwd</span>
+</code></pre></div>
+<strong>Output</strong>   <code>/home/$USER/scripting_workshop/rna_seq</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>mkdir<span class="w"> </span>Counts
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>cd Counts
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>featureCounts<span class="w"> </span>-a<span class="w"> </span>../ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf<span class="w"> </span>-o<span class="w"> </span>./yeast_counts.txt<span class="w"> </span>-T<span class="w"> </span><span class="m">2</span><span class="w"> </span>-t<span class="w"> </span>exon<span class="w"> </span>-g<span class="w"> </span>gene_id<span class="w"> </span>../Mapping/*sorted.bam
+</code></pre></div><p></p>
+<div class="admonition tip">
+<p class="admonition-title">Hint</p>
+<p>If you encounter an error along the lines of <code>ERROR: invalid parameter:..</code>, first check that your current working directory is <code>Counts</code>. (it's all about location, location, location 😉 )</p>
+</div>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>            ==========     _____ _    _ ____  _____  ______          _____  
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>            =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>              =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>                ====      \___ \| |  | |  _ &lt;|  _  /|  __|   / /\ \ | |  | |
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>                  ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>            ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>              v2.0.7
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>    //========================== featureCounts setting ===========================\\
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>    ||                                                                            ||
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>    ||             Input files : 6 BAM files                                      ||
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>    ||                                                                            ||
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a>    ||                           SRR014335-chr1_sorted.bam                        ||
+<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a>    ||                           SRR014336-chr1_sorted.bam                        ||
+<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>    ||                           SRR014337-chr1_sorted.bam                        ||
+<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>    ||                           SRR014339-chr1_sorted.bam                        ||
+<a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a>    ||                           SRR014340-chr1_sorted.bam                        ||
+<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>    ||                           SRR014341-chr1_sorted.bam                        ||
+<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>    ||                                                                            ||
+<a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a>    ||             Output file : yeast_counts.txt                                 ||
+<a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a>    ||                 Summary : yeast_counts.txt.summary                         ||
+<a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a>    ||              Paired-end : no                                               ||
+<a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a>    ||        Count read pairs : no                                               ||
+<a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a>    ||              Annotation : Saccharomyces_cerevisiae.R64-1-1.99.gtf (GTF)    ||
+<a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a>    ||      Dir for temp files : .                                                ||
+<a id="__codelineno-36-26" name="__codelineno-36-26" href="#__codelineno-36-26"></a>    ||                                                                            ||
+<a id="__codelineno-36-27" name="__codelineno-36-27" href="#__codelineno-36-27"></a>    ||                 Threads : 2                                                ||
+<a id="__codelineno-36-28" name="__codelineno-36-28" href="#__codelineno-36-28"></a>    ||                   Level : meta-feature level                               ||
+<a id="__codelineno-36-29" name="__codelineno-36-29" href="#__codelineno-36-29"></a>    ||      Multimapping reads : not counted                                      ||
+<a id="__codelineno-36-30" name="__codelineno-36-30" href="#__codelineno-36-30"></a>    || Multi-overlapping reads : not counted                                      ||
+<a id="__codelineno-36-31" name="__codelineno-36-31" href="#__codelineno-36-31"></a>    ||   Min overlapping bases : 1                                                ||
+<a id="__codelineno-36-32" name="__codelineno-36-32" href="#__codelineno-36-32"></a>    ||                                                                            ||
+<a id="__codelineno-36-33" name="__codelineno-36-33" href="#__codelineno-36-33"></a>    \\============================================================================//
+<a id="__codelineno-36-34" name="__codelineno-36-34" href="#__codelineno-36-34"></a>
+<a id="__codelineno-36-35" name="__codelineno-36-35" href="#__codelineno-36-35"></a>    //================================= Running ==================================\\
+<a id="__codelineno-36-36" name="__codelineno-36-36" href="#__codelineno-36-36"></a>    ||                                                                            ||
+<a id="__codelineno-36-37" name="__codelineno-36-37" href="#__codelineno-36-37"></a>    || Load annotation file Saccharomyces_cerevisiae.R64-1-1.99.gtf ...           ||
+<a id="__codelineno-36-38" name="__codelineno-36-38" href="#__codelineno-36-38"></a>    ||    Features : 7507                                                         ||
+<a id="__codelineno-36-39" name="__codelineno-36-39" href="#__codelineno-36-39"></a>    ||    Meta-features : 7127                                                    ||
+<a id="__codelineno-36-40" name="__codelineno-36-40" href="#__codelineno-36-40"></a>    ||    Chromosomes/contigs : 17                                                ||
+<a id="__codelineno-36-41" name="__codelineno-36-41" href="#__codelineno-36-41"></a>    ||                                                                            ||
+<a id="__codelineno-36-42" name="__codelineno-36-42" href="#__codelineno-36-42"></a>    || Process BAM file SRR014335-chr1_sorted.bam...                              ||
+<a id="__codelineno-36-43" name="__codelineno-36-43" href="#__codelineno-36-43"></a>    ||    Single-end reads are included.                                          ||
+<a id="__codelineno-36-44" name="__codelineno-36-44" href="#__codelineno-36-44"></a>    ||    Total alignments : 161172                                               ||
+<a id="__codelineno-36-45" name="__codelineno-36-45" href="#__codelineno-36-45"></a>    ||    Successfully assigned alignments : 58373 (36.2%)                        ||
+<a id="__codelineno-36-46" name="__codelineno-36-46" href="#__codelineno-36-46"></a>    ||    Running time : 0.00 minutes                                             ||
+<a id="__codelineno-36-47" name="__codelineno-36-47" href="#__codelineno-36-47"></a>    ||                                                                            ||
+<a id="__codelineno-36-48" name="__codelineno-36-48" href="#__codelineno-36-48"></a>    || Process BAM file SRR014336-chr1_sorted.bam...                              ||
+<a id="__codelineno-36-49" name="__codelineno-36-49" href="#__codelineno-36-49"></a>    ||    Single-end reads are included.                                          ||
+<a id="__codelineno-36-50" name="__codelineno-36-50" href="#__codelineno-36-50"></a>    ||    Total alignments : 163348                                               ||
+<a id="__codelineno-36-51" name="__codelineno-36-51" href="#__codelineno-36-51"></a>    ||    Successfully assigned alignments : 59351 (36.3%)                        ||
+<a id="__codelineno-36-52" name="__codelineno-36-52" href="#__codelineno-36-52"></a>    ||    Running time : 0.00 minutes                                             ||
+<a id="__codelineno-36-53" name="__codelineno-36-53" href="#__codelineno-36-53"></a>    ||                                                                            ||
+<a id="__codelineno-36-54" name="__codelineno-36-54" href="#__codelineno-36-54"></a>    || Process BAM file SRR014337-chr1_sorted.bam...                              ||
+<a id="__codelineno-36-55" name="__codelineno-36-55" href="#__codelineno-36-55"></a>    ||    Single-end reads are included.                                          ||
+<a id="__codelineno-36-56" name="__codelineno-36-56" href="#__codelineno-36-56"></a>    ||    Total alignments : 179255                                               ||
+<a id="__codelineno-36-57" name="__codelineno-36-57" href="#__codelineno-36-57"></a>    ||    Successfully assigned alignments : 61791 (34.5%)                        ||
+<a id="__codelineno-36-58" name="__codelineno-36-58" href="#__codelineno-36-58"></a>    ||    Running time : 0.00 minutes                                             ||
+<a id="__codelineno-36-59" name="__codelineno-36-59" href="#__codelineno-36-59"></a>    ||                                                                            ||
+<a id="__codelineno-36-60" name="__codelineno-36-60" href="#__codelineno-36-60"></a>    || Process BAM file SRR014339-chr1_sorted.bam...                              ||
+<a id="__codelineno-36-61" name="__codelineno-36-61" href="#__codelineno-36-61"></a>    ||    Single-end reads are included.                                          ||
+<a id="__codelineno-36-62" name="__codelineno-36-62" href="#__codelineno-36-62"></a>    ||    Total alignments : 107272                                               ||
+<a id="__codelineno-36-63" name="__codelineno-36-63" href="#__codelineno-36-63"></a>    ||    Successfully assigned alignments : 47147 (44.0%)                        ||
+<a id="__codelineno-36-64" name="__codelineno-36-64" href="#__codelineno-36-64"></a>    ||    Running time : 0.00 minutes                                             ||
+<a id="__codelineno-36-65" name="__codelineno-36-65" href="#__codelineno-36-65"></a>    ||                                                                            ||
+<a id="__codelineno-36-66" name="__codelineno-36-66" href="#__codelineno-36-66"></a>    || Process BAM file SRR014340-chr1_sorted.bam...                              ||
+<a id="__codelineno-36-67" name="__codelineno-36-67" href="#__codelineno-36-67"></a>    ||    Single-end reads are included.                                          ||
+<a id="__codelineno-36-68" name="__codelineno-36-68" href="#__codelineno-36-68"></a>    ||    Total alignments : 104274                                               ||
+<a id="__codelineno-36-69" name="__codelineno-36-69" href="#__codelineno-36-69"></a>    ||    Successfully assigned alignments : 47473 (45.5%)                        ||
+<a id="__codelineno-36-70" name="__codelineno-36-70" href="#__codelineno-36-70"></a>    ||    Running time : 0.00 minutes                                             ||
+<a id="__codelineno-36-71" name="__codelineno-36-71" href="#__codelineno-36-71"></a>    ||                                                                            ||
+<a id="__codelineno-36-72" name="__codelineno-36-72" href="#__codelineno-36-72"></a>    || Process BAM file SRR014341-chr1_sorted.bam...                              ||
+<a id="__codelineno-36-73" name="__codelineno-36-73" href="#__codelineno-36-73"></a>    ||    Single-end reads are included.                                          ||
+<a id="__codelineno-36-74" name="__codelineno-36-74" href="#__codelineno-36-74"></a>    ||    Total alignments : 99253                                                ||
+<a id="__codelineno-36-75" name="__codelineno-36-75" href="#__codelineno-36-75"></a>    ||    Successfully assigned alignments : 46614 (47.0%)                        ||
+<a id="__codelineno-36-76" name="__codelineno-36-76" href="#__codelineno-36-76"></a>    ||    Running time : 0.00 minutes                                             ||
+<a id="__codelineno-36-77" name="__codelineno-36-77" href="#__codelineno-36-77"></a>    ||                                                                            ||
+<a id="__codelineno-36-78" name="__codelineno-36-78" href="#__codelineno-36-78"></a>    || Write the final count table.                                               ||
+<a id="__codelineno-36-79" name="__codelineno-36-79" href="#__codelineno-36-79"></a>    || Write the read assignment summary.                                         ||
+<a id="__codelineno-36-80" name="__codelineno-36-80" href="#__codelineno-36-80"></a>    ||                                                                            ||
+<a id="__codelineno-36-81" name="__codelineno-36-81" href="#__codelineno-36-81"></a>    || Summary of counting results can be found in file "./yeast_counts.txt.summ  ||
+<a id="__codelineno-36-82" name="__codelineno-36-82" href="#__codelineno-36-82"></a>    || ary"                                                                       ||
+<a id="__codelineno-36-83" name="__codelineno-36-83" href="#__codelineno-36-83"></a>    ||                                                                            ||
+<a id="__codelineno-36-84" name="__codelineno-36-84" href="#__codelineno-36-84"></a>    \\============================================================================//
+</code></pre></div>
+</details>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>ls
+</code></pre></div>
+<strong>Output</strong> - <code>yeast_counts.txt  yeast_counts.txt.summary</code>     <p></p>
+</div>
+<div class="admonition bell">
+<p class="admonition-title"><strong>Arguments:</strong></p>
+<ul>
+<li><strong>-a</strong> Name of an annotation file. GTF/GFF format by default.</li>
+<li><strong>-o</strong> Name of output file including read counts</li>
+<li><strong>-T</strong> Specify the number of threads/CPUs used for mapping. 1 by default.</li>
+<li><strong>-t</strong> Specify feature type in GTF annotation. 'exon' by default. Features used for read counting will be extracted from annotation using the provided value.</li>
+<li><strong>-g</strong> Specify attribute type in GTF annotation. 'gene_id' by default. Meta-features used for read counting will be extracted from annotation using the provided value.</li>
+</ul>
+</div>
+<hr>
+<div class="admonition users-line">
+<p class="admonition-title">Group Exercise 3.1</p>
+<p>Now, let's work together in our groups to create an RNA-seq mapping and count script.</p>
+<ul>
+<li>You will be assigned to breakout rooms</li>
+<li>One person from the room must volunteer to share their screen as the group works together to compile the script 
+<br> </li>
+</ul>
+<div class="admonition quote">
+<ol>
+<li>It is safe to compile and submit the script from <code>/rna_seq</code> parent directory as it will override the existing results from the above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as <code>--override</code> (if it is available as a function of the application)</li>
+<li>On the other hand, how about we bring more structure to "results/outputs" ? .i.e. Perhaps create a <strong>results</strong> directory for <code>sam</code>,<code>bam</code> and <code>counts</code> sub-directories than creating <code>/Mapping</code> (for both sam and bam) and <code>/Counts</code>  ? (Similar to what we have done in Variant calling pipeline)</li>
+<li>Also, the above testing was done with three separate <code>for</code> loops. Is it possible to bring them altogether under one <code>for</code> loop ?</li>
+</ol>
+</div>
+</div>
+<hr>
+<div class="admonition pied-piper">
+<p class="admonition-title">🎊</p>
+<p>At this stage we have mastered the art of writing scripts, instead of running them on the command line, let us now run them on HPC.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../2_AutomaticVariantC/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Automating a Variant Calling Workflow">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Automating a Variant Calling Workflow
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../4_IntroductiontoHPC/" class="md-footer__link md-footer__link--next" aria-label="Next: Introduction to HPC">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Introduction to HPC
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Introduction to Bash Scripting and HPC Scheduler is licensed under a <a rel="noopener" target="_blank" href="https://opensource.org/license/mit/">MIT License</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
