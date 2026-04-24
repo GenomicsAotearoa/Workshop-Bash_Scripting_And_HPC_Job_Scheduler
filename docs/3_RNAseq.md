@@ -15,7 +15,7 @@ This material is extracted from the [RNA-seq workshop](https://github.com/Genomi
 
 ## RNA-Seq Data Analysis Workflow
 <center>
-![image](./nesi_images/rnaseq_workflowdiagram.png)
+![image](./nesi_images/rnaseq_workflowdiagram_2026.png)
 </center>
 
 ### Assumptions
