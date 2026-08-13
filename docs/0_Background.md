@@ -1,4 +1,4 @@
-# Background
+# Background & setup
 
 !!! rectangle-list "Primary objective of this workshop"
 
@@ -16,3 +16,25 @@ Finally, we'll go one step further and introduce **HPC job scheduling**. Most se
 By the end of the workshop, you'll have a practical workflow that takes you all the way from a handful of typed commands to a reproducible, cluster-ready pipeline.
 
 ![image](./nesi_images/phase_process_outputs.png)
+
+## Setup
+
+
+!!! screwdriver-wrench "Setup"
+
+    This workshop is run on the REANNZ HPC. Before the workshop, the instructors set up a unique dir for each learner with a copy of the dataset. Follow the instructions below to access your directory:
+
+!!! terminal "code"
+    - Make sure you are in your home directory
+    ```bash
+    cd ~
+    ```
+    - Create a symbolic link to the `scripting_workshop` dir that has been uniquely created for you:
+    ```bash
+    ln -s /nesi/nobackup/nesi02659/scripting_workshop/users/${USER}/ scripting_workshop
+    ```
+    - You should now have a dir called `scripting_workshop` in your home dir. Move into this directory:
+    ```bash
+    cd ~/scripting_workshop
+    ``` 
+

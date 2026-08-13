@@ -30,10 +30,7 @@
 
 <br>
 
-!!! screwdriver-wrench "Setup"
 
-    Workshop material is designed to run on REANNZ HPC. You do not need to do anything in advance.
-<br>
 
 !!! rectangle-list "Content"
     | **Lesson**                                        | **Overview** | 
