@@ -1,6 +1,6 @@
 # Introduction to HPC
 
-<center>![image](./nesi_images/scaling.png){width="300"}</center>
+![image](./nesi_images/scaling.png){.center width="300"}
 
 ## Defining high-performance computing
 

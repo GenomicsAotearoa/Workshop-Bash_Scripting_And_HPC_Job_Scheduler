@@ -8,15 +8,11 @@ This material is extracted from the [RNA-seq workshop](https://github.com/Genomi
     - Understand and perform the steps involved in RNA-seq mapping and read count.
     - Use command line tools to run the pipeline.
 
-<center>
-![imge](./nesi_images/mapping.png){width="300"}
-</center>
+![image](./nesi_images/mapping.png){.center width="300"}
 
 
 ## RNA-Seq Data Analysis Workflow
-<center>
-![image](./nesi_images/rnaseq_workflowdiagram_2026.png)
-</center>
+![image](./nesi_images/rnaseq_workflowdiagram_2026.png){.center}
 
 ### Assumptions
 - You have already performed trimming and filtering of your reads and saved in a directory called trimmed_reads.

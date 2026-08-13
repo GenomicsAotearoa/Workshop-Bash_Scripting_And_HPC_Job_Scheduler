@@ -9,9 +9,7 @@ This material is extracted from the [Genomics Data Carpentry Lesson](https://dat
     - Use command line tools to perform variant calling.
 
 
-<center>
-![image](./nesi_images/variant_callingworkflow.png){width="800"}
-</center>
+![image](./nesi_images/variant_callingworkflow.png){.center width="800"}
 
 
 !!! square-pen "Assumptions"

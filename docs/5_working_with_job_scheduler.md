@@ -1,6 +1,6 @@
 # Working with job scheduler
 
-<center>![image](./nesi_images/scheduler_image.png){width="500"}</center>
+![image](./nesi_images/scheduler_image.png){.center width="500"}
 
 ## Introduction to slurm scheduler and directives
 
@@ -36,9 +36,7 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
       
 ## Life cycle of a slurm job
 
-<center>
-![image](./nesi_images/batch_system_flow.png){width="1000"}
-</center>
+![image](./nesi_images/batch_system_flow.png){.center width="1000"}
 
 - - -
 !!! clipboard-list "Commonly used Slurm commands"
@@ -83,9 +81,7 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
 As with most other scheduler systems, job submission scripts in Slurm consist of a header section with the shell specification and options to the submission command (`sbatch` in this case) followed by the body of the script that actually runs the commands you want. In the header section, options to `sbatch` should be prepended with `#SBATCH`.
 
 
-<center>
-![image](./nesi_images/anatomy_of_a_slurm_script.png){width="700"}
-</center>
+![image](./nesi_images/anatomy_of_a_slurm_script.png){.center width="700"}
 
 
 !!! square-pen "Commented lines `#`"

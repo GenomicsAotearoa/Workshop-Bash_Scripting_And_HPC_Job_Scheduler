@@ -1,15 +1,10 @@
-<center>![image](./nesi_images/ga_reannz.png){width="300"}</center>
+![image](./nesi_images/ga_reannz.png){ .center width="300" }
 
-<center>
-# **Introduction to Bash Scripting and HPC Scheduler**
+# **Introduction to Bash Scripting and HPC Scheduler**{ .center }
  
-</center>
 
 
-<center>
-![image](./nesi_images/slurm_llinux_penguin_dna.png){width="450"}
-</center>
-
+![image](./nesi_images/slurm_llinux_penguin_dna.png){ .center width="450" }
 
 
 !!! check-to-slot "Prerequisites"
