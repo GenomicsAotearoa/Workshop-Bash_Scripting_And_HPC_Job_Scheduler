@@ -57,6 +57,38 @@
         ![image](./nesi_images/open_text_file.png)
 
 
+??? tip "Variant calling command line steps"
+    
+    In the order they were run in the previous step-by-step lesson:
+
+    ```bash
+
+    mkdir -p results/sam results/bam results/bcf results/vcf
+
+    module purge
+    module load BWA/0.7.18-GCC-12.3.0
+
+    bwa index ref_genome/ecoli_rel606.fasta
+
+    bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
+
+    module load SAMtools/1.22-GCC-12.3.0
+
+    samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR2584866.aligned.bam
+
+    samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
+
+    samtools flagstat results/bam/SRR2584866.aligned.sorted.bam 
+
+    module load BCFtools/1.22-GCC-12.3.0
+
+    bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
+
+    bcftools call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf
+
+    vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf > results/vcf/SRR2584866_final_variants.vcf
+    ```
+
 !!! terminal-2 "In the text editor, type the commands"
 
     ```bash linenums="1"
@@ -82,11 +114,11 @@
     bwa index $genome
     
     # create a loop that map reads to the genome, sort the bam files and call variants
-    for fq1 in trimmed_reads/*_1.trim.sub.fastq
+    for file in trimmed_reads/*_1.trim.sub.fastq
         do
-        echo "working with file $fq1"
+        echo "working with file $file"
     
-        base=$(basename $fq1 _1.trim.sub.fastq)
+        base=$(basename $file _1.trim.sub.fastq)
         echo "base name is $base"
     
        # setting the variables
@@ -103,16 +135,28 @@
       bwa mem $genome $fq1 $fq2 > $sam
       samtools view -S -b $sam > $bam
       samtools sort -o $sorted_bam $bam
-      samtools index $sorted_bam
       bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
       bcftools call --ploidy 1 -m -v -o $variants $raw_bcf
       vcfutils.pl varFilter $variants > $final_variants
     
     done
     ```
+
     <br>
+
+    ??? tip "Optional: add flagstat output too"
+
+        ```bash
+        # setting the variables - add AFTER sorted_bam variable
+        flagstat=results/bam/${base}.aligned.sorted.bam.summary
+
+        # running the analysis steps  - add AFTER samtools sort command
+        samtools flagstat $sorted_bam > $flagstat
+        ```
+
     ??? hand-holding-dollar "Shell variables"
         A variable is a character string to which we assign a value. The value assigned could be a number, text, filename, device, or any other type of data. A variable is nothing more than a pointer to the actual data. The shell enables you to create, assign, and delete variables.
+
 
 
 
