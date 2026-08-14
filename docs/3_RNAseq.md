@@ -58,9 +58,10 @@ Checking to make sure we have the directory and files for the workshop.
 ## Alignment to a reference genome
 RNA-seq generate gene expression information by quantifying the number of transcripts (per gene) in a sample. This is accomplished by counting the number of transcripts that have been sequenced - the more active a gene is, the more transcripts will be in a sample, and the more reads will be generated from that transcript.
 
-For RNA-seq, we need to align or map each read back to the genome, to see which gene produced it.
-- Highly expressed genes will generate lots of transcripts, so there will be lots of reads that map back to the position of that transcript in the genome.
-- The per-gene data we work with in an RNA-seq experiment are counts: the number of reads from each sample that originated from that gene.
+For RNA-seq, we need to align or map each read back to the genome, to see which gene produced it.  
+
+- Highly expressed genes will generate lots of transcripts, so there will be lots of reads that map back to the position of that transcript in the genome.  
+- The per-gene data we work with in an RNA-seq experiment are counts: the number of reads from each sample that originated from that gene.  
 
 ### Preparation of the genome
 
@@ -467,7 +468,7 @@ You can process all the samples at once:
     <br> 
     !!! quote ""
         1. It is safe to compile and submit the script from `/rna_seq` parent directory as it will override the existing results from the above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as `--override` (if it is available as a function of the application)
-        2. On the other hand, how about we bring more structure to "results/outputs" ? .i.e. Perhaps create a **results** directory for `sam`,`bam` and `counts` sub-directories than creating `/Mapping` (for both sam and bam) and `/Counts`  ? (Similar to what we have done in Variant calling pipeline)
+        2. On the other hand, how about we bring more structure to "results/outputs" ? .i.e. Perhaps create a **results** directory for `sam`,`bam` and `counts` sub-directories rather than creating `/Mapping` (for both sam and bam) and `/Counts`  ? (Similar to what we have done in Variant calling pipeline)
         3. Also, the above testing was done with three separate `for` loops. Is it possible to bring them altogether under one `for` loop ?
     
 ---
