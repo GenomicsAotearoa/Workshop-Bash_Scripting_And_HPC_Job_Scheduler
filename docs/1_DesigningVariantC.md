@@ -251,6 +251,97 @@ Identify SNVs using bcftools call. We have to specify ploidy with the flag `--pl
 
 ### Explore the VCF format:
 
+
+!!! terminal-2 "Quick look with head:"
+    ```bash
+    head -n 50 SRR2584866_final_variants.vcf
+    ```
+
+    ??? circle-check "Output"
+
+        ```
+        ##fileformat=VCFv4.2
+        ##FILTER=<ID=PASS,Description="All filters passed">
+        ##bcftoolsVersion=1.22+htslib-1.22
+        ##bcftoolsCommand=mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
+        ##reference=file://ref_genome/ecoli_rel606.fasta
+        ##contig=<ID=CP000819.1,length=4629812>
+        ##ALT=<ID=*,Description="Represents allele(s) other than observed.">
+        ##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+        ##INFO=<ID=IDV,Number=1,Type=Integer,Description="Maximum number of raw reads supporting an indel">
+        ##INFO=<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of raw reads supporting an indel">
+        ##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
+        ##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version="3">
+        ##INFO=<ID=RPBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Read Position Bias (closer to 0 is better)">
+        ##INFO=<ID=MQBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Mapping Quality Bias (closer to 0 is better)">
+        ##INFO=<ID=BQBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Base Quality Bias (closer to 0 is better)">
+        ##INFO=<ID=MQSBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Mapping Quality vs Strand Bias (closer to 0 is better)">
+        ##INFO=<ID=SCBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Soft-Clip Length Bias (closer to 0 is better)">
+        ##INFO=<ID=SGB,Number=1,Type=Float,Description="Segregation based metric, http://samtools.github.io/bcftools/rd-SegBias.pdf">
+        ##INFO=<ID=MQ0F,Number=1,Type=Float,Description="Fraction of MQ0 reads (smaller is better)">
+        ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
+        ##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths (high-quality bases)">
+        ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+        ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes for each ALT allele, in the same order as listed">
+        ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+        ##INFO=<ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases">
+        ##INFO=<ID=MQ,Number=1,Type=Integer,Description="Average mapping quality">
+        ##bcftools_callVersion=1.22+htslib-1.22
+        ##bcftools_callCommand=call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf; Date=Fri Aug 14 11:29:56 2026
+        #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR2584866.aligned.sorted.bam
+        CP000819.1      1521    .       C       T       207.417 .       DP=9;VDB=0.99088;SGB=-0.662043;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,5;MQ=60    GT:PL:AD 1:237,0:0,9
+        CP000819.1      1612    .       A       G       225.417 .       DP=13;VDB=0.772939;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,5,6;MQ=60  GT:PL:AD 1:255,0:0,11
+        CP000819.1      9092    .       A       G       225.417 .       DP=14;VDB=0.905545;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,7,4;MQ=60  GT:PL:AD 1:255,0:0,11
+        CP000819.1      9972    .       T       G       214.417 .       DP=10;VDB=0.0199125;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,8;MQ=60 GT:PL:AD 1:244,0:0,10
+        CP000819.1      10563   .       G       A       225.417 .       DP=11;VDB=0.988455;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,6;MQ=60  GT:PL:AD 1:255,0:0,10
+        CP000819.1      22257   .       C       T       127.416 .       DP=5;VDB=0.0799024;SGB=-0.590765;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,3;MQ=60  GT:PL:AD 1:157,0:0,5
+        CP000819.1      38971   .       A       G       225.417 .       DP=14;VDB=0.926209;SGB=-0.683931;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,3,10;MQ=60 GT:PL:AD 1:255,0:0,13
+        CP000819.1      42306   .       A       G       225.417 .       DP=15;VDB=0.987311;SGB=-0.688148;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,9;MQ=60  GT:PL:AD 1:255,0:0,15
+        CP000819.1      45277   .       A       G       225.417 .       DP=15;VDB=0.262612;SGB=-0.680642;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,6;MQ=60  GT:PL:AD 1:255,0:0,12
+        CP000819.1      56613   .       C       G       213.417 .       DP=12;VDB=0.936239;SGB=-0.680642;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,9,3;MQ=60  GT:PL:AD 1:243,0:0,12
+        CP000819.1      62118   .       A       G       225.417 .       DP=19;VDB=0.0761508;SGB=-0.689466;MQSBZ=1;MQ0F=0;AC=1;AN=1;DP4=0,0,8,8;MQ=59 GT:PL:AD 1:255,0:0,16
+        CP000819.1      64042   .       G       A       225.417 .       DP=18;VDB=0.149787;SGB=-0.689466;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,10;MQ=60 GT:PL:AD 1:255,0:0,16
+        CP000819.1      78808   .       C       T       225.417 .       DP=23;VDB=0.906225;SGB=-0.69168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,11,8;MQ=60  GT:PL:AD 1:255,0:0,19
+        CP000819.1      80113   .       A       G       178.416 .       DP=9;VDB=0.980881;SGB=-0.662043;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,7,2;MQ=60   GT:PL:AD 1:208,0:0,9
+        CP000819.1      81158   .       A       C       225.417 .       DP=13;VDB=0.588386;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,5,6;MQ=60  GT:PL:AD 1:255,0:0,11
+        CP000819.1      87462   .       A       G       205.417 .       DP=10;VDB=0.129862;SGB=-0.636426;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,1,6;MQ=60  GT:PL:AD 1:235,0:0,7
+        CP000819.1      94370   .       A       G       220.417 .       DP=11;VDB=0.952152;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,8;MQ=60  GT:PL:AD 1:250,0:0,10
+        CP000819.1      98286   .       C       T       147.416 .       DP=7;VDB=0.707785;SGB=-0.636426;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,3;MQ=60   GT:PL:AD 1:177,0:0,7
+        CP000819.1      98404   .       G       A       225.417 .       DP=14;VDB=0.33436;SGB=-0.686358;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,8,6;MQ=60   GT:PL:AD 1:255,0:0,14
+        CP000819.1      105581  .       G       A       225.417 .       DP=13;VDB=0.376838;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,5;MQ=60  GT:PL:AD 1:255,0:0,11
+        CP000819.1      124045  .       A       G       225.417 .       DP=13;VDB=0.575341;SGB=-0.680642;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,6;MQ=60  GT:PL:AD 1:255,0:0,12
+        ```
+
+    ??? tip "Tip: Remove headers from output"
+        Use grep to remove all header lines, except the column name header line:
+        ```bash
+        cat SRR2584866_final_variants.vcf | grep -v '^##' | head -n 20 
+        ```
+        ??? circle-check "Output"
+            ```bash
+            #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR2584866.aligned.sorted.bam
+            CP000819.1      1521    .       C       T       207.417 .       DP=9;VDB=0.99088;SGB=-0.662043;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,5;MQ=60    GT:PL:AD 1:237,0:0,9
+            CP000819.1      1612    .       A       G       225.417 .       DP=13;VDB=0.772939;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,5,6;MQ=60  GT:PL:AD 1:255,0:0,11
+            CP000819.1      9092    .       A       G       225.417 .       DP=14;VDB=0.905545;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,7,4;MQ=60  GT:PL:AD 1:255,0:0,11
+            CP000819.1      9972    .       T       G       214.417 .       DP=10;VDB=0.0199125;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,8;MQ=60 GT:PL:AD 1:244,0:0,10
+            CP000819.1      10563   .       G       A       225.417 .       DP=11;VDB=0.988455;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,6;MQ=60  GT:PL:AD 1:255,0:0,10
+            CP000819.1      22257   .       C       T       127.416 .       DP=5;VDB=0.0799024;SGB=-0.590765;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,3;MQ=60  GT:PL:AD 1:157,0:0,5
+            CP000819.1      38971   .       A       G       225.417 .       DP=14;VDB=0.926209;SGB=-0.683931;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,3,10;MQ=60 GT:PL:AD 1:255,0:0,13
+            CP000819.1      42306   .       A       G       225.417 .       DP=15;VDB=0.987311;SGB=-0.688148;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,9;MQ=60  GT:PL:AD 1:255,0:0,15
+            CP000819.1      45277   .       A       G       225.417 .       DP=15;VDB=0.262612;SGB=-0.680642;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,6;MQ=60  GT:PL:AD 1:255,0:0,12
+            CP000819.1      56613   .       C       G       213.417 .       DP=12;VDB=0.936239;SGB=-0.680642;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,9,3;MQ=60  GT:PL:AD 1:243,0:0,12
+            CP000819.1      62118   .       A       G       225.417 .       DP=19;VDB=0.0761508;SGB=-0.689466;MQSBZ=1;MQ0F=0;AC=1;AN=1;DP4=0,0,8,8;MQ=59 GT:PL:AD 1:255,0:0,16
+            CP000819.1      64042   .       G       A       225.417 .       DP=18;VDB=0.149787;SGB=-0.689466;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,10;MQ=60 GT:PL:AD 1:255,0:0,16
+            CP000819.1      78808   .       C       T       225.417 .       DP=23;VDB=0.906225;SGB=-0.69168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,11,8;MQ=60  GT:PL:AD 1:255,0:0,19
+            CP000819.1      80113   .       A       G       178.416 .       DP=9;VDB=0.980881;SGB=-0.662043;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,7,2;MQ=60   GT:PL:AD 1:208,0:0,9
+            CP000819.1      81158   .       A       C       225.417 .       DP=13;VDB=0.588386;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,5,6;MQ=60  GT:PL:AD 1:255,0:0,11
+            CP000819.1      87462   .       A       G       205.417 .       DP=10;VDB=0.129862;SGB=-0.636426;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,1,6;MQ=60  GT:PL:AD 1:235,0:0,7
+            CP000819.1      94370   .       A       G       220.417 .       DP=11;VDB=0.952152;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,8;MQ=60  GT:PL:AD 1:250,0:0,10
+            CP000819.1      98286   .       C       T       147.416 .       DP=7;VDB=0.707785;SGB=-0.636426;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,3;MQ=60   GT:PL:AD 1:177,0:0,7
+            CP000819.1      98404   .       G       A       225.417 .       DP=14;VDB=0.33436;SGB=-0.686358;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,8,6;MQ=60   GT:PL:AD 1:255,0:0,14
+            ```
+
+
 !!! quote ""
 
     - At this stage you can use various tools to analyse the vcf file. 
