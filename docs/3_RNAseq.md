@@ -82,7 +82,7 @@ To be able to map (align) sequencing reads on the genome, the genome needs to be
     ```
     ```bash
     # index file:
-    hisat2-build -p 4 -f Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+    hisat2-build -p 2 -f Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
     ```
     ```bash
     #list what is in the directory (You should be in ~/scripting_workshop/rna_seq/ref_genome):
@@ -294,15 +294,29 @@ We can use samtools to learn more about the bam file as well.
 !!! terminal "script"
 
     ```bash    
-    samtools flagstat SRR014335-chr1_sorted.bam 
+    for filename in *_sorted.bam
+    do
+    base=$(basename ${filename} _sorted.bam)
+    samtools flagstat ${filename} > ${base}_mapstat.txt   
+    done
     ```
+
+    Optional: Check one of the outputs. 
+
+    ```bash
+    cat SRR014335-chr1_mapstat.txt
+    ```
+
     ??? circle-check "Output"
         ```
-        156984 + 0 in total (QC-passed reads + QC-failed reads)
-        31894 + 0 secondary
+        161172 + 0 in total (QC-passed reads + QC-failed reads)
+        125090 + 0 primary
+        36082 + 0 secondary
         0 + 0 supplementary
         0 + 0 duplicates
-        136447 + 0 mapped (86.92% : N/A)
+        0 + 0 primary duplicates
+        146064 + 0 mapped (90.63% : N/A)
+        109982 + 0 primary mapped (87.92% : N/A)
         0 + 0 paired in sequencing
         0 + 0 read1
         0 + 0 read2
@@ -315,7 +329,7 @@ We can use samtools to learn more about the bam file as well.
 
 - - - 
 
-## Read Summarization
+## Read Summarisation
 Sequencing reads often need to be assigned to genomic features of interest after they are mapped to the reference genome. This process is often called read summarization or read quantification. Read summarization is required by a number of downstream analyses such as gene expression analysis and histone modification analysis. The output of read summarization
 is a count table, in which the number of reads assigned to each feature in each library is recorded.
 
@@ -467,9 +481,70 @@ You can process all the samples at once:
     * One person from the room must volunteer to share their screen as the group works together to compile the script 
     <br> 
     !!! quote ""
-        1. It is safe to compile and submit the script from `/rna_seq` parent directory as it will override the existing results from the above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as `--override` (if it is available as a function of the application)
+        1. It is safe to compile and submit the script from `/rna_seq` parent directory as it will override the existing results from the above steps. Applications used in this pipeline will obey the "override" by default. However, some applications will demand the existing outputs to be deleted or use a provided flag such as `--override` (if it is available as a function of the application).  
         2. On the other hand, how about we bring more structure to "results/outputs" ? .i.e. Perhaps create a **results** directory for `sam`,`bam` and `counts` sub-directories rather than creating `/Mapping` (for both sam and bam) and `/Counts`  ? (Similar to what we have done in Variant calling pipeline)
-        3. Also, the above testing was done with three separate `for` loops. Is it possible to bring them altogether under one `for` loop ?
+        3. Also, the above testing was done with four separate `for` loops. Is it possible to bring them altogether under one `for` loop ?
+        4. Bonus: We don't need the original bam file, only the sorted bam. Can you use a pipe to redirect the output of `samtools view` directly into `samtools sort`? 
+    
+    ??? tip "RNAseq command line steps"
+        In the order they were run step-by-step:
+
+        ```bash
+        cd ~/scripting_workshop
+        cd rna_seq
+        cd ref_genome
+
+        module load HISAT2/2.2.1-gompi-2023a
+
+        hisat2-build -p 4 -f Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+
+        cd ..
+
+        mkdir Mapping
+
+        cd trimmed_reads
+
+        for filename in *
+        do
+        base=$(basename ${filename} .fastq)
+        hisat2 -p 4 -x ../ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filename -S ../Mapping/${base}.sam --summary-file ../Mapping/${base}_summary.txt
+        done
+
+        cd ../Mapping
+
+        module load SAMtools/1.22-GCC-12.3.0
+
+        for filename in *.sam
+        do
+        base=$(basename ${filename} .sam)
+        samtools view -S -b ${filename} -o ${base}.bam
+        done
+
+        for filename in *.bam
+        do
+        base=$(basename ${filename} .bam)
+        samtools sort -o ${base}_sorted.bam ${filename}
+        done
+
+
+        for filename in *_sorted.bam
+        do
+        base=$(basename ${filename} _sorted.bam)
+        samtools flagstat ${filename} > ${base}_mapstat.txt   
+        done
+
+
+        cd .. 
+
+        module load Subread/2.0.7-GCC-12.3.0
+
+        mkdir Counts
+
+        cd Counts
+
+        featureCounts -a ../ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o ./yeast_counts.txt -T 2 -t exon -g gene_id ../Mapping/*sorted.bam
+
+        ```
     
 ---
 

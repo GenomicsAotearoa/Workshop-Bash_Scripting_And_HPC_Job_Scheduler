@@ -24,32 +24,39 @@
     mkdir -p results/{sam,bam,counts}
 
     # Index genome
-    hisat2-build -p 2 -f ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa \
-                         ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+    genome=ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
+    index=ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+
+    hisat2-build -p 2 -f $genome $index
 
     # Align to indexed genome
-    for filename in trimmed_reads/*.fastq
+    for file in trimmed_reads/*.fastq
     do
           # Extract base name
-          base=$(basename ${filename} .fastq)
-
-          # Align to the reference genome
-          hisat2 -p 2 -x ref_genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filename \
-          -S results/sam/${base}.sam --summary-file results/sam/${base}.summary.txt
-
-          # Convert SAM to BAM
-          samtools view -S -b results/sam/${base}.sam | samtools sort -o results/bam/${base}_sorted.bam
-
-          # Extract stats for mapping
-          samtools flagstat results/bam/${base}_sorted.bam > results/bam/${base}_mapstat.txt
+          base=$(basename ${file} .fastq)
+          
+          # Set variables
+          sam=results/sam/${base}.sam
+          summary=results/sam/${base}.summary.txt
+          sortedbam=results/bam/${base}_sorted.bam
+          mapstat=results/bam/${base}_mapstat.txt
+          
+          # Run commands
+          hisat2 -p 2 -x $index -U $file -S $sam --summary-file $summary
+          samtools view -S -b $sam | samtools sort -o $sortedbam
+          samtools flagstat $sortedbam > $mapstat
     done
 
-    # count how many reads aligned to each genome feature (exon).
+    # count how many reads aligned to each genome feature (exon)  
     featureCounts -a ref_genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf \
-                  -o results/counts/yeast_counts.txt -T 4 -t exon -g gene_id \
-                     results/bam/*_sorted.bam
+                  -o results/counts/yeast_counts.txt -T 2 -t exon -g gene_id \
+                    results/bam/*_sorted.bam
 
     ```
+
+    !!! tip "What is the <KBD>\</KBD> in the featureCounts command line?"
+      
+        You can use the backslash to continue your code over multiple lines. This increases the ease of visibility across very long lines of code. You'll frequently see scripts with each flag on a new line to make it easy to see and edit flag arguments.   
 
 ??? circle-check "Exercise 5.4 - Variant calling workflow slurm script 📜"	
     
