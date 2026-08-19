@@ -31,7 +31,7 @@ By the end of the workshop, you'll have a practical workflow that takes you all 
     ```
     - Create a symbolic link to the `scripting_workshop` dir that has been uniquely created for you:
     ```bash
-    ln -s /nesi/nobackup/nesi02659/scripting_workshop/users/${USER}/ scripting_workshop
+    ln -s /nesi/nobackup/nesi02659/scripting_workshop/users/${USER} scripting_workshop
     ```
     - You should now have a dir called `scripting_workshop` in your home dir. Move into this directory:
     ```bash
