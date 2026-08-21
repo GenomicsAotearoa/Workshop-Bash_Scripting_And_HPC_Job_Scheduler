@@ -13,9 +13,16 @@ One of the workarounds for this issue is Environment modules. A module is a self
 
 There are a number of different environment module implementations commonly used on HPC systems and the one used in REANNZ cluster is `Lmod` where the `module` command is used to interact with environment modules.
 
+Read more about modules in the [REANNZ documentation on Environment & Modules.](https://docs.nesi.org.nz/Tutorials/Introduction_To_HPC/Environment_And_Modules/) 
+
 !!! circle-info "Commonly used `module` sub-commands"
 
-    * View available modules
+     * View all currently loaded modules 
+    ```bash
+    module list
+    ```
+    
+    * View ALL available modules (hint: you may want to redirect the output into a text file for easier searching)
     ```bash
     module avail
     ```

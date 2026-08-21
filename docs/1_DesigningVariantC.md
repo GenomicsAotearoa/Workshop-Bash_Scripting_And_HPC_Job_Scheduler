@@ -54,6 +54,94 @@ First, it is always good to verify where we are:
     ls
     ```
     **Output**:  `ref_genome  trimmed_reads` 
+
+## Modules on the HPC
+
+Similar to other HPCs/SuperComputers, REANNZ Clusters provide software as modules (this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).  
+
+ - A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.  
+
+- Refer to [supplementary 1 - Accessing software via modules](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/ 6_supplementary_1/) for more information. 
+
+Let's search for the first software we'll need called "Burrows-Wheeler Aligner" or BWA.  
+
+!!! terminal "script"
+
+    ```bash
+    #Search for a module. Module spider is not case-sensitive. 
+    module spider bwa
+    ```
+    !!! circle-check "Output - this will change as new versions are added"
+        ```bash
+        -------------------------------------------------------------------------------------------------
+        BWA:
+        -------------------------------------------------------------------------------------------------
+        Description:
+        Burrows-Wheeler Aligner (BWA) is an efficient program that aligns relatively short
+        nucleotide sequences against a long reference sequence such as the human genome.
+
+        Versions:
+        BWA/0.7.17-GCC-7.4.0
+        BWA/0.7.17-GCC-9.2.0
+        BWA/0.7.17-GCC-11.3.0
+        BWA/0.7.18-GCC-12.3.0
+
+        -------------------------------------------------------------------------------------------------
+        For detailed information about a specific "BWA" package (including how to load the modules) use the module's full name.
+        Note that names that have a trailing (E) are extensions provided by other modules.
+        For example:
+
+        $ module spider BWA/0.7.18-GCC-12.3.0
+        -------------------------------------------------------------------------------------------------
+        ```
+
+Now run module purge, then module load the most recent version of BWA:
+
+!!! terminal "script"
+
+    ```bash
+    #Load BWA module
+    module purge
+    module load BWA/0.7.18-GCC-12.3.0
+    ```
+
+!!! square-pen "Note"
+
+    It's a good idea to run `module purge` first, to make sure you don't get dependency clashes. Each module you load are set up by the HPC maintainers to also pull in any software dependencies they need. As multiple modules can need the same software dependencies, but may be linked to different versions of that software, it's safer to purge first. 
+
+??? tip "Tip: All-In-One module load"
+    We will be needing a few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once, you could run the following command:
+    ```bash
+    source ~/scripting_workshop/modload.sh
+    ```
+    ??? circle-check "Output"
+        ```bash
+        The following modules were not unloaded:
+        (Use "module --force purge" to unload all):
+
+        1) XALT/minimal   2) slurm   
+        Loaded modules BWA, SAMtools, BCFtools,HISAT2,Subread
+        ```
+        
+        - Please **do not** run `module --force purge` under any circumstances
+
+To see all of your currently loaded modules, run:
+!!! terminal "script"
+
+    ```bash
+    module list
+    ```
+    !!! circle-check  "Output"
+        ```bash
+        Currently Loaded Modules:
+        1) NeSI/zen3 (S)   2) GCCcore/12.3.0   3) zlib/1.2.13-GCCcore-12.3.0   4) binutils/2.40-GCCcore-12.3.0   5) GCC/12.3.0   6) BWA/0.7.18-GCC-12.3.0
+
+        Where:
+        S:  Module is Sticky, requires --force to unload or purge
+        ```
+    - You'll see multiple software dependencies have now loaded not just BWA! 
+    - Please **do not** use `$ module --force purge`
+
 ## Alignment to a reference genome
 First we need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because mkdir can accept multiple new directory names as input.
 
@@ -72,39 +160,7 @@ Our first step is to index the reference genome for use by BWA. Indexing allows 
 
 Since we are working on the REANNZ HPC, we need to search and load the package before we start using it.
 
-!!! key "Software as modules"
-    - Similar to other HPCs/SuperComputers, REANNZ Clusters provide software as modules (this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).
-    - A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.
-    - Refer to [supplementary 1 - Accessing software via modules](https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/6_supplementary_1/) for more information. 
 
-!!! terminal "script"
-
-    ```bash
-    #Search for a module
-    module spider bwa
-    # or
-    module avail bwa
-    ```
-    ```bash
-    #Load BWA module
-    module purge
-    module load BWA/0.7.18-GCC-12.3.0
-    ```
-    ??? tip "Tip: All-In-One module load"
-        We will be needing a few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once, you could run the following command:
-        ```bash
-        source ~/scripting_workshop/modload.sh
-        ```
-        ??? circle-check "Output"
-            ```bash
-            The following modules were not unloaded:
-            (Use "module --force purge" to unload all):
-    
-            1) XALT/minimal   2) slurm   
-            Loaded modules BWA, SAMtools, BCFtools,HISAT2,Subread
-            ```
-            
-            - Please **do not** run `module --force purge` under any circumstances
 
 
 !!! terminal-2 "Indexing the genome"
