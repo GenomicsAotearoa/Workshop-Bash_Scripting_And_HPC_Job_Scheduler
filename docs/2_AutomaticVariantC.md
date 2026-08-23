@@ -94,12 +94,14 @@
     ```bash linenums="1"
     #!/bin/bash 
     
+    # This script runs the variant calling pipeline from mapping to vcf.
+
     # Jane Doe
     echo $(date)
-    
-    # This script runs the variant calling pipeline from mapping to vcf.
-    
+
+    # Setting -e flag tells bash to exit immediately if a command exits with a non-zero (error) status
     set -e
+    
     # Load all the required modules
     module purge
     module load BWA/0.7.18-GCC-12.3.0
@@ -157,8 +159,12 @@
     ??? hand-holding-dollar "Shell variables"
         A variable is a character string to which we assign a value. The value assigned could be a number, text, filename, device, or any other type of data. A variable is nothing more than a pointer to the actual data. The shell enables you to create, assign, and delete variables.
 
-
-
+    !!! bell "What is `#!/bin/bash` ?"
+        * This line is called a [**shebang**.](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) It's not a comment, even though it starts with `#`.
+        * It tells the operating system which interpreter to use to run the rest of the file. `#!/bin/bash` means "run this script with bash."
+        * It **must be the very first line** of the file; no blank lines or comments before it, or it won't be recognised.
+        * If you run your script as `bash script.sh`, the shebang line is ignored and bash is used as the interpreter, but if you run a directly executed script *i.e.,* `./script.sh` the shebang line is needed to call the interpreter. To be safe, always have the shebang line in your scripts.  
+        * `#!/bin/bash` assumes bash lives at `/bin/bash`. This is generally the case, but if bash lives somewhere else you should specify the correct path instead. 
 
 
 
