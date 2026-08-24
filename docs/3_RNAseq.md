@@ -67,6 +67,8 @@ For RNA-seq, we need to align or map each read back to the genome, to see which 
 
 To be able to map (align) sequencing reads on the genome, the genome needs to be indexed first. In this workshop we will use [HISAT2](https://www.nature.com/articles/nmeth.3317).
 
+Indexing generates 8 `.ht2` files, which will be prefixed with the argument we indicate after the genome file name during the `hisat2-build` command below.
+
 !!! terminal "script"
 
     ```bash
@@ -100,7 +102,11 @@ To be able to map (align) sequencing reads on the genome, the genome needs to be
     * **-p** number of threads
     * **-f** fasta file
 
-How many files were created during the indexing process?
+
+??? square-pen "What are threads?"
+    A **thread** is a unit of work a program runs in parallel. When you give a tool like HISAT2 the `-p` option (*e.g.,* `-p 2`), you're telling it to split the indexing/alignment work into that many chunks and process them simultaneously, rather than one after another, which usually makes it run faster.  More threads = faster, but only up to a point; you're limited by how many processors are actually available to you, or how many the software can efficiently utilise. In this workshop, our JupyterLab session was started with 2 cores and 4 GB of memory, so `-p 2` is the most we can actually use here. Later in the workshop, we'll submit jobs to the cluster for tasks that need more. Knowing how many threads (or CPUs) you need for any particular bioinformatic step often is tricky to determine, and you may use a combination of trial and error, reading the software manual and finding examples of what other people have done. 
+
+
 
 ## Alignment on the genome
 
@@ -114,7 +120,7 @@ Now that the genome is prepared, sequencing reads can be aligned.
     * Where will the mapping files be stored?
   
   
-  * Now, lets move one folder up (into the rna_seq folder):
+Now, lets move one folder up (into the rna_seq folder) and make a new dir called Mapping to put our alignment files in:
   
 !!! terminal "script"  
 
@@ -127,19 +133,11 @@ Now that the genome is prepared, sequencing reads can be aligned.
     ```
     **Output**  - `~/scripting_workshop/rna_seq` 
 
-Let's map one of our sample to the reference genome:
-
-!!! terminal "script"
-
     ```bash
     mkdir Mapping
     ```
-    ```bash
-    ls
-    ```
-    **Output**   - `ref_genome  Mapping  trimmed_reads`
 
-Let's use a for loop to process our samples:
+Let's use a `for loop` to process our samples:
 
 !!! terminal "script"
 
@@ -200,7 +198,7 @@ Let's use a for loop to process our samples:
 
 !!! bell "Arguments"
 
-    * **-x** The basename of the index for the reference genome. 
+    * **-x** The basename of the index for the reference genome. We don't need to refer to each `.ht2` file individually here. 
     * **-U** Comma-separated list of files containing unpaired reads to be aligned
     * **-S** File to write SAM alignments to. By default, alignments are written to the “standard out” or “stdout” filehandle  
 
