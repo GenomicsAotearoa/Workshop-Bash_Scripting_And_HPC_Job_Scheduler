@@ -41,11 +41,11 @@ An HPC system might have thousands of nodes and thousands of users. How do we de
 - - -
 !!! clipboard-list "Commonly used Slurm commands"
 
-    | Command        | Function                                                                                             |
-    |:---------------|:------------------------------------------------------------------------------------------------------|
-    | `sbatch`       | Submit non-interactive (batch) jobs to the scheduler                                                 |
-    | `squeue`       | List jobs in the queue                                                                               |
-    | `scancel`      | Cancel a job                                                                                         |
+    | Command                    | Function                                                                                                          |
+    |:----------------------|:-------------------------------------------------------------------------------------------------|
+    | `sbatch `       | Submit non-interactive (batch) jobs to the scheduler (*e.g.,* `sbatch script.sl`)                                                 |
+    | `squeue`       | List jobs in the queue (*e.g.,* `squeue --me`)                                                                             |
+    | `scancel `      | Cancel a job (*e.g.,* `scancel JOBID`)                                                                                         |
     | `sacct`        | Display accounting data for all jobs and job steps in the Slurm job accounting log or Slurm database|
     | `srun`         | Slurm directive for parallel computing                                                                      |
     | `sinfo`        | Query the current state of nodes                                                                     |
@@ -91,6 +91,8 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
 -  - - 
 
 !!! circle-info "Slurm variables"
+    
+    <div class="slurm-vars-table" markdown>
 
     | header          | use                                 | description                                          |
     |:--------------- |:------------------------------------|:-----------------------------------------------------|
@@ -100,11 +102,15 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     |--mem 	          | `#SBATCH --mem=512M` 	            |Memory required per node in MB                            |
     |--mem 	          | `#SBATCH --mem=2G` 	            |Memory required per node in GB                            |
     |--cpus-per-task  | `#SBATCH --cpus-per-task=10` 	    |Will request 10 logical CPUs per task.                |
-    |--output 	      | `#SBATCH --output=%j_output.out` 	|Path and name of standard output file. `%j` will be replaced by the job ID.         |
+    |--output 	      | `#SBATCH --output=logs/%x.%j.out` 	|Path and name of standard output file. `%x` will be replaced with the job name,`%j` will be replaced by the job ID.         |
+    |--error 	      | `#SBATCH --error=logs/%x.%j.err` 	|Path and name of standard error file.  `%x` will be replaced with the job name,`%j` will be replaced by the job ID.          |
     |--mail-user 	  | `#SBATCH --mail-user=me23@gmail.com`|address to send mail notifications.                   |
     |--mail-type 	  | `#SBATCH --mail-type=ALL` 	        |Will send a mail notification at BEGIN END FAIL.      |
-    |                 | `#SBATCH --mail-type=TIME_LIMIT_80` |Will send message at 80% walltime.                    |
+    |   --mail-type    | `#SBATCH --mail-type=TIME_LIMIT_80` |Will send message at 80% walltime.                    |
+    
+    </div>
 
+    * Note: You don't need to pre-make the logs/ dir referenced in the slurm header. 
 <br>
 
 ??? bell "Assigning values to Slurm variables (formatting correctly examples)"

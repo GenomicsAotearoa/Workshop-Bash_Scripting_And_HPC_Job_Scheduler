@@ -685,3 +685,17 @@ img.center {
 .center {
   text-align: center;
 }
+
+/* table column width*/
+.slurm-vars-table table th:nth-child(1),
+.slurm-vars-table table td:nth-child(1) {
+  width: 20%;
+}
+.slurm-vars-table table th:nth-child(2),
+.slurm-vars-table table td:nth-child(2) {
+  width: 40%;
+}
+.slurm-vars-table table th:nth-child(3),
+.slurm-vars-table table td:nth-child(3) {
+  width: 40%;
+}
