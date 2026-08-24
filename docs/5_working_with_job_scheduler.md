@@ -97,7 +97,8 @@ As with most other scheduler systems, job submission scripts in Slurm consist of
     |--job-name 	  | `#SBATCH --job-name=MyJob` 	        |The name that will appear when using squeue or sacct. |
     |--account 	      | `#SBATCH --account=nesi12345` 	    |The account your core hours will be 'charged' to.     |
     |--time 	      | `#SBATCH --time=DD-HH:MM:SS` 	    |Job max walltime.                                     |
-    |--mem 	          | `#SBATCH --mem=512MB` 	            |Memory required per node.                             |
+    |--mem 	          | `#SBATCH --mem=512M` 	            |Memory required per node in MB                            |
+    |--mem 	          | `#SBATCH --mem=2G` 	            |Memory required per node in GB                            |
     |--cpus-per-task  | `#SBATCH --cpus-per-task=10` 	    |Will request 10 logical CPUs per task.                |
     |--output 	      | `#SBATCH --output=%j_output.out` 	|Path and name of standard output file. `%j` will be replaced by the job ID.         |
     |--mail-user 	  | `#SBATCH --mail-user=me23@gmail.com`|address to send mail notifications.                   |
