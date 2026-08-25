@@ -344,5 +344,9 @@ Understanding the resources you have available and how to use them most efficien
     * When your job finishes, check your log files. Did it complete successfully or fail? What happened to the output of your `echo` commands? 
 ---
 
+## Where to next?
+
+* Complete the [Introduction to HPC tutorial](https://docs.nesi.org.nz/Tutorials/Introduction_To_HPC/What_Is_an_HPC/) at the REANNZ documentation page to refresh your knowledge and learn more.  
+* Read more about [Batch computing in the REANNZ documentation](https://docs.nesi.org.nz/Batch_Computing/Batch_Computing_Guide/), in particular, have a look at how [job arrays](https://docs.nesi.org.nz/Batch_Computing/Job_Arrays/) work. Bioinformatics tasks such as read alignment can be performed in an array, where each sample gets aligned to the genome in its own job, but submitted from one script. This massively speeds up the total run time.  
 
 <p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
