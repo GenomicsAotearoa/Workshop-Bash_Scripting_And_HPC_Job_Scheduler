@@ -1,0 +1,1401 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa &amp; NeSI">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/1_DesigningVariantC/">
+      
+      
+        <link rel="prev" href="../0_Background/">
+      
+      
+        <link rel="next" href="../2_AutomaticVariantC/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../nesi_images/ga_logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Variant Calling Workflow - Introduction to Bash Scripting and HPC Scheduler</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#variant-calling-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to Bash Scripting and HPC Scheduler" class="md-header__button md-logo" aria-label="Introduction to Bash Scripting and HPC Scheduler" data-md-component="logo">
+      
+  <img src="../nesi_images/ga_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to Bash Scripting and HPC Scheduler
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Variant Calling Workflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to Bash Scripting and HPC Scheduler" class="md-nav__button md-logo" aria-label="Introduction to Bash Scripting and HPC Scheduler" data-md-component="logo">
+      
+  <img src="../nesi_images/ga_logo.png" alt="logo">
+
+    </a>
+    Introduction to Bash Scripting and HPC Scheduler
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_Background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background &amp; setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variant Calling Workflow
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variant Calling Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modules-on-the-hpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules on the HPC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alignment-to-a-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alignment to a reference genome
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alignment to a reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#index-the-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Index the reference genome
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-reads-to-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Align reads to reference genome
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Align reads to reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sambam-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAM/BAM format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort-bam-file-by-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sort BAM file by coordinates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variant-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variant calling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variant calling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-calculate-the-read-coverage-of-positions-in-the-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Calculate the read coverage of positions in the genome
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-detect-the-single-nucleotide-variants-snvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Detect the single nucleotide variants (SNVs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Filter and report the SNV variants in variant calling format (VCF)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explore-the-vcf-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explore the VCF format:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_AutomaticVariantC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automating a Variant Calling Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_RNAseq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNA-Seq Mapping And Count Data Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_IntroductiontoHPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to HPC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_working_with_job_scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with job scheduler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_supplementary_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S1 : Accessing software via modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_supplementary_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S2 : slurm profiling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_supplementary_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S3 : Solutions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modules-on-the-hpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules on the HPC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alignment-to-a-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alignment to a reference genome
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alignment to a reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#index-the-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Index the reference genome
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-reads-to-reference-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Align reads to reference genome
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Align reads to reference genome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sambam-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAM/BAM format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort-bam-file-by-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sort BAM file by coordinates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variant-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variant calling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variant calling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-calculate-the-read-coverage-of-positions-in-the-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Calculate the read coverage of positions in the genome
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-detect-the-single-nucleotide-variants-snvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Detect the single nucleotide variants (SNVs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Filter and report the SNV variants in variant calling format (VCF)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explore-the-vcf-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explore the VCF format:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="variant-calling-workflow">Variant Calling Workflow<a class="headerlink" href="#variant-calling-workflow" title="Permanent link">¶</a></h1>
+<p>This material is extracted from the <a href="https://datacarpentry.org/genomics-workshop/">Genomics Data Carpentry Lesson</a></p>
+<div class="admonition clipboard-list">
+<p class="admonition-title">Objectives and overall workflow</p>
+<ul>
+<li>Understand and perform the steps involved in variant calling.</li>
+<li>Describe the types of data formats encountered during variant calling.</li>
+<li>Use command line tools to perform variant calling.</li>
+</ul>
+</div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../nesi_images/variant_callingworkflow.png" data-desc-position="bottom"><img alt="image" class="center" src="../nesi_images/variant_callingworkflow.png" width="800"></a></p>
+<div class="admonition square-pen">
+<p class="admonition-title">Assumptions</p>
+<ul>
+<li>You have already performed trimming and filtering of your reads and saved them in a directory called <code>trimmed_reads</code>.</li>
+<li>You have a reference genome saved in a directory called <code>ref_genome</code>.</li>
+</ul>
+</div>
+<p>In this workshop we have already trimmed the reads and downloaded the reference genome for you.
+First, it is always good to verify where we are:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">pwd</span>
+</code></pre></div>
+<strong>Output</strong>:  <code>/home/$USER</code><p></p>
+<div class="admonition quote">
+<ul>
+<li>You should see your own <strong>username</strong> in place of <code>$USER</code></li>
+<li>FYI: <code>$USER</code> is not an arbitrary string as it is a real environment variable. Run <code>echo $USER</code> and see what happens </li>
+</ul>
+</div>
+</div>
+<div class="admonition terminal-2">
+<p class="admonition-title">Checking to make sure we have the directory and files for the workshop.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ls
+</code></pre></div>
+<ul>
+<li>You should see a directory named <code>/scripting_workshop</code></li>
+</ul>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>scripting_workshop/variant_calling
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ls
+</code></pre></div>
+<strong>Output</strong>:  <code>ref_genome  trimmed_reads</code> <p></p>
+</div>
+<h2 id="modules-on-the-hpc">Modules on the HPC<a class="headerlink" href="#modules-on-the-hpc" title="Permanent link">¶</a></h2>
+<p>Similar to other HPCs/SuperComputers, REANNZ Clusters provide software as modules (this is not the only way to deploy software as it can be done via other means such as conda, containers, etc.).  </p>
+<ul>
+<li>
+<p>A module is a self-contained description of a software package — it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.  </p>
+</li>
+<li>
+<p>Refer to <a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/ 6_supplementary_1/">supplementary 1 - Accessing software via modules</a> for more information. </p>
+</li>
+</ul>
+<p>Let's search for the first software we'll need called "Burrows-Wheeler Aligner" or BWA.  </p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">#Search for a module. Module spider is not case-sensitive. </span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>module<span class="w"> </span>spider<span class="w"> </span>bwa
+</code></pre></div>
+<div class="admonition circle-check">
+<p class="admonition-title">Output - this will change as new versions are added</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>-------------------------------------------------------------------------------------------------
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>BWA:
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>-------------------------------------------------------------------------------------------------
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Description:
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Burrows-Wheeler<span class="w"> </span>Aligner<span class="w"> </span><span class="o">(</span>BWA<span class="o">)</span><span class="w"> </span>is<span class="w"> </span>an<span class="w"> </span>efficient<span class="w"> </span>program<span class="w"> </span>that<span class="w"> </span>aligns<span class="w"> </span>relatively<span class="w"> </span>short
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>nucleotide<span class="w"> </span>sequences<span class="w"> </span>against<span class="w"> </span>a<span class="w"> </span>long<span class="w"> </span>reference<span class="w"> </span>sequence<span class="w"> </span>such<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>human<span class="w"> </span>genome.
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>Versions:
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>BWA/0.7.17-GCC-7.4.0
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>BWA/0.7.17-GCC-9.2.0
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>BWA/0.7.17-GCC-11.3.0
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>BWA/0.7.18-GCC-12.3.0
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>-------------------------------------------------------------------------------------------------
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>For<span class="w"> </span>detailed<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span><span class="s2">"BWA"</span><span class="w"> </span>package<span class="w"> </span><span class="o">(</span>including<span class="w"> </span>how<span class="w"> </span>to<span class="w"> </span>load<span class="w"> </span>the<span class="w"> </span>modules<span class="o">)</span><span class="w"> </span>use<span class="w"> </span>the<span class="w"> </span>module<span class="err">'</span>s<span class="w"> </span>full<span class="w"> </span>name.
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>Note<span class="w"> </span>that<span class="w"> </span>names<span class="w"> </span>that<span class="w"> </span>have<span class="w"> </span>a<span class="w"> </span>trailing<span class="w"> </span><span class="o">(</span>E<span class="o">)</span><span class="w"> </span>are<span class="w"> </span>extensions<span class="w"> </span>provided<span class="w"> </span>by<span class="w"> </span>other<span class="w"> </span>modules.
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>For<span class="w"> </span>example:
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>$<span class="w"> </span>module<span class="w"> </span>spider<span class="w"> </span>BWA/0.7.18-GCC-12.3.0
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>-------------------------------------------------------------------------------------------------
+</code></pre></div>
+</div>
+</div>
+<p>Now run module purge, then module load the most recent version of BWA:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">#Load BWA module</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>module<span class="w"> </span>purge
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>module<span class="w"> </span>load<span class="w"> </span>BWA/0.7.18-GCC-12.3.0
+</code></pre></div>
+</div>
+<div class="admonition square-pen">
+<p class="admonition-title">Note</p>
+<p>It's a good idea to run <code>module purge</code> first, to make sure you don't get dependency clashes. Each module you load are set up by the HPC maintainers to also pull in any software dependencies they need. As multiple modules can need the same software dependencies, but may be linked to different versions of that software, it's safer to purge first. </p>
+</div>
+<details class="tip">
+<summary>Tip: All-In-One module load</summary>
+<p>We will be needing a few modules for this episode and the RNA-Seq Mapping episode. If you would like to load all of them at once, you could run the following command:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">source</span><span class="w"> </span>~/scripting_workshop/modload.sh
+</code></pre></div><p></p>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>The<span class="w"> </span>following<span class="w"> </span>modules<span class="w"> </span>were<span class="w"> </span>not<span class="w"> </span>unloaded:
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="o">(</span>Use<span class="w"> </span><span class="s2">"module --force purge"</span><span class="w"> </span>to<span class="w"> </span>unload<span class="w"> </span>all<span class="o">)</span>:
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="m">1</span><span class="o">)</span><span class="w"> </span>XALT/minimal<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span>slurm<span class="w">   </span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>Loaded<span class="w"> </span>modules<span class="w"> </span>BWA,<span class="w"> </span>SAMtools,<span class="w"> </span>BCFtools,HISAT2,Subread
+</code></pre></div>
+<ul>
+<li>Please <strong>do not</strong> run <code>module --force purge</code> under any circumstances</li>
+</ul>
+</details>
+</details>
+<p>To see all of your currently loaded modules, run:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>module<span class="w"> </span>list
+</code></pre></div>
+<div class="admonition circle-check">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Currently<span class="w"> </span>Loaded<span class="w"> </span>Modules:
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="m">1</span><span class="o">)</span><span class="w"> </span>NeSI/zen3<span class="w"> </span><span class="o">(</span>S<span class="o">)</span><span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span>GCCcore/12.3.0<span class="w">   </span><span class="m">3</span><span class="o">)</span><span class="w"> </span>zlib/1.2.13-GCCcore-12.3.0<span class="w">   </span><span class="m">4</span><span class="o">)</span><span class="w"> </span>binutils/2.40-GCCcore-12.3.0<span class="w">   </span><span class="m">5</span><span class="o">)</span><span class="w"> </span>GCC/12.3.0<span class="w">   </span><span class="m">6</span><span class="o">)</span><span class="w"> </span>BWA/0.7.18-GCC-12.3.0
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Where:
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>S:<span class="w">  </span>Module<span class="w"> </span>is<span class="w"> </span>Sticky,<span class="w"> </span>requires<span class="w"> </span>--force<span class="w"> </span>to<span class="w"> </span>unload<span class="w"> </span>or<span class="w"> </span>purge
+</code></pre></div>
+</div>
+<ul>
+<li>You'll see multiple software dependencies have now loaded not just BWA! </li>
+<li>Please <strong>do not</strong> use <code>$ module --force purge</code></li>
+</ul>
+</div>
+<h2 id="alignment-to-a-reference-genome">Alignment to a reference genome<a class="headerlink" href="#alignment-to-a-reference-genome" title="Permanent link">¶</a></h2>
+<p>First we need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because mkdir can accept multiple new directory names as input.</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>results/sam<span class="w"> </span>results/bam<span class="w"> </span>results/bcf<span class="w"> </span>results/vcf
+</code></pre></div>
+<ul>
+<li>Another quick and easy way to create multiple directories reside within the same parent directory is to wrap them with <code>{}</code> (comma separated) e.g., 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>results/<span class="o">{</span>sam,bam,bcf,vcf<span class="o">}</span>
+</code></pre></div></li>
+</ul>
+</div>
+<h3 id="index-the-reference-genome">Index the reference genome<a class="headerlink" href="#index-the-reference-genome" title="Permanent link">¶</a></h3>
+<p>Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequence in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.</p>
+<p>Since we are working on the REANNZ HPC, we need to search and load the package before we start using it.</p>
+<div class="admonition terminal-2">
+<p class="admonition-title">Indexing the genome</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>bwa<span class="w"> </span>index<span class="w"> </span>ref_genome/ecoli_rel606.fasta
+</code></pre></div>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Pack<span class="w"> </span>FASTA...<span class="w"> </span><span class="m">0</span>.03<span class="w"> </span>sec
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Construct<span class="w"> </span>BWT<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>packed<span class="w"> </span>sequence...
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span><span class="m">1</span>.04<span class="w"> </span>seconds<span class="w"> </span>elapse.
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Update<span class="w"> </span>BWT...<span class="w"> </span><span class="m">0</span>.03<span class="w"> </span>sec
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Pack<span class="w"> </span>forward-only<span class="w"> </span>FASTA...<span class="w"> </span><span class="m">0</span>.02<span class="w"> </span>sec
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="o">[</span>bwa_index<span class="o">]</span><span class="w"> </span>Construct<span class="w"> </span>SA<span class="w"> </span>from<span class="w"> </span>BWT<span class="w"> </span>and<span class="w"> </span>Occ...<span class="w"> </span><span class="m">0</span>.57<span class="w"> </span>sec
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="o">[</span>main<span class="o">]</span><span class="w"> </span>Version:<span class="w"> </span><span class="m">0</span>.7.17-r1188
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="o">[</span>main<span class="o">]</span><span class="w"> </span>CMD:<span class="w"> </span>bwa<span class="w"> </span>index<span class="w"> </span>ref_genome/ecoli_rel606.fasta
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="o">[</span>main<span class="o">]</span><span class="w"> </span>Real<span class="w"> </span>time:<span class="w"> </span><span class="m">2</span>.462<span class="w"> </span>sec<span class="p">;</span><span class="w"> </span>CPU:<span class="w"> </span><span class="m">1</span>.702<span class="w"> </span>sec
+</code></pre></div>
+</details>
+</div>
+<h3 id="align-reads-to-reference-genome">Align reads to reference genome<a class="headerlink" href="#align-reads-to-reference-genome" title="Permanent link">¶</a></h3>
+<p>The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it is faster and more accurate.
+We are going to start by aligning the reads from just one of the samples in our dataset (SRR2584866).</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>bwa<span class="w"> </span>mem<span class="w"> </span>ref_genome/ecoli_rel606.fasta<span class="w"> </span>trimmed_reads/SRR2584866_1.trim.sub.fastq<span class="w"> </span>trimmed_reads/SRR2584866_2.trim.sub.fastq<span class="w"> </span>&gt;<span class="w"> </span>results/sam/SRR2584866.aligned.sam
+</code></pre></div>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>[M::bwa_idx_load_from_disk] read 0 ALT contigs
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>[M::process] read 77446 sequences (10000033 bp)...
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>[M::process] read 77296 sequences (10000182 bp)...
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>[M::mem_pestat] analyzing insert size distribution for orientation FF...
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>[M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>.....
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>[main] CMD: bwa mem ref_genome/ecoli_rel606.fasta trimmed_reads/SRR2584866_1.trim.sub.fastq trimmed_reads/SRR2584866_2.trim.sub.fastq
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>[main] Real time: 12.234 sec; CPU: 12.434 sec
+</code></pre></div>
+</details>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>ls<span class="w"> </span>results/sam/
+</code></pre></div>
+<strong>Output</strong> - <code>SRR2584866.aligned.sam</code> <p></p>
+</div>
+<h4 id="sambam-format">SAM/BAM format<a class="headerlink" href="#sambam-format" title="Permanent link">¶</a></h4>
+<p>The SAM file is a tab-delimited text file that contains information for each individual read and it's alignment to the genome. While we do not have time to go into detail about the features of the SAM format, the paper by <a href="https://academic.oup.com/bioinformatics/article/25/16/2078/204688">Heng Li et al.</a> provides a lot more detail on the specification.</p>
+<p>The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.</p>
+<p>We will convert the SAM file to BAM format using the samtools program with the view command and tell this command that the input is in SAM format (-S) and to output BAM format (-b):</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>module<span class="w"> </span>load<span class="w"> </span>SAMtools/1.22-GCC-12.3.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>samtools<span class="w"> </span>view<span class="w"> </span>-S<span class="w"> </span>-b<span class="w"> </span>results/sam/SRR2584866.aligned.sam<span class="w"> </span>&gt;<span class="w"> </span>results/bam/SRR2584866.aligned.bam
+</code></pre></div><p></p>
+</div>
+<h4 id="sort-bam-file-by-coordinates">Sort BAM file by coordinates<a class="headerlink" href="#sort-bam-file-by-coordinates" title="Permanent link">¶</a></h4>
+<p>Next we sort the BAM file using the <code>sort</code> command from samtools. The -o flag tells the command where to write the output.</p>
+<div class="admonition terminal">
+<p class="admonition-title">Terminal</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>samtools<span class="w"> </span>sort<span class="w"> </span>-o<span class="w"> </span>results/bam/SRR2584866.aligned.sorted.bam<span class="w"> </span>results/bam/SRR2584866.aligned.bam
+</code></pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Sorting</p>
+<p>SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.</p>
+</div>
+<div class="admonition terminal-2">
+<p class="admonition-title">You can use samtools to learn more about the bam file.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>samtools<span class="w"> </span>flagstat<span class="w"> </span>results/bam/SRR2584866.aligned.sorted.bam
+</code></pre></div>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>351169 + 0 in total (QC-passed reads + QC-failed reads)
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>350000 + 0 primary
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>0 + 0 secondary
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>1169 + 0 supplementary
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>0 + 0 duplicates
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>0 + 0 primary duplicates
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>351103 + 0 mapped (99.98% : N/A)
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>349934 + 0 primary mapped (99.98% : N/A)
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>350000 + 0 paired in sequencing
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>175000 + 0 read1
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>175000 + 0 read2
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>346688 + 0 properly paired (99.05% : N/A)
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>349876 + 0 with itself and mate mapped
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>58 + 0 singletons (0.02% : N/A)
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>0 + 0 with mate mapped to a different chr
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>0 + 0 with mate mapped to a different chr (mapQ&gt;=5)
+</code></pre></div>
+</details>
+</div>
+<h2 id="variant-calling">Variant calling<a class="headerlink" href="#variant-calling" title="Permanent link">¶</a></h2>
+<p>A variant call is a conclusion that there is a nucleotide difference relative to a given reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for variant calling. In this workshop we will be using <code>bcftools</code>, but there are a few things we need to do before actually calling the variants.</p>
+<h3 id="step-1-calculate-the-read-coverage-of-positions-in-the-genome">Step 1: Calculate the read coverage of positions in the genome<a class="headerlink" href="#step-1-calculate-the-read-coverage-of-positions-in-the-genome" title="Permanent link">¶</a></h3>
+<p>Do the first pass on variant calling by counting read coverage with <code>bcftools</code>. We will use the command mpileup. The flag -O b tells bcftools to generate a bcf format output file, -o specifies where to write the output file, and -f specifies the path to the reference genome:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>module<span class="w"> </span>load<span class="w"> </span>BCFtools/1.22-GCC-12.3.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>bcftools<span class="w"> </span>mpileup<span class="w"> </span>-O<span class="w"> </span>b<span class="w"> </span>-o<span class="w"> </span>results/bcf/SRR2584866_raw.bcf<span class="w"> </span>-f<span class="w"> </span>ref_genome/ecoli_rel606.fasta<span class="w"> </span>results/bam/SRR2584866.aligned.sorted.bam
+</code></pre></div><p></p>
+<details class="circle-check">
+<summary>Output</summary>
+<p>[mpileup] 1 samples in 1 input files
+[mpileup] maximum number of reads per input file set to -d 250</p>
+</details>
+</div>
+<p>We have now generated a file with coverage information for every base.</p>
+<h3 id="step-2-detect-the-single-nucleotide-variants-snvs">Step 2: Detect the single nucleotide variants (SNVs)<a class="headerlink" href="#step-2-detect-the-single-nucleotide-variants-snvs" title="Permanent link">¶</a></h3>
+<p>Identify SNVs using bcftools call. We have to specify ploidy with the flag <code>--ploidy</code>, which is one for the haploid <em>E. coli</em>. -m allows for multiallelic and rare-variant calling, -v tells the program to output variant sites only (not every site in the genome), and -o specifies where to write the output file:</p>
+<div class="admonition terminal">
+<p class="admonition-title">script</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>bcftools<span class="w"> </span>call<span class="w"> </span>--ploidy<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>-v<span class="w"> </span>-o<span class="w"> </span>results/vcf/SRR2584866_variants.vcf<span class="w"> </span>results/bcf/SRR2584866_raw.bcf<span class="w"> </span>
+</code></pre></div>
+</div>
+<h3 id="step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf">Step 3: Filter and report the SNV variants in variant calling format (VCF)<a class="headerlink" href="#step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf" title="Permanent link">¶</a></h3>
+<div class="admonition terminal-2">
+<p class="admonition-title">Filter the SNVs for the final output in VCF format, using <code>vcfutils.pl</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vcfutils.pl<span class="w"> </span>varFilter<span class="w"> </span>results/vcf/SRR2584866_variants.vcf<span class="w"> </span>&gt;<span class="w"> </span>results/vcf/SRR2584866_final_variants.vcf
+</code></pre></div>
+</div>
+<h3 id="explore-the-vcf-format">Explore the VCF format:<a class="headerlink" href="#explore-the-vcf-format" title="Permanent link">¶</a></h3>
+<div class="admonition terminal-2">
+<p class="admonition-title">Quick look with head:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>head<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>SRR2584866_final_variants.vcf
+</code></pre></div>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>##fileformat=VCFv4.2
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>##FILTER=&lt;ID=PASS,Description="All filters passed"&gt;
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>##bcftoolsVersion=1.22+htslib-1.22
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>##bcftoolsCommand=mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>##reference=file://ref_genome/ecoli_rel606.fasta
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>##contig=&lt;ID=CP000819.1,length=4629812&gt;
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>##ALT=&lt;ID=*,Description="Represents allele(s) other than observed."&gt;
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>##INFO=&lt;ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL."&gt;
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>##INFO=&lt;ID=IDV,Number=1,Type=Integer,Description="Maximum number of raw reads supporting an indel"&gt;
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>##INFO=&lt;ID=IMF,Number=1,Type=Float,Description="Maximum fraction of raw reads supporting an indel"&gt;
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a>##INFO=&lt;ID=DP,Number=1,Type=Integer,Description="Raw read depth"&gt;
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>##INFO=&lt;ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version="3"&gt;
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a>##INFO=&lt;ID=RPBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Read Position Bias (closer to 0 is better)"&gt;
+<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a>##INFO=&lt;ID=MQBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Mapping Quality Bias (closer to 0 is better)"&gt;
+<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a>##INFO=&lt;ID=BQBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Base Quality Bias (closer to 0 is better)"&gt;
+<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a>##INFO=&lt;ID=MQSBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Mapping Quality vs Strand Bias (closer to 0 is better)"&gt;
+<a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a>##INFO=&lt;ID=SCBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Soft-Clip Length Bias (closer to 0 is better)"&gt;
+<a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a>##INFO=&lt;ID=SGB,Number=1,Type=Float,Description="Segregation based metric, http://samtools.github.io/bcftools/rd-SegBias.pdf"&gt;
+<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a>##INFO=&lt;ID=MQ0F,Number=1,Type=Float,Description="Fraction of MQ0 reads (smaller is better)"&gt;
+<a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a>##FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods"&gt;
+<a id="__codelineno-29-21" name="__codelineno-29-21" href="#__codelineno-29-21"></a>##FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description="Allelic depths (high-quality bases)"&gt;
+<a id="__codelineno-29-22" name="__codelineno-29-22" href="#__codelineno-29-22"></a>##FORMAT=&lt;ID=GT,Number=1,Type=String,Description="Genotype"&gt;
+<a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a>##INFO=&lt;ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes for each ALT allele, in the same order as listed"&gt;
+<a id="__codelineno-29-24" name="__codelineno-29-24" href="#__codelineno-29-24"></a>##INFO=&lt;ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes"&gt;
+<a id="__codelineno-29-25" name="__codelineno-29-25" href="#__codelineno-29-25"></a>##INFO=&lt;ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases"&gt;
+<a id="__codelineno-29-26" name="__codelineno-29-26" href="#__codelineno-29-26"></a>##INFO=&lt;ID=MQ,Number=1,Type=Integer,Description="Average mapping quality"&gt;
+<a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a>##bcftools_callVersion=1.22+htslib-1.22
+<a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a>##bcftools_callCommand=call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf; Date=Fri Aug 14 11:29:56 2026
+<a id="__codelineno-29-29" name="__codelineno-29-29" href="#__codelineno-29-29"></a>#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR2584866.aligned.sorted.bam
+<a id="__codelineno-29-30" name="__codelineno-29-30" href="#__codelineno-29-30"></a>CP000819.1      1521    .       C       T       207.417 .       DP=9;VDB=0.99088;SGB=-0.662043;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,5;MQ=60    GT:PL:AD 1:237,0:0,9
+<a id="__codelineno-29-31" name="__codelineno-29-31" href="#__codelineno-29-31"></a>CP000819.1      1612    .       A       G       225.417 .       DP=13;VDB=0.772939;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,5,6;MQ=60  GT:PL:AD 1:255,0:0,11
+<a id="__codelineno-29-32" name="__codelineno-29-32" href="#__codelineno-29-32"></a>CP000819.1      9092    .       A       G       225.417 .       DP=14;VDB=0.905545;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,7,4;MQ=60  GT:PL:AD 1:255,0:0,11
+<a id="__codelineno-29-33" name="__codelineno-29-33" href="#__codelineno-29-33"></a>CP000819.1      9972    .       T       G       214.417 .       DP=10;VDB=0.0199125;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,8;MQ=60 GT:PL:AD 1:244,0:0,10
+<a id="__codelineno-29-34" name="__codelineno-29-34" href="#__codelineno-29-34"></a>CP000819.1      10563   .       G       A       225.417 .       DP=11;VDB=0.988455;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,6;MQ=60  GT:PL:AD 1:255,0:0,10
+<a id="__codelineno-29-35" name="__codelineno-29-35" href="#__codelineno-29-35"></a>CP000819.1      22257   .       C       T       127.416 .       DP=5;VDB=0.0799024;SGB=-0.590765;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,3;MQ=60  GT:PL:AD 1:157,0:0,5
+<a id="__codelineno-29-36" name="__codelineno-29-36" href="#__codelineno-29-36"></a>CP000819.1      38971   .       A       G       225.417 .       DP=14;VDB=0.926209;SGB=-0.683931;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,3,10;MQ=60 GT:PL:AD 1:255,0:0,13
+<a id="__codelineno-29-37" name="__codelineno-29-37" href="#__codelineno-29-37"></a>CP000819.1      42306   .       A       G       225.417 .       DP=15;VDB=0.987311;SGB=-0.688148;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,9;MQ=60  GT:PL:AD 1:255,0:0,15
+<a id="__codelineno-29-38" name="__codelineno-29-38" href="#__codelineno-29-38"></a>CP000819.1      45277   .       A       G       225.417 .       DP=15;VDB=0.262612;SGB=-0.680642;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,6;MQ=60  GT:PL:AD 1:255,0:0,12
+<a id="__codelineno-29-39" name="__codelineno-29-39" href="#__codelineno-29-39"></a>CP000819.1      56613   .       C       G       213.417 .       DP=12;VDB=0.936239;SGB=-0.680642;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,9,3;MQ=60  GT:PL:AD 1:243,0:0,12
+<a id="__codelineno-29-40" name="__codelineno-29-40" href="#__codelineno-29-40"></a>CP000819.1      62118   .       A       G       225.417 .       DP=19;VDB=0.0761508;SGB=-0.689466;MQSBZ=1;MQ0F=0;AC=1;AN=1;DP4=0,0,8,8;MQ=59 GT:PL:AD 1:255,0:0,16
+<a id="__codelineno-29-41" name="__codelineno-29-41" href="#__codelineno-29-41"></a>CP000819.1      64042   .       G       A       225.417 .       DP=18;VDB=0.149787;SGB=-0.689466;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,10;MQ=60 GT:PL:AD 1:255,0:0,16
+<a id="__codelineno-29-42" name="__codelineno-29-42" href="#__codelineno-29-42"></a>CP000819.1      78808   .       C       T       225.417 .       DP=23;VDB=0.906225;SGB=-0.69168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,11,8;MQ=60  GT:PL:AD 1:255,0:0,19
+<a id="__codelineno-29-43" name="__codelineno-29-43" href="#__codelineno-29-43"></a>CP000819.1      80113   .       A       G       178.416 .       DP=9;VDB=0.980881;SGB=-0.662043;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,7,2;MQ=60   GT:PL:AD 1:208,0:0,9
+<a id="__codelineno-29-44" name="__codelineno-29-44" href="#__codelineno-29-44"></a>CP000819.1      81158   .       A       C       225.417 .       DP=13;VDB=0.588386;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,5,6;MQ=60  GT:PL:AD 1:255,0:0,11
+<a id="__codelineno-29-45" name="__codelineno-29-45" href="#__codelineno-29-45"></a>CP000819.1      87462   .       A       G       205.417 .       DP=10;VDB=0.129862;SGB=-0.636426;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,1,6;MQ=60  GT:PL:AD 1:235,0:0,7
+<a id="__codelineno-29-46" name="__codelineno-29-46" href="#__codelineno-29-46"></a>CP000819.1      94370   .       A       G       220.417 .       DP=11;VDB=0.952152;SGB=-0.670168;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,2,8;MQ=60  GT:PL:AD 1:250,0:0,10
+<a id="__codelineno-29-47" name="__codelineno-29-47" href="#__codelineno-29-47"></a>CP000819.1      98286   .       C       T       147.416 .       DP=7;VDB=0.707785;SGB=-0.636426;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,4,3;MQ=60   GT:PL:AD 1:177,0:0,7
+<a id="__codelineno-29-48" name="__codelineno-29-48" href="#__codelineno-29-48"></a>CP000819.1      98404   .       G       A       225.417 .       DP=14;VDB=0.33436;SGB=-0.686358;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,8,6;MQ=60   GT:PL:AD 1:255,0:0,14
+<a id="__codelineno-29-49" name="__codelineno-29-49" href="#__codelineno-29-49"></a>CP000819.1      105581  .       G       A       225.417 .       DP=13;VDB=0.376838;SGB=-0.676189;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,5;MQ=60  GT:PL:AD 1:255,0:0,11
+<a id="__codelineno-29-50" name="__codelineno-29-50" href="#__codelineno-29-50"></a>CP000819.1      124045  .       A       G       225.417 .       DP=13;VDB=0.575341;SGB=-0.680642;MQSBZ=0;MQ0F=0;AC=1;AN=1;DP4=0,0,6,6;MQ=60  GT:PL:AD 1:255,0:0,12
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Tip: Remove headers from output</summary>
+<p>Use grep to remove all header lines, except the column name header line:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>cat<span class="w"> </span>SRR2584866_final_variants.vcf<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">'^##'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">20</span><span class="w"> </span>
+</code></pre></div><p></p>
+<details class="circle-check">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1">#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR2584866.aligned.sorted.bam</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>CP000819.1<span class="w">      </span><span class="m">1521</span><span class="w">    </span>.<span class="w">       </span>C<span class="w">       </span>T<span class="w">       </span><span class="m">207</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">9</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.99088<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.662043<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,4,5<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">    </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:237,0:0,9
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>CP000819.1<span class="w">      </span><span class="m">1612</span><span class="w">    </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">13</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.772939<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.676189<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,5,6<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,11
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>CP000819.1<span class="w">      </span><span class="m">9092</span><span class="w">    </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">14</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.905545<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.676189<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,7,4<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,11
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>CP000819.1<span class="w">      </span><span class="m">9972</span><span class="w">    </span>.<span class="w">       </span>T<span class="w">       </span>G<span class="w">       </span><span class="m">214</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">10</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.0199125<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.670168<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,2,8<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w"> </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:244,0:0,10
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>CP000819.1<span class="w">      </span><span class="m">10563</span><span class="w">   </span>.<span class="w">       </span>G<span class="w">       </span>A<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">11</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.988455<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.670168<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,4,6<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,10
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>CP000819.1<span class="w">      </span><span class="m">22257</span><span class="w">   </span>.<span class="w">       </span>C<span class="w">       </span>T<span class="w">       </span><span class="m">127</span>.416<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">5</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.0799024<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.590765<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,2,3<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:157,0:0,5
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>CP000819.1<span class="w">      </span><span class="m">38971</span><span class="w">   </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">14</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.926209<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.683931<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,3,10<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w"> </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,13
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>CP000819.1<span class="w">      </span><span class="m">42306</span><span class="w">   </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">15</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.987311<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.688148<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,6,9<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,15
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a>CP000819.1<span class="w">      </span><span class="m">45277</span><span class="w">   </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">15</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.262612<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.680642<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,6,6<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,12
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>CP000819.1<span class="w">      </span><span class="m">56613</span><span class="w">   </span>.<span class="w">       </span>C<span class="w">       </span>G<span class="w">       </span><span class="m">213</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">12</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.936239<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.680642<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,9,3<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:243,0:0,12
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>CP000819.1<span class="w">      </span><span class="m">62118</span><span class="w">   </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">19</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.0761508<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.689466<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,8,8<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">59</span><span class="w"> </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,16
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a>CP000819.1<span class="w">      </span><span class="m">64042</span><span class="w">   </span>.<span class="w">       </span>G<span class="w">       </span>A<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">18</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.149787<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.689466<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,6,10<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w"> </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,16
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>CP000819.1<span class="w">      </span><span class="m">78808</span><span class="w">   </span>.<span class="w">       </span>C<span class="w">       </span>T<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">23</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.906225<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.69168<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,11,8<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,19
+<a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>CP000819.1<span class="w">      </span><span class="m">80113</span><span class="w">   </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">178</span>.416<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">9</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.980881<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.662043<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,7,2<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">   </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:208,0:0,9
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a>CP000819.1<span class="w">      </span><span class="m">81158</span><span class="w">   </span>.<span class="w">       </span>A<span class="w">       </span>C<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">13</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.588386<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.676189<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,5,6<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,11
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>CP000819.1<span class="w">      </span><span class="m">87462</span><span class="w">   </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">205</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">10</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.129862<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.636426<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,1,6<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:235,0:0,7
+<a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a>CP000819.1<span class="w">      </span><span class="m">94370</span><span class="w">   </span>.<span class="w">       </span>A<span class="w">       </span>G<span class="w">       </span><span class="m">220</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">11</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.952152<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.670168<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,2,8<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">  </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:250,0:0,10
+<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a>CP000819.1<span class="w">      </span><span class="m">98286</span><span class="w">   </span>.<span class="w">       </span>C<span class="w">       </span>T<span class="w">       </span><span class="m">147</span>.416<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">7</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.707785<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.636426<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,4,3<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">   </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:177,0:0,7
+<a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a>CP000819.1<span class="w">      </span><span class="m">98404</span><span class="w">   </span>.<span class="w">       </span>G<span class="w">       </span>A<span class="w">       </span><span class="m">225</span>.417<span class="w"> </span>.<span class="w">       </span><span class="nv">DP</span><span class="o">=</span><span class="m">14</span><span class="p">;</span><span class="nv">VDB</span><span class="o">=</span><span class="m">0</span>.33436<span class="p">;</span><span class="nv">SGB</span><span class="o">=</span>-0.686358<span class="p">;</span><span class="nv">MQSBZ</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">MQ0F</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="nv">AC</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">AN</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="nv">DP4</span><span class="o">=</span><span class="m">0</span>,0,8,6<span class="p">;</span><span class="nv">MQ</span><span class="o">=</span><span class="m">60</span><span class="w">   </span>GT:PL:AD<span class="w"> </span><span class="m">1</span>:255,0:0,14
+</code></pre></div>
+</details>
+</details>
+</div>
+<div class="admonition quote">
+<ul>
+<li>At this stage you can use various tools to analyse the vcf file. </li>
+<li>Exploring the vcf is beyond the scope of this workshop. Please refer to <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format">official documentation on VCF provided by Broad Institute</a></li>
+</ul>
+</div>
+<p>Now we are ready for the <a href="../2_AutomaticVariantC/">Next Lesson</a> to put all these commands in a script.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../0_Background/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Background &amp;amp; setup">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Background &amp; setup
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2_AutomaticVariantC/" class="md-footer__link md-footer__link--next" aria-label="Next: Automating a Variant Calling Workflow">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Automating a Variant Calling Workflow
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Introduction to Bash Scripting and HPC Scheduler is licensed under a <a rel="noopener" target="_blank" href="https://opensource.org/license/mit/">MIT License</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
