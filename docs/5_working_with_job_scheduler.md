@@ -272,13 +272,13 @@ Understanding the resources you have available and how to use them most efficien
 
 ## Compiling slurm scripts for Variant Calling and RNA-seq episodes 
 
-👣 Choose your own adventure - compile a slurm script either for a variant calling or RNA-seq workflow. 
+👣 Choose your own adventure  – compile a slurm script either for a variant calling or RNA-seq workflow. 
 
 ??? question "Exercise 5.4 - Variant Calling Workflow 🧬 🔎"	
     
     The purpose of this exercise is to compile a slurm submission script based on the script we wrote in [episode 2 - Automating variant calling workflow](2_AutomaticVariantC.md)
 
-    * Recommend creating a new directory for the exercise .i.e `ex_5.4`
+    * Recommend creating a new directory for the exercise *i.e.,* `ex_5.4`(or make this as part of the slurm script)
     * Name the file is `variant_calling.sl` (note that we change the extension from `.sh` to `.sl`)
     * Set slurm variables:
 
@@ -286,23 +286,32 @@ Understanding the resources you have available and how to use them most efficien
         * number of CPUS as `2`
         * timelimit `15 minutes`
         * amount of memory in GB `4G`
-        * generate  *.err* files and *.out* 
+        * generate  *.err* files and *.out*, put them in a logs dir and name with the job name and ID.  
         * an email notification at the end of the job 
 
-    * We don't want to replicate ***input data***  in multiple places .i.e. be conservative in-terms how you use research storage
-    * Therefore, use the same reference genome file (assign the filename to variable `genome` and the trimmed read files (assign the path of these files to variable `trimmed`) used in the first episode
-    ```bash
-    genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
-    trimmed=~/scripting_workshop/variant_calling/trimmed_reads
-    ```
+    * We don't want to replicate ***input data***  in multiple places *i.e.,* be conservative in-terms how you use research storage. Therefore, use the same reference genome file (assign the filename to variable `genome`) and the trimmed read files (assign the path of these files to variable `trimmed`) used in the variant calling lesson. 
     
+    * Add optional `echo` statements, e.g., `echo $PWD`, `echo $(date)`, `echo "All done!"` (at the end of your script).  
+
+
+    ??? tip "Hint: setting variables to reuse data"
+        ```bash
+        genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta
+        trimmed=~/scripting_workshop/variant_calling/trimmed_reads
+        ```
+    **Monitor and evaluate your script**
+
+    * When you are ready, **submit** your script to slurm with `sbatch variant_calling.sl`  
+    * Monitor the progress using `sacct` and `squeue --me`  
+    * When your job finishes, check your log files. Did it complete successfully or fail? What happened to the output of your `echo` commands?   
+
 - - - 
 
 ??? question  "Exercise 5.5  - RNA-seq workflow 🧬 📊"	
 
     The purpose of this exercise is to compile a slurm submission script based on the script we wrote in [episode 3 - RNA-seq workflow](3_RNAseq.md )
 
-    * Recommend creating a new directory for the exercise i.e. `ex_5.5` (or make this as part of the slurm script)
+    * Recommend creating a new directory for the exercise *i.e.,* `ex_5.5` (or make this as part of the slurm script)
     * Name the file is `rnaseq.sl` (note that we change the extension from `.sh` to `.sl`)
     * Set slurm variables:
 
@@ -310,17 +319,29 @@ Understanding the resources you have available and how to use them most efficien
         * number of CPUs as `4`
         * timelimit `15 minutes`
         * amount of memory in GB `4G`
-        * generate *.err* files and *.out* 
+        * generate *.err* files and *.out*, put them in a logs dir and name with the job name and ID.  
         * an email notification at the end of the job
 
-    * We don't want to replicate ***input data*** in multiple places i.e. be conservative in terms of how you use research storage
-    * Therefore, use the same reference genome file (assign the filename to variable `genomedir`) and the trimmed read files (assign the path of these files to variable `trimmeddir`) used in the RNA-seq episode
-    ```bash
-    genomedir=~/scripting_workshop/rna_seq/ref_genome # update path as needed for your own dir!
-    trimmeddir=~/scripting_workshop/rna_seq/trimmed_reads # update path as needed for your own dir!
-    ```
+    * We don't want to replicate ***input data*** in multiple places *i.e.,* be conservative in terms of how you use research storage. Therefore, use the same reference genome file, index files and trimmed reads that we used during the RNAseq lesson, instead of copying them to your current working directory. 
+
+    * Match the number of threads used in commands to the number of CPUs allcoated in the slurm header.  
+
+    * Add optional `echo` statements, e.g., `echo $PWD`, `echo $(date)`, `echo "All done!"` (at the end of your script).  
+
     
-    Optional: recreate the genome index files as part of this script, or make use of the index files we already generated in `${genomedir}`
+    ??? tip "Hint: setting variables to reuse data"
+        ```bash
+        genomedir=~/scripting_workshop/rna_seq/ref_genome
+        genome=${genomedir}/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa 
+        index=${genomedir}/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+        trimmeddir=~/scripting_workshop/rna_seq/trimmed_reads 
+        ```
+
+    **Monitor and evaluate your script**
+
+    * When you are ready, **submit** your script to slurm with `sbatch rnaseq.sl`  
+    * Monitor the progress using `sacct` and `squeue --me`  
+    * When your job finishes, check your log files. Did it complete successfully or fail? What happened to the output of your `echo` commands? 
 ---
 
 

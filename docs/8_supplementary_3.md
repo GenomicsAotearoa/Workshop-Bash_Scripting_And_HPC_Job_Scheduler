@@ -67,13 +67,20 @@
 
     #SBATCH --account		nesi02659
     #SBATCH --job-name 	    variant_calling_workflow
-    #SBATCH --cpus-per-task 2
+    #SBATCH --cpus-per-task 4
     #SBATCH --time 			00:15:00
     #SBATCH --mem 			4G
-    #SBATCH --output 		variant_calling-%j.out
-    #SBATCH --error 		variant_calling-%j.err
+    #SBATCH --output 		logs/%x-%j.out
+    #SBATCH --error 		logs/%x-%j.err
     #SBATCH --mail-type		END
     #SBATCH --mail-user		myemail@email.co.nz # remember to update with your own email!
+
+    # Optional: create and cd into new working dir   
+    mkdir ex_5.4 && cd ex_5.4
+    
+    # Optional: echo back some variables for help debugging later
+    echo "The date is $(date)"
+    echo "My current working directory path is $PWD"
 
     # Load all the required modules
     module purge
@@ -82,15 +89,15 @@
     module load BCFtools/1.22-GCC-12.3.0
 
 
-    echo "$PWD"
-
     # create the results directories
-    mkdir -p results/sam results/bam results/bcf results/vcf
+    mkdir -p results/{sam,bam,bcf,vcf}
 
     # indexing the genome
-    genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta # you may need to explicity set the path here!
-    trimmed=~/scripting_workshop/variant_calling/trimmed_reads # you may need to explicity set the path here!
-    bwa index $genome
+    genome=~/scripting_workshop/variant_calling/ref_genome/ecoli_rel606.fasta 
+    trimmed=~/scripting_workshop/variant_calling/trimmed_reads 
+    
+    # Optional: re-index here, or re-use the index files we already created
+    # bwa index $genome
 
     # create a loop that map reads to the genome, sort the bam files and call variants
     for fq1 in ${trimmed}/*_1.trim.sub.fastq
@@ -121,7 +128,7 @@
 
     done
 
-    echo "DONE"
+    echo "ALL DONE!"
     ```
 
 
@@ -137,10 +144,17 @@
     #SBATCH --cpus-per-task 4
     #SBATCH --time          00:15:00
     #SBATCH --mem           4G
-    #SBATCH --output        rna-seq_workflow-%j.out
-    #SBATCH --error         rna-seq_workflow-%j.err
+    #SBATCH --output        logs/%x-%j.out
+    #SBATCH --error         logs/%x-%j.err
     #SBATCH --mail-type     END
     #SBATCH --mail-user     myemail@email.org.nz
+
+    # Optional: create and cd into new working dir   
+    mkdir ex_5.5 && cd ex_5.5
+    
+    # Optional: echo back some variables for help debugging later
+    echo "The date is $(date)"
+    echo "My current working directory path is $PWD"
 
     # load modules
     module purge
@@ -148,33 +162,45 @@
     module load SAMtools/1.22-GCC-12.3.0
     module load Subread/2.0.7-GCC-12.3.0
 
-    # create results directories
-    mkdir -p ex_5.5/{Mapping,Counts} && cd ex_5.5
 
-    # set variables
-    genomedir=~/scripting_workshop/rna_seq/ref_genome  # update path as needed!
-    trimmeddir=~/scripting_workshop/rna_seq/trimmed_reads  # update path as needed!
+    # Create results directories. 
+    mkdir -p results/{sam,bam,counts}
 
-    # index genome
-    hisat2-build -p 4 -f ${genomedir}/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa ${genomedir}/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+    # Set variables.
+    genomedir=~/scripting_workshop/rna_seq/ref_genome
+    genome=${genomedir}/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa 
+    index=${genomedir}/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+    trimmeddir=~/scripting_workshop/rna_seq/trimmed_reads  
+
+    # Optional: re-index here, or re-use the index files we already created. 
+    # hisat2-build -p 4 -f $genome $index
 
     # map reads, convert to BAM and sort
     for filename in ${trimmeddir}/*
       do
         base=$(basename ${filename} .fastq)
-        hisat2 -p 4 -x ${genomedir}/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel \
-        -U $filename -S Mapping/${base}.sam \
-        --summary-file Mapping/${base}_summary.txt
-        samtools view -S -b Mapping/${base}.sam -o Mapping/${base}.bam
-        samtools sort -o Mapping/${base}_sorted.bam Mapping/${base}.bam
-        samtools flagstat Mapping/${base}_sorted.bam > Mapping/${base}_mapstat.txt
+
+        # Set variables
+        sam=results/sam/${base}.sam
+        summary=results/sam/${base}.summary.txt
+        sortedbam=results/bam/${base}_sorted.bam
+        mapstat=results/bam/${base}_mapstat.txt
+
+        # Run commands
+        hisat2 -p 4 -x $index -U $filename -S $sam --summary-file $summary
+        samtools view -S -b $sam | samtools sort -o $sortedbam
+        samtools flagstat $sortedbam > $mapstat
+        
       done
 
     # count reads per feature
-    featureCounts -a ${genomedir}/Saccharomyces_cerevisiae.R64-1-1.99.gtf \
-                  -o Counts/yeast_counts.txt \
-                  -T 4 -t exon -g gene_id \
-                  Mapping/*sorted.bam
+    featureCounts \
+      -a ${genomedir}/Saccharomyces_cerevisiae.R64-1-1.99.gtf \
+      -o results/counts/yeast_counts.txt \
+      -T 4 \
+      -t exon \
+      -g gene_id \
+      results/bam/*sorted.bam
 
     echo "All done!"
     ```
