@@ -1,4 +1,4 @@
-.DS_Store
+*.DS_Store*
 scripting_workshop
 scripting_workshop.zip
-**/.DS_Store
+*/.DS_Store*

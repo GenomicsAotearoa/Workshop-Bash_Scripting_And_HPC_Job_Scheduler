@@ -229,7 +229,7 @@ Understanding the resources you have available and how to use them most efficien
     cd ../ex_5.3
     ```
 
-    * Run `ls` command and you should see two files (one .R and one sl) and one directory named slurmout
+    * Run `ls` command and you should see one .sl file and two directories, named slurmout and input_data
     ```bash
     ls -F
     ```
@@ -243,22 +243,19 @@ Understanding the resources you have available and how to use them most efficien
 
     * use `squeue --me` and `sacct` again to evaluate the job status
 
-    * Once the job ran into completion, use `nn_seff JOBID` command to print the resource utilisation statistics (Replace **JOBID** with the corresponding number)
+    * Once the job ran into completion, use `seff JOBID` command to print the resource utilisation statistics (Replace **JOBID** with the corresponding number)
     ```bash
     # Example
-    $ nn_seff 5545696
+    $ seff 11051790
     ```
     ```bash
     # Output
-    Cluster: hpc
-    Job ID: 5545696
-    State: COMPLETED
-    Cores: 2
-    Tasks: 1
-    Nodes: 1
-    Job Wall-time:    10.6%  00:00:19 of 00:03:00 time limit
-    CPU Utilisation:  88.9%  00:00:33 of 00:00:38 core-walltime
-    Mem Utilisation:   0.0%  0.00 MB of 1.00 GB
+	Job ID: 11051790
+	State: COMPLETED
+	Cores: 1
+	Job Wall-time:         83%  00:01:40 of 00:02:00 time limit
+	Avg CPU Utilisation:    0%  00:00:00 of 00:01:40 core-walltime
+	Peak Mem Utilisation:   0%  820.00 kB of 1.00 GB
     ```
     * Now review the content of `.err` and `.out` files in */slurmout* directory
 

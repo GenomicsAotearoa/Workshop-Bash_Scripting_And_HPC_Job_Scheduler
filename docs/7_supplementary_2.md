@@ -1,9 +1,54 @@
-# S2 : slurm profiling
+# S2 : Slurm profiling
 
 
-Although `nn_seff` command is a quick and easy way to determine the resource utilisation, it relies on **peak** values (data gets recorded every 30 seconds) which doesn't allows us to examine resource usage over the run-time of the job. There are number of in-built/external tools to achieve the latter which will require some effort to understand its deployment, tracing and interpretation. Therefore, we will use **slurm native profiling** to evaluate resource usage over run-time. This is a simple and elegant solution.
+Although `seff` command is a quick and easy way to determine the resource utilisation, it relies on **peak** values (data gets recorded every 30 seconds) which doesn't allows us to examine resource usage over the run-time of the job. There are number of in-built/external tools to achieve the latter which will require some effort to understand its deployment, tracing and interpretation. Therefore, we will use **slurm native profiling** to evaluate resource usage over run-time. This is a simple and elegant solution.
+See the [REANNZ Support Documentation on Slurm Native Profiling](https://docs.nesi.org.nz/Software/Profiling_and_Debugging/Slurm_Native_Profiling/) for more information. 
 
-***The below is an example only. `sh5util` currently not installed on the REANNZ HPC (as of April 2026).*** *An alternative approach will eventually be updated here.* 
+???+ question "Exercise S.2.1"
+
+    Create a new directory and cd into it 
+    
+    ```bash
+    mkdir Exercise_S21 && cd Exercise_S21
+    ```
+
+    Copy over either the variant calling or RNA-seq slurm script to your current directory. (Hint: you can use one from S3: Solutions if you need). For this example we'll use the `variant_calling.sl` script. Don't forget the `.` at the end of your `cp` command!    
+    
+    ```bash
+    cp ~/scripting_workshop/variant_calling/variant_calling.sl .
+    ```
+    
+    
+    Use nano to edit your script and add the following to the SLURM header:
+    ```bash
+    nano variant_calling.sl
+    ```
+    ```bash
+    #SBATCH --profile task
+    ```
+
+    Review the slurm script with cat or nano and update paths as needed to point to the input files. Submit with sbatch.
+    ```bash
+    sbatch variant_calling.sl 
+    ```
+    
+    * Do take a note of the **JOBID** as we are going to need it for next step. Otherwise, we use `squeue --me` OR `sacct` command as before to monitor the status
+    * Also, you can `watch` the status of this job via `$ watch -n 1 -d "squeue -j JOBID"`. 
+    *  `watch` command execute a program periodically, showing output fullscreen. Exiting the `watch` screen by done by pressing `Ctrl+C` 
+
+	Once the job is complete, we can create the slurm profile graphs with:
+
+    ```bash
+    profile_plot JOBID
+    ```
+
+
+	![image of slurm profile plot](./nesi_images/vcw_profile_plot.png){width="700"}
+	
+	
+	
+
+<!--- ***The below is an example only. `sh5util` currently not installed on the REANNZ HPC (as of April 2026).*** *An alternative approach will eventually be updated here.* 
 
 ???+ question "Exercise S.2.1"
 
@@ -65,6 +110,6 @@ Although `nn_seff` command is a quick and easy way to determine the resource uti
     </br>
 
 
-
+---> 
 
 <p align="center"><b><a href="https://genomicsaotearoa.github.io/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/">Back to homepage</a></b></p>
